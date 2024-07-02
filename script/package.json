@@ -1,0 +1,15 @@
+{
+  "name": "wmc-project",
+  "version": "1.0.0",
+  "description": "This is our wmc project GTA-5 ",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Moin & Vrunda",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
