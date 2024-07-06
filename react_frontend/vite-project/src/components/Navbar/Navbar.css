@@ -1,4 +1,4 @@
-.header{
+/* .header{
     
     position: fixed;
     top: 0;
@@ -22,16 +22,16 @@
     font-size: 32px;
     color: white;
     font-weight: 700;
-}
+} */
 
 
 .navbar a{
     position: relative; 
     font-size: 18px;
-    color: #fff;
+    color: #0e153a;
     font-weight: 500;     
     margin-left: 40px;
-}
+} 
 
 
 .navbar a::before{
@@ -41,7 +41,7 @@
     left: 0;
     width: 0;
     height: 2px;
-    background: #fff;
+    background: #d91111;
     transition: .3s;
 }
 
