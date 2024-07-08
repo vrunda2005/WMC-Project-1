@@ -6,6 +6,7 @@ import Home from './components/Home/Home'
 import About from './components/About/About'
 import Donate from './components/Donate/Donate'
 import { RouterProvider,createBrowserRouter } from 'react-router-dom'
+import Quiz from './components/Quiz/Quiz.jsx'
 
 const router=createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router=createBrowserRouter([
       {
         path:"Donate",
         element:<Donate/>
+      },
+      {
+        path:"quiz",
+        element:<Quiz/>
       }
     ]
   }
