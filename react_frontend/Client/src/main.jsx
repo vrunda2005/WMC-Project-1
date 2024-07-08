@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import  './index.css'
 import Home from './components/Home/Home'
+import Login from './components/Login/Login'
 import About from './components/About/About'
 import Donate from './components/Donate/Donate'
+import Signup from './components/Signup/SignUp'
 import { RouterProvider,createBrowserRouter } from 'react-router-dom'
 import Quiz from './components/Quiz/Quiz.jsx'
 
@@ -17,6 +19,14 @@ const router=createBrowserRouter([
       {
         path:"",
         element:<Home />
+      },
+      {
+        path:"Signup",
+        element:<Signup />
+      },
+      {
+        path:"Login",
+        element:<Login />
       },
       {
         path:"About",
