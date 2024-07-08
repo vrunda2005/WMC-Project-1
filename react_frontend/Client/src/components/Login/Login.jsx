@@ -20,7 +20,7 @@ export default function Login() {
   };
 
   return (
-    <div className="h-[600px] flex justify-center items-center bg-gray-100">
+    <div className="h-[540px] flex justify-center items-center bg-gray-100">
       <div className="max-w-md h-fit w-full p-6 bg-white rounded shadow-md">
         <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
           <img
