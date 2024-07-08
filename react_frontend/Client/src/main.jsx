@@ -8,6 +8,7 @@ import Donate from './components/Donate/Donate'
 import { RouterProvider,createBrowserRouter } from 'react-router-dom'
 import Quiz from './components/Quiz/Quiz.jsx'
 
+
 const router=createBrowserRouter([
   {
     path:'/',

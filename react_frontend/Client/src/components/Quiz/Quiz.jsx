@@ -5,14 +5,18 @@ function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [userAnswers, setUserAnswers] = useState({});
   const [quizCompleted, setQuizCompleted] = useState(false);
+  const [score, setScore] = useState(0);
 
   const handleAnswer = (answer) => {
-    setUserAnswers({ ...userAnswers, [currentQuestion]: answer });
-    setCurrentQuestion(currentQuestion + 1);
-  };
-
-  const handleSubmit = () => {
-    setQuizCompleted(true);
+    setUserAnswers({...userAnswers, [currentQuestion]: answer });
+    if (answer === questions[currentQuestion].answer) {
+      setScore(score + 1);
+    }
+    if (currentQuestion === questions.length - 1) {
+      setQuizCompleted(true);
+    } else {
+      setCurrentQuestion(currentQuestion + 1);
+    }
   };
 
   return (
@@ -21,6 +25,7 @@ function Quiz() {
       {quizCompleted ? (
         <div>
           <h2 className="text-2xl mb-2">You completed the quiz!</h2>
+          <p>You scored {score} out of {questions.length}!</p>
           <ul>
             {questions.map((question, index) => (
               <li key={index} className="mb-2">
@@ -31,6 +36,11 @@ function Quiz() {
                 <span className="text-lg ml-2">
                   Correct answer: {question.answer}
                 </span>
+                {userAnswers[index] === question.answer ? (
+                  <span className="text-lg ml-2 text-green-500">Correct!</span>
+                ) : (
+                  <span className="text-lg ml-2 text-red-500">Incorrect</span>
+                )}
               </li>
             ))}
           </ul>
@@ -40,34 +50,22 @@ function Quiz() {
           <h2 className="text-2xl mb-2">
             Question {currentQuestion + 1} of {questions.length}
           </h2>
-          <h3 className="text-lg mb-2">{questions[currentQuestion].question}</h3>
+          <h3 className="text-lg mb-2">
+            {questions[currentQuestion] && questions[currentQuestion].question}
+          </h3>
           <ul>
-            {questions[currentQuestion].options.map((option, index) => (
-              <li key={index} className="mb-2">
-                <button
-                  className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
-                  onClick={() => handleAnswer(option)}
-                >
-                  {option}
-                </button>
-              </li>
-            ))}
+            {questions[currentQuestion] &&
+              questions[currentQuestion].options.map((option, index) => (
+                <li key={index} className="mb-2">
+                  <button
+                    className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={() => handleAnswer(option)}
+                  >
+                    {option}
+                  </button>
+                </li>
+              ))}
           </ul>
-          {currentQuestion === questions.length - 1 ? (
-            <button
-              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-              onClick={handleSubmit}
-            >
-              Submit Quiz
-            </button>
-          ) : (
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              onClick={() => setCurrentQuestion(currentQuestion + 1)}
-            >
-              Next Question
-            </button>
-          )}
         </div>
       )}
     </div>
