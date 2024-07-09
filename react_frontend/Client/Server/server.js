@@ -5,7 +5,7 @@ import cors from 'cors';
 
 const PORT = 5000
 const app = express()
-const uri = "mongodb://localhost:27017/students";
+const uri = "mongodb+srv://moinvinchhi:Database.mongodb@cluster0.crywp50.mongodb.net/WMC_user";
 
 app.use(cors())
 app.use(express.json())
@@ -43,7 +43,7 @@ app.post('/register', async (req, res) => {
     res.status(201).json(savedUser)
   } catch (error) {
     console.error('Error during registration', error)
-    res.status(500).json({ error: "inter server error" })
+    res.status(500).json({ error: "Inter server error" })
   }
 })
 

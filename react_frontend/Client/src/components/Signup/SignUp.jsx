@@ -68,7 +68,7 @@ export default function App() {
 
           <button 
             type="submit" 
-            className="w-full bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded mt-4"
+            className="w-full bg-orange-500 hover:bg-orange-600 transition-all text-white font-bold py-2 px-4 rounded mt-4"
           >
             Submit
           </button>
