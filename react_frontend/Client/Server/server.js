@@ -1,7 +1,9 @@
-const express = require('express')
-const mongoose = require('mongoose')
+import { useNavigate } from 'react-router-dom';
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+
 const PORT = 5000
-const cors = require('cors')
 const app = express()
 const uri = "mongodb://localhost:27017/students";
 
@@ -22,6 +24,8 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
+// const navigate=useNavigate();
+
 app.post('/register', async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -34,6 +38,7 @@ app.post('/register', async (req, res) => {
       email,
       password
     })
+
     const savedUser = await newUser.save()
     res.status(201).json(savedUser)
   } catch (error) {
@@ -41,6 +46,7 @@ app.post('/register', async (req, res) => {
     res.status(500).json({ error: "inter server error" })
   }
 })
+
 
 app.post('/login', async (req, res) => {
   try {
