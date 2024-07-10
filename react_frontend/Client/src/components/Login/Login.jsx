@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../creatContext';
-import { useContext } from 'react';
+import { useContext ,useEffect} from 'react';
+import useToken from '../../tokens';
 
 
 export default function Login() {
@@ -10,7 +11,10 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
-  const { login } = useContext(AuthContext);
+  const { setToken } = useToken();
+
+
+  const { login ,isLoggedIn} = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -19,13 +23,27 @@ export default function Login() {
       const response = await axios.post('http://localhost:5000/login', { email, password });
       if (response.status === 200) {
         alert("Login successful");
+        const token =  response;
+        localStorage.setItem('token',token)
+        setToken(token);
         login();
         navigate('/', { replace: true });
       }
     } catch (error) {
+      console.log("error");
       setError(error.response.data.error);
     }
   };
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setToken(token);
+      if(!isLoggedIn){
+        login(); 
+      }
+      // Call the login function from the AuthContext
+    }
+  }, [setToken,isLoggedIn,login]);
 
   return (
     <div className="h-[540px] flex justify-center items-center bg-gray-100">

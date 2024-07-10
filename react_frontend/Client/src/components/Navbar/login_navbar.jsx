@@ -1,8 +1,20 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import './Navbar.css'
-import { Link } from 'react-router-dom'
+import { Link , useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../creatContext'
 
 const Login_navbar = () => {
+  const { isLoggedIn, logout, setIsLoggedIn } = useContext(AuthContext); 
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    console.log("clicked logout");
+   logout();
+   setIsLoggedIn(false); 
+    navigate('/', { replace: true }); // Redirect to login page
+  };
+
   return (
     <>
     <header className="sticky z-50 top-0 p-5 flex content-between place-content-between bg-white ">
@@ -14,6 +26,8 @@ const Login_navbar = () => {
 
         <Link to="/Donate">Donate</Link>
         <Link to='/About'>About</Link>
+        <button onClick={handleLogout}>Logout</button>
+       
       
       </nav>  
  
