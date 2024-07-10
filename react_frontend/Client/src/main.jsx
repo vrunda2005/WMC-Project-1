@@ -6,6 +6,7 @@ import Home from './components/Home/Home'
 import Login from './components/Login/Login'
 import About from './components/About/About'
 import Donate from './components/Donate/Donate'
+import Membership from './components/Membership/Membership'
 import Signup from './components/Signup/SignUp'
 import { RouterProvider,createBrowserRouter } from 'react-router-dom'
 import Quiz from './components/Quiz/Quiz.jsx'
@@ -31,6 +32,10 @@ const router=createBrowserRouter([
       {
         path:"About",
         element:<About/>
+      },
+      {
+        path:"Membership",
+        element:<Membership/>
       },
       {
         path:"Donate",
