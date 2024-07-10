@@ -21,7 +21,7 @@ const Login_navbar = () => {
       <a href="/" className="logo">Logo</a>
       <nav className="navbar">
         <Link to="/">Home</Link>
-        <Link to="#">Membership</Link>
+        <Link to="/membership">Membership</Link>
         <Link to="#">Blog</Link>
 
         <Link to="/Donate">Donate</Link>
