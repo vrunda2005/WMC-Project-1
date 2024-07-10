@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
@@ -24,7 +23,7 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-// const navigate=useNavigate();
+
 
 app.post('/register', async (req, res) => {
   try {

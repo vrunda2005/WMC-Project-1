@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Login() {
@@ -6,13 +7,15 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/login', { email, password });
       if (response.status === 200) {
         alert("Login successful");
-        // You can also redirect to a dashboard page or something
+        navigate('/', { replace: true });
       }
     } catch (error) {
       setError(error.response.data.error);

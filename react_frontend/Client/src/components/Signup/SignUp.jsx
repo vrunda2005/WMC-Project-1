@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 export default function App() {
   const [value, setValue] = useState({
@@ -8,6 +9,8 @@ export default function App() {
     password:''
   });
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setValue ({
         ...value,
@@ -15,6 +18,7 @@ export default function App() {
     });
   };
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     const reigter = await axios.post("http://localhost:5000/register", value);
@@ -25,6 +29,7 @@ export default function App() {
       password: "",
     });
     alert("Acount created");
+    navigate('/Donate', { replace: true });
   };
 
   return (
