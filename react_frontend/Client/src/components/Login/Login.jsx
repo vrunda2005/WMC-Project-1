@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../../creatContext';
+import { useContext } from 'react';
+
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -15,6 +19,7 @@ export default function Login() {
       const response = await axios.post('http://localhost:5000/login', { email, password });
       if (response.status === 200) {
         alert("Login successful");
+        login();
         navigate('/', { replace: true });
       }
     } catch (error) {
