@@ -9,6 +9,8 @@ export default function App() {
     password:''
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -18,7 +20,10 @@ export default function App() {
     });
   };
 
-  
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const reigter = await axios.post("http://localhost:5000/register", value);
@@ -29,7 +34,7 @@ export default function App() {
       password: "",
     });
     alert("Acount created");
-    navigate('/Donate', { replace: true });
+    navigate('/login', { replace: true });
   };
 
   return (
@@ -54,6 +59,7 @@ export default function App() {
           />
 
           <input 
+            type="email"
             placeholder="Email" 
             value={value.email} 
             onChange={handleChange} 
@@ -61,15 +67,26 @@ export default function App() {
             name= "email" 
             className="w-full p-2 pl-5 text-sm text-gray-700 border border-gray-300 rounded mt-4"
           />
+          
+          <div className="flex gap-2">
+            <input 
+              type={showPassword ? "text" : "password"}
+              placeholder="Password" 
+              value={value.password} 
+              onChange={handleChange} 
+              required 
+              name= "password" 
+              className="w-full p-2 pl-5 text-sm text-gray-700 border border-gray-300 rounded mt-4"
+            />
 
-          <input 
-            placeholder="Password" 
-            value={value.password} 
-            onChange={handleChange} 
-            required 
-            name= "password" 
-            className="w-full p-2 pl-5 text-sm text-gray-700 border border-gray-300 rounded mt-4"
-          />
+            <button 
+              type="button"
+              onClick={handleShowPassword} 
+              className="border w-10 border-gray-300 rounded mt-4 p-1 hover:bg-gray-50"
+            >
+              {showPassword ? "◎" : "◉" }
+            </button>
+          </div>
 
           <button 
             type="submit" 

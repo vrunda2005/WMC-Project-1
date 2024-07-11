@@ -13,6 +13,11 @@ export default function Login() {
 
   const { setToken } = useToken();
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const { login ,isLoggedIn} = useContext(AuthContext);
   const navigate = useNavigate();
@@ -68,8 +73,10 @@ export default function Login() {
 
           {/* <hr className='relative bg-gray-300 h-[1px] w-full -top-2' /> */}
 
+          <div className="flex gap-2">
+          
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Password"
             name="password"
             value={password}
@@ -77,6 +84,14 @@ export default function Login() {
             required
             className="w-full p-2 pl-5 text-sm text-gray-700 border border-gray-300 rounded mt-4"
           />
+          <button 
+              type="button"
+              onClick={handleShowPassword} 
+              className="border w-10 border-gray-300 rounded mt-4 p-1 hover:bg-gray-50"
+            >
+              {showPassword ? "◎" : "◉" }
+            </button>
+          </div>
           
           {/* <hr className='relative bg-gray-300 h-[1px] w-full -top-2' /> */}
 
