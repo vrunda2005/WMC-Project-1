@@ -1,6 +1,7 @@
 import React from 'react';
 
 function MembershipPage() {
+  
   return (
     <div className="container mx-auto h-[650px] p-4 md:p-8 lg:p-7">
 

@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import useToken from '../../tokens';
+import { AuthContext } from '../../creatContext';
+import { useContext ,useEffect} from 'react';
+
 
 export default function App() {
   const [value, setValue] = useState({
@@ -8,6 +12,8 @@ export default function App() {
     email:'',
     password:''
   });
+
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 
@@ -18,9 +24,13 @@ export default function App() {
     });
   };
 
-  
+  const { setToken } = useToken();
+  const { login ,isLoggedIn} = useContext(AuthContext);
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try{
     const reigter = await axios.post("http://localhost:5000/register", value);
     console.log(reigter.data);
     setValue({
@@ -28,8 +38,21 @@ export default function App() {
       email: "",
       password: "",
     });
+
+    const token =  reigter;
+    localStorage.setItem('token',token)
+    setToken(token);
+    const username =reigter.data.name;
+   localStorage.setItem('username',username);
+   
+    login();
     alert("Acount created");
     navigate('/Donate', { replace: true });
+  }
+  catch(error){
+    console.log(error);
+    setError(error.respone.data.error)
+  }
   };
 
   return (

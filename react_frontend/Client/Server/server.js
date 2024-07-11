@@ -1,6 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+dotenv.config();
 
 const PORT = 5000
 const app = express()
@@ -57,7 +61,14 @@ app.post('/login', async (req, res) => {
     if (user.password!== password) {
       return res.status(401).json({ error: "Invalid password" });
     }
-    res.status(200).json({ message: "Login successful" });
+    // Generate a token
+    if (!process.env.SECRET_KEY) {
+      console.error('SECRET_KEY environment variable is not set');
+      process.exit(1); // Exit the process if SECRET_KEY is not set
+    }
+    const token = jwt.sign({ username: User.name }, 'SECRET_KEY', { expiresIn: '1h' });
+    res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'strict' });
+    res.status(200).json({ message: "Login successful", token,username:user.name });
   } catch (error) {
     console.error('Error during login', error)
     res.status(500).json({ error: "inter server error" })

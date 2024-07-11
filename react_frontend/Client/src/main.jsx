@@ -42,7 +42,7 @@ const router=createBrowserRouter([
         element:<Donate/>
       },
       {
-        path:"quiz",
+        path:"Quiz",
         element:<Quiz/>
       }
     ]

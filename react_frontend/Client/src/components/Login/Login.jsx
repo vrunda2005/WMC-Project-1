@@ -7,13 +7,11 @@ import useToken from '../../tokens';
 
 
 export default function Login() {
+  const [username,setUsername]=useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-
   const { setToken } = useToken();
-
-
   const { login ,isLoggedIn} = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -21,29 +19,35 @@ export default function Login() {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/login', { email, password });
-      if (response.status === 200) {
+      if (response.status === 200 && response.data) {
+        const username =  response.data.username;
+    
+        localStorage.setItem('token',response.data.token);
+        localStorage.setItem('username',response.data.username);
+       
+  
         alert("Login successful");
-        const token =  response;
-        localStorage.setItem('token',token)
-        setToken(token);
         login();
         navigate('/', { replace: true });
+       
+
       }
     } catch (error) {
+      console.log("only erro ");
       console.log("error");
       setError(error.response.data.error);
     }
   };
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      setToken(token);
-      if(!isLoggedIn){
-        login(); 
-      }
-      // Call the login function from the AuthContext
-    }
-  }, [setToken,isLoggedIn,login]);
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   if (token) {
+  //     setToken(token);
+  //     if(!isLoggedIn){
+  //       login(); 
+  //     }
+  //     // Call the login function from the AuthContext
+  //   }
+  // }, [setToken,isLoggedIn,login]);
 
   return (
     <div className="h-[540px] flex justify-center items-center bg-gray-100">
