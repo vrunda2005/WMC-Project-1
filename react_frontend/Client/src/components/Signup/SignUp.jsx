@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-import useToken from '../../tokens';
+// import useToken from '../../tokens';
 import { AuthContext } from '../../creatContext';
 import { useContext ,useEffect} from 'react';
 
@@ -14,6 +14,7 @@ export default function App() {
   });
 
   const [error, setError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -24,9 +25,12 @@ export default function App() {
     });
   };
 
-  const { setToken } = useToken();
+  // const { setToken } = useToken();
   const { login ,isLoggedIn} = useContext(AuthContext);
 
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,15 +43,16 @@ export default function App() {
       password: "",
     });
 
-    const token =  reigter;
-    localStorage.setItem('token',token)
-    setToken(token);
+    // const token =  reigter;
+    localStorage.setItem('token',reigter.data.token);
+    localStorage.setItem('points',reigter.data.points)
+    // setToken(token);
     const username =reigter.data.name;
    localStorage.setItem('username',username);
    
     login();
     alert("Acount created");
-    navigate('/Donate', { replace: true });
+    navigate('/', { replace: true });
   }
   catch(error){
     console.log(error);
@@ -77,6 +82,7 @@ export default function App() {
           />
 
           <input 
+            type="email"
             placeholder="Email" 
             value={value.email} 
             onChange={handleChange} 
@@ -84,15 +90,26 @@ export default function App() {
             name= "email" 
             className="w-full p-2 pl-5 text-sm text-gray-700 border border-gray-300 rounded mt-4"
           />
+          
+          <div className="flex gap-2">
+            <input 
+              type={showPassword ? "text" : "password"}
+              placeholder="Password" 
+              value={value.password} 
+              onChange={handleChange} 
+              required 
+              name= "password" 
+              className="w-full p-2 pl-5 text-sm text-gray-700 border border-gray-300 rounded mt-4"
+            />
 
-          <input 
-            placeholder="Password" 
-            value={value.password} 
-            onChange={handleChange} 
-            required 
-            name= "password" 
-            className="w-full p-2 pl-5 text-sm text-gray-700 border border-gray-300 rounded mt-4"
-          />
+            <button 
+              type="button"
+              onClick={handleShowPassword} 
+              className="border w-10 border-gray-300 rounded mt-4 p-1 hover:bg-gray-50"
+            >
+              {showPassword ? "◎" : "◉" }
+            </button>
+          </div>
 
           <button 
             type="submit" 

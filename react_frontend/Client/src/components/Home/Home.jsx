@@ -1,42 +1,98 @@
-import React from 'react'
+import React from 'react';
 
 function Home() {
   return (
-    <>
-    <div className='bContainer mx-auto p-4 pt-10 bg-zinc-300'>
-    <h1 class="text-4xl font-bold mb-4 text-blue-950">Epsilon Program</h1>
-
-      <div className='inline-flex'>
-      <p class="mb-4 mt-4 max-w-4xl text-base leading-7 text-slate-700">
-      Welcome to the Epsilon Program, the ultimate path to enlightenment in Los Santos. 
-Do you want to be happy and free from thoughts? Join us and discover the true secrets of the universe, just as revealed by our great leader, Cris Formage.
-</p>
-     
-      <img className="w-52 h-1/3" src="https://articles-images.sftcdn.net/wp-content/uploads/sites/9/2013/05/Epsilon-Program.jpg" alt="img" />
-     </div>
-
-  </div>
-  
-    <div className="mx-5 mt-4 relative h-[400px] w-[300px] rounded-md mb-10">
+    <div className="h-screen flex flex-col justify-center items-center bg-gradient-to-r from-indigo-500 to-purple-500">
+      <div className="container mx-auto p-4 pt-6 md:p-6 lg:p-12">
+        <div className="flex flex-wrap justify-center  mt-48 mb-4">
           <img
-            src="https://articles-images.sftcdn.net/wp-content/uploads/sites/9/2013/05/Epsilon-Program.jpg"
-            alt="AirMax Pro"
-            className="z-0 h-full w-full rounded-md object-cover"
+            src="https://upload.wikimedia.org/wikipedia/commons/4/47/Epsilon_Program_Logo.png"
+            alt="Epsilon Programme Logo"
+            className="w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
-          <div className="absolute bottom-4 left-4 text-left">
-            <h1 className="text-lg font-semibold text-white">Epsilon Missions</h1>
-            <p className="mt-2 text-sm text-gray-300">
-            The Epsilon Cult Missions are a series of optional GTA 5 quests designed to antagonize the player. The Kifflom Missions are a parody of exploitative cultist behavior, (in particular, Scientology). They require Michael to engage in an increasingly-ridiculous series of quests while donating increasingly large sums of money to the cult.
-            </p>
-            <button className="mt-2 inline-flex cursor-pointer items-center text-sm font-semibold text-white">
-              View Profile →
-            </button>
-          </div>
+        </div>
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+          Welcome to the Epsilon Programme
+        </h1>
+        <p className="text-lg md:text-xl lg:text-2xl text-gray-200">
+          Join our community of like-minded individuals seeking spiritual enlightenment and self-improvement.
+        </p>
+        <button
+          className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => console.log('Get Started')}
+        >
+          Get Started
+        </button>
+      </div>
+      <div className="container mx-auto p-4 pt-6 md:p-6 lg:p-12 ">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+          What We Do
+        </h2>
+        <p className="text-lg md:text-xl lg:text-2xl text-gray-200">
+          At the Epsilon Programme, we believe that personal growth and spiritual development are key to unlocking human potential. Our programme offers a range of activities and resources designed to help you cultivate mindfulness, self-awareness, and emotional intelligence.
+        </p>
+        <ul className="list-none mb-4">
+          <li className="flex items-center mb-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              className="w-6 h-6 text-green-600"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 12l2 2 4-4m5-3l2 2 4-4M2 12l2 2 4-4"
+              />
+            </svg>
+            <span className="text-lg md:text-xl lg:text-2xl text-gray-200">
+              Guided meditation and mindfulness exercises
+            </span>
+          </li>
+          <li className="flex items-center mb-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              className="w-6 h-6 text-green-600"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 12l2 2 4-4m5-3l2 2 4-4M2 12l2 2 4-4"
+              />
+            </svg>
+            <span className="text-lg md:text-xl lg:text-2xl text-gray-200">
+              Workshops and seminars on personal growth and development
+            </span>
+          </li>
+          <li className="flex items-center mb-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              className="w-6 h-6 text-green-600"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 12l2 2 4-4m5-3l2 2 4-4M2 12l2 2 4-4"
+              />
+            </svg>
+            <span className="text-lg md:text-xl lg:text-2xl text-gray-200">
+              One-on-one coaching and mentoring
+            </span>
+          </li>
+        </ul>
+      </div>
     </div>
-    
-    </>
-  )
+  );
 }
 
-export default Home
+export default Home;
