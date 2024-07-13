@@ -23,12 +23,16 @@ const userSchema = new mongoose.Schema({
   name: String,
   email: String,
   password: String,
-  points: Number
+  points: Number,
+  isAdmin:Boolean
 });
 
 const User = mongoose.model('User', userSchema);
 
-
+app.get('/admin', async (req, res) => {
+  // This is the admin dashboard route
+  res.send('Welcome to the admin dashboard!');
+});
 
 app.post('/register', async (req, res) => {
   try {
@@ -37,11 +41,14 @@ app.post('/register', async (req, res) => {
     if (existingUser) {
       return res.status(409).json({ error: "Email already exists" });
     }
+
+    const isAdminUser=name ==='admin';
     const newUser = new User({
       name,
       email,
       password,
-      points:100
+      points:100,
+      isAdmin:isAdminUser?true:false
     })
 
     const savedUser = await newUser.save()
@@ -63,18 +70,36 @@ app.post('/login', async (req, res) => {
     if (user.password!== password) {
       return res.status(401).json({ error: "Invalid password" });
     }
+    
     // Generate a token
     if (!process.env.SECRET_KEY) {
       console.error('SECRET_KEY environment variable is not set');
       process.exit(1); // Exit the process if SECRET_KEY is not set
     }
+
+        // Check if the user is an admin
+    if (user.isAdmin) { // assuming you have an isAdmin field in your user schema
+       // Generate a token for the admin dashboard
+      const adminToken = jwt.sign({ username: User.name, isAdmin: true }, 'SECRET_KEY', { expiresIn: '1h' });
+      res.cookie('token', adminToken, { httpOnly: true, secure: true, sameSite: 'strict' });
+      res.status(200).json({ message: "Admin Login successful", token: adminToken, username: user.name, points: user.points, isAdmin: true });
+      // Redirect to the admin dashboa
+      // res.render('Admin'); // assuming you have an admin dashboard route
+
+    }
+    else{
     const token = jwt.sign({ username: User.name }, 'SECRET_KEY', { expiresIn: '1h' });
     res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'strict' });
     res.status(200).json({ message: "Login successful", token,username:user.name ,points :user.points });
-  } catch (error) {
+     } 
+    }
+catch (error) {
     console.error('Error during login', error)
     res.status(500).json({ error: "inter server error" })
   }
 })
+
+
+
 
 app.listen(PORT);

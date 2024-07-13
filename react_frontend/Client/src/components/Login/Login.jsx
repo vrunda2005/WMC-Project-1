@@ -31,11 +31,18 @@ export default function Login() {
     
         localStorage.setItem('token',response.data.token);
         localStorage.setItem('username',response.data.username);
-       
+        if(response.data.isAdmin){
+          
+        alert("Login successful");
+          console.log("admin herre");
+          login();
+          navigate('/admin',{replace:true});
+        }else{      
   
         alert("Login successful");
         login();
         navigate('/', { replace: true });
+        }
        
 
       }

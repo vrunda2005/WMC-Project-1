@@ -10,6 +10,7 @@ import Membership from './components/Membership/Membership'
 import Signup from './components/Signup/SignUp'
 import { RouterProvider,createBrowserRouter } from 'react-router-dom'
 import Quiz from './components/Quiz/Quiz.jsx'
+import Admin from './components/Admin.jsx'
 
 
 const router=createBrowserRouter([
@@ -44,6 +45,10 @@ const router=createBrowserRouter([
       {
         path:"Quiz",
         element:<Quiz/>
+      },
+      {
+        path:"Admin",
+        element:<Admin/>
       }
     ]
   }
