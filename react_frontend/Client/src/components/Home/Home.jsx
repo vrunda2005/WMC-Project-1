@@ -4,7 +4,7 @@ function Home() {
   return (
     <div className=" flex flex-col justify-center items-center bg-gradient-to-r from-indigo-500 to-purple-500 border border-orange-400 h-fit">
       <div className="container mx-auto p-4 pt-6 md:p-6 lg:p-12">
-        <div className="flex flex-wrap justify-center  mt-48 mb-4">
+        <div className="flex flex-wrap justify-center  mt-30 mb-4">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/4/47/Epsilon_Program_Logo.png"
             alt="Epsilon Programme Logo"

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../creatContext';
-import { useContext ,useEffect} from 'react';
+import { useContext } from 'react';
 // import useToken from '../../tokens';
 
 
@@ -11,7 +11,8 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-  // const { setToken } = useToken();
+  const{isAdmin,setisAdmin}=useContext(AuthContext);
+  const { login ,isLoggedIn} = useContext(AuthContext);
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -19,7 +20,6 @@ export default function Login() {
     setShowPassword(!showPassword);
   };
 
-  const { login ,isLoggedIn} = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -27,14 +27,13 @@ export default function Login() {
     try {
       const response = await axios.post('http://localhost:5000/login', { email, password });
       if (response.status === 200 && response.data) {
-        const username =  response.data.username;
-    
         localStorage.setItem('token',response.data.token);
         localStorage.setItem('username',response.data.username);
         if(response.data.isAdmin){
           
-        alert("Login successful");
+          alert("Login successful");
           console.log("admin herre");
+          isAdmin();
           login();
           navigate('/admin',{replace:true});
         }else{      

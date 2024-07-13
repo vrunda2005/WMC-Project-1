@@ -1,14 +1,15 @@
-import React,{useContext} from 'react'
+import React,{useContext, useEffect} from 'react'
 import './Navbar.css'
 import { Link , useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../creatContext'
 
 const Login_navbar = () => {
-  const { isLoggedIn, logout, setIsLoggedIn } = useContext(AuthContext); 
+  const { isLoggedIn, logout, setIsLoggedIn ,isAdminLoggedIN ,setIsAdminLoggedIn} = useContext(AuthContext); 
   const navigate = useNavigate();
 
   const username=localStorage.getItem('username'); 
   const points=localStorage.getItem('points'); 
+
 
 
   const handleLogout = () => {
@@ -17,6 +18,7 @@ const Login_navbar = () => {
     console.log("clicked logout");
    logout();
    setIsLoggedIn(false); 
+   setIsAdminLoggedIn(false);
     navigate('/', { replace: true }); // Redirect to login page
   };
 
@@ -26,14 +28,26 @@ const Login_navbar = () => {
       <a href="/" className="logo">Logo</a>
       <h1>user:{username}</h1>
       <h1>points:{points}</h1>
-      <nav className="navbar">
-        <Link to="/">Home</Link>
-        <Link to="/membership">Membership</Link>
-        <Link to="#">Blog</Link>
-        <Link to="/Donate">Donate</Link>
-        <Link to='/About'>About</Link>
-        <Link to='/Quiz'>Quiz</Link>
-      </nav>  
+
+      {
+        isAdminLoggedIN ? ( 
+           <nav className="navbar">
+          <Link to="/">Home</Link>
+          <Link to="#">Blog</Link>
+          {/* <Link to="/Donate">Donate</Link> */}
+          <Link to='/About'>About</Link>
+          <Link to='/Quiz'>Quiz</Link>
+        </nav>  )  :
+        (  <nav className="navbar">
+          <Link to="/">Home</Link>
+          <Link to="/membership">Membership</Link>
+          <Link to="#">Blog</Link>
+          <Link to="/Donate">Donate</Link>
+          <Link to='/About'>About</Link>
+          <Link to='/Quiz'>Quiz</Link>
+        </nav>  )
+      }
+    
       
       <div className="flex items-center lg:order-2">
         <button onClick={handleLogout} className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">Logout</button>

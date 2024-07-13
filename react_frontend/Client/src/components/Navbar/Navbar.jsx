@@ -15,7 +15,8 @@ const Navbar = () => {
     console.log("logout clicked")
   };
 
-  if (isLoggedIn) {
+
+   if (isLoggedIn) {
     return <Login_navbar onLogout={handleLogout} />;
   } else {
     return <Logout_navbar />;

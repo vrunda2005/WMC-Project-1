@@ -20,8 +20,8 @@ function Quiz() {
   };
 
   return (
-    <div className="container mx-auto p-4 pt-6 md:p-6 lg:p-12 bg-gray-700">
-      <h1 className="text-3xl font-bold mb-4 text-cyan-400">Quiz Page</h1>
+    <div className="container mx-auto p-4 pt-6 md:p-6 lg:p-12">
+      <h1 className="text-3xl font-bold mb-4 text-zinc-800">Quiz Page</h1>
       {quizCompleted ? (
         <div className='flex flex-wrap  '>
           <h2 className="text-2xl mb-2">You completed the quiz!</h2>
@@ -46,7 +46,7 @@ function Quiz() {
           </ul>
         </div>
       ) : (
-        <div className=' text-cyan-400'>
+        <div className=' text-zinc-800'>
           <h2 className="text-2xl mb-2">
             Question {currentQuestion + 1} of {questions.length}
           </h2>

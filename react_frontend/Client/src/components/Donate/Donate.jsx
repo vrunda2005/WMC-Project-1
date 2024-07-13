@@ -4,9 +4,9 @@ function Donate() {
   return (
     <>
 
-<div class="container mx-auto p-4 pt-6 md:p-6 lg:p-12 bg-gray-900 rounded shadow-md">
-  <h1 class="text-4xl font-bold mb-4 text-green-400">Support Epsilon Program</h1>
-  <p class="text-lg mb-6 text-gray-400">
+<div class="container mx-auto p-4 pt-6 md:p-6 lg:p-12 rounded shadow-md">
+  <h1 class="text-4xl font-bold mb-4 text-zinc-900">Support Epsilon Program</h1>
+  <p class="text-lg mb-6 text-green-600">
     Your donation will help us level up our resources and support to our community.
     •	"Support the Epsilon Program - Your donations help us spread the truth and enlighten more souls."<br/>
     	Donation Levels:<br/>

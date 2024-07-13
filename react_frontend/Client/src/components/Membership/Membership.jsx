@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 
 function MembershipPage() {
-  
+  const [points,setPoints]= useState(localStorage.getItem('points'));
+
+  useEffect(
+    ()=>{
+      localStorage.setItem('points',points);
+    },[points]
+  );
+
+  const handleGetBasicClick = () =>{
+    
+    setPoints(Number(points)+10);
+  };
+
+  const handleResetPoints = () => {
+    setPoints(100);
+  };
+
   return (
     <div className="container mx-auto h-[650px] p-4 md:p-8 lg:p-7">
 
@@ -40,6 +57,12 @@ function MembershipPage() {
             <li>Subscription to Epsilon Program newsletter.</li>
             <li>Limited access to events (e.g., online webinars)</li>
           </ul>
+
+          <button className='bg-orange-400' onClick={handleGetBasicClick}>get basic</button>
+          {points}
+          <button className="bg-gray-400 ml-2" onClick={handleResetPoints}>
+            Reset
+          </button>
 
         </div>
 
