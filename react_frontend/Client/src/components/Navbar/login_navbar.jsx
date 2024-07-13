@@ -2,6 +2,8 @@ import React,{useContext, useEffect} from 'react'
 import './Navbar.css'
 import { Link , useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../creatContext'
+import { FaRegUser } from "react-icons/fa";
+import { MdCurrencyBitcoin } from "react-icons/md";
 
 const Login_navbar = () => {
   const { isLoggedIn, logout, setIsLoggedIn ,isAdminLoggedIN ,setIsAdminLoggedIn} = useContext(AuthContext); 
@@ -26,8 +28,9 @@ const Login_navbar = () => {
     <>
     <header className="sticky z-50 top-0 p-5 flex content-between place-content-between bg-white ">
       <a href="/" className="logo">Logo</a>
-      <h1>user:{username}</h1>
-      <h1>points:{points}</h1>
+      <div className='flex gap-5 '><FaRegUser size="1.5em" />{username}</div>
+      <div className='flex gap-5 '><MdCurrencyBitcoin size="1.5em" />{points}</div>
+      {/* <h1>points:{points}</h1> */}
 
       {
         isAdminLoggedIN ? ( 
