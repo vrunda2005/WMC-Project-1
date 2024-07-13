@@ -33,7 +33,6 @@ const Login_navbar = () => {
         <Link to="/Donate">Donate</Link>
         <Link to='/About'>About</Link>
         <Link to='/Quiz'>Quiz</Link>
-        <Link onClick={handleLogout}>Logout</Link>
       </nav>  
       
       <div className="flex items-center lg:order-2">

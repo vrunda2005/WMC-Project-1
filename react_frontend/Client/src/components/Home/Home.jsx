@@ -2,7 +2,7 @@ import React from 'react';
 
 function Home() {
   return (
-    <div className="h-screen flex flex-col justify-center items-center bg-gradient-to-r from-indigo-500 to-purple-500">
+    <div className=" flex flex-col justify-center items-center bg-gradient-to-r from-indigo-500 to-purple-500 border border-orange-400 h-fit">
       <div className="container mx-auto p-4 pt-6 md:p-6 lg:p-12">
         <div className="flex flex-wrap justify-center  mt-48 mb-4">
           <img
