@@ -13,18 +13,6 @@ const Login_navbar = () => {
   const navigate = useNavigate();
   const [auth,setAuth]=useAuth();
 
-
-
-  // const handleLogout = () => {
-  //   alert("You've been logged out");
-  //   localStorage.removeItem('token');
-  //   localStorage.removeItem('username');
-  //   localStorage.removeItem('points');
-  //   logout();
-  //   setIsLoggedIn(false);
-  //   setIsAdminLoggedIn(false);
-  //   navigate('/', { replace: true }); // Redirect to login page
-  // };
   const handleLogout = () => {
     alert("You've been logged out");
     setAuth({ username: null, token: '',points:0,isAdmin:false, isLoggedIn: false });
@@ -39,23 +27,26 @@ const Login_navbar = () => {
         {/* <div className='flex gap-5 '><FaRegUser size="1.5em" />{username}</div>
         <div className='flex gap-5 '><MdCurrencyBitcoin size="1.5em" />{points}</div> */}
         {
-          !auth.isLoggedIn ? (
+          auth.isLoggedIn ? (
             <nav className="navbar">
-              <Link to="/">Home</Link>
-              <Link to="#">Blog</Link>
-              {/* <Link to="/Donate">Donate</Link> */}
-              <Link to='/About'>About</Link>
-              <Link to='/Quiz'>Quiz</Link>
+                 {auth.username}
+                 { auth.userPoints}
+                    <Link to="/">Home</Link>
+                
+                    <Link to="/membership">Membership</Link>
+                    <Link to="#">Blog</Link>
+                    <Link to="/Donate">Donate</Link>
+                    <Link to='/About'>About</Link>
+                    <Link to='/Quiz'>Quiz</Link>
+          
             </nav>
           ) : (
             <nav className="navbar">
-              <Link to="/">Home</Link>
-              {auth.username}   { auth.userPoints}
-              <Link to="/membership">Membership</Link>
-              <Link to="#">Blog</Link>
-              <Link to="/Donate">Donate</Link>
-              <Link to='/About'>About</Link>
-              <Link to='/Quiz'>Quiz</Link>
+            <Link to="/">Home</Link>
+            <Link to="#">Blog</Link>
+            {/* <Link to="/Donate">Donate</Link> */}
+            <Link to='/About'>About</Link>
+            <Link to='/Quiz'>Quiz</Link>
             </nav>
           )
         }

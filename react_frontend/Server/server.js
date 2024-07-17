@@ -154,6 +154,7 @@ app.get('/getalluser/:username', async (req, res) => {
 app.put('/updateuser/:username', async (req, res) => {
   const username = req.params.username;
   const updatedPoints = req.body.points;
+  const {addPoints} =req.body;
 
   try {
     const user = await User.findOne({ name: username });
@@ -161,7 +162,7 @@ app.put('/updateuser/:username', async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
      const adminUser = await User.findOne({ name: 'admin' });
-      adminUser.points = adminUser.points + 10;
+      adminUser.points = adminUser.points + addPoints;
       await adminUser.save();
       
 

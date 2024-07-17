@@ -6,7 +6,6 @@ function MembershipPage() {
   const [auth, setAuth] = useAuth();
   const [userData, setUserData] = useState({});
 
-
   const fetchData = async () => {
     if (auth.username) {
       try {
@@ -23,21 +22,30 @@ function MembershipPage() {
     fetchData();
   }, [auth.username]);
 
+  useEffect(() => {
+    if (auth.username) {
+      setAuth({ ...auth, userPoints: userData.points });
+    }
+  }, [userData.points]);
+
   
-  const updatePoints = async () => {
+  const updatePoints = async (pointsToUpdate) => {
     try {
       const response = await fetch(`http://localhost:5000/updateuser/${auth.username}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ points: userData.points - 10 }),
+        body: JSON.stringify({ points: userData.points + pointsToUpdate ,
+                                addPoints : pointsToUpdate,
+
+        }),
       });
       const data = await response.json();
-      // console.log(data);
+      console.log(data);
       // console.log(data.user);
       setUserData(data.user);
       setAuth({
         ...auth,
-        username:data.user.username,
+        username:data.user.name,
         userPoints:data.user.points,
       });  
       localStorage.setItem('auth', JSON.stringify(auth));
@@ -110,7 +118,7 @@ function MembershipPage() {
             <li>Limited access to events (e.g., online webinars)</li>
           </ul>
 
-          <button className='bg-orange-400' onClick={updatePoints}>get basic</button>
+          <button className='bg-orange-400' onClick={()=>updatePoints(10)}>get basic</button>
           {auth.userPoints}
         </div>
 
@@ -139,7 +147,11 @@ function MembershipPage() {
             <li>Exclusive access to Epsilon Program's inner circle (e.g., private Facebook group)</li>
           </ul>
 
+          <button className='bg-orange-400' onClick={()=>updatePoints(30)}>Premium Membership</button>
+          {auth.userPoints}
         </div>
+
+        
 
         <div className="w-full md:w-1/3 lg:w-1/4 p-4 md:p-6 lg:p-8 shadow-lg
         shadow-cyan-500/30 hover:shadow-2xl hover:shadow-cyan-500/40 hover:scale-105 hover:cursor-pointer transition duration-550 ease-in-out rounded-[35px]">
@@ -166,6 +178,9 @@ function MembershipPage() {
             <li>VIP access to exclusive events (e.g., private meetings with Epsilon Program leaders).</li>
           </ul>
 
+          <button className='bg-orange-400' onClick={()=>updatePoints(30)}>Elite Membership</button>
+          {auth.userPoints}
+       
         </div>
 
       </div>

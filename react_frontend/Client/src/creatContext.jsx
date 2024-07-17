@@ -4,10 +4,7 @@ import axios from 'axios';
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-
-  // const [auth,setAuth]=useState({});
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const [userData, setUserData] = useState({});
   const [auth, setAuth] = useState({
     username: "",
     token: "",
@@ -20,7 +17,30 @@ const AuthProvider = ({ children }) => {
   useEffect(()=>{
     axios.defaults.headers.common["Authorization"] = auth?.token;
 
-  },[])
+  },[auth])
+
+  const fetchData = async () => {
+    if (auth.username) {
+      try {
+        const response = await fetch(`http://localhost:5000/getalluser/${auth.username}`);
+        const data = await response.json();
+        setUserData(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [auth.username]);
+
+  
+  useEffect(() => {
+    if (auth.username) {
+      setAuth({ ...auth, userPoints: userData.points });
+    }
+  }, [userData.points]);
 
   useEffect(() => {
     const data = localStorage.getItem("auth");
@@ -38,9 +58,9 @@ const AuthProvider = ({ children }) => {
       } catch (error) {
         console.error("Error parsing auth data from local storage:", error);
       }
-    //eslint-disable-next-line
   }}, []);
 
+  
 
   return (
     <AuthContext.Provider value={[auth,setAuth]}>

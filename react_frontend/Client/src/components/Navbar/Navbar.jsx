@@ -8,6 +8,15 @@ const Navbar = () => {
   const [ auth, setAuth ] = useAuth();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // Check if the auth object is initialized correctly
+    if (!auth) {
+      setAuth({ user: null, token: '', isLoggedIn: false });
+    }
+  }, []);
+
+  
+
   const handleLogout = () => {
     setAuth({ user: null, token: '', isLoggedIn: false });
     localStorage.removeItem('auth');
@@ -16,7 +25,7 @@ const Navbar = () => {
 
   return (
     <nav>
-      {auth.isLoggedIn? (
+    {auth && auth.isLoggedIn? (
         <Login_navbar onLogout={handleLogout} />
       ) : (
         <Logout_navbar />
