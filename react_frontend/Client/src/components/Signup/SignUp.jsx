@@ -1,10 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
-// import useToken from '../../tokens';
-import { AuthContext } from '../../creatContext';
-import { useContext ,useEffect} from 'react';
-
 
 export default function App() {
   const [value, setValue] = useState({
@@ -13,10 +8,10 @@ export default function App() {
     password:''
   });
 
-  const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-
-  const navigate = useNavigate();
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleChange = (e) => {
     setValue ({
@@ -25,16 +20,9 @@ export default function App() {
     });
   };
 
-  // const { setToken } = useToken();
-  const { login ,isLoggedIn} = useContext(AuthContext);
-
-  const handleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
     const reigter = await axios.post("http://localhost:5000/register", value);
     console.log(reigter.data);
     setValue({
@@ -42,22 +30,7 @@ export default function App() {
       email: "",
       password: "",
     });
-
-    // const token =  reigter;
-    localStorage.setItem('token',reigter.data.token);
-    localStorage.setItem('points',reigter.data.points)
-    // setToken(token);
-    const username =reigter.data.name;
-   localStorage.setItem('username',username);
-   
-    login();
     alert("Acount created");
-    navigate('/', { replace: true });
-  }
-  catch(error){
-    console.log(error);
-    setError(error.respone.data.error)
-  }
   };
 
   return (

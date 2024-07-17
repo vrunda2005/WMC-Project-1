@@ -1,21 +1,34 @@
+// server
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import session from 'express-session';
+
 dotenv.config();
 
-const PORT = 5000
-const app = express()
-const uri = "mongodb+srv://moinvinchhi:Database.mongodb@cluster0.crywp50.mongodb.net/WMC_user";
+const app = express();
+const PORT = process.env.PORT || 5000;
+const MONGODB_URI = process.env.MONGODB_URI;
+const SECRET_KEY = process.env.SECRET_KEY;
 
-app.use(cors())
-app.use(express.json())
+app.use(cors({
+  origin: process.env.CLIENT_ORIGIN,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  headers: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
+app.use(express.json());
+app.use(cookieParser());
+app.use(express.urlencoded());
 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => console.log('Mongodb is connected'))
-.catch((err) => console.error('Mongodb connection error', err));
+
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log(`Mongodb is connected on port ${PORT}`))
+  .catch((err) => console.error('Mongodb connection error', err));
 
 const db = mongoose.connection;
 
@@ -24,7 +37,7 @@ const userSchema = new mongoose.Schema({
   email: String,
   password: String,
   points: Number,
-  isAdmin:Boolean
+  isAdmin: Boolean
 });
 
 const User = mongoose.model('User', userSchema);
@@ -42,23 +55,38 @@ app.post('/register', async (req, res) => {
       return res.status(409).json({ error: "Email already exists" });
     }
 
-    const isAdminUser=name ==='admin';
+    const isAdminUser = name === 'admin';
     const newUser = new User({
       name,
       email,
       password,
-      points:100,
-      isAdmin:isAdminUser?true:false
-    })
+      points: 100,
+      isAdmin: isAdminUser ? true : false
+    });
 
-    const savedUser = await newUser.save()
-    res.status(201).json(savedUser)
+    const savedUser = await newUser.save();
+    res.status(201).json(savedUser);
   } catch (error) {
-    console.error('Error during registration', error)
-    res.status(500).json({ error: "Inter server error" })
+    console.error('Error during registration', error);
+    res.status(500).json({ error: "Inter server error" });
   }
-})
+});
 
+app.get('/api/me', async (req, res,next) => {
+  const token = req.cookies.token;
+  if (!token) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, SECRET_KEY);
+    console.log(decoded);
+  } catch (error) {
+    console.error('Error during user retrieval', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+  return next()
+});
 
 app.post('/login', async (req, res) => {
   try {
@@ -89,8 +117,10 @@ app.post('/login', async (req, res) => {
     }
     else{
     const token = jwt.sign({ username: User.name }, 'SECRET_KEY', { expiresIn: '1h' });
+    // const refreshtoken = jwt.sign({ username: User.name }, 'SECRET_KEY', { expiresIn: '1h' });
     res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'strict' });
-    res.status(200).json({ message: "Login successful", token,username:user.name ,points :user.points });
+    // res.cookie('refreshtoken', refreshtoken, { httpOnly: true, secure: true, sameSite: 'strict' });
+    res.status(200).json({ message: "Login successful", token,username:user.name ,points :user.points,Login:true });
      } 
     }
 catch (error) {
@@ -100,6 +130,93 @@ catch (error) {
 })
 
 
+app.get('/getallusers', async (req, res) => {
+  try {
+    const users = await User.find() // exclude password field
+    res.status(200).json(users);
+  } catch (error) {
+    console.error('Error retrieving users', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
+
+app.get('/getalluser/:username', async (req, res) => {
+  const username = req.params.username;
+  const user = await User.findOne({ name: username });
+  if (!user) {
+    return res.status(404).json({ error: 'User not found' });
+  }
+  res.json(user);
+});
+
+
+app.put('/updateuser/:username', async (req, res) => {
+  const username = req.params.username;
+  const updatedPoints = req.body.points;
+
+  try {
+    const user = await User.findOne({ name: username });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+     const adminUser = await User.findOne({ name: 'admin' });
+      adminUser.points = adminUser.points + 10;
+      await adminUser.save();
+      
+
+    user.points = updatedPoints;
+    const updatedUser = await user.save();
+    res.json({user: updatedUser,admin:adminUser});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+app.get('/display',async(req,res)=>{
+  res.send('ajbajba');
+})
 
 app.listen(PORT);
+
+
+
+
+
+// const varifyUser =(req,res,next)=>{
+//     const accesstoken=req.cookies.token;
+//     if(!accesstoken){
+
+//     }else{
+//       jwt.verify(accesstoken,SECRET_KEY,(err,decoded)=>{
+//         if(err){
+//           return res.json({valid:false,message:"Invalid token "})
+//         }else{
+//           req.email=decoded.email
+//           next()
+//         }
+//       })
+//     }
+// }
+
+// const renewToken =(req,res,next)=>{
+//   const reftoken=req.cookies.refreshtoken;
+//   if(!reftoken){
+
+//   }else{
+//     jwt.verify(reftoken,SECRET_KEY,(err,decoded)=>{
+//       if(err){
+//         return res.json({valid:false,message:"Invalid reftoken token "})
+//       }else{
+//         req.email=decoded.email
+//         next()
+//       }
+//     })
+//   }
+// }
+
+// app.get('dash',(req,res)=>{
+//   return res.json({valid:true ,message:"authorized"})
+// })

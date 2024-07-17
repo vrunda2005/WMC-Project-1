@@ -6,11 +6,12 @@ import Home from './components/Home/Home'
 import Login from './components/Login/Login'
 import About from './components/About/About'
 import Donate from './components/Donate/Donate'
-import Membership from './components/Membership/Membership'
 import Signup from './components/Signup/SignUp'
 import { RouterProvider,createBrowserRouter } from 'react-router-dom'
 import Quiz from './components/Quiz/Quiz.jsx'
 import Admin from './components/Admin.jsx'
+import MembershipPage from './components/Membership/membership_temp.jsx'
+
 
 
 const router=createBrowserRouter([
@@ -36,7 +37,7 @@ const router=createBrowserRouter([
       },
       {
         path:"Membership",
-        element:<Membership/>
+        element:<MembershipPage/>
       },
       {
         path:"Donate",

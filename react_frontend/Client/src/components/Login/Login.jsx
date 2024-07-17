@@ -1,78 +1,87 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState ,useContext} from 'react';
 import axios from 'axios';
 import { AuthContext } from '../../creatContext';
-import { useContext } from 'react';
-// import useToken from '../../tokens';
-
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../creatContext';
 
 export default function Login() {
-  const [username,setUsername]=useState('');
+  // const {auth,setAuth,setIsLoggedIn}=useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-  const{isAdmin,setisAdmin}=useContext(AuthContext);
-  const { login ,isLoggedIn} = useContext(AuthContext);
+  const [auth, setAuth] = useAuth();
 
-  const [showPassword, setShowPassword] = useState(false);
+  const username = auth.username;
 
-  const handleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
+  const navigate =useNavigate();
 
-  const navigate = useNavigate();
-
+  axios.defaults.withCredentials=true;
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/login', { email, password });
-      if (response.status === 200 && response.data) {
-        localStorage.setItem('token',response.data.token);
-        localStorage.setItem('username',response.data.username);
-        if(response.data.isAdmin){
-          
+      if (response.status === 200) {
+        if(response.data.Login){
+          // localStorage.setItem('token',response.data.token);
+          // localStorage.setItem('username',response.data.username);
+          // sessionStorage.setItem('username',response.data.username);
+          const username=response.data.username;
+          const token=response.data.token;
+          const points=response.data.points;
+          //set AUth 
+          setAuth({
+            ...auth,
+            username: username,
+            token: token,
+            isLoggedIn:true,
+            isAdmin:false,
+            points:points,
+          });
+          localStorage.setItem("auth", JSON.stringify(response.data));
+          console.log("hi data ",response.data);       
           alert("Login successful");
-          console.log("admin herre");
-          isAdmin();
-          login();
-          navigate('/admin',{replace:true});
-        }else{      
-  
-        alert("Login successful");
-        login();
-        navigate('/', { replace: true });
-        }
-       
+          navigate('/');
+        }else if(response.data.isAdmin){
+          const username=response.data.username;
+          const token=response.data.token;
+          const points=response.data.points;
+          setAuth({
+            ...auth,
+            username: username,
+            token: token,
+            isLoggedIn:true,
+            isAdmin:true,
+            userPoints:points,
+          });
+          localStorage.setItem("auth", JSON.stringify(response.data));
+          console.log(response.data);
+          alert("Admin Login successful");
+          // setIsLoggedIn(true);
+          navigate('/')
 
+        }else{
+          console.log('ERROR NOT A USER ');
+        }
+     
+
+              
       }
     } catch (error) {
-      console.log("only erro ");
-      console.log("error");
       setError(error.response.data.error);
     }
   };
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
-  //     setToken(token);
-  //     if(!isLoggedIn){
-  //       login(); 
-  //     }
-  //     // Call the login function from the AuthContext
-  //   }
-  // }, [setToken,isLoggedIn,login]);
 
   return (
     <div className="h-[540px] flex justify-center items-center bg-gray-100">
       <div className="max-w-md h-fit w-full p-6 bg-white rounded shadow-md">
-        <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
+      <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
           <img
               src="https://upload.wikimedia.org/wikipedia/commons/4/47/Epsilon_Program_Logo.png"
               className="h-36 shadow-sm"
               alt="Logo"
           />
           <h2 className="text-5xl font-bold mt-2 mb-8 text-center">Log In</h2>
-
+          <h1>Welcome, {auth.username? auth.username : 'Guest'}</h1>
           <input
             type="email"
             placeholder="Email"
@@ -85,10 +94,8 @@ export default function Login() {
 
           {/* <hr className='relative bg-gray-300 h-[1px] w-full -top-2' /> */}
 
-          <div className="flex gap-2">
-          
           <input
-            type={showPassword ? "text" : "password"}
+            type="password"
             placeholder="Password"
             name="password"
             value={password}
@@ -96,14 +103,6 @@ export default function Login() {
             required
             className="w-full p-2 pl-5 text-sm text-gray-700 border border-gray-300 rounded mt-4"
           />
-          <button 
-              type="button"
-              onClick={handleShowPassword} 
-              className="border w-10 border-gray-300 rounded mt-4 p-1 hover:bg-gray-50"
-            >
-              {showPassword ? "◎" : "◉" }
-            </button>
-          </div>
           
           {/* <hr className='relative bg-gray-300 h-[1px] w-full -top-2' /> */}
 
