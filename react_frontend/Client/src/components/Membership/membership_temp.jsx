@@ -32,36 +32,36 @@ function MembershipPage() {
   }, [userData.points]);
 
   
-  const updatePoints = async (pointsToUpdate,membership_id) => {
-    try {
-      const response = await fetch(`http://localhost:5000/updateuser/${auth.username}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ points: userData.points + pointsToUpdate ,
-                                addPoints : pointsToUpdate,
-                                membership_id:membership_id,
+  // const updatePoints = async (pointsToUpdate,membership_id) => {
+  //   try {
+  //     const response = await fetch(`http://localhost:5000/updateuser/${auth.username}`, {
+  //       method: 'PUT',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify({ points: userData.points + pointsToUpdate ,
+  //                               addPoints : pointsToUpdate,
+  //                               membership_id:membership_id,
 
-        }),
-      });
-      const data = await response.json();
-      console.log(data);
-      // console.log(data.user);
-      setUserData(data.user);
-      setAuth({
-        ...auth,
-        username:data.user.name,
-        userPoints:data.user.points,
-      });  
-      localStorage.setItem('auth', JSON.stringify(auth));
-      localStorage.setItem('userData', JSON.stringify(data.user)); 
-      console.log("updated auth ");
-      console.log(`Admin points: ${data.admin}`); 
-      navigate(`/MembershipLayout/${membership_id}`);
+  //       }),
+  //     });
+  //     const data = await response.json();
+  //     console.log(data);
+  //     // console.log(data.user);
+  //     setUserData(data.user);
+  //     const newAuth = {...auth,
+  //       username: data.user.name,
+  //       userPoints: data.user.points,
+  //     };
+  //     setAuth(newAuth);
+  //     localStorage.setItem('auth', JSON.stringify(newAuth));
+  //     localStorage.setItem('userData', JSON.stringify(data.user));
+  //     console.log("updated auth ");
+  //     console.log(`Admin points: ${data.admin}`); 
+  //     navigate(`/MembershipLayout/${membership_id}`);
       
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   useEffect(() => {
     const storedAuth = localStorage.getItem('auth');

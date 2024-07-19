@@ -4,6 +4,7 @@
     "axois": "^0.0.1-security",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",
-    "react-router-dom": "^6.24.1"
+    "react-router-dom": "^6.24.1",
+    "react-typed": "^2.0.12"
   }
 }
