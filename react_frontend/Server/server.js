@@ -37,7 +37,8 @@ const userSchema = new mongoose.Schema({
   email: String,
   password: String,
   points: Number,
-  isAdmin: Boolean
+  isAdmin: Boolean,
+  membership_id: Number,
 });
 
 const User = mongoose.model('User', userSchema);
@@ -61,7 +62,8 @@ app.post('/register', async (req, res) => {
       email,
       password,
       points: 100,
-      isAdmin: isAdminUser ? true : false
+      isAdmin: isAdminUser ? true : false,
+      membership_id :0,
     });
 
     const savedUser = await newUser.save();
@@ -155,6 +157,7 @@ app.put('/updateuser/:username', async (req, res) => {
   const username = req.params.username;
   const updatedPoints = req.body.points;
   const {addPoints} =req.body;
+  const {membership_id} =req.body;
 
   try {
     const user = await User.findOne({ name: username });
@@ -165,7 +168,7 @@ app.put('/updateuser/:username', async (req, res) => {
       adminUser.points = adminUser.points + addPoints;
       await adminUser.save();
       
-
+    user.membership_id=membership_id;
     user.points = updatedPoints;
     const updatedUser = await user.save();
     res.json({user: updatedUser,admin:adminUser});

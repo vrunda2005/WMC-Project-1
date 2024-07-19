@@ -1,19 +1,16 @@
-import React, { useState ,useContext} from 'react';
+import React, { useState ,useContext, useEffect} from 'react';
 import axios from 'axios';
 import { AuthContext } from '../../creatContext';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../creatContext';
 
 export default function Login() {
-  // const {auth,setAuth,setIsLoggedIn}=useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const [auth, setAuth] = useAuth();
-
-  const username = auth.username;
-
   const navigate =useNavigate();
+
 
   axios.defaults.withCredentials=true;
   const handleSubmit = async (e) => {

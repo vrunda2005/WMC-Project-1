@@ -9,10 +9,8 @@ const Logout_navbar = () => {
       <a href="/" className="logo">Logo</a>
       <nav className="navbar">
         <Link to="/">Home</Link>
-        <Link to="/membership">Membership</Link>
         <Link to="#">Blog</Link>
-
-        <Link to="/Donate">Donate</Link>
+        <Link to="#">Events</Link>
         <Link to='/About'>About</Link>
       
       </nav>  

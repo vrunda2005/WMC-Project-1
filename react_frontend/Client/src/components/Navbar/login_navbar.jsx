@@ -8,45 +8,48 @@ import axios from 'axios';
 import { useAuth } from '../../creatContext';
 
 const Login_navbar = () => {
-  // const [points, setPoints] = useState(0);
-  // const { isLoggedIn, logout, setIsLoggedIn, isAdminLoggedIn, setIsAdminLoggedIn, username } = useContext(AuthContext);
   const navigate = useNavigate();
   const [auth,setAuth]=useAuth();
 
   const handleLogout = () => {
-    alert("You've been logged out");
-    setAuth({ username: null, token: '',points:0,isAdmin:false, isLoggedIn: false });
+    alert("You have logged out")
     localStorage.removeItem('auth');
+    setAuth({ user: null, token: '', isLoggedIn: false });
     navigate('/login', { replace: true });
   };
 
   return (
     <>
-      <header className="sticky z-50 top-0 p-5 flex content-between place-content-between bg-white">
+      <header className="sticky z-50 top-0 p-5 flex justify-between bg-white md:flex-row flex-col">
         <a href="/" className="logo">Logo</a>
-        {/* <div className='flex gap-5 '><FaRegUser size="1.5em" />{username}</div>
-        <div className='flex gap-5 '><MdCurrencyBitcoin size="1.5em" />{points}</div> */}
         {
           auth.isLoggedIn ? (
-            <nav className="navbar">
-                 {auth.username}
-                 { auth.userPoints}
-                    <Link to="/">Home</Link>
-                
-                    <Link to="/membership">Membership</Link>
-                    <Link to="#">Blog</Link>
-                    <Link to="/Donate">Donate</Link>
-                    <Link to='/About'>About</Link>
-                    <Link to='/Quiz'>Quiz</Link>
-          
+            <nav className="navbar flex flex-wrap justify-between md:flex-row flex-col">
+              <div className="flex items-center mb-2 md:mb-0">
+                <FaRegUser size="1.5em" />
+                <span className="ml-2">{auth.username}</span>
+              </div>
+              <div className="flex items-center mb-2 md:mb-0">
+                <MdCurrencyBitcoin size="1.5em" />
+                <span className="ml-2">{auth.points}</span>
+              </div>
+              <ul className="flex flex-wrap justify-between md:flex-row flex-col">
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/membership">Membership</Link></li>
+                <li><Link to="#">Blog</Link></li>
+                <li><Link to="/Donate">Donate</Link></li>
+                <li><Link to='/About'>About</Link></li>
+                <li><Link to='/Quiz'>Quiz</Link></li>
+              </ul>
             </nav>
           ) : (
-            <nav className="navbar">
-            <Link to="/">Home</Link>
-            <Link to="#">Blog</Link>
-            {/* <Link to="/Donate">Donate</Link> */}
-            <Link to='/About'>About</Link>
-            <Link to='/Quiz'>Quiz</Link>
+            <nav className="navbar flex flex-wrap justify-between md:flex-row flex-col">
+              <ul className="flex flex-wrap justify-between md:flex-row flex-col">
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="#">Blog</Link></li>
+                <li><Link to='/About'>About</Link></li>
+                <li><Link to='/Quiz'>Quiz</Link></li>
+              </ul>
             </nav>
           )
         }

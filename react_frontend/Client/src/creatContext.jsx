@@ -13,12 +13,13 @@ const AuthProvider = ({ children }) => {
 
   });
 
+  
+
+
   //default axios
-  useEffect(()=>{
     axios.defaults.headers.common["Authorization"] = auth?.token;
 
-  },[auth])
-
+ 
   const fetchData = async () => {
     if (auth.username) {
       try {

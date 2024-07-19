@@ -74,12 +74,9 @@ function Home() {
        Your points: {auth.userPoints}<br/>
         Now here we implement Our home page!!!
 
-      
         
 
-
-
-    
+        
     </div>
   );
 }

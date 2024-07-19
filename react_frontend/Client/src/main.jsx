@@ -11,6 +11,7 @@ import { RouterProvider,createBrowserRouter } from 'react-router-dom'
 import Quiz from './components/Quiz/Quiz.jsx'
 import Admin from './components/Admin.jsx'
 import MembershipPage from './components/Membership/membership_temp.jsx'
+import MembershipLayout from './components/Membership/MembershipLayout.jsx'
 
 
 
@@ -50,7 +51,11 @@ const router=createBrowserRouter([
       {
         path:"Admin",
         element:<Admin/>
-      }
+      },
+      {
+        path:"MembershipLayout/:membership_id",
+        element:<MembershipLayout/>
+      },
     ]
   }
 ])
