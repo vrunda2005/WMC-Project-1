@@ -43,15 +43,15 @@ function MembershipPage() {
       console.log(data);
       // console.log(data.user);
       setUserData(data.user);
-      setAuth({
-        ...auth,
-        username:data.user.name,
-        userPoints:data.user.points,
-      });  
-      localStorage.setItem('auth', JSON.stringify(auth));
-      localStorage.setItem('userData', JSON.stringify(data.user)); 
+      const newAuth = {...auth,
+        username: data.user.name,
+        userPoints: data.user.points,
+      };
+      setAuth(newAuth);
+      localStorage.setItem('auth', JSON.stringify(newAuth));
+      localStorage.setItem('userData', JSON.stringify(data.user));
       console.log("updated auth ");
-      console.log(`Admin points: ${data.admin}`); 
+      console.log(`Admin points: ${data.admin}`);
     } catch (error) {
       console.error(error);
     }
