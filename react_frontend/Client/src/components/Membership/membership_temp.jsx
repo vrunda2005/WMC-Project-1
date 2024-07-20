@@ -72,8 +72,8 @@ function MembershipPage() {
         const parsedUserData = JSON.parse(storedUserData);
         setAuth(parsedAuth);
         setUserData(parsedUserData);
-        console.log('Auth state updated from localStorage:', parsedAuth);
-        console.log('User data updated from localStorage:', parsedUserData);
+        // console.log('Auth state updated from localStorage:', parsedAuth);
+        // console.log('User data updated from localStorage:', parsedUserData);
       } catch (error) {
         console.error('Error parsing auth state from localStorage:', error);
       }

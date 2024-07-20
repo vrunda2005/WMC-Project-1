@@ -6,6 +6,7 @@ import { useState ,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 const MembershipDetails = ({ title, description, benefits,up }) => {
 
+
   return (
     <div className="max-w-md mx-auto p-4 pt-6 pb-8 mb-4 bg-white rounded shadow-md">
       <h2 className="text-2xl font-bold mb-2">{title}</h2>
@@ -29,6 +30,8 @@ const MembershipLayout = () => {
   const [auth, setAuth] = useAuth();
   const [userData, setUserData] = useState({});
   const navigate=useNavigate();
+  const [error, setError] = useState(null);
+
 
 
   const fetchData = async () => {
@@ -59,12 +62,17 @@ const MembershipLayout = () => {
       const response = await fetch(`http://localhost:5000/updateuser/${auth.username}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ points: userData.points + pointsToUpdate ,
+        body: JSON.stringify({ points: userData.points  ,
                                 addPoints : pointsToUpdate,
                                 membership_id:membership_id,
 
         }),
       });
+
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        throw new Error(errorResponse.error);
+      }else{
       const data = await response.json();
       // console.log(data);
       // console.log(data.user);
@@ -74,14 +82,18 @@ const MembershipLayout = () => {
         username:data.user.name,
         userPoints:data.user.points,
       });  
+
+    }
       localStorage.setItem('auth', JSON.stringify(auth));
       localStorage.setItem('userData', JSON.stringify(data.user)); 
       // console.log("updated auth ");
       // console.log(`Admin points: ${data.admin}`); 
       navigate(`/MembershipLayout/${membership_id}`);
+    
       
     } catch (error) {
-      console.error(error);
+      // console.error(error);
+      setError(error.message);
     }
   };
 
@@ -97,6 +109,7 @@ const MembershipLayout = () => {
         // console.log('Auth state updated from localStorage:', parsedAuth);
         // console.log('User data updated from localStorage:', parsedUserData);
       } catch (error) {
+        
         console.error('Error parsing auth state from localStorage:', error);
       }
     }
@@ -153,14 +166,23 @@ const MembershipLayout = () => {
   }
 
   return (
+    <>
+    
+
     <div className='container p-5 justify-center items-center '>
       <h1 className='text-center  text-4xl font-bold mb-2 text-zinc-600'>MembershipLayout</h1>
+      {error && (
+        <div className='text-red-600 text-center mb-4'>
+          <p>{error}</p>
+        </div>
+      )}
       <MembershipDetails {...membershipDetails} />
       <button>Membership_ID  :  {membership_id}</button>
       <button className="flex text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-400 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none" onClick={() => updatePoints(membershipDetails.up,membership_id)}>GETTT Membership</button>
       {auth.userPoints}
       
     </div>
+    </>
   );
 };
 

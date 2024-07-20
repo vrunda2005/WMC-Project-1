@@ -41,8 +41,8 @@ function Home() {
       });  
       localStorage.setItem('auth', JSON.stringify(auth));
       localStorage.setItem('userData', JSON.stringify(data.user)); 
-      console.log("updated auth ");
-      console.log(`Admin points: ${data.admin}`); 
+      // console.log("updated auth ");
+      // console.log(`Admin points: ${data.admin}`); 
     } catch (error) {
       console.error(error);
     }
@@ -57,8 +57,8 @@ function Home() {
         const parsedUserData = JSON.parse(storedUserData);
         setAuth(parsedAuth);
         setUserData(parsedUserData);
-        console.log('Auth state updated from localStorage:', parsedAuth);
-        console.log('User data updated from localStorage:', parsedUserData);
+        // console.log('Auth state updated from localStorage:', parsedAuth);
+        // console.log('User data updated from localStorage:', parsedUserData);
       } catch (error) {
         console.error('Error parsing auth state from localStorage:', error);
       }

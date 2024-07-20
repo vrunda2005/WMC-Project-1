@@ -131,7 +131,7 @@ catch (error) {
   }
 })
 
-
+//all user code 
 app.get('/getallusers', async (req, res) => {
   try {
     const users = await User.find() // exclude password field
@@ -142,7 +142,7 @@ app.get('/getallusers', async (req, res) => {
   }
 });
 
-
+//find one particular user 
 app.get('/getalluser/:username', async (req, res) => {
   const username = req.params.username;
   const user = await User.findOne({ name: username });
@@ -152,23 +152,75 @@ app.get('/getalluser/:username', async (req, res) => {
   res.json(user);
 });
 
-
+//update membership amount code 
 app.put('/updateuser/:username', async (req, res) => {
+  const username = req.params.username;
+  const userPoints = req.body.points;
+  const {addPoints} =req.body;
+  const {membership_id} =req.body;
+
+
+  console.log(typeof membership_id);
+  try {
+    const user = await User.findOne({ name: username });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+  
+    let errorResponse;
+  
+    if (Number(membership_id) === 1) {
+      if (userPoints < 1000) {
+        errorResponse = { error: 'User must have at least 10 points for membership ID 1' };
+      }
+    } else if (Number(membership_id) === 2) {
+      if (userPoints < 20) {
+        errorResponse = { error: 'User must have at least 20 points for membership ID 2' };
+      }
+    } else if (Number(membership_id) === 3) {
+      if (userPoints < 30) {
+        errorResponse = { error: 'User must have at least 30 points for membership ID 3' };
+      }
+    }
+  
+    if (errorResponse) {
+      return res.status(400).json(errorResponse);
+    }else{
+  
+    const adminUser = await User.findOne({ name: 'admin' });
+    adminUser.points = adminUser.points + addPoints;
+    await adminUser.save();
+  
+    user.membership_id = membership_id;
+    user.points = req.body.points + addPoints;
+    const updatedUser = await user.save();
+    res.json({ user: updatedUser, admin: adminUser });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal error' });
+  }
+
+
+});
+
+//donate code 
+app.put('/donate/:username', async (req, res) => {
   const username = req.params.username;
   const updatedPoints = req.body.points;
   const {addPoints} =req.body;
-  const {membership_id} =req.body;
 
   try {
     const user = await User.findOne({ name: username });
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
+
+    
      const adminUser = await User.findOne({ name: 'admin' });
-      adminUser.points = adminUser.points + addPoints;
+      adminUser.points = adminUser.points + Number(addPoints);
       await adminUser.save();
       
-    user.membership_id=membership_id;
     user.points = updatedPoints;
     const updatedUser = await user.save();
     res.json({user: updatedUser,admin:adminUser});
