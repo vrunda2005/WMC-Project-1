@@ -1,74 +1,104 @@
-import React, { useState } from 'react';
-import questions from './questions.json';
+import React, { useState, useRef } from 'react';
+// import questions from './questions.json';
+import { data } from './data';
+import './quiz.css';
 
 function Quiz() {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [userAnswers, setUserAnswers] = useState({});
-  const [quizCompleted, setQuizCompleted] = useState(false);
-  const [score, setScore] = useState(0);
 
-  const handleAnswer = (answer) => {
-    setUserAnswers({...userAnswers, [currentQuestion]: answer });
-    if (answer === questions[currentQuestion].answer) {
-      setScore(score + 1);
+  let [index, setIndex] = useState(0);
+  let [question, setQuestion] = useState(data[index]);
+  let [lock, setLock] = useState(false);
+  let [score, setScore] = useState(0);
+  let [result, setResult] = useState(false);
+
+  let option1 = useRef(null);
+  let option2 = useRef(null);
+  let option3 = useRef(null);
+  let option4 = useRef(null);
+
+  let optionArray = [option1,option2, option3, option4];
+
+  const checkAns = (e, ans) => {
+    if (lock === false) { 
+      if (question.ans === ans) {
+        e.target.classList.add("correct");
+        setLock(true);
+        setScore(prev=> prev+1);
+      }
+      else {
+        e.target.classList.add("wrong");
+        setLock(true);
+        optionArray[question.ans-1].current.classList.add("correct");
+      }
     }
-    if (currentQuestion === questions.length - 1) {
-      setQuizCompleted(true);
-    } else {
-      setCurrentQuestion(currentQuestion + 1);
+  }
+
+  const next = () => {
+    if (lock === true) {
+      if (index === data.length-1) {
+        setResult(true);
+        return null;
+      }
+      setIndex(++index);
+      setQuestion(data[index]);
+      setLock(false);
+      optionArray.map((option)=> {
+        option.current.classList.remove("correct");
+        option.current.classList.remove("wrong");
+        return null;
+      });
     }
-  };
+  }
+
+  const reset = () => {
+    setIndex(0);
+    setQuestion(data[index]);
+    setScore(0);
+    setLock(false);
+    setResult(false);
+  }
 
   return (
-    <div className="container mx-auto p-4 pt-6 md:p-6 lg:p-12">
-      <h1 className="text-3xl font-bold mb-4 text-zinc-800">Quiz Page</h1>
-      {quizCompleted ? (
-        <div className='flex flex-wrap  '>
-          <h2 className="text-2xl mb-2">You completed the quiz!</h2>
-          <p>You scored {score} out of {questions.length}!</p>
-          <ul>
-            {questions.map((question, index) => (
-              <li key={index} className="mb-2">
-                <span className="text-lg">{question.question}</span>
-                <span className="text-lg ml-2">
-                  Your answer: {userAnswers[index]}
-                </span>
-                <span className="text-lg ml-2">
-                  Correct answer: {question.answer}
-                </span>
-                {userAnswers[index] === question.answer ? (
-                  <span className="text-lg ml-2 text-green-500">Correct!</span>
-                ) : (
-                  <span className="text-lg ml-2 text-red-500">Incorrect</span>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <div className=' text-zinc-800'>
-          <h2 className="text-2xl mb-2">
-            Question {currentQuestion + 1} of {questions.length}
-          </h2>
-          <h3 className="text-lg mb-2">
-            {questions[currentQuestion] && questions[currentQuestion].question}
-          </h3>
-          <ul>
-            {questions[currentQuestion] &&
-              questions[currentQuestion].options.map((option, index) => (
-                <li key={index} className="mb-2">
-                  <button
-                    className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
-                    onClick={() => handleAnswer(option)}
-                  >
-                    {option}
-                  </button>
-                </li>
-              ))}
-          </ul>
-        </div>
-      )}
+    <>
+    <div className='h-[100vh] border'>
+
+      <div className='bg-white mt-10 max-h-screen border border-blue-400 w-[666px] mx-auto p-6 rounded-xl py-10'>
+
+        <h1 className='text-4xl mb-2 font-semibold'>Quiz</h1>
+
+        <hr />
+
+        {result ? <>
+          <h2 className='mt-10 text-lg'>You scored <span className='font-semibold text-2xl'>{score}</span> out of {data.length} </h2>
+          
+          <button onClick={reset} className='bg-blue-200 block mx-auto w-28 mt-8 p-2 rounded-lg hover:rounded-3xl transition-all'>Reset</button>
+
+        </> : <>
+
+        <h2 className='mt-10 text-xl'>{index+1}. {question.question}</h2>
+
+        <ul className='mt-8 flex flex-col gap-2'>
+
+          <li ref={option1} onClick={(e) => checkAns(e,1)} className='border-[1px] p-2 ml-8 hover:cursor-pointer'>{question.option1}</li>
+
+          <li ref={option2} onClick={(e) => checkAns(e,2)} className='border-[1px] p-2 ml-8 hover:cursor-pointer'>{question.option2}</li>
+
+          <li ref={option3} onClick={(e) => checkAns(e,3)} className='border-[1px] p-2 ml-8 hover:cursor-pointer'>{question.option3}</li>
+
+          <li ref={option4} onClick={(e) => checkAns(e,4)} className='border-[1px] p-2 ml-8 hover:cursor-pointer'>{question.option4}</li>
+
+        </ul>
+        
+        <button onClick={next} className='bg-blue-200 block mx-auto w-28 mt-8 p-2 rounded-lg hover:rounded-3xl transition-all'>
+          Next
+        </button>
+
+        <div className='mt-4 text-sm'>{index+1} of {data.length} questions</div>
+        </>}
+        
+      </div>
     </div>
+    </>
   );
 }
 
