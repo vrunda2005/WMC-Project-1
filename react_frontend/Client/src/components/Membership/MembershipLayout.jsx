@@ -28,33 +28,51 @@ const MembershipDetails = ({ title, description, benefits,up }) => {
 const MembershipLayout = () => {
   // UPDATESTION CODE 
   const [auth, setAuth] = useAuth();
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({  membershipStatus: null,});
   const navigate=useNavigate();
   const [error, setError] = useState(null);
+  const [membershipStatus, setMembershipStatus] = useState(null);
 
 
+  useEffect(() => {
+    const storedMembershipStatus = localStorage.getItem(auth.username);
+    if (storedMembershipStatus) {
+      setMembershipStatus(storedMembershipStatus);
+    }
+  }, [auth.username]);
 
-  const fetchData = async () => {
-    if (auth.username) {
-      try {
-        const response = await fetch(`http://localhost:5000/getalluser/${auth.username}`);
-        const data = await response.json();
-        setUserData(data);
-      } catch (error) {
-        console.error(error);
-      }
+
+  const cancelMembership = async () => {
+    try {
+      //...
+      localStorage.removeItem(auth.username); // remove membership status
+    } catch (error) {
+      //...
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, [auth.username]);
 
-  useEffect(() => {
-    if (auth.username) {
-      setAuth({ ...auth, userPoints: userData.points });
-    }
-  }, [userData.points]);
+  // const fetchData = async () => {
+  //   if (auth.username) {
+  //     try {
+  //       const response = await fetch(`http://localhost:5000/getalluser/${auth.username}`);
+  //       const data = await response.json();
+  //       setUserData(data);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, [auth.username]);
+
+  // useEffect(() => {
+  //   if (auth.username) {
+  //     setAuth({ ...auth, userPoints: userData.points });
+  //   }
+  // }, [userData.points]);
 
   
   const updatePoints = async (pointsToUpdate,membership_id) => {
@@ -76,21 +94,23 @@ const MembershipLayout = () => {
       const data = await response.json();
       // console.log(data);
       // console.log(data.user);
-      setUserData(data.user);
+      setUserData({...data.user,membershipStatus:membership_id});
       setAuth({
         ...auth,
         username:data.user.name,
         userPoints:data.user.points,
       });  
 
-    }
+    
       localStorage.setItem('auth', JSON.stringify(auth));
       localStorage.setItem('userData', JSON.stringify(data.user)); 
+      localStorage.setItem(auth.username, membership_id); // store membership status
+
       // console.log("updated auth ");
       // console.log(`Admin points: ${data.admin}`); 
       navigate(`/MembershipLayout/${membership_id}`);
     
-      
+    }
     } catch (error) {
       // console.error(error);
       setError(error.message);
@@ -178,8 +198,22 @@ const MembershipLayout = () => {
       )}
       <MembershipDetails {...membershipDetails} />
       <button>Membership_ID  :  {membership_id}</button>
-      <button className="flex text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-400 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none" onClick={() => updatePoints(membershipDetails.up,membership_id)}>GETTT Membership</button>
+      {membershipStatus===membership_id ? 
+      (<>
+      <p>You are already member</p> 
+       <button
+       className="flex text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-400 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+       onClick={() => cancelMembership(membership_id)}
+     >
+       Cancel Membership
+     </button>
+     </>
+     ) : 
+      (<button className="flex text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-400 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none" onClick={() => updatePoints(membershipDetails.up,membership_id)}>GETTT Membership</button>
+)}
       {auth.userPoints}
+
+
       
     </div>
     </>

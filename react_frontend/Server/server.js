@@ -170,7 +170,7 @@ app.put('/updateuser/:username', async (req, res) => {
     let errorResponse;
   
     if (Number(membership_id) === 1) {
-      if (userPoints < 1000) {
+      if (userPoints < 10) {
         errorResponse = { error: 'User must have at least 10 points for membership ID 1' };
       }
     } else if (Number(membership_id) === 2) {
@@ -215,6 +215,9 @@ app.put('/donate/:username', async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
+    if (user.points < addPoints) {
+      return res.status(400).json({ error: 'Insufficient balance' });
+    }else{
 
     
      const adminUser = await User.findOne({ name: 'admin' });
@@ -224,6 +227,7 @@ app.put('/donate/:username', async (req, res) => {
     user.points = updatedPoints;
     const updatedUser = await user.save();
     res.json({user: updatedUser,admin:adminUser});
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });

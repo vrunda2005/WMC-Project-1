@@ -8,6 +8,7 @@ function Donate() {
   const [auth,setAuth]=useAuth();
   const [userData, setUserData] = useState({});
   const navigate=useNavigate();
+  const [error, setError] = useState(null);
 
 
   const [amount ,setAmount]=useState(0);
@@ -51,6 +52,10 @@ function Donate() {
 
         }),
       });
+      if(!response.ok){
+        const errorResponse = await response.json();
+        throw new Error(errorResponse.error);
+      }else{
       const data = await response.json();
       // console.log(data);
       // console.log(data.user);
@@ -60,13 +65,16 @@ function Donate() {
         userPoints: data.user.points,
       };
       setAuth(newAuth);
+    
       localStorage.setItem('auth', JSON.stringify(newAuth));
       localStorage.setItem('userData', JSON.stringify(data.user));
       // console.log("updated auth ");
       // console.log(`Admin points: ${data.admin}`); 
       navigate(`/`);
+    }
       
     } catch (error) {
+      setError(error.message);
       console.error(error);
     }
   }
@@ -79,7 +87,11 @@ function Donate() {
 
 <div class="container mx-auto p-4 pt-6 md:p-6 lg:p-12 rounded shadow-md">
   <h1 class="text-4xl font-bold mb-4 text-zinc-900">hey user {auth.username}!!! Support Epsilon Program</h1>
-  
+  {error && (
+        <div className='text-red-600 text-center mb-4'>
+          <p>{error}</p>
+        </div>
+      )}
   <p class="text-lg mb-6 text-green-600">
     Your donation will help us level up our resources and support to our community.
     •	"Support the Epsilon Program - Your donations help us spread the truth and enlighten more souls."<br/>
