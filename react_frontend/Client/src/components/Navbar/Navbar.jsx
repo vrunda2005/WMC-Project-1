@@ -49,17 +49,22 @@ const Navbar = () => {
               <ul className="flex flex-wrap justify-between md:flex-row flex-col">
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/membership">Membership</Link></li>
-                <li><Link to="#">Blog</Link></li>
+                <li><Link to="/Blog">Blog</Link></li>
                 <li><Link to="/Donate">Donate</Link></li>
                 <li><Link to='/About'>About</Link></li>
                 <li><Link to='/Quiz'>Quiz</Link></li>
+                {
+                  auth.isAdmin ? (
+                    <li><Link to='/events'>Events</Link></li>
+                  ) : null
+                }
               </ul>
             </nav>
           ) : (
             <nav className="navbar flex flex-wrap justify-between md:flex-row flex-col">
               <ul className="flex flex-wrap justify-between md:flex-row flex-col">
                 <li><Link to="/">Home</Link></li>
-                <li><Link to="#">Blog</Link></li>
+                <li><Link to="/blog">Blog</Link></li>
                 <li><Link to='/About'>About</Link></li>
                 <li><Link to='/Quiz'>Quiz</Link></li>
               </ul>
