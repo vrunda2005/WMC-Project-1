@@ -1,6 +1,9 @@
-import React, { useContext } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { AuthContext } from '../../creatContext';
+import {useAuth} from '../../creatContext';
+import {useNavigate} from 'react-router-dom'
+
 
 const MembershipTier = ({ tier, benefits, profileLink, newsLink, message, onCancelMembership }) => {
   return (
@@ -85,22 +88,36 @@ const membershipTiers = {
 };
 
 const MembershipLayout = () => {
-    const { membership_id } = useParams();
-    const membershipTier = membershipTiers[membership_id];
-    
-    if (!membershipTier) {
-      return <div>Invalid membership ID</div>;
-    }
-  
-    const handleCancelMembership = () => {
-      // Add logic to cancel membership here
-      localStorage.removeItem(auth.username); // remove membership status
-  
-      console.log('Membership cancelled!');
-      return <Navigate to="/" replace={true} />;
-    };
-  
-    return <MembershipTier {...membershipTier} onCancelMembership={handleCancelMembership} />;
+  const { membership_id } = useParams();
+  const membershipTier = membershipTiers[membership_id];
+  const [cancellationMessage, setCancellationMessage] = useState('');
+  const [ auth ] = useAuth();
+  const navigate=useNavigate();
+
+  if (!membershipTier) {
+    return <div>Invalid membership ID</div>;
+  }
+
+  const handleCancelMembership = () => {
+    // Add logic to cancel membership here
+    localStorage.removeItem(auth.username); // remove membership status
+    console.log('Membership cancelled!');
+    setCancellationMessage('Your membership has been cancelled.');
+    navigate('/');
   };
-  
-  export default MembershipLayout;
+
+  return (
+    <div>
+      {auth.username}
+      {cancellationMessage ? (
+        <div className="bg-red-100 text-red-700 p-4 mb-6 rounded">
+          {cancellationMessage}
+        </div>
+      ) : (
+        <MembershipTier {...membershipTier} onCancelMembership={handleCancelMembership} />
+      )}
+    </div>
+  );
+};
+
+export default MembershipLayout;

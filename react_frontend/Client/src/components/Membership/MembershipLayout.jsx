@@ -32,7 +32,6 @@ const MembershipLayout = () => {
   const [error, setError] = useState(null);
   const [membershipStatus, setMembershipStatus] = useState(null);
 
-
   useEffect(() => {
     const storedMembershipStatus = localStorage.getItem(auth.username);
     if (storedMembershipStatus) {
@@ -43,37 +42,12 @@ const MembershipLayout = () => {
 
   const cancelMembership = async () => {
     try {
-      //...
       localStorage.removeItem(auth.username); // remove membership status
     } catch (error) {
-      //...
     }
   };
 
 
-  const fetchData = async () => {
-    if (auth.username) {
-      try {
-        const response = await fetch(`http://localhost:5000/getalluser/${auth.username}`);
-        const data = await response.json();
-        setUserData(data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, [auth.username]);
-
-  useEffect(() => {
-    if (auth.username) {
-      setAuth({ ...auth, userPoints: userData.points });
-    }
-  }, [userData.points]);
-
-  
   const updatePoints = async (pointsToUpdate,membership_id) => {
     try {
       const response = await fetch(`http://localhost:5000/updateuser/${auth.username}`, {

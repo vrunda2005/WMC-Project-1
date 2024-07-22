@@ -8,86 +8,12 @@ function MembershipPage() {
   const [userData, setUserData] = useAuth();
   const navigate=useNavigate();
 
-
-  // const fetchData = async () => {
-  //   if (auth.username) {
-  //     try {
-  //       const response = await fetch(`http://localhost:5000/getalluser/${auth.username}`);
-  //       const data = await response.json();
-  //       setUserData(data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, [auth.username]);
-
   useEffect(() => {
     const storedAuth = localStorage.getItem('auth');
     if (storedAuth) {
       setAuth(JSON.parse(storedAuth));
     }
   }, [setAuth]);
-
-  // useEffect(() => {
-  //   if (auth.username) {
-  //     setAuth({ ...auth, userPoints: userData.points });
-  //   }
-  // }, [userData.points,auth]);
-
-  
-  // const updatePoints = async (pointsToUpdate,membership_id) => {
-  //   try {
-  //     const response = await fetch(`http://localhost:5000/updateuser/${auth.username}`, {
-  //       method: 'PUT',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify({ points: userData.points + pointsToUpdate ,
-  //                               addPoints : pointsToUpdate,
-  //                               membership_id:membership_id,
-
-  //       }),
-  //     });
-  //     const data = await response.json();
-  //     console.log(data);
-  //     // console.log(data.user);
-  //     setUserData(data.user);
-  //     const newAuth = {...auth,
-  //       username: data.user.name,
-  //       userPoints: data.user.points,
-  //     };
-  //     setAuth(newAuth);
-  //     localStorage.setItem('auth', JSON.stringify(newAuth));
-  //     localStorage.setItem('userData', JSON.stringify(data.user));
-  //     console.log("updated auth ");
-  //     console.log(`Admin points: ${data.admin}`); 
-  //     navigate(`/MembershipLayout/${membership_id}`);
-      
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const storedAuth = localStorage.getItem('auth');
-  //   const storedUserData = localStorage.getItem('userData');
-  //   if (storedAuth && storedUserData) {
-  //     try {
-  //       const parsedAuth = JSON.parse(storedAuth);
-  //       const parsedUserData = JSON.parse(storedUserData);
-  //       setAuth(parsedAuth);
-  //       setUserData(parsedUserData);
-  //       // console.log('Auth state updated from localStorage:', parsedAuth);
-  //       // console.log('User data updated from localStorage:', parsedUserData);
-  //     } catch (error) {
-  //       console.error('Error parsing auth state from localStorage:', error);
-  //     }
-  //   }
-  // }, []);
-
-
 
   return (
     <div className="container mx-auto h-[650px] p-4 md:p-8 lg:p-7">

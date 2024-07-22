@@ -18,11 +18,11 @@ const Navbar = () => {
   // }, [setAuth]);
 
   
-  useEffect(() => {
-    // Re-render the component when the auth state changes
-    console.log("Navbar ",auth);
-    // setAuth(auth);
-  }, [auth]);
+  // useEffect(() => {
+  //   // Re-render the component when the auth state changes
+  //   console.log("Navbar ",auth);
+  //   // setAuth(auth);
+  // }, [auth]);
 
   const handleLogout = () => {
     alert("You have logged out")
@@ -44,7 +44,7 @@ const Navbar = () => {
               </div>
               <div className="flex items-center mb-2 md:mb-0">
                 <MdCurrencyBitcoin size="1.5em" />
-                <span className="ml-2">{auth.points}</span>
+                <span className="ml-2">{auth.userPoints}</span>
               </div>
               <ul className="flex flex-wrap justify-between md:flex-row flex-col">
                 <li><Link to="/">Home</Link></li>
