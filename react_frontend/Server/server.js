@@ -277,7 +277,6 @@ app.get('/display',async(req,res)=>{
   res.send('ajbajba');
 })
 
-<<<<<<< HEAD
 const events = [];
 
 // Get all events
@@ -317,9 +316,6 @@ app.post('/api/events', (req, res) => {
 //       res.status(500).json({ message: 'Error deleting event', error });
 //     });
 // });
-=======
-
->>>>>>> 62676a2baba6396a450c520ba0e0475926f09ad1
 
 
 app.listen(PORT);

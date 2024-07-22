@@ -59,17 +59,12 @@ const router=createBrowserRouter([
         element:<Admin/>
       },
       {
-<<<<<<< HEAD
         path:"Events",
         element:<Events/>
       },
       {
         path:"Blog",
         element:<Blog/>
-=======
-        path:"createEvent",
-        element:<createEvent/>
->>>>>>> 62676a2baba6396a450c520ba0e0475926f09ad1
       },
       {
         path:"MembershipLayout/:membership_id",

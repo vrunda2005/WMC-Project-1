@@ -42,23 +42,8 @@ const Navbar = () => {
               </div>
               <ul className="flex flex-wrap justify-between md:flex-row flex-col">
                 <li><Link to="/">Home</Link></li>
-<<<<<<< HEAD
                 <li><Link to="/membership">Membership</Link></li>
                 <li><Link to="/Blog">Blog</Link></li>
-=======
-                <li>
-                  <Link to={auth.membership_id ? `/epsilon_program_membership/${auth.membership_id}` : '/membership'}>
-                    Membership
-                  </Link>
-                </li>
-                {/* <li><Link to="/membership">Membership</Link></li> */}
-
-                {auth.isAdmin ? (   <li><Link to="#">create event</Link></li>) : (   <li><Link to="#">events</Link></li>)}
-
-                <li><Link to="/storyPage">Stories</Link></li>
-
-             
->>>>>>> 62676a2baba6396a450c520ba0e0475926f09ad1
                 <li><Link to="/Donate">Donate</Link></li>
                 <li><Link to='/About'>About</Link></li>
                 <li><Link to='/Quiz'>Quiz</Link></li>
