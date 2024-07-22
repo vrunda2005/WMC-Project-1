@@ -89,6 +89,7 @@ function Home() {
       '>
         <p className='md:text-5xl sm:text-4xl font-bold text-blue-950 md:py-6'>
         hi user : {auth.username}<br/>
+        membership_id : {auth.membership_id}<br/>
         
        Your points: {auth.userPoints}<br/>
         Now here we implement Our home page!!!

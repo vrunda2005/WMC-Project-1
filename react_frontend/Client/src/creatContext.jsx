@@ -4,16 +4,14 @@ import axios from 'axios';
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  // Initialize auth state from local storage if available
   const initialAuthState = () => {
     const data = localStorage.getItem("auth");
-    return data ? JSON.parse(data) : { username: "", token: "", isLoggedIn: false, isAdmin: false };
+    return data ? JSON.parse(data) : { username: "", token: "", isLoggedIn: false, isAdmin: false ,membership_id: null };
   };
 
   const [auth, setAuth] = useState(initialAuthState);
   const [userData, setUserData] = useState({});
 
-  // Set default axios authorization header
   useEffect(() => {
     axios.defaults.headers.common["Authorization"] = auth?.token;
   }, [auth.token]);
@@ -36,6 +34,9 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (userData?.points) {
       setAuth(prevAuth => ({ ...prevAuth, userPoints: userData.points }));
+    }
+    if (userData?.membership_id) {
+      setAuth(prevAuth => ({ ...prevAuth, membership_id: userData.membership_id }));
     }
   }, [userData]);
 

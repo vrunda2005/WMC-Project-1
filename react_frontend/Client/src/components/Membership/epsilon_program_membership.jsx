@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState ,useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../../creatContext';
 import {useAuth} from '../../creatContext';
@@ -91,19 +91,47 @@ const MembershipLayout = () => {
   const { membership_id } = useParams();
   const membershipTier = membershipTiers[membership_id];
   const [cancellationMessage, setCancellationMessage] = useState('');
-  const [ auth ] = useAuth();
-  const navigate=useNavigate();
+  const [auth, setAuth] = useAuth();
+  const [userData, setUserData] = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedAuth = JSON.parse(localStorage.getItem("auth"));
+    console.log('Loaded Auth from Local Storage:', storedAuth);
+    if (storedAuth) {
+      setAuth(storedAuth);
+    }
+  }, [setAuth]);
 
   if (!membershipTier) {
     return <div>Invalid membership ID</div>;
   }
 
-  const handleCancelMembership = () => {
-    // Add logic to cancel membership here
-    localStorage.removeItem(auth.username); // remove membership status
-    console.log('Membership cancelled!');
-    setCancellationMessage('Your membership has been cancelled.');
-    navigate('/');
+  const handleCancelMembership = async () => {
+    try {
+      // Make the API call to cancel the membership
+      const response = await fetch('http://localhost:5000/cancel', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: auth.username }),
+      });
+
+      if (response.ok) {
+        // Update the local state
+        const updatedAuth = { ...auth, membership_id: null };
+        console.log('Updating Auth to Null:', updatedAuth);
+        setAuth(updatedAuth);
+        localStorage.setItem('auth', JSON.stringify(updatedAuth));
+        setUserData(updatedAuth); // Update local state
+        setCancellationMessage('Your membership has been cancelled.');
+        navigate('/');
+      } else {
+        setCancellationMessage('Failed to cancel membership. Please try again later.');
+      }
+    } catch (error) {
+      console.error('Error cancelling membership:', error);
+      setCancellationMessage('Failed to cancel membership. Please try again later.');
+    }
   };
 
   return (

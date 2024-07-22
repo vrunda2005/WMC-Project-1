@@ -7,6 +7,8 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 
+
+
 dotenv.config();
 
 const app = express();
@@ -238,10 +240,44 @@ app.put('/donate/:username', async (req, res) => {
 });
 
 
+app.post('/cancel', async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    // Update the user's document in MongoDB
+    await User.updateOne({ name: userId }, { $unset: { membership_id: "" } });
+    res.status(200).json({ message: 'Membership cancelled successfully.' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error cancelling membership.', error });
+  }
+});
+
+
+const stories = []; // This should be replaced with a proper database
+
+const getAllStories = (req, res) => {
+  res.json(stories);
+};
+
+const addStory = (req, res) => {
+  const { username, story } = req.body;
+  const newStory = { id: stories.length + 1, username, story, date: new Date() };
+  stories.push(newStory);
+  res.status(201).json(newStory);
+};
+
+app.get('/stories',getAllStories);
+
+app.post('/stories',addStory);
+
+
+
+
 app.get('/display',async(req,res)=>{
   res.send('ajbajba');
 })
 
+<<<<<<< HEAD
 const events = [];
 
 // Get all events
@@ -281,9 +317,37 @@ app.post('/api/events', (req, res) => {
 //       res.status(500).json({ message: 'Error deleting event', error });
 //     });
 // });
+=======
+
+>>>>>>> 62676a2baba6396a450c520ba0e0475926f09ad1
 
 
 app.listen(PORT);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

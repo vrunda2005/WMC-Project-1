@@ -1,35 +1,124 @@
-import React from 'react'
+import React from 'react';
+import { motion } from 'framer-motion';
+import backgroundImage from '../../assets/images/CrisFormage-GTAV.png'; // Update with the correct path
 
-function About() {
+const AboutUs = () => {
   return (
-    <>
-    <div class="container mx-auto p-4 pt-6 md:p-6 lg:p-12 bg-gray-900 rounded shadow-md">
-      <h1 class="text-4xl font-bold mb-4 text-cyan-400">Vrunda Moin</h1>
-      <p class="text-lg mb-6 text-gray-400">Join the resistance and experience the future of gaming.</p>
-    
-      <div class="flex flex-wrap -mx-4 mb-6">
-        <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
-          <img src="https://articles-images.sftcdn.net/wp-content/uploads/sites/9/2013/05/Epsilon-Program.jpg" alt="Game Thumbnail" class="w-full rounded shadow-md"/>
-        </div>
-        <div class="w-full md:w-1/2 lg:w-2/3 xl:w-3/4 p-4">
-          <h2 class="text-2xl font-bold mb-2 text-white">hello</h2>
-          <p class="text-lg text-gray-400">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis voluptatibus aliquam quam qui, perspiciatis itaque fugiat, nihil eaque dolorum deserunt, totam provident consequatur. Aut debitis sit cupiditate quisquam, adipisci dignissimos.</p>
-          <button class="bg-cyan-600 hover:bg-cyan-800 text-white font-bold py-2 px-4 rounded shadow-md">
-            Learn More
-          </button>
-        </div>
+    <div className="relative overflow-hidden min-h-screen text-white">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 z-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${backgroundImage})` }}
+      >
+        <div className="absolute inset-0 bg-black opacity-60"></div> {/* Overlay for better text visibility */}
       </div>
-    
-      <div class="flex justify-center mb-6">
-        <button class="bg-cyan-600 hover:bg-cyan-800 text-white font-bold py-2 px-4 rounded shadow-md">
-          Join the Community
-        </button>
+      
+      {/* Main Content */}
+      <div className="relative z-10 p-6 md:p-12">
+        {/* Header Section */}
+        <header className="text-center py-12">
+          <motion.h1
+            className="text-5xl font-bold mb-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+          >
+            About the Epsilon Program
+          </motion.h1>
+        </header>
+
+        {/* Core Values Section */}
+        <section className="my-12">
+          <motion.div
+            className="bg-gray-900 p-8 rounded-lg shadow-lg mx-auto max-w-4xl relative"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <h2 className="text-4xl font-semibold mb-4 text-center">Core Values</h2>
+            <p className="text-lg">
+              At the heart of the Epsilon Program are our core values: Truth, Enlightenment, and Unity. We strive to uncover the hidden truths of existence, seek enlightenment through our practices, and unite individuals who are on a similar spiritual journey. These values guide our actions and interactions within our community.
+            </p>
+          </motion.div>
+        </section>
+
+        {/* Beliefs and Practices */}
+        <section className="my-12">
+          <div className="flex flex-col md:flex-row gap-8">
+            {/* Beliefs */}
+            <motion.div
+              className="bg-gray-800 p-8 rounded-lg shadow-lg flex-1"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
+            >
+              <h2 className="text-4xl font-semibold mb-4">Our Beliefs</h2>
+              <p className="text-lg">
+                The Epsilon Program is a unique spiritual movement dedicated to uncovering the profound truths of the universe. We believe in a higher state of existence that transcends the material world. Our teachings guide members towards enlightenment through a blend of esoteric knowledge, mystical practices, and a deep connection with the cosmic energies.
+              </p>
+            </motion.div>
+            
+            {/* Practices */}
+            <motion.div
+              className="bg-gray-800 p-8 rounded-lg shadow-lg flex-1"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
+            >
+              <h2 className="text-4xl font-semibold mb-4">Our Practices</h2>
+              <p className="text-lg">
+                Our practices involve a range of rituals and ceremonies designed to elevate consciousness and foster spiritual growth. From meditative exercises to cosmic rituals, each practice is aimed at aligning our members with the universal energies and achieving higher states of awareness.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* History and Testimonials */}
+        <section className="my-12">
+          <motion.div
+            className="bg-gray-900 p-8 rounded-lg shadow-lg mx-auto max-w-4xl relative"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <h2 className="text-4xl font-semibold mb-4 text-center">Our History</h2>
+            <p className="text-lg mb-8">
+              The Epsilon Program was founded in the heart of Los Santos by the enigmatic leader Kifflom. What began as a small group of seekers has grown into a vibrant community of individuals dedicated to exploring the mysteries of the universe. Our history is rich with stories of spiritual revelations and cosmic insights, guiding us on our path to enlightenment.
+            </p>
+            <h2 className="text-3xl font-semibold mb-4 text-center">Member Testimonials</h2>
+            <div className="space-y-4">
+              <blockquote className="bg-gray-800 p-4 rounded-lg shadow-md">
+                <p className="italic">
+                  "Joining the Epsilon Program has been a transformative experience. The teachings and community support have opened my eyes to new perspectives and helped me find inner peace."
+                </p>
+                <footer className="mt-2 text-right">— Alex M.</footer>
+              </blockquote>
+              <blockquote className="bg-gray-800 p-4 rounded-lg shadow-md">
+                <p className="italic">
+                  "The Epsilon Program's rituals and practices have deepened my understanding of the universe. The sense of belonging and purpose I've found here is unparalleled."
+                </p>
+                <footer className="mt-2 text-right">— Jordan R.</footer>
+              </blockquote>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Call-to-Action */}
+        <section className="text-center mt-12">
+          <motion.button
+            className="bg-orange-600 text-white px-8 py-4 rounded-lg shadow-md hover:bg-orange-700 transition-all duration-300"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Join Us
+          </motion.button>
+          <p className="mt-4">
+            Interested in learning more? <a href="/contact" className="text-orange-400 hover:underline">Contact us</a> for more information or to schedule a personal consultation.
+          </p>
+        </section>
       </div>
     </div>
+  );
+};
 
-
-</>
-  )
-}
-
-export default About
+export default AboutUs;
