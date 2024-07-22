@@ -5,24 +5,24 @@ import { ReactTyped } from "react-typed";
 
 function Home() {
   const [auth, setAuth] = useAuth();
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useAuth();
 
 
-  const fetchData = async () => {
-    if (auth.username) {
-      try {
-        const response = await fetch(`http://localhost:5000/getalluser/${auth.username}`);
-        const data = await response.json();
-        setUserData(data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
+  // const fetchData = async () => {
+  //   if (auth.username) {
+  //     try {
+  //       const response = await fetch(`http://localhost:5000/getalluser/${auth.username}`);
+  //       const data = await response.json();
+  //       setUserData(data);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchData();
-  }, [auth.username]);
+  // useEffect(() => {
+  //   fetchData();
+  // }, [auth.username]);
 
   
   const updatePoints = async () => {
@@ -48,22 +48,22 @@ function Home() {
     }
   };
 
-  useEffect(() => {
-    const storedAuth = localStorage.getItem('auth');
-    const storedUserData = localStorage.getItem('userData');
-    if (storedAuth && storedUserData) {
-      try {
-        const parsedAuth = JSON.parse(storedAuth);
-        const parsedUserData = JSON.parse(storedUserData);
-        setAuth(parsedAuth);
-        setUserData(parsedUserData);
-        // console.log('Auth state updated from localStorage:', parsedAuth);
-        // console.log('User data updated from localStorage:', parsedUserData);
-      } catch (error) {
-        console.error('Error parsing auth state from localStorage:', error);
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   const storedAuth = localStorage.getItem('auth');
+  //   const storedUserData = localStorage.getItem('userData');
+  //   if (storedAuth && storedUserData) {
+  //     try {
+  //       const parsedAuth = JSON.parse(storedAuth);
+  //       const parsedUserData = JSON.parse(storedUserData);
+  //       setAuth(parsedAuth);
+  //       setUserData(parsedUserData);
+  //       // console.log('Auth state updated from localStorage:', parsedAuth);
+  //       // console.log('User data updated from localStorage:', parsedUserData);
+  //     } catch (error) {
+  //       console.error('Error parsing auth state from localStorage:', error);
+  //     }
+  //   }
+  // }, []);
 
   const goals = [
     "We are making an assault on happiness.",

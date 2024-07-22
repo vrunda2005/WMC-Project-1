@@ -13,6 +13,7 @@ import Admin from './components/Admin.jsx'
 import MembershipPage from './components/Membership/membership_temp.jsx'
 import MembershipLayout from './components/Membership/MembershipLayout.jsx'
 import MembershipTier from './components/Membership/epsilon_program_membership.jsx'
+import { AuthProvider } from './creatContext.jsx'
 
 
 
@@ -69,6 +70,8 @@ const router=createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <AuthProvider>
     <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>,
 )

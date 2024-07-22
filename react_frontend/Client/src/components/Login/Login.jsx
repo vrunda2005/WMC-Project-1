@@ -18,51 +18,21 @@ export default function Login() {
     try {
       const response = await axios.post('http://localhost:5000/login', { email, password });
       if (response.status === 200) {
-        if(response.data.Login){
-          // localStorage.setItem('token',response.data.token);
-          // localStorage.setItem('username',response.data.username);
-          // sessionStorage.setItem('username',response.data.username);
-          const username=response.data.username;
-          const token=response.data.token;
-          const points=response.data.points;
-          //set AUth 
-          setAuth({
-            ...auth,
-            username: username,
-            token: token,
-            isLoggedIn:true,
-            isAdmin:false,
-            points:points,
-          });
-          localStorage.setItem("auth", JSON.stringify(response.data));
-          console.log("hi data ",response.data);       
-          alert("Login successful");
-          navigate('/');
-        }else if(response.data.isAdmin){
-          const username=response.data.username;
-          const token=response.data.token;
-          const points=response.data.points;
-          setAuth({
-            ...auth,
-            username: username,
-            token: token,
-            isLoggedIn:true,
-            isAdmin:true,
-            userPoints:points,
-          });
-          localStorage.setItem("auth", JSON.stringify(response.data));
-          console.log(response.data);
-          alert("Admin Login successful");
-          // setIsLoggedIn(true);
-          navigate('/')
-          navigate(0);
+        const { username, token, points, isAdmin, Login } = response.data;
+        
+        const newAuth = {
+          username,
+          token,
+          isLoggedIn: true,
+          isAdmin: isAdmin || false,
+          points: points,
+        };
 
-        }else{
-          console.log('ERROR NOT A USER ');
-        }
-     
+        setAuth(newAuth);
+        localStorage.setItem("auth", JSON.stringify(newAuth));
 
-              
+        alert(isAdmin ? "Admin Login successful" : "Login successful");
+        navigate('/');
       }
     } catch (error) {
       setError(error.response.data.error);

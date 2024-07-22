@@ -1,29 +1,30 @@
-import { createContext, useState, useEffect ,useContext} from 'react';
+import { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+  // Initialize auth state from local storage if available
+  const initialAuthState = () => {
+    const data = localStorage.getItem("auth");
+    return data ? JSON.parse(data) : { username: "", token: "", isLoggedIn: false, isAdmin: false };
+  };
+
+  const [auth, setAuth] = useState(initialAuthState);
   const [userData, setUserData] = useState({});
-  const [auth, setAuth] = useState({
-    username: "",
-    token: "",
-    isLoggedIn: false,
-    isAdmin:false,
 
-  });
-
-  //default axios
+  // Set default axios authorization header
+  useEffect(() => {
     axios.defaults.headers.common["Authorization"] = auth?.token;
+  }, [auth.token]);
 
   const fetchData = async () => {
     if (auth.username) {
       try {
-        const response = await fetch(`http://localhost:5000/getalluser/${auth.username}`);
-        const data = await response.json();
-        setUserData(data);
+        const response = await axios.get(`http://localhost:5000/getalluser/${auth.username}`);
+        setUserData(response.data);
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching user data:", error);
       }
     }
   };
@@ -32,35 +33,18 @@ const AuthProvider = ({ children }) => {
     fetchData();
   }, [auth.username]);
 
-  
   useEffect(() => {
-    if (auth.username) {
-      setAuth({ ...auth, userPoints: userData.points });
+    if (userData?.points) {
+      setAuth(prevAuth => ({ ...prevAuth, userPoints: userData.points }));
     }
-  }, [userData.points]);
+  }, [userData]);
 
   useEffect(() => {
-    const data = localStorage.getItem("auth");
-    if (data !== null) { // Check if data is not null
-      try {
-        const parseData = JSON.parse(data);
-        setAuth({
-          ...auth,
-          username: parseData.username,
-          token: parseData.token,
-          isLoggedIn: true,
-          userPoints: parseData.points,
-          isAdmin: parseData.isAdmin ? true : false,
-        });
-      } catch (error) {
-        console.error("Error parsing auth data from local storage:", error);
-      }
-  }}, []);
-
-  
+    localStorage.setItem("auth", JSON.stringify(auth));
+  }, [auth]);
 
   return (
-    <AuthContext.Provider value={[auth,setAuth]}>
+    <AuthContext.Provider value={[auth, setAuth, userData, setUserData]}>
       {children}
     </AuthContext.Provider>
   );
@@ -68,5 +52,4 @@ const AuthProvider = ({ children }) => {
 
 const useAuth = () => useContext(AuthContext);
 
-
-export { useAuth,AuthProvider, AuthContext };
+export { useAuth, AuthProvider, AuthContext };
