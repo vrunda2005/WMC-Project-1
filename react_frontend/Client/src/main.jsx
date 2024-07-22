@@ -14,6 +14,7 @@ import MembershipPage from './components/Membership/membership_temp.jsx'
 import MembershipLayout from './components/Membership/MembershipLayout.jsx'
 import MembershipTier from './components/Membership/epsilon_program_membership.jsx'
 import { AuthProvider } from './creatContext.jsx'
+import StoryPage from './components/stories/storyPage.jsx'
 
 
 
@@ -67,6 +68,10 @@ const router=createBrowserRouter([
         path:"/epsilon_program_membership/:membership_id",
         element:<MembershipTier/>
       },
+      {
+        path:"storyPage",
+        element:<StoryPage/>
+      }
     ]
   }
 ])
