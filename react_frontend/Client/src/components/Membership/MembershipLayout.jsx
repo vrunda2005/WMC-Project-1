@@ -2,11 +2,10 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useAuth } from '../../creatContext';
 import { useState ,useEffect } from 'react';
+import MembershipTier from './epsilon_program_membership'
 
 import { useNavigate } from 'react-router-dom';
 const MembershipDetails = ({ title, description, benefits,up }) => {
-
-
   return (
     <div className="max-w-md mx-auto p-4 pt-6 pb-8 mb-4 bg-white rounded shadow-md">
       <h2 className="text-2xl font-bold mb-2">{title}</h2>
@@ -52,27 +51,27 @@ const MembershipLayout = () => {
   };
 
 
-  // const fetchData = async () => {
-  //   if (auth.username) {
-  //     try {
-  //       const response = await fetch(`http://localhost:5000/getalluser/${auth.username}`);
-  //       const data = await response.json();
-  //       setUserData(data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  // };
+  const fetchData = async () => {
+    if (auth.username) {
+      try {
+        const response = await fetch(`http://localhost:5000/getalluser/${auth.username}`);
+        const data = await response.json();
+        setUserData(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, [auth.username]);
+  useEffect(() => {
+    fetchData();
+  }, [auth.username]);
 
-  // useEffect(() => {
-  //   if (auth.username) {
-  //     setAuth({ ...auth, userPoints: userData.points });
-  //   }
-  // }, [userData.points]);
+  useEffect(() => {
+    if (auth.username) {
+      setAuth({ ...auth, userPoints: userData.points });
+    }
+  }, [userData.points]);
 
   
   const updatePoints = async (pointsToUpdate,membership_id) => {
@@ -105,10 +104,11 @@ const MembershipLayout = () => {
       localStorage.setItem('auth', JSON.stringify(auth));
       localStorage.setItem('userData', JSON.stringify(data.user)); 
       localStorage.setItem(auth.username, membership_id); // store membership status
-
+      // <MembershipTier/>
       // console.log("updated auth ");
       // console.log(`Admin points: ${data.admin}`); 
-      navigate(`/MembershipLayout/${membership_id}`);
+      
+      navigate(`/epsilon_program_membership/${membership_id}`);
     
     }
     } catch (error) {
@@ -198,6 +198,7 @@ const MembershipLayout = () => {
       )}
       <MembershipDetails {...membershipDetails} />
       <button>Membership_ID  :  {membership_id}</button>
+
       {membershipStatus===membership_id ? 
       (<>
       <p>You are already member</p> 
@@ -208,7 +209,9 @@ const MembershipLayout = () => {
        Cancel Membership
      </button>
      </>
-     ) : 
+     ) 
+     
+     : 
       (<button className="flex text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-400 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none" onClick={() => updatePoints(membershipDetails.up,membership_id)}>GETTT Membership</button>
 )}
       {auth.userPoints}

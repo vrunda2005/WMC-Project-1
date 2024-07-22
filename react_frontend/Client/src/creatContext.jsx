@@ -13,13 +13,9 @@ const AuthProvider = ({ children }) => {
 
   });
 
-  
-
-
   //default axios
     axios.defaults.headers.common["Authorization"] = auth?.token;
 
- 
   const fetchData = async () => {
     if (auth.username) {
       try {

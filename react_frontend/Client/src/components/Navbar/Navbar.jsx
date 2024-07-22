@@ -9,19 +9,17 @@ const Navbar = () => {
   const navigate = useNavigate();
 
 
-  // useEffect(() => {
-  //   // Check if the auth object is initialized correctly
-  //   console.log("Here is desturctured auth",auth);
-  //   localStorage.getItem('auth');
-  //   console.log("Here is desturctured auth",auth);
+  useEffect(() => {
+    // Check if the auth object is initialized correctly
+    console.log("Here is desturctured auth",auth);
+    localStorage.getItem('auth');
+    console.log("Here is desturctured auth",auth);
 
 
-  //   // if (!auth) {
-  //   //   setAuth({ user: null, token: '', isLoggedIn: false });
-  //   // }
-  // }, []);
-
-  
+    // if (!auth) {
+    //   setAuth({ user: null, token: '', isLoggedIn: false });
+    // }
+  }, [auth]);
 
   const handleLogout = () => {
     setAuth({ user: null, token: '', isLoggedIn: false });

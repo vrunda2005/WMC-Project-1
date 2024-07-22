@@ -12,6 +12,8 @@ import Quiz from './components/Quiz/Quiz.jsx'
 import Admin from './components/Admin.jsx'
 import MembershipPage from './components/Membership/membership_temp.jsx'
 import MembershipLayout from './components/Membership/MembershipLayout.jsx'
+import MembershipTier from './components/Membership/epsilon_program_membership.jsx'
+
 
 
 
@@ -55,6 +57,10 @@ const router=createBrowserRouter([
       {
         path:"MembershipLayout/:membership_id",
         element:<MembershipLayout/>
+      },
+      {
+        path:"/epsilon_program_membership/:membership_id",
+        element:<MembershipTier/>
       },
     ]
   }

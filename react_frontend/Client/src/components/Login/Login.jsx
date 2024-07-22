@@ -55,6 +55,7 @@ export default function Login() {
           alert("Admin Login successful");
           // setIsLoggedIn(true);
           navigate('/')
+          navigate(0);
 
         }else{
           console.log('ERROR NOT A USER ');
