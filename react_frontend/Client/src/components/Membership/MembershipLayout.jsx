@@ -24,39 +24,23 @@ const MembershipDetails = ({ title, description, benefits,up }) => {
   );
 };
 
+
 const MembershipLayout = () => {
   // UPDATESTION CODE 
   const [auth, setAuth] = useAuth();
-  const [userData, setUserData] = useState({  membershipStatus: null,});
+  const [userData, setUserData] = useAuth();
   const navigate=useNavigate();
   const [error, setError] = useState(null);
   const [membershipStatus, setMembershipStatus] = useState(null);
-
-  useEffect(() => {
-    const storedMembershipStatus = localStorage.getItem(auth.username);
-    if (storedMembershipStatus) {
-      setMembershipStatus(storedMembershipStatus);
-    }
-  }, [auth.username]);
-
-
-  const cancelMembership = async () => {
-    try {
-      localStorage.removeItem(auth.username); // remove membership status
-    } catch (error) {
-    }
-  };
-
-
+  
   const updatePoints = async (pointsToUpdate,membership_id) => {
     try {
       const response = await fetch(`http://localhost:5000/updateuser/${auth.username}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ points: userData.points  ,
+        body: JSON.stringify({ points: userData.userPoints  ,
                                 addPoints : pointsToUpdate,
                                 membership_id:membership_id,
-
         }),
       });
 
@@ -90,25 +74,6 @@ const MembershipLayout = () => {
       setError(error.message);
     }
   };
-
-  useEffect(() => {
-    const storedAuth = localStorage.getItem('auth');
-    const storedUserData = localStorage.getItem('userData');
-    if (storedAuth && storedUserData) {
-      try {
-        const parsedAuth = JSON.parse(storedAuth);
-        const parsedUserData = JSON.parse(storedUserData);
-        setAuth(parsedAuth);
-        setUserData(parsedUserData);
-        // console.log('Auth state updated from localStorage:', parsedAuth);
-        // console.log('User data updated from localStorage:', parsedUserData);
-      } catch (error) {
-        
-        console.error('Error parsing auth state from localStorage:', error);
-      }
-    }
-  }, []);
-
 
 
   ///MY CODE 
@@ -173,21 +138,7 @@ const MembershipLayout = () => {
       <MembershipDetails {...membershipDetails} />
       <button>Membership_ID  :  {membership_id}</button>
 
-      {membershipStatus===membership_id ? 
-      (<>
-      <p>You are already member</p> 
-       <button
-       className="flex text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-400 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
-       onClick={() => cancelMembership(membership_id)}
-     >
-       Cancel Membership
-     </button>
-     </>
-     ) 
-     
-     : 
-      (<button className="flex text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-400 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none" onClick={() => updatePoints(membershipDetails.up,membership_id)}>GETTT Membership</button>
-)}
+<button className="flex text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-400 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none" onClick={() => updatePoints(membershipDetails.up,membership_id)}>GETTT Membership</button>
       {auth.userPoints}
 
 

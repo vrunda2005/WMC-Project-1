@@ -56,6 +56,10 @@ const router=createBrowserRouter([
         element:<Admin/>
       },
       {
+        path:"createEvent",
+        element:<createEvent/>
+      },
+      {
         path:"MembershipLayout/:membership_id",
         element:<MembershipLayout/>
       },

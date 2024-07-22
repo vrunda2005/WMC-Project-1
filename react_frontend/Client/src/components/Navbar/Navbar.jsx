@@ -4,25 +4,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaRegUser } from "react-icons/fa";
 import { MdCurrencyBitcoin } from "react-icons/md";
 import { useAuth } from '../../creatContext';
+import MembershipTier from '../Membership/epsilon_program_membership'
+
 
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [auth,setAuth]=useAuth();
+  const [userData, setUserData]=useAuth();
 
-  // useEffect(() => {
-  //   const storedAuth = localStorage.getItem('auth');
-  //   if (storedAuth) {
-  //     setAuth(JSON.parse(storedAuth));
-  //   }
-  // }, [setAuth]);
+  // console.log("user data",userData );
+  // console.log("auth data",auth );
 
-  
-  // useEffect(() => {
-  //   // Re-render the component when the auth state changes
-  //   console.log("Navbar ",auth);
-  //   // setAuth(auth);
-  // }, [auth]);
 
   const handleLogout = () => {
     alert("You have logged out")
@@ -35,6 +28,7 @@ const Navbar = () => {
     <>
       <header className="sticky z-50 top-0 p-5 flex justify-between bg-white md:flex-row flex-col">
         <a href="/" className="logo">Logo</a>
+        {auth.membership_id}
         {
           auth.isLoggedIn ? (
             <nav className="navbar flex flex-wrap justify-between md:flex-row flex-col">
@@ -48,8 +42,18 @@ const Navbar = () => {
               </div>
               <ul className="flex flex-wrap justify-between md:flex-row flex-col">
                 <li><Link to="/">Home</Link></li>
-                <li><Link to="/membership">Membership</Link></li>
-                <li><Link to="#">Blog</Link></li>
+                <li>
+                  <Link to={auth.membership_id ? `/epsilon_program_membership/${auth.membership_id}` : '/membership'}>
+                    Membership
+                  </Link>
+                </li>
+                {/* <li><Link to="/membership">Membership</Link></li> */}
+
+                {auth.isAdmin ? (   <li><Link to="#">create event</Link></li>) : (   <li><Link to="#">events</Link></li>)}
+
+                <li><Link to="#">Stories</Link></li>
+
+             
                 <li><Link to="/Donate">Donate</Link></li>
                 <li><Link to='/About'>About</Link></li>
                 <li><Link to='/Quiz'>Quiz</Link></li>

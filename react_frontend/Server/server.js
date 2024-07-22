@@ -235,6 +235,18 @@ app.put('/donate/:username', async (req, res) => {
 });
 
 
+app.post('/cancel', async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    // Update the user's document in MongoDB
+    await User.updateOne({ name: userId }, { $unset: { membership_id: "" } });
+    res.status(200).json({ message: 'Membership cancelled successfully.' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error cancelling membership.', error });
+  }
+});
+
 app.get('/display',async(req,res)=>{
   res.send('ajbajba');
 })
