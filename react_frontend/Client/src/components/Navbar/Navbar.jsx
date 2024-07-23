@@ -12,11 +12,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [auth,setAuth]=useAuth();
   const [userData, setUserData]=useAuth();
-
-  // console.log("user data",userData );
-  // console.log("auth data",auth );
-
-
+  
   const handleLogout = () => {
     alert("You have logged out")
     localStorage.removeItem('auth');

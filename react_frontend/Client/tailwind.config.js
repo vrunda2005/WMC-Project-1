@@ -10,6 +10,16 @@ export default {
         fadeIn: {
           '0%': { opacity: 0, transform: 'translateY(20px)' },
           '100%': { opacity: 1, transform: 'translateY(0)' },
+        }, 
+        colors: {
+          darkPurple: '#2e1f3d', // Dark purple color
+          textLight: '#e0e0e0', // Light text color
+        },
+        backgroundImage: {
+          'quiz-bg': "url('/path-to-your-image.jpg')", // Replace with your image path
+        },
+        backdropBlur: {
+          xs: '4px', // Adding a small blur
         },
       },
       animation: {

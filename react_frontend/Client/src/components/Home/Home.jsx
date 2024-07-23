@@ -6,71 +6,13 @@ import { ReactTyped } from "react-typed";
 function Home() {
   const [auth, setAuth] = useAuth();
   const [userData, setUserData] = useAuth();
-
-
-  // const fetchData = async () => {
-  //   if (auth.username) {
-  //     try {
-  //       const response = await fetch(`http://localhost:5000/getalluser/${auth.username}`);
-  //       const data = await response.json();
-  //       setUserData(data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, [auth.username]);
-
   
-  const updatePoints = async () => {
-    try {
-      const response = await fetch(`http://localhost:5000/updateuser/${auth.username}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ points: userData.points - 10 }),
-      });
-      const data = await response.json();
-      setUserData(data.user);
-      setAuth({
-        ...auth,
-        username:data.user.username,
-        userPoints:data.user.points,
-      });  
-      localStorage.setItem('auth', JSON.stringify(auth));
-      localStorage.setItem('userData', JSON.stringify(data.user)); 
-      // console.log("updated auth ");
-      // console.log(`Admin points: ${data.admin}`); 
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  // useEffect(() => {
-  //   const storedAuth = localStorage.getItem('auth');
-  //   const storedUserData = localStorage.getItem('userData');
-  //   if (storedAuth && storedUserData) {
-  //     try {
-  //       const parsedAuth = JSON.parse(storedAuth);
-  //       const parsedUserData = JSON.parse(storedUserData);
-  //       setAuth(parsedAuth);
-  //       setUserData(parsedUserData);
-  //       // console.log('Auth state updated from localStorage:', parsedAuth);
-  //       // console.log('User data updated from localStorage:', parsedUserData);
-  //     } catch (error) {
-  //       console.error('Error parsing auth state from localStorage:', error);
-  //     }
-  //   }
-  // }, []);
-
   const goals = [
     "We are making an assault on happiness.",
     "We will be generous, in ways that are upwards and ways that are manifest.",
     "We will live by the proven scientific truth of the metaphors.",
     "We will fight superstition, limited thinking and dogma wherever we find it.",
-    "We will be clear thinking, independent minded and do exactly what we are told.",
+    "We will be clear thinking, independent minded and do exactly what we are told.",     
     "We will practice science by not doubting.",
     "We will display infinite power by closing out those with doubt with our life choices.",
     "We will practice kindness and mercy by a relentless assault on insavables, always reminding them of what awaits.",
