@@ -7,6 +7,8 @@ import Login from './components/Login/Login'
 import About from './components/About/About'
 import Donate from './components/Donate/Donate'
 import Signup from './components/Signup/SignUp'
+import Events from './components/Events/Events.jsx'
+import Blog from './components/Blog/Blog.jsx'
 import { RouterProvider,createBrowserRouter } from 'react-router-dom'
 import Quiz from './components/Quiz/Quiz.jsx'
 import Admin from './components/Admin.jsx'
@@ -57,8 +59,12 @@ const router=createBrowserRouter([
         element:<Admin/>
       },
       {
-        path:"createEvent",
-        element:<createEvent/>
+        path:"Events",
+        element:<Events/>
+      },
+      {
+        path:"Blog",
+        element:<Blog/>
       },
       {
         path:"MembershipLayout/:membership_id",

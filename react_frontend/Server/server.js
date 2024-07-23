@@ -217,6 +217,9 @@ app.put('/donate/:username', async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
+    if (addPoints <0) {
+      return res.status(400).json({ error: 'Invalid amount, please enter a valid number' });
+    }
     if (user.points < addPoints) {
       return res.status(400).json({ error: 'Insufficient balance' });
     }else{
@@ -274,7 +277,45 @@ app.get('/display',async(req,res)=>{
   res.send('ajbajba');
 })
 
+const events = [];
 
+// Get all events
+app.get('/api/events', (req, res) => {
+  try {
+    res.json(events);
+  } catch (error) {
+    console.error('Error fetching events:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Create a new event
+app.post('/api/events', (req, res) => {
+  const { title, description, date, time } = req.body;
+  const newEvent = { title, description, date, time };
+  events.push(newEvent);
+  try {
+    res.status(201).json(newEvent);
+  } catch (error) {
+    console.error('Error creating event:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Delete event
+// app.delete('/api/events/:id', (req, res) => {
+//   Event.findByIdAndDelete(req.params.id)
+//     .then(result => {
+//       if (result) {
+//         res.status(200).json({ message: 'Event deleted successfully' });
+//       } else {
+//         res.status(404).json({ message: 'Event not found' });
+//       }
+//     })
+//     .catch(error => {
+//       res.status(500).json({ message: 'Error deleting event', error });
+//     });
+// });
 
 
 app.listen(PORT);
