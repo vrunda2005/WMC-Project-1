@@ -162,7 +162,7 @@ app.put('/updateuser/:username', async (req, res) => {
   const {membership_id} =req.body;
 
 
-  console.log(typeof membership_id);
+  // console.log(typeof membership_id);
   try {
     const user = await User.findOne({ name: username });
     if (!user) {
@@ -280,27 +280,27 @@ app.get('/display',async(req,res)=>{
 const events = [];
 
 // Get all events
-app.get('/api/events', (req, res) => {
-  try {
-    res.json(events);
-  } catch (error) {
-    console.error('Error fetching events:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
+// app.get('/api/events', (req, res) => {
+//   try {
+//     res.json(events);
+//   } catch (error) {
+//     console.error('Error fetching events:', error);
+//     res.status(500).json({ error: 'Internal server error' });
+//   }
+// });
 
 // Create a new event
-app.post('/api/events', (req, res) => {
-  const { title, description, date, time } = req.body;
-  const newEvent = { title, description, date, time };
-  events.push(newEvent);
-  try {
-    res.status(201).json(newEvent);
-  } catch (error) {
-    console.error('Error creating event:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
+// app.post('/api/events', (req, res) => {
+//   const { title, description, date, time } = req.body;
+//   const newEvent = { title, description, date, time };
+//   events.push(newEvent);
+//   try {
+//     res.status(201).json(newEvent);
+//   } catch (error) {
+//     console.error('Error creating event:', error);
+//     res.status(500).json({ error: 'Internal server error' });
+//   }
+// });
 
 // Delete event
 // app.delete('/api/events/:id', (req, res) => {
@@ -316,6 +316,52 @@ app.post('/api/events', (req, res) => {
 //       res.status(500).json({ message: 'Error deleting event', error });
 //     });
 // });
+
+
+
+const eventSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  date: { type: Date, required: true },
+  time: { type: String, required: true },
+  image: { type: String }
+});
+
+const Event = mongoose.model('Event', eventSchema);
+
+// Event routes
+app.get('/api/events', async (req, res) => {
+  try {
+    const events = await Event.find();
+    res.json(events);
+  } catch (error) {
+    console.error('Error fetching events:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.post('/api/events', async (req, res) => {
+  const { title, description, date, time, image } = req.body;
+  const newEvent = new Event({ title, description, date, time, image });
+  try {
+    const savedEvent = await newEvent.save();
+    res.status(201).json(savedEvent);
+  } catch (error) {
+    console.error('Error creating event:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.delete('/api/events/:id', async (req, res) => {
+  try {
+    const eventId = req.params.id;
+    await Event.findByIdAndDelete(eventId);
+    res.status(200).json({ message: 'Event deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting event:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 
 app.listen(PORT);
