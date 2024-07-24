@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../creatContext';
-import moment from 'moment'; // Correctly import moment
+import moment from 'moment';
 
 function Blog() {
   const [events, setEvents] = useState([]);
-  const [auth, setAuth] = useAuth();
+  const [auth] = useAuth();
 
   useEffect(() => {
-    // Load events from backend API when the component mounts
     axios.get('http://localhost:5000/api/events')
       .then(response => {
         setEvents(response.data || []);
@@ -40,39 +39,67 @@ function Blog() {
   const renderEvent = (event, index) => (
     <div
       key={index}
+<<<<<<< HEAD
       className=" shadow-md rounded-lg p-6 flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6"
+=======
+      className="bg-white shadow-md rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-lg relative"
+      style={{ minHeight: '300px' }} // Adjust minimum height as needed
+>>>>>>> 510964590564120d1cb93c329b3f682287ead560
     >
-      <div className="flex-none sm:w-40 sm:h-40 bg-gray-200 rounded-lg overflow-hidden">
+      <div className="relative h-full">
         <img
-          className="object-cover w-full h-full"
-          src={event.image || './src/assets/images/placeholder.png'} 
+          className="object-cover w-full h-64"
+          src={event.image || './src/assets/images/placeholder.png'}
           alt={event.title}
         />
-      </div>
-      <div className="flex-grow">
-        <h3 className="text-xl font-semibold mb-2 text-gray-900">{event.title}</h3>
-        <p className="text-gray-700 mb-4">{event.description}</p>
-        <div className="flex flex-wrap items-center">
-          <p className="text-gray-600 mr-4">
-            <img className='w-5 inline mr-1 mb-1' src="./src/assets/images/calendar.png" alt="Calendar icon" />
-            {event.date}
-          </p>
-          <p className="text-gray-600">
-            <img className='w-5 inline mr-1 mb-1' src="./src/assets/images/clock.png" alt="Clock icon" />
-            {event.time}
-          </p>
+        <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-6 text-white">
+          <div>
+            <p className="mb-2">{event.description}</p>
+            <p>{event.time}</p>
+            {auth.isAdmin && (
+              <button
+                onClick={() => handleRemoveEvent(event._id, index)}
+                className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+              >
+                Remove Event
+              </button>
+            )}
+          </div>
         </div>
-        {auth.isAdmin && (
-          <button
-            onClick={() => handleRemoveEvent(event._id, index)}
-            className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-          >
-            Remove Event
-          </button>
+      </div>
+      <div className="p-6">
+        <h3 className="text-xl font-bold mb-2">{event.title}</h3>
+        <p className="text-gray-600">{moment(event.date).format('DD MMMM YYYY')}</p>
+      </div>
+    </div>
+  );
+  
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h2 className="text-3xl font-bold mb-8">Events</h2>
+      <div className="mb-8">
+        <h3 className="text-2xl font-bold mb-4">Upcoming Events</h3>
+        {upcomingEvents.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {upcomingEvents.map(renderEvent)}
+          </div>
+        ) : (
+          <p className="text-gray-600">No upcoming events found.</p>
+        )}
+      </div>
+      <div>
+        <h3 className="text-2xl font-bold mb-4">Past Events</h3>
+        {pastEvents.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {pastEvents.map(renderEvent)}
+          </div>
+        ) : (
+          <p className="text-gray-600">No past events found.</p>
         )}
       </div>
     </div>
   );
+<<<<<<< HEAD
 
   return (
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
@@ -98,5 +125,8 @@ function Blog() {
     </div>
   );
 }
+=======
+}  
+>>>>>>> 510964590564120d1cb93c329b3f682287ead560
 
 export default Blog;
