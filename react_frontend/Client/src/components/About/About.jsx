@@ -1,21 +1,33 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import backgroundImage from '../../assets/images/CrisFormage-GTAV.png'; // Update with the correct path
+import { useTheme } from '../../usetheamContext';
 
 const AboutUs = () => {
+  const { theme } = useTheme();
+
+  // Define theme-based classes
+  const containerBgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
+  const overlayColor = theme === 'blue' ? 'bg-blue-overlay' : 'bg-dark-overlay';
+  const sectionBgColor = theme === 'blue' ? 'bg-blue-secondary-bg' : 'bg-dark-secondary-bg';
+  const textPrimaryColor = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
+  const textSecondaryColor = theme === 'blue' ? 'text-blue-text-blue' : 'text-dark-text-blue';
+  const buttonBgColor = theme === 'blue' ? 'bg-blue-highlight' : 'bg-dark-highlight';
+  const buttonHoverBgColor = theme === 'blue' ? 'hover:bg-blue-accent' : 'hover:bg-dark-accent';
+
   return (
-    <div className="relative overflow-hidden min-h-screen text-text-light">
+    <div className={`relative overflow-hidden min-h-screen ${textPrimaryColor}`}>
       {/* Background Image */}
       <div
-        className="absolute inset-0 z-0 bg-cover bg-center bg-hero-pattern"
+        className={`absolute inset-0 z-0 bg-cover bg-center bg-hero-pattern`}
+        // style={{ backgroundImage: `url(${backgroundImage})` }}
       >
-        <div className="absolute inset-0 bg-overlay"></div> {/* Overlay for better text visibility */}
+        <div className={`absolute inset-0 ${overlayColor}`}></div> {/* Overlay for better text visibility */}
       </div>
       
       {/* Main Content */}
       <div className="relative z-10 p-6 md:p-12">
         {/* Header Section */}
-        <header className="text-center py-12">
+        <header className="text-center py-12  text-white">
           <motion.h1
             className="text-5xl font-bold mb-4"
             initial={{ opacity: 0 }}
@@ -29,7 +41,7 @@ const AboutUs = () => {
         {/* Core Values Section */}
         <section className="my-12">
           <motion.div
-            className="bg-primary-bg p-8 rounded-lg shadow-lg mx-auto max-w-4xl relative"
+            className={`p-8 rounded-lg shadow-lg mx-auto max-w-4xl ${containerBgColor}`}
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
@@ -46,7 +58,7 @@ const AboutUs = () => {
           <div className="flex flex-col md:flex-row gap-8">
             {/* Beliefs */}
             <motion.div
-              className="bg-secondary-bg p-8 rounded-lg shadow-lg flex-1"
+              className={`p-8 rounded-lg shadow-lg flex-1 ${sectionBgColor}`}
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1 }}
@@ -59,7 +71,7 @@ const AboutUs = () => {
             
             {/* Practices */}
             <motion.div
-              className="bg-secondary-bg p-8 rounded-lg shadow-lg flex-1"
+              className={`p-8 rounded-lg shadow-lg flex-1 ${sectionBgColor}`}
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1 }}
@@ -75,7 +87,7 @@ const AboutUs = () => {
         {/* History and Testimonials */}
         <section className="my-12">
           <motion.div
-            className="bg-primary-bg p-8 rounded-lg shadow-lg mx-auto max-w-4xl relative"
+            className={`p-8 rounded-lg shadow-lg mx-auto max-w-4xl ${containerBgColor}`}
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
@@ -86,13 +98,13 @@ const AboutUs = () => {
             </p>
             <h2 className="text-3xl font-semibold mb-4 text-center">Member Testimonials</h2>
             <div className="space-y-4">
-              <blockquote className="bg-secondary-bg p-4 rounded-lg shadow-md">
+              <blockquote className={`p-4 rounded-lg shadow-md ${sectionBgColor}`}>
                 <p className="italic">
                   "Joining the Epsilon Program has been a transformative experience. The teachings and community support have opened my eyes to new perspectives and helped me find inner peace."
                 </p>
                 <footer className="mt-2 text-right">— Alex M.</footer>
               </blockquote>
-              <blockquote className="bg-secondary-bg p-4 rounded-lg shadow-md">
+              <blockquote className={`p-4 rounded-lg shadow-md ${sectionBgColor}`}>
                 <p className="italic">
                   "The Epsilon Program's rituals and practices have deepened my understanding of the universe. The sense of belonging and purpose I've found here is unparalleled."
                 </p>
@@ -105,7 +117,7 @@ const AboutUs = () => {
         {/* Call-to-Action */}
         <section className="text-center mt-12">
           <motion.button
-            className="bg-highlight text-white px-8 py-4 rounded-lg shadow-md hover:bg-orange-700 transition-all duration-300"
+            className={`text-white px-8 py-4 rounded-lg shadow-md ${buttonBgColor} ${buttonHoverBgColor}`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

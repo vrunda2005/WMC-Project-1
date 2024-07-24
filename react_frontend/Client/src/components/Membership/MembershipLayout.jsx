@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../creatContext';
+import { useTheme } from '../../usetheamContext';
 
 const MembershipDetails = ({ title, description, benefits }) => (
   <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
@@ -105,8 +106,12 @@ const MembershipLayout = () => {
     };
   }
 
+  const {theme}=useTheme();
+  const containerBgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
+  const textPrimary = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
+  const textSecondary = theme === 'blue' ? 'text-blue-text-blue' : 'text-dark-text-blue';
   return (
-    <div className="container mx-auto p-6 lg:p-8">
+    <div className={`container mx-auto p-6 lg:p-8 ${containerBgColor}`}>
       <h1 className="text-4xl font-bold text-center text-blue-900 mb-6">Membership Details</h1>
       {error && (
         <div className="text-red-600 text-center mb-4">

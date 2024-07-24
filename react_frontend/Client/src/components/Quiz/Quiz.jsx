@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { data } from './data';
 import './quiz.css';
+import { useTheme } from '../../usetheamContext';
 
 function Quiz() {
   const randomQuestions = React.useMemo(() => {
@@ -60,11 +61,22 @@ function Quiz() {
     setResult(false);
   }
 
+  const { theme } = useTheme();
+
+  // Define theme-based classes
+  const containerBgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
+  const overlayColor = theme === 'blue' ? 'bg-blue-overlay' : 'bg-dark-overlay';
+  const sectionBgColor = theme === 'blue' ? 'bg-blue-secondary-bg' : 'bg-dark-secondary-bg';
+  const textPrimaryColor = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
+  const textSecondaryColor = theme === 'blue' ? 'text-blue-text-blue' : 'text-dark-text-blue';
+  const buttonBgColor = theme === 'blue' ? 'bg-blue-highlight' : 'bg-dark-highlight';
+  const buttonHoverBgColor = theme === 'blue' ? 'hover:bg-blue-accent' : 'hover:bg-dark-accent';
+
   return (
     <>
-      <div className='bg-secondary-bg h-[100vh] border'>
+      <div className={`${containerBgColor} bg-secondary-bg h-[100vh] border`}>
 
-        <div className='bg-secondary-bg mt-10 max-h-screen border text-white border-blue-400 w-[666px] mx-auto p-6 rounded-xl py-10'>
+        <div className={`${sectionBgColor} mt-10 max-h-screen border ${textPrimaryColor} border-blue-400 w-[666px] mx-auto p-6 rounded-xl py-10'`}>
 
           <h1 className='text-4xl mb-2 font-semibold'>Quiz</h1>
 

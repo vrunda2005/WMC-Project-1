@@ -1,10 +1,16 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext, useAuth } from '../../creatContext';
+import { useTheme } from '../../usetheamContext';
 
 const MembershipTier = ({ tier, benefits, profileLink, newsLink, message, onCancelMembership }) => {
+  const {theme}=useTheme();
+  const containerBgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
+  const textPrimary = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
+  const textSecondary = theme === 'blue' ? 'text-blue-text-blue' : 'text-dark-text-blue';
+  
   return (
-    <div className="bg-secondary-bg text-light shadow-md p-8 mb-10 border rounded-lg transform hover:scale-105 transition-transform duration-300">
+    <div className={`${containerBgColor} ${textPrimary}shadow-md p-8 mb-10 border rounded-lg transform hover:scale-105 transition-transform duration-300`}>
       <h2 className="text-3xl font-bold mb-6 text-highlight">{tier} Membership Benefits</h2>
       <ul className="list-disc pl-6 text-muted mb-6">
         {benefits.map((benefit, index) => (
@@ -127,8 +133,13 @@ const MembershipLayout = () => {
     }
   };
 
+  const {theme}=useTheme();
+  const containerBgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
+  const textPrimary = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
+  const textSecondary = theme === 'blue' ? 'text-blue-text-blue' : 'text-dark-text-blue';
+
   return (
-    <div className="min-h-screen bg-secondary-bg text-light p-10">
+    <div className={`min-h-screen ${containerBgColor} ${textPrimary} p-10`}>
       <h1 className="text-4xl font-bold mb-8 text-center">Epsilon Program Membership</h1>
       {auth.username && <p className="text-center mb-8">Welcome, {auth.username}</p>}
       {cancellationMessage ? (

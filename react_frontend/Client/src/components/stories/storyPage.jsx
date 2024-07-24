@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../creatContext';
+import { useTheme } from '../../usetheamContext';
+
 
 const StoryPage = () => {
   const [stories, setStories] = useState([]);
@@ -43,8 +45,14 @@ const StoryPage = () => {
     }
   };
 
+  const {theme}=useTheme();
+  const containerBgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
+  const textPrimary = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
+  const textSecondary = theme === 'blue' ? 'text-blue-text-blue' : 'text-dark-text-blue';
+  const overlay=theme==='blue' ? 'bg-blue-overlay' : 'bg-dark-overlay'; 
+
   return (
-    <div className="bg-opacity-70 bg-secondary-bg max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+    <div className={`bg-opacity-70 ${textPrimary} ${overlay} max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8`}>
       <h1 className="text-3xl font-bold text-center mb-8">Stories</h1>
 
       <div className="space-y-4">
@@ -58,7 +66,7 @@ const StoryPage = () => {
       </div>
 
       <div className="mt-8">
-        <h2 className="text-2xl font-bold mb-4">Add Your Story</h2>
+        <h2 className={`text-2xl font-bold mb-4 ${textSecondary}`}>Add Your Story</h2>
         <textarea
           className="w-full p-4 border rounded-lg mb-4"
           rows="5"

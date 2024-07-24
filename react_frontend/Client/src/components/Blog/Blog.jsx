@@ -39,12 +39,8 @@ function Blog() {
   const renderEvent = (event, index) => (
     <div
       key={index}
-<<<<<<< HEAD
-      className=" shadow-md rounded-lg p-6 flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6"
-=======
       className="bg-white shadow-md rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-lg relative"
       style={{ minHeight: '300px' }} // Adjust minimum height as needed
->>>>>>> 510964590564120d1cb93c329b3f682287ead560
     >
       <div className="relative h-full">
         <img
@@ -74,32 +70,7 @@ function Blog() {
     </div>
   );
   
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <h2 className="text-3xl font-bold mb-8">Events</h2>
-      <div className="mb-8">
-        <h3 className="text-2xl font-bold mb-4">Upcoming Events</h3>
-        {upcomingEvents.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {upcomingEvents.map(renderEvent)}
-          </div>
-        ) : (
-          <p className="text-gray-600">No upcoming events found.</p>
-        )}
-      </div>
-      <div>
-        <h3 className="text-2xl font-bold mb-4">Past Events</h3>
-        {pastEvents.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {pastEvents.map(renderEvent)}
-          </div>
-        ) : (
-          <p className="text-gray-600">No past events found.</p>
-        )}
-      </div>
-    </div>
-  );
-<<<<<<< HEAD
+
 
   return (
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
@@ -125,8 +96,6 @@ function Blog() {
     </div>
   );
 }
-=======
-}  
->>>>>>> 510964590564120d1cb93c329b3f682287ead560
+
 
 export default Blog;

@@ -2,12 +2,15 @@ import React, { useState ,useEffect} from 'react'
 import { useAuth } from '../../creatContext';
 import { useNavigate } from 'react-router-dom';
 import {motion} from 'framer-motion'
+import { useTheme } from '../../usetheamContext';
 
 function Donate() {
   const [auth,setAuth]=useAuth();
   const [userData, setUserData] = useState({});
   const navigate=useNavigate();
   const [error, setError] = useState(null);
+  const { theme } = useTheme();
+
 
 
   const [amount ,setAmount]=useState(0);
@@ -78,13 +81,16 @@ function Donate() {
     }
   }
 
-
-
+  // Define theme-based classes
+  const bgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
+  const textColor = theme === 'blue' ? 'text-blue-light' : 'text-gray-100';
+  const buttonColor = theme === 'blue' ? 'bg-blue-600 hover:bg-blue-800' : 'bg-green-600 hover:bg-green-800';
+  const overlayColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-gray-800';
+  
   return (
-    <div className='bg-hero-pattern bg-cover bg-center text-text-light' >
-        <div className="absolute inset-0 bg-overlay"></div> {/* Optional overlay for better readability */}
+    <div className={`relative bg-hero-pattern bg-cover bg-center text-${textColor}`}>
+      <div className={`absolute inset-0 ${overlayColor} bg-opacity-50`} /> {/* Optional overlay for better readability */}
 
-    {/* <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black min-h-screen text-white"> */}
       {/* Background Decoration */}
       <div className="absolute inset-0 z-0">
         <svg
@@ -102,7 +108,7 @@ function Donate() {
         {/* Header Section */}
         <header className="text-center py-12">
           <motion.h1
-            className="text-5xl font-bold mb-4"
+            className={`text-5xl font-bold mb-4 ${textColor}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
@@ -112,19 +118,17 @@ function Donate() {
         </header>
 
         {/* Donation Info */}
-        <section className="max-w-4xl mx-auto my-12 bg-gray-800 p-8 rounded-lg shadow-lg relative">
+        <section className={`max-w-4xl mx-auto my-12 ${bgColor} p-8 rounded-lg shadow-lg relative`}>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-            <h2 className="text-3xl font-semibold mb-4 text-center">Dear {auth.username}!</h2>
-            {error && (
-              <div className='text-red-600 text-center mb-4'>
-                <p>{error}</p>
-              </div>
-            )}
-            <p className="text-lg mb-6 text-green-400 text-center">
+            <h2 className={`text-3xl font-semibold mb-4 text-center ${textColor}`}>
+              Dear {auth.username}!
+            </h2>
+            {/* Add any error handling here */}
+            <p className={`text-lg mb-6 text-center ${textColor}`}>
               Your donation will help us level up our resources and support our community.<br />
               "Support the Epsilon Program - Your donations help us spread the truth and enlighten more souls."<br />
               Donation Levels:<br />
@@ -136,7 +140,7 @@ function Donate() {
             <div className="flex flex-wrap justify-center -mx-4 mb-6">
               <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                 <motion.button
-                  className="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-md"
+                  className={`text-white font-bold py-2 px-4 rounded shadow-md ${buttonColor}`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => handleDonate(500)}
@@ -146,7 +150,7 @@ function Donate() {
               </div>
               <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                 <motion.button
-                  className="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-md"
+                  className={`text-white font-bold py-2 px-4 rounded shadow-md ${buttonColor}`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => handleDonate(2000)}
@@ -156,7 +160,7 @@ function Donate() {
               </div>
               <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                 <motion.button
-                  className="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-md"
+                  className={`text-white font-bold py-2 px-4 rounded shadow-md ${buttonColor}`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => handleDonate(10000)}
@@ -166,9 +170,9 @@ function Donate() {
               </div>
             </div>
 
-            <form className="max-w-md mx-auto p-4 pt-6 bg-gray-800 rounded-lg shadow-md">
+            <form className={`max-w-md mx-auto p-4 pt-6 ${bgColor} rounded-lg shadow-md`}>
               <label className="block mb-4">
-                <span className="text-lg text-gray-400">Custom Donation Amount:</span>
+                <span className={`text-lg ${textColor}`}>Custom Donation Amount:</span>
                 <input 
                   type="number" 
                   className="w-full p-2 text-sm text-gray-300 border border-gray-600 rounded" 
@@ -178,7 +182,7 @@ function Donate() {
                 />
               </label>
               <motion.button
-                className="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-md w-full"
+                className={`text-white font-bold py-2 px-4 rounded shadow-md w-full ${buttonColor}`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={(e) => {

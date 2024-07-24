@@ -4,30 +4,46 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
 
-/* body{
-  /* background-color: black; */
-/* background: url('./assets/images/CAR4.0.avif') no-repeat; */
-/* background: url('https://oyster.ignimgs.com/mediawiki/apis.ign.com/grand-theft-auto-5/1/1e/GTAV.PS4.1080.UN_TT.HD_SCREENCAPS.1.jpg') no-repeat;
- background-size: cover;
-background-position: center; */
-/* height: 100vh;
-} */ 
 /* Apply the Poppins font family globally */
-
-
-/* Body background color and image */
 body {
-  background-color: #2d3748; /* Use Tailwind color codes directly */
   background-image: url('./assets/images/CAR4.0.avif');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   height: 100vh;
+  /* Ensure body fills the viewport */
+}
+
+:root {
+  --bg-color: #1e3a8a; /* Default Blue */
+  --text-color: #dbeafe; /* Default Blue Text */
+}
+
+[data-theme='dark'] {
+  --bg-color: #1a202c;
+  --text-color: #edf2f7;
+}
+
+/* Overlay for readability */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  z-index: 0; /* Place it behind content */
+}
+
+/* Ensure text is above the overlay */
+.content {
+  position: relative;
+  z-index: 1;
 }

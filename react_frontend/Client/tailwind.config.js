@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  mode: 'jit',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -7,17 +8,32 @@ export default {
   theme: {
     extend: {
       colors: {
-        'primary-bg': '#1a202c',         // Dark background color
-        'secondary-bg': '#2d3748',       // Slightly lighter dark color for sections
-        'highlight': '#4299e1',          // Vibrant blue for call-to-action buttons and highlights
-        'overlay': 'rgba(0, 0, 0, 0.3)', // Overlay color
-        'text-light': '#edf2f7',         // Light text color for readability on dark backgrounds
-        'text-blue': '#63b3ed',          // Light blue for text
-        'text-dark': '#2d3748',          // Dark text color for light backgrounds
-        'accent': '#3182ce',             // Blue for accents
-        'muted': '#a0aec0',              // Muted color for less important text
-        'success': '#48bb78',            // Green color for success messages
-        'error': '#e53e3e',              // Red color for error messages
+        blue: {
+          'primary-bg': '#7dd3fc',       // Deep blue for background to ensure readability
+          'secondary-bg': '#0ea5e9',     // Lighter blue for sections, good contrast with text
+          'highlight': '#60A5FA',        // Bright blue for call-to-action elements
+          'overlay': 'rgba(15,23,42,.5)', // Blue overlay for contrast
+          'text-light': '#082f49',       // Light blue text color, readable on dark backgrounds
+          'text-blue': '#93c5fd',        // Darker blue text color, good on lighter backgrounds
+          'text-dark': '#06b6d4',        // Very dark blue for text on light backgrounds
+          'accent': '#d8b4fe',           // Accents in bright blue
+          'muted': '#BFDBFE',            // Muted light blue for less prominent text
+          'success': '#34D399',          // Green for success messages
+          'error': '#F87171',            // Red for error messages
+        },
+        dark: {
+          'primary-bg': '#0F172A',       // Darker background for a sleek look
+          'secondary-bg': '#1E293B',     // Slightly lighter dark color for sections
+          'highlight': '#3B82F6',        // Vibrant blue for highlights and calls-to-action
+          'overlay': 'rgba(15, 23, 42, 0.5)', // Dark overlay for contrast
+          'text-light': '#E0F2FE',       // Light blue text color for readability on dark backgrounds
+          'text-blue': '#60A5FA',        // Light blue for text
+          'text-dark': '#1E293B',        // Dark text color for light backgrounds
+          'accent': '#2563EB',           // Bright blue for accents
+          'muted': '#4B5563',            // Muted grayish blue for less important text
+          'success': '#48BB78',          // Green color for success messages
+          'error': '#F87171',            // Red color for error messages
+        },
       },
       backgroundImage: {
         'hero-pattern': 'url("./assets/images/CrisFormage-GTAV.png")',
