@@ -253,72 +253,12 @@ app.post('/cancel', async (req, res) => {
 });
 
 
-const stories = []; // This should be replaced with a proper database
-
-const getAllStories = (req, res) => {
-  res.json(stories);
-};
-
-const addStory = (req, res) => {
-  const { username, story } = req.body;
-  const newStory = { id: stories.length + 1, username, story, date: new Date() };
-  stories.push(newStory);
-  res.status(201).json(newStory);
-};
-
-app.get('/stories',getAllStories);
-
-app.post('/stories',addStory);
-
-
-
-
 app.get('/display',async(req,res)=>{
   res.send('ajbajba');
 })
 
-const events = [];
 
-// Get all events
-// app.get('/api/events', (req, res) => {
-//   try {
-//     res.json(events);
-//   } catch (error) {
-//     console.error('Error fetching events:', error);
-//     res.status(500).json({ error: 'Internal server error' });
-//   }
-// });
-
-// Create a new event
-// app.post('/api/events', (req, res) => {
-//   const { title, description, date, time } = req.body;
-//   const newEvent = { title, description, date, time };
-//   events.push(newEvent);
-//   try {
-//     res.status(201).json(newEvent);
-//   } catch (error) {
-//     console.error('Error creating event:', error);
-//     res.status(500).json({ error: 'Internal server error' });
-//   }
-// });
-
-// Delete event
-// app.delete('/api/events/:id', (req, res) => {
-//   Event.findByIdAndDelete(req.params.id)
-//     .then(result => {
-//       if (result) {
-//         res.status(200).json({ message: 'Event deleted successfully' });
-//       } else {
-//         res.status(404).json({ message: 'Event not found' });
-//       }
-//     })
-//     .catch(error => {
-//       res.status(500).json({ message: 'Error deleting event', error });
-//     });
-// });
-
-
-
+// Events
 const eventSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
@@ -363,70 +303,38 @@ app.delete('/api/events/:id', async (req, res) => {
   }
 });
 
+// Stories
+const storySchema = new mongoose.Schema({
+  username: String,
+  story: String,
+  date: { type: Date, default: Date.now }
+});
+
+const Story = mongoose.model('Story', storySchema);
+
+// Endpoint to get all stories
+app.get('/stories', async (req, res) => {
+  try {
+    const stories = await Story.find().sort({ date: -1 }); // Sorting by date descending
+    res.json(stories);
+  } catch (error) {
+    console.error('Error fetching stories:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Endpoint to add a new story
+app.post('/stories', async (req, res) => {
+  const { username, story } = req.body;
+  try {
+    const newStory = new Story({ username, story });
+    const savedStory = await newStory.save();
+    res.status(201).json(savedStory);
+  } catch (error) {
+    console.error('Error adding story:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 
 app.listen(PORT);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const varifyUser =(req,res,next)=>{
-//     const accesstoken=req.cookies.token;
-//     if(!accesstoken){
-
-//     }else{
-//       jwt.verify(accesstoken,SECRET_KEY,(err,decoded)=>{
-//         if(err){
-//           return res.json({valid:false,message:"Invalid token "})
-//         }else{
-//           req.email=decoded.email
-//           next()
-//         }
-//       })
-//     }
-// }
-
-// const renewToken =(req,res,next)=>{
-//   const reftoken=req.cookies.refreshtoken;
-//   if(!reftoken){
-
-//   }else{
-//     jwt.verify(reftoken,SECRET_KEY,(err,decoded)=>{
-//       if(err){
-//         return res.json({valid:false,message:"Invalid reftoken token "})
-//       }else{
-//         req.email=decoded.email
-//         next()
-//       }
-//     })
-//   }
-// }
-
-// app.get('dash',(req,res)=>{
-//   return res.json({valid:true ,message:"authorized"})
-// })

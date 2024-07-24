@@ -7,15 +7,22 @@ const StoryPage = () => {
   const [stories, setStories] = useState([]);
   const [newStory, setNewStory] = useState('');
   const [auth] = useAuth();
+  const [loading, setLoading] = useState(true); // Loading state
 
   useEffect(() => {
     const fetchStories = async () => {
       try {
+        setLoading(true); // Start loading
         const response = await fetch('http://localhost:5000/stories');
+        if (!response.ok) {
+          throw new Error('Failed to fetch stories');
+        }
         const data = await response.json();
         setStories(data);
       } catch (error) {
         console.error('Error fetching stories:', error);
+      } finally {
+        setLoading(false); // Stop loading
       }
     };
 
@@ -28,7 +35,9 @@ const StoryPage = () => {
     try {
       const response = await fetch('http://localhost:5000/stories', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({ username: auth.username, story: newStory }),
       });
 
@@ -81,6 +90,29 @@ const StoryPage = () => {
           Submit Story
         </button>
       </div>
+
+      
+      <h1 className="text-3xl font-bold text-center mb-8">Stories</h1>
+
+      {loading ? (
+        <div className="text-center py-8">
+          <div className="spinner-border text-orange-600 mb-4" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+          <p>Loading stories...</p>
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {stories.map((story) => (
+            <div key={story._id} className="bg-white p-6 rounded-lg shadow-md">
+              <h2 className="text-xl font-bold mb-2">{story.username}</h2>
+              <p className="text-gray-700 mb-2">{story.story}</p>
+              <p className="text-gray-500 text-sm">{new Date(story.date).toLocaleString()}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
     </div>
   );
 };

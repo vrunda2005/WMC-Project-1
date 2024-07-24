@@ -5,16 +5,19 @@ import moment from 'moment';
 
 function Blog() {
   const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
   const [auth] = useAuth();
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/events')
       .then(response => {
         setEvents(response.data || []);
+        setLoading(false); // Stop loading after data is fetched
       })
       .catch(error => {
         console.error(error);
         alert('Error loading events: ' + error.message);
+        setLoading(false); // Stop loading on error
       });
   }, []);
 
@@ -40,9 +43,9 @@ function Blog() {
     <div
       key={index}
       className="bg-white shadow-md rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-lg relative"
-      style={{ minHeight: '300px' }} // Adjust minimum height as needed
+      style={{ minHeight: '300px' }}
     >
-      <div className="relative h-full">
+      <div className="relative h-auto">
         <img
           className="object-cover w-full h-64"
           src={event.image || './src/assets/images/placeholder.png'}
@@ -69,33 +72,43 @@ function Blog() {
       </div>
     </div>
   );
-  
-
 
   return (
-    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8 text-light">Upcoming Events</h2>
-        <div className="grid gap-6">
-          {Array.isArray(upcomingEvents) && upcomingEvents.length > 0 ? (
-            upcomingEvents.map(renderEvent)
-          ) : (
-            <p className="text-gray-600">No upcoming events found</p>
-          )}
+    <div className="container mx-auto px-4 py-8">
+      <h2 className="text-3xl font-bold mb-8">Events</h2>
+      {loading ? (
+        <div className="text-center py-8">
+          <div className="spinner-border text-orange-600 mb-4" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+          <p>Loading events...</p>
         </div>
-
-        <h2 className="text-3xl font-bold mb-8 text-gray-800 mt-12">Past Events</h2>
-        <div className="grid gap-6">
-          {Array.isArray(pastEvents) && pastEvents.length > 0 ? (
-            pastEvents.map(renderEvent)
-          ) : (
-            <p className="text-gray-600">No past events found</p>
-          )}
-        </div>
-      </div>
+      ) : (
+        <>
+          <div className="mb-8">
+            <h3 className="text-2xl font-bold mb-4">Upcoming Events</h3>
+            {upcomingEvents.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {upcomingEvents.map(renderEvent)}
+              </div>
+            ) : (
+              <p className="text-gray-600">No upcoming events found.</p>
+            )}
+          </div>
+          <div>
+            <h3 className="text-2xl font-bold mb-4">Past Events</h3>
+            {pastEvents.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {pastEvents.map(renderEvent)}
+              </div>
+            ) : (
+              <p className="text-gray-600">No past events found.</p>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }
-
 
 export default Blog;
