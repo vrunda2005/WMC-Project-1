@@ -28,7 +28,6 @@
 .navbar a{
     position: relative; 
     font-size: 18px;
-    color: #0e153a;
     font-weight: 500;     
     margin-left: 40px;
 } 
@@ -41,7 +40,7 @@
     left: 0;
     width: 0;
     height: 2px;
-    background: #d91111;
+    background: #00e1ff;
     transition: .3s;
 }
 

@@ -3,8 +3,6 @@ import { useAuth } from '../../creatContext';
 import { useNavigate } from 'react-router-dom';
 import {motion} from 'framer-motion'
 
-
-
 function Donate() {
   const [auth,setAuth]=useAuth();
   const [userData, setUserData] = useState({});
@@ -83,7 +81,10 @@ function Donate() {
 
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black min-h-screen text-white">
+    <div className='bg-hero-pattern bg-cover bg-center text-text-light' >
+        <div className="absolute inset-0 bg-overlay"></div> {/* Optional overlay for better readability */}
+
+    {/* <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black min-h-screen text-white"> */}
       {/* Background Decoration */}
       <div className="absolute inset-0 z-0">
         <svg

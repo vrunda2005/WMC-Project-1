@@ -40,7 +40,7 @@ function Blog() {
   const renderEvent = (event, index) => (
     <div
       key={index}
-      className="bg-white shadow-md rounded-lg p-6 flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6"
+      className=" shadow-md rounded-lg p-6 flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6"
     >
       <div className="flex-none sm:w-40 sm:h-40 bg-gray-200 rounded-lg overflow-hidden">
         <img
@@ -75,9 +75,9 @@ function Blog() {
   );
 
   return (
-    <div className="bg-gray-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8 text-gray-800">Upcoming Events</h2>
+        <h2 className="text-3xl font-bold mb-8 text-light">Upcoming Events</h2>
         <div className="grid gap-6">
           {Array.isArray(upcomingEvents) && upcomingEvents.length > 0 ? (
             upcomingEvents.map(renderEvent)

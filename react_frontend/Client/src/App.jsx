@@ -11,9 +11,13 @@ const App = () => {
 
   return (
     <AuthProvider>
-      <Navbar/>
-      <Outlet />
-      <Footer />
+       {/* <div className='bg-hero-pattern bg-cover bg-center text-text-light' > */}
+        {/* <div className="absolute inset-1 bg-overlay"></div> Optional overlay for better readability */}
+
+            <Navbar/>
+            <Outlet />
+            <Footer />
+      {/* </div> */}
     </AuthProvider>
   )
 }

@@ -6,42 +6,56 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        'primary-bg': '#1a202c',         // Dark background color
+        'secondary-bg': '#2d3748',       // Slightly lighter dark color for sections
+        'highlight': '#4299e1',          // Vibrant blue for call-to-action buttons and highlights
+        'overlay': 'rgba(0, 0, 0, 0.3)', // Overlay color
+        'text-light': '#edf2f7',         // Light text color for readability on dark backgrounds
+        'text-blue': '#63b3ed',          // Light blue for text
+        'text-dark': '#2d3748',          // Dark text color for light backgrounds
+        'accent': '#3182ce',             // Blue for accents
+        'muted': '#a0aec0',              // Muted color for less important text
+        'success': '#48bb78',            // Green color for success messages
+        'error': '#e53e3e',              // Red color for error messages
+      },
+      backgroundImage: {
+        'hero-pattern': 'url("./assets/images/CrisFormage-GTAV.png")',
+        'footer-texture': 'url("./assets/images/footer-texture.png")',
+      },
       keyframes: {
         fadeIn: {
           '0%': { opacity: 0, transform: 'translateY(20px)' },
           '100%': { opacity: 1, transform: 'translateY(0)' },
-        }, 
-        colors: {
-          darkPurple: '#2e1f3d', // Dark purple color
-          textLight: '#e0e0e0', // Light text color
         },
-        backgroundImage: {
-          'quiz-bg': "url('/path-to-your-image.jpg')", // Replace with your image path
-        },
-        backdropBlur: {
-          xs: '4px', // Adding a small blur
+        fadeOut: {
+          '0%': { opacity: 1, transform: 'translateY(0)' },
+          '100%': { opacity: 0, transform: 'translateY(20px)' },
         },
       },
       animation: {
         fadeIn: 'fadeIn 1s ease-in-out',
+        fadeOut: 'fadeOut 1s ease-in-out',
+        bounce: 'bounce 1s infinite',
       },
-    }, screens: {
+      boxShadow: {
+        'outline': '0 0 0 3px rgba(237, 137, 54, 0.5)',
+        'card': '0 4px 6px rgba(0, 0, 0, 0.1)',
+      },
+      spacing: {
+        '18': '4.5rem',
+        '30': '7.5rem',
+        '84': '21rem',
+        '96': '24rem',
+      },
+    },
+    screens: {
       sm: '640px',
-      // => @media (min-width: 640px) { ... }
-
       md: '768px',
-      // => @media (min-width: 768px) { ... }
-
       lg: '1024px',
-      // => @media (min-width: 1024px) { ... }
-
       xl: '1280px',
-      // => @media (min-width: 1280px) { ... }
-
       '2xl': '1536px',
-      // => @media (min-width: 1536px) { ... }
     },
   },
   plugins: [],
-}
-
+};

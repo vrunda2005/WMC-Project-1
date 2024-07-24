@@ -1,32 +1,29 @@
-import React, { useContext, useState ,useEffect} from 'react';
-import { useParams } from 'react-router-dom';
-import { AuthContext } from '../../creatContext';
-import {useAuth} from '../../creatContext';
-import {useNavigate} from 'react-router-dom'
-
+import React, { useContext, useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { AuthContext, useAuth } from '../../creatContext';
 
 const MembershipTier = ({ tier, benefits, profileLink, newsLink, message, onCancelMembership }) => {
   return (
-    <div className="bg-white shadow-md p-4 mb-6">
-      <h2 className="text-2xl font-bold mb-2">{tier} Membership Benefits</h2>
-      <ul className="list-disc pl-4">
+    <div className="bg-secondary-bg text-light shadow-md p-8 mb-10 border rounded-lg transform hover:scale-105 transition-transform duration-300">
+      <h2 className="text-3xl font-bold mb-6 text-highlight">{tier} Membership Benefits</h2>
+      <ul className="list-disc pl-6 text-muted mb-6">
         {benefits.map((benefit, index) => (
-          <li key={index}>{benefit}</li>
+          <li key={index} className="mb-2">{benefit}</li>
         ))}
       </ul>
 
-      <div className="mt-4">
-        <h2 className="text-2xl font-bold mb-2">Your {tier} Profile</h2>
-        <p className="mb-2">View your membership details, track your progress, and access exclusive content through your {tier} profile.</p>
-        <a href={profileLink} className="text-blue-600 hover:text-blue-900">View Profile</a>
+      <div className="mt-8">
+        <h2 className="text-3xl font-bold mb-6">Your {tier} Profile</h2>
+        <p className="mb-6">View your membership details, track your progress, and access exclusive content through your {tier} profile.</p>
+        <a href={profileLink} className="text-highlight hover:text-accent">View Profile</a>
       </div>
 
-      <div className="mt-4">
-        <h2 className="text-2xl font-bold mb-2">{tier} News and Updates</h2>
-        <p className="mb-2">Stay informed about the latest developments in the {tier} program, including new content, events, and initiatives.</p>
-        <ul className="list-none pl-0">
+      <div className="mt-8">
+        <h2 className="text-3xl font-bold mb-6">{tier} News and Updates</h2>
+        <p className="mb-6">Stay informed about the latest developments in the {tier} program, including new content, events, and initiatives.</p>
+        <ul className="list-none pl-0 mb-6">
           <li>
-            <a href={newsLink} className="text-blue-600 hover:text-blue-900">
+            <a href={newsLink} className="text-highlight hover:text-accent">
               <i className="fas fa-newspaper mr-2" />
               {tier} Newsletter
             </a>
@@ -34,14 +31,14 @@ const MembershipTier = ({ tier, benefits, profileLink, newsLink, message, onCanc
         </ul>
       </div>
 
-      <div className="mt-4">
-        <h2 className="text-2xl font-bold mb-2">Message from Cris Formage</h2>
-        <p className="mb-2">{message}</p>
+      <div className="mt-8">
+        <h2 className="text-3xl font-bold mb-6">Message from Cris Formage</h2>
+        <p className="mb-6">{message}</p>
       </div>
 
-      <div className="mt-4">
+      <div className="mt-8">
         <button
-          className="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded"
+          className="bg-highlight hover:bg-accent text-primary-bg font-bold py-2 px-4 rounded-lg transition-all"
           onClick={onCancelMembership}
         >
           Cancel Membership
@@ -92,7 +89,6 @@ const MembershipLayout = () => {
   const membershipTier = membershipTiers[membership_id];
   const [cancellationMessage, setCancellationMessage] = useState('');
   const [auth, setAuth] = useAuth();
-  const [userData, setUserData] = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -101,7 +97,7 @@ const MembershipLayout = () => {
     if (storedAuth) {
       setAuth(storedAuth);
     }
-  }, [setAuth]);
+  }, [setAuth,auth]);
 
   if (!membershipTier) {
     return <div>Invalid membership ID</div>;
@@ -109,7 +105,6 @@ const MembershipLayout = () => {
 
   const handleCancelMembership = async () => {
     try {
-      // Make the API call to cancel the membership
       const response = await fetch('http://localhost:5000/cancel', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -117,12 +112,10 @@ const MembershipLayout = () => {
       });
 
       if (response.ok) {
-        // Update the local state
         const updatedAuth = { ...auth, membership_id: null };
         console.log('Updating Auth to Null:', updatedAuth);
         setAuth(updatedAuth);
         localStorage.setItem('auth', JSON.stringify(updatedAuth));
-        setUserData(updatedAuth); // Update local state
         setCancellationMessage('Your membership has been cancelled.');
         navigate('/');
       } else {
@@ -135,15 +128,28 @@ const MembershipLayout = () => {
   };
 
   return (
-    <div>
-      {auth.username}
+    <div className="min-h-screen bg-secondary-bg text-light p-10">
+      <h1 className="text-4xl font-bold mb-8 text-center">Epsilon Program Membership</h1>
+      {auth.username && <p className="text-center mb-8">Welcome, {auth.username}</p>}
       {cancellationMessage ? (
-        <div className="bg-red-100 text-red-700 p-4 mb-6 rounded">
+        <div className="bg-red-100 text-red-700 p-6 mb-10 rounded-lg">
           {cancellationMessage}
         </div>
       ) : (
         <MembershipTier {...membershipTier} onCancelMembership={handleCancelMembership} />
       )}
+      <div className="bg-secondary-bg text-light shadow-md p-8 mb-10 border border-white rounded-lg animate-fadeIn">
+        <h2 className="text-3xl font-bold mb-6 text-highlight">About the Epsilon Program</h2>
+        <p className="mb-6">
+          The Epsilon Program is a fictional religious cult in the Grand Theft Auto series. Founded by Cris Formage, the program is known for its mysterious teachings, often revolving around the number 157, extraterrestrial life, and unconventional spiritual practices. As a member, you will explore the deepest truths of the universe and connect with like-minded individuals.
+        </p>
+        <p className="mb-6">
+          Members are encouraged to donate generously, attend exclusive events, and participate in various rituals to advance their spiritual enlightenment. The program promises profound personal growth, eternal salvation, and a deeper understanding of the cosmos.
+        </p>
+        <p className="mb-6">
+          As you progress through the membership tiers, you'll gain access to more exclusive content, personalized guidance from Cris Formage, and invitations to high-level ceremonies. Embrace the path to enlightenment and join the ranks of the enlightened today!
+        </p>
+      </div>
     </div>
   );
 };

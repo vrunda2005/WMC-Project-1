@@ -24,11 +24,10 @@ function Home() {
 
 
   return (
-    <div className="">
+    <div className="bg-secondary-bg">
       <div className='max-w[800px] mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center items-center'>
 
-      <div className='container opacity-80 bg-white 
-      '>
+      <div className='container opacity-80 bg-white '>
         <p className='md:text-5xl sm:text-4xl font-bold text-blue-950 md:py-6'>
         hi user : {auth.username}<br/>
         membership_id : {auth.membership_id}<br/>
@@ -72,7 +71,7 @@ function Home() {
   </div>
 </div>
 
-<div className="flex flex-col justify-center bg-gray-100 p-8 gap-8 md:p-12 lg:p-16">
+<div className="flex flex-col justify-center bg-secondary-bg p-8 gap-8 md:p-12 lg:p-16">
   <h1 className="text-3xl font-bold text-center mb-4 md:text-4xl lg:text-5xl">Epsilonism Goals</h1>
   <ul className="list-none mb-4">
     {goals.map((goal, index) => (

@@ -62,16 +62,16 @@ function Quiz() {
 
   return (
     <>
-      <div className='h-[100vh] border'>
+      <div className='bg-secondary-bg h-[100vh] border'>
 
-        <div className='bg-white mt-10 max-h-screen border border-blue-400 w-[666px] mx-auto p-6 rounded-xl py-10'>
+        <div className='bg-secondary-bg mt-10 max-h-screen border text-white border-blue-400 w-[666px] mx-auto p-6 rounded-xl py-10'>
 
           <h1 className='text-4xl mb-2 font-semibold'>Quiz</h1>
 
           <hr />
 
           {result? (
-            <>
+            <>  
               <h2 className='mt-10 text-lg'>You scored <span className='font-semibold text-2xl'>{score}</span> out of {randomQuestions.length} </h2>
               
               <button onClick={reset} className='bg-blue-200 block mx-auto w-28 mt-8 p-2 rounded-lg hover:rounded-3xl transition-all'>Reset</button>

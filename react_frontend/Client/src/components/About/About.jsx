@@ -4,13 +4,12 @@ import backgroundImage from '../../assets/images/CrisFormage-GTAV.png'; // Updat
 
 const AboutUs = () => {
   return (
-    <div className="relative overflow-hidden min-h-screen text-white">
+    <div className="relative overflow-hidden min-h-screen text-text-light">
       {/* Background Image */}
       <div
-        className="absolute inset-0 z-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
+        className="absolute inset-0 z-0 bg-cover bg-center bg-hero-pattern"
       >
-        <div className="absolute inset-0 bg-black opacity-60"></div> {/* Overlay for better text visibility */}
+        <div className="absolute inset-0 bg-overlay"></div> {/* Overlay for better text visibility */}
       </div>
       
       {/* Main Content */}
@@ -30,7 +29,7 @@ const AboutUs = () => {
         {/* Core Values Section */}
         <section className="my-12">
           <motion.div
-            className="bg-gray-900 p-8 rounded-lg shadow-lg mx-auto max-w-4xl relative"
+            className="bg-primary-bg p-8 rounded-lg shadow-lg mx-auto max-w-4xl relative"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
@@ -47,7 +46,7 @@ const AboutUs = () => {
           <div className="flex flex-col md:flex-row gap-8">
             {/* Beliefs */}
             <motion.div
-              className="bg-gray-800 p-8 rounded-lg shadow-lg flex-1"
+              className="bg-secondary-bg p-8 rounded-lg shadow-lg flex-1"
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1 }}
@@ -60,7 +59,7 @@ const AboutUs = () => {
             
             {/* Practices */}
             <motion.div
-              className="bg-gray-800 p-8 rounded-lg shadow-lg flex-1"
+              className="bg-secondary-bg p-8 rounded-lg shadow-lg flex-1"
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1 }}
@@ -76,7 +75,7 @@ const AboutUs = () => {
         {/* History and Testimonials */}
         <section className="my-12">
           <motion.div
-            className="bg-gray-900 p-8 rounded-lg shadow-lg mx-auto max-w-4xl relative"
+            className="bg-primary-bg p-8 rounded-lg shadow-lg mx-auto max-w-4xl relative"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
@@ -87,13 +86,13 @@ const AboutUs = () => {
             </p>
             <h2 className="text-3xl font-semibold mb-4 text-center">Member Testimonials</h2>
             <div className="space-y-4">
-              <blockquote className="bg-gray-800 p-4 rounded-lg shadow-md">
+              <blockquote className="bg-secondary-bg p-4 rounded-lg shadow-md">
                 <p className="italic">
                   "Joining the Epsilon Program has been a transformative experience. The teachings and community support have opened my eyes to new perspectives and helped me find inner peace."
                 </p>
                 <footer className="mt-2 text-right">— Alex M.</footer>
               </blockquote>
-              <blockquote className="bg-gray-800 p-4 rounded-lg shadow-md">
+              <blockquote className="bg-secondary-bg p-4 rounded-lg shadow-md">
                 <p className="italic">
                   "The Epsilon Program's rituals and practices have deepened my understanding of the universe. The sense of belonging and purpose I've found here is unparalleled."
                 </p>
@@ -106,7 +105,7 @@ const AboutUs = () => {
         {/* Call-to-Action */}
         <section className="text-center mt-12">
           <motion.button
-            className="bg-orange-600 text-white px-8 py-4 rounded-lg shadow-md hover:bg-orange-700 transition-all duration-300"
+            className="bg-highlight text-white px-8 py-4 rounded-lg shadow-md hover:bg-orange-700 transition-all duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

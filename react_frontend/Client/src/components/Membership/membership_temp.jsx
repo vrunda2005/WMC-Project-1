@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
-import { useState } from 'react';
 import { useAuth } from '../../creatContext';
-import {useNavigate,Link} from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function MembershipPage() {
   const [auth, setAuth] = useAuth();
-  const [userData, setUserData] = useAuth();
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedAuth = localStorage.getItem('auth');
@@ -16,81 +14,86 @@ function MembershipPage() {
   }, [setAuth]);
 
   return (
-    <div className="container mx-auto h-[650px] p-4 md:p-8 lg:p-7">
-    <div className="text-center flex flex-col gap-5 mb-10">
-      <h1 className="text-blue-950 text-4xl font-bold mb-2">Join the Epsilon Program</h1>
-      <h1 className="text-blue-950 text-4xl font-bold mb-2">Welcome, {auth.username ? auth.username : 'Guest hi '}</h1>
-      <h3 className="text-blue-900 text-xl font-medium">
-        Choose your membership level and start your journey to happiness and freedom from thoughts!
-      </h3>
+    <div className="container mx-auto px-4 py-8 md:px-8 md:py-12 lg:px-12 lg:py-16">
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-bold text-blue-900 mb-4">Join the Epsilon Program</h1>
+        <h2 className="text-3xl font-semibold text-blue-800 mb-4">
+          Welcome, {auth.username ? auth.username : 'Guest'}
+        </h2>
+        <p className="text-lg text-blue-700">
+          Choose your membership level and start your journey to happiness and freedom from thoughts!
+        </p>
+      </div>
+
+      <div className="flex flex-col md:flex-row md:flex-wrap justify-center gap-8 md:gap-10 lg:gap-12 mb-12">
+        <div className="bg-white bg-opacity-80 p-6 md:p-8 lg:p-10 shadow-lg rounded-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out w-full md:w-1/3 lg:w-1/4">
+          {/* Basic Membership */}
+          <h3 className="text-xl font-semibold text-center mb-4">Basic Membership</h3>
+          <div className="flex items-center justify-center mb-4">
+            <h2 className="text-4xl font-bold text-blue-600">$149</h2>
+            <span className="text-sm ml-2">per month</span>
+          </div>
+          <p className="text-lg font-semibold mb-4">Entry-level membership</p>
+          <ul className="list-disc list-inside mb-4 text-sm text-blue-800">
+            <li>Basic access to Epsilon Program resources.</li>
+            <li>Access to online forums and community discussions.</li>
+            <li>Subscription to Epsilon Program newsletter.</li>
+            <li>Limited access to events (e.g., online webinars).</li>
+          </ul>
+          <Link to={`/MembershipLayout/${1}`}>
+            <button className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300">
+              Read More Basic
+            </button>
+          </Link>
+          {auth.userPoints && <p className="text-center mt-4 text-blue-900">Your Points: {auth.userPoints}</p>}
+        </div>
+
+        <div className="bg-white bg-opacity-80 p-6 md:p-8 lg:p-10 shadow-lg rounded-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out w-full md:w-1/3 lg:w-1/4">
+          {/* Premium Membership */}
+          <h3 className="text-xl font-semibold text-center mb-4">Premium Membership</h3>
+          <div className="flex items-center justify-center mb-4">
+            <h2 className="text-4xl font-bold text-indigo-600">$299</h2>
+            <span className="text-sm ml-2">per month</span>
+          </div>
+          <p className="text-lg font-semibold mb-4">Advanced membership</p>
+          <ul className="list-disc list-inside mb-4 text-sm text-indigo-800">
+            <li>Full access to Epsilon Program resources.</li>
+            <li>Discounts on events and merchandise.</li>
+            <li>Personalized coaching sessions with Epsilon Program leaders.</li>
+            <li>Exclusive access to Epsilon Program's inner circle (e.g., private Facebook group).</li>
+          </ul>
+          <Link to={`/MembershipLayout/${2}`}>
+            <button className="w-full py-2 px-4 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300">
+              Read More Premium
+            </button>
+          </Link>
+          {auth.userPoints && <p className="text-center mt-4 text-indigo-900">Your Points: {auth.userPoints}</p>}
+        </div>
+
+        <div className="bg-white bg-opacity-80 p-6 md:p-8 lg:p-10 shadow-lg rounded-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out w-full md:w-1/3 lg:w-1/4">
+          {/* Elite Membership */}
+          <h3 className="text-xl font-semibold text-center mb-4">Elite Membership</h3>
+          <div className="flex items-center justify-center mb-4">
+            <h2 className="text-4xl font-bold text-cyan-500">$499</h2>
+            <span className="text-sm ml-2">per month</span>
+          </div>
+          <p className="text-lg font-semibold mb-4">Elite membership</p>
+          <ul className="list-disc list-inside mb-4 text-sm text-cyan-700">
+            <li>Subscription to Epsilon Program newsletter.</li>
+            <li>Personalized spiritual guidance and mentorship.</li>
+            <li>Invitation to an annual retreat at a secluded location.</li>
+            <li>VIP access to exclusive events (e.g., private meetings with Epsilon Program leaders).</li>
+          </ul>
+          <Link to={`/MembershipLayout/${3}`}>
+            <button className="w-full py-2 px-4 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 focus:ring-4 focus:ring-cyan-300">
+              Read More Elite
+            </button>
+          </Link>
+          {auth.userPoints && <p className="text-center mt-4 text-cyan-900">Your Points: {auth.userPoints}</p>}
+        </div>
+      </div>
     </div>
-
-    <div className="flex flex-wrap justify-center gap-10 mb-10">
-      <div className="w-full md:w-1/3 lg:w-1/4 p-4 md:p-6 lg:p-8 shadow-lg shadow-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/40 hover:scale-105 hover:cursor-pointer transition duration-550 ease-in-out rounded-[35px]">
-        {/* Basic Membership */}
-        <h3 className="text-md font-medium text-center -mt-3 mb-3">Basic Membership</h3>
-        <div className="flex">
-          <h2 className="ml-16 text-blue-600 text-5xl font-bold text-center mb-8">$149</h2>
-          <h5 className="relative ml-2 mt-6 text-sm">per month</h5>
-        </div>
-        <h4 className="text-lg font-bold mb-4">Entry-level membership</h4>
-        <ul className="list-none text-sm mb-4 gap-3 flex flex-col">
-          <li>Basic access to Epsilon Program resources.</li>
-          <li>Access to online forums and community discussions.</li>
-          <li>Subscription to Epsilon Program newsletter.</li>
-          <li>Limited access to events (e.g., online webinars)</li>
-        </ul>
-        {/* <button className="bg-orange-400" onClick={() => updatePoints(10,1)}>Get Basic</button> */}
-        <button className="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-400 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">
-            <Link to={`/MembershipLayout/${1}`}>Read More Basic</Link>
-          </button>
-        {auth.userPoints}
-      </div>
-
-      <div className="w-full md:w-1/3 lg:w-1/4 p-4 md:p-6 lg:p-8 shadow-lg shadow-indigo-500/30 hover:shadow-2xl hover:shadow-indigo-500/40 hover:scale-105 hover:cursor-pointer transition duration-550 ease-in-out rounded-[35px]">
-        {/* Premium Membership */}
-        <h3 className="text-md font-medium text-center -mt-3 mb-3">Premium Membership</h3>
-        <div className="flex">
-          <h2 className="ml-16 text-indigo-600 text-5xl font-bold text-center mb-8">$299</h2>
-          <h5 className="relative ml-2 mt-6 text-sm">per month</h5>
-        </div>
-        <h4 className="text-lg font-bold mb-4">Advanced membership</h4>
-        <ul className="list-none text-sm mb-4 gap-3 flex flex-col">
-          <li>Full access to Epsilon Program resources.</li>
-          <li>Discounts on events and merchandise.</li>
-          <li>Personalized coaching sessions with Epsilon Program leaders.</li>
-          <li>Exclusive access to Epsilon Program's inner circle (e.g., private Facebook group)</li>
-        </ul>
-        {/* <button className="bg-orange-400" onClick={() => updatePoints(20,2)}>Premium Membership</button> */}
-        <button className="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-400 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">
-            <Link to={`/MembershipLayout/${2}`}>Read More </Link>
-          </button>
-        {auth.userPoints}
-      </div>
-
-      <div className="w-full md:w-1/3 lg:w-1/4 p-4 md:p-6 lg:p-8 shadow-lg shadow-cyan-500/30 hover:shadow-2xl hover:shadow-cyan-500/40 hover:scale-105 hover:cursor-pointer transition duration-550 ease-in-out rounded-[35px]">
-        {/* Elite Membership */}
-        <h3 className="text-md font-medium text-center -mt-3 mb-3">Elite Membership</h3>
-        <div className="flex">
-          <h2 className="ml-16 text-cyan-500 text-5xl font-bold text-center mb-8">$499</h2>
-          <h5 className="relative ml-2 mt-6 text-sm">per month</h5>
-        </div>
-        <h4 className="text-lg font-bold mb-4">Elite membership</h4>
-        <ul className="list-none text-sm mb-4 gap-3 flex flex-col">
-          <li>Subscription to Epsilon Program newsletter.</li>
-          <li>Personalized spiritual guidance and mentorship</li>
-          <li>Invitation to an annual retreat at a secluded location.</li>
-          <li>VIP access to exclusive events (e.g., private meetings with Epsilon Program leaders).</li>
-        </ul>
-        {/* <button className="bg-orange-400" onClick={() => updatePoints(30,3)}>Elite Membership</button> */}
-        <button className="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-400 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">
-            <Link to={`/MembershipLayout/${3}`}>Read More </Link>
-          </button>
-        {auth.userPoints}
-      </div>
-    </div>
-  </div>
-);
+  );
 }
 
 export default MembershipPage;

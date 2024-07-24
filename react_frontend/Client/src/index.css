@@ -19,19 +19,15 @@
 background-position: center; */
 /* height: 100vh;
 } */ 
+/* Apply the Poppins font family globally */
 
 
-
-/* body {
-  background-image: url('./assets/images/CrisFormage-GTAV.png');
+/* Body background color and image */
+body {
+  background-color: #2d3748; /* Use Tailwind color codes directly */
+  background-image: url('./assets/images/CAR4.0.avif');
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  color: #e0e0e0;  Default text color
-  font-family: 'Nunito', sans-serif;
-} 
-
-
-a{
-  text-decoration: none;
-  
-} */
+  height: 100vh;
+}

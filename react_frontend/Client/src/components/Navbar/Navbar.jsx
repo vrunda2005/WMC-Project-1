@@ -22,7 +22,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="sticky z-50 top-0 p-5 flex justify-between bg-white md:flex-row flex-col">
+      <header className="sticky z-50 top-0 p-5 flex justify-between bg-secondary-bg text-white md:flex-row flex-col">
         <a href="/" className="logo">Logo</a>
         {auth.membership_id}
         {
@@ -38,7 +38,11 @@ const Navbar = () => {
               </div>
               <ul className="flex flex-wrap justify-between md:flex-row flex-col">
                 <li><Link to="/">Home</Link></li>
-                <li><Link to="/membership">Membership</Link></li>
+                <li>
+                  <Link to={auth.membership_id ? `/epsilon_program_membership/${auth.membership_id}` : '/membership'}>
+                    Membership
+                  </Link>
+                </li>                <li><Link to="/storyPage">Stories</Link></li>
                 <li><Link to="/Blog">Blog</Link></li>
                 <li><Link to="/Donate">Donate</Link></li>
                 <li><Link to='/About'>About</Link></li>
