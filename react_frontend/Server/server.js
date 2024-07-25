@@ -47,7 +47,7 @@ const User = mongoose.model('User', userSchema);
 
 app.get('/', async (req, res) => {
   // This is the admin dashboard route
-  res.send('Welcome to the  dashboard!');
+  res.json('Welcome to the  dashboard!');
 });
 
 app.post('/register', async (req, res) => {
