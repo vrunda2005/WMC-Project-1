@@ -20,7 +20,7 @@ function Donate() {
   const fetchData = async () => {
     if (auth.username) {
       try {
-        const response = await fetch(`http://localhost:5000/getalluser/${auth.username}`);
+        const response = await fetch(`https://wmc-project-api.vercel.app/getalluser/${auth.username}`);
         const data = await response.json();
         setUserData(data);
       } catch (error) {
@@ -46,7 +46,7 @@ function Donate() {
     event.preventDefault();
           try {
             console.log(`amount ${amount}`);
-      const response = await fetch(`http://localhost:5000/donate/${auth.username}`, {
+      const response = await fetch(`https://wmc-project-api.vercel.app/donate/${auth.username}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ points: auth.userPoints - amount ,

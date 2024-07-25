@@ -23,7 +23,7 @@ export default function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const reigter = await axios.post("http://localhost:5000/register", value);
+    const reigter = await axios.post("https://wmc-project-api.vercel.app/register", value);
     console.log(reigter.data);
     setValue({
       name: "",

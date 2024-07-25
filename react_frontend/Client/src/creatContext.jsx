@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
   const fetchData = async () => {
     if (auth.username) {
       try {
-        const response = await axios.get(`http://localhost:5000/getalluser/${auth.username}`);
+        const response = await axios.get(`https://wmc-project-api.vercel.app/getalluser/${auth.username}`);
         setUserData(response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);

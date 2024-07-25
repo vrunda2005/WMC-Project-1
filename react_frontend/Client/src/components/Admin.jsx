@@ -11,7 +11,7 @@ useEffect(() => {
 
 const fetchData = async () => {
   try {
-    const response = await fetch("http://localhost:5000/getUsers");
+    const response = await fetch("https://wmc-project-api.vercel.app/getUsers");
     const data = await response.json();
     console.log(data);
     setData(data);

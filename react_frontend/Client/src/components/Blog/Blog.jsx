@@ -9,7 +9,7 @@ function Blog() {
   const [auth] = useAuth();
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/events')
+    axios.get('https://wmc-project-api.vercel.app/api/events')
       .then(response => {
         setEvents(response.data || []);
         setLoading(false); // Stop loading after data is fetched
@@ -22,7 +22,7 @@ function Blog() {
   }, []);
 
   const handleRemoveEvent = (eventId, index) => {
-    axios.delete(`http://localhost:5000/api/events/${eventId}`)
+    axios.delete(`https://wmc-project-api.vercel.app/api/events/${eventId}`)
       .then(() => {
         const updatedEvents = [...events];
         updatedEvents.splice(index, 1);
