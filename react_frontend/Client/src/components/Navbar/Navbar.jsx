@@ -61,6 +61,7 @@ const Navbar = () => {
               <li><Link to="/Donate">Donate</Link></li>
               <li><Link to='/About'>About</Link></li>
               <li><Link to='/Quiz'>Quiz</Link></li>
+              <li><Link to='/epsilonMap'>EpsilonMap</Link></li>
               {
                 auth.isAdmin ? (
                   <li><Link to='/events'>Events</Link></li>
