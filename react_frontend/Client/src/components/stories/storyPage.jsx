@@ -62,17 +62,6 @@ const StoryPage = () => {
 
   return (
     <div className={`bg-opacity-70 ${textPrimary} ${overlay} max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8`}>
-      <h1 className="text-3xl font-bold text-center mb-8">Stories</h1>
-
-      <div className="space-y-4">
-        {stories.map((story) => (
-          <div key={story.id} className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-bold mb-2">{story.username}</h2>
-            <p className="text-gray-700 mb-2">{story.story}</p>
-            <p className="text-gray-500 text-sm">{new Date(story.date).toLocaleString()}</p>
-          </div>
-        ))}
-      </div>
 
       <div className="mt-8">
         <h2 className={`text-2xl font-bold mb-4 ${textSecondary}`}>Add Your Story</h2>

@@ -1,21 +1,43 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../creatContext';
 import { ReactTyped } from "react-typed";
 import { useTheme } from '../../usetheamContext';
+import axios from 'axios';
+import moment from 'moment';
 
 function Home() {
-  const [auth, setAuth] = useAuth();
-  const [userData, setUserData] = useAuth();
+  const [auth] = useAuth();
+  const [events, setEvents] = useState([]);
+  const [stories, setStories] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { theme } = useTheme();
 
-  
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/events')
+      .then(response => {
+        const sortedEvents = response.data.sort((a, b) => new Date(a.date) - new Date(b.date));
+        setEvents(sortedEvents || []);
+      })
+      .catch(error => console.error(error));
+
+    axios.get('http://localhost:5000/stories')
+      .then(response => {
+        const sortedStories = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setStories(sortedStories || []);
+      })
+      .catch(error => console.error(error))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const upcomingEvents = events.slice(0, 3);
+  const lastFiveStories = stories.slice(0, 5);
+
   const goals = [
     "We are making an assault on happiness.",
     "We will be generous, in ways that are upwards and ways that are manifest.",
     "We will live by the proven scientific truth of the metaphors.",
     "We will fight superstition, limited thinking and dogma wherever we find it.",
-    "We will be clear thinking, independent minded and do exactly what we are told.",     
+    "We will be clear thinking, independent minded and do exactly what we are told.",
     "We will practice science by not doubting.",
     "We will display infinite power by closing out those with doubt with our life choices.",
     "We will practice kindness and mercy by a relentless assault on insavables, always reminding them of what awaits.",
@@ -25,11 +47,12 @@ function Home() {
     "We will promote epsilonism in everything we do, while we await both the writing of the tract and the ending of the 9th paradigm.",
   ];
 
-
-  // Apply theme classes
   const containerClass = `max-w-[800px] mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center items-center ${theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light'}`;
   const sectionClass = `w-full py-16 px-4 ${theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg'} text-white`;
   const goalItemClass = `flex items-center mb-2 animate-fadeIn ${theme === 'blue' ? 'bg-blue-highlight' : 'bg-dark-highlight'} rounded-lg shadow-md p-4 md:p-6 lg:p-8`;
+
+  const upcomingEventsClass = `py-16 px-4 ${theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg'} text-white`;
+  const latestStoriesClass = `py-16 px-4 ${theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg'} text-white`;
 
   return (
     <div className={`${theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg'}`}>
@@ -88,6 +111,42 @@ function Home() {
             </li>
           ))}
         </ul>
+      </div>
+
+      {/* Five Upcoming Events Section */}
+      <div className={upcomingEventsClass}>
+        <h2 className="text-3xl font-bold mb-6 p-4 bg-white rounded-lg text-center">Upcoming Events</h2>
+        {loading ? (
+          <p>Loading events...</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-screen-xl m-auto">
+            {upcomingEvents.map((event, index) => (
+              <div key={index} className="bg-white shadow-md rounded-lg p-4">
+                <img src={event.image} alt={event.title} className="w-full h-60 object-cover mb-2"/>
+                <h3 className="text-xl font-bold">{event.title}</h3>
+                <p>{moment(event.date).format('DD MMMM YYYY')}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Last Five Stories Section */}
+      <div className={latestStoriesClass}>
+        <h2 className="text-3xl font-bold mb-6 p-4 bg-gray-100 rounded-lg text-center">Latest Stories</h2>
+        {loading ? (
+          <p>Loading stories...</p>
+        ) : (
+          <div className="space-y-4 max-w-screen-xl m-auto">
+            {lastFiveStories.map((story) => (
+              <div key={story._id} className="h-40 overflow-scroll bg-white p-6 rounded-lg shadow-md">
+                <h2 className="text-xl font-bold mb-2">{story.username}</h2>
+                <p className="text-gray-700 mb-2">{story.story}</p>
+                <p className="text-gray-500 text-sm">{new Date(story.date).toLocaleString()}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
