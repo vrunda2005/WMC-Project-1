@@ -253,6 +253,26 @@ app.post('/cancel', async (req, res) => {
 });
 
 
+app.post('/quizPoints', async (req, res) => {
+  const { userId } = req.body;
+  const {addPoints}=req.body;
+  try {
+    const user = await User.findOne({ name: userId });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+      
+    user.points = user.points+Number(addPoints);
+    const updatedUser = await user.save();
+    res.json({user: updatedUser});
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
 app.get('/display',async(req,res)=>{
   res.send('ajbajba');
 })
