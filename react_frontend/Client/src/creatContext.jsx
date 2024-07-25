@@ -6,7 +6,8 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const initialAuthState = () => {
     const data = localStorage.getItem("auth");
-    return data ? JSON.parse(data) : { username: "", token: "", isLoggedIn: false, isAdmin: false ,membership_id: null };
+    return data ? JSON.parse(data) 
+    : { username: "", token: "", isLoggedIn: false, isAdmin: false, membership_id: null, userPoints: 0, lastAttempt: null };
   };
 
   const [auth, setAuth] = useState(initialAuthState);
@@ -37,6 +38,9 @@ const AuthProvider = ({ children }) => {
     }
     if (userData?.membership_id) {
       setAuth(prevAuth => ({ ...prevAuth, membership_id: userData.membership_id }));
+    }
+    if (userData?.lastAttempt) {
+      setAuth(prevAuth => ({ ...prevAuth, lastAttempt: userData.lastAttempt }));
     }
   }, [userData]);
 
