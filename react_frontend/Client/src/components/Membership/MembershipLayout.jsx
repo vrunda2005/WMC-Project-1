@@ -28,7 +28,7 @@ const MembershipLayout = () => {
 
   const updatePoints = async (pointsToUpdate, membership_id) => {
     try {
-      const response = await fetch(`https://wmc-project-api.vercel.app/updateuser/${auth.username}`, {
+      const response = await fetch(`https://wmc-project-av5d.onrender.com/updateuser/${auth.username}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

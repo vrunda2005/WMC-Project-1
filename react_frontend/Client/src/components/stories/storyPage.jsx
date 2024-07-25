@@ -13,7 +13,7 @@ const StoryPage = () => {
     const fetchStories = async () => {
       try {
         setLoading(true); // Start loading
-        const response = await fetch('https://wmc-project-api.vercel.app/stories');
+        const response = await fetch('https://wmc-project-av5d.onrender.com/stories');
         if (!response.ok) {
           throw new Error('Failed to fetch stories');
         }
@@ -33,7 +33,7 @@ const StoryPage = () => {
     if (!newStory) return;
 
     try {
-      const response = await fetch('https://wmc-project-api.vercel.app/stories', {
+      const response = await fetch('https://wmc-project-av5d.onrender.com/stories', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
