@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../creatContext';
 import { useTheme } from '../../usetheamContext';
-
+import axios from 'axios';
 
 const StoryPage = () => {
   const [stories, setStories] = useState([]);
   const [newStory, setNewStory] = useState('');
   const [auth] = useAuth();
   const [loading, setLoading] = useState(true); // Loading state
+  axios.defaults.withCredentials=true;
+
 
   useEffect(() => {
     const fetchStories = async () => {

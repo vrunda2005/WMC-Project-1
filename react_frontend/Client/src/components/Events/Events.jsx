@@ -9,6 +9,7 @@ function AddEvent() {
   const [time, setTime] = useState('');
   const [image, setImage] = useState('');
   const navigate = useNavigate();
+  axios.defaults.withCredentials=true;
 
   const handleSubmit = (e) => {
     e.preventDefault();
