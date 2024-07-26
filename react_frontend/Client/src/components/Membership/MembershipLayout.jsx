@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../creatContext';
 import { useTheme } from '../../usetheamContext';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './layout.css'
 
 const MembershipDetails = ({ title, description, benefits }) => (
@@ -51,9 +53,13 @@ const MembershipLayout = () => {
         localStorage.setItem(auth.username, membership_id); // Store membership status
 
         navigate(`/epsilon_program_membership/${membership_id}`);
+        toast.success("Membership updated successfully!");
+
       }
     } catch (error) {
       setError(error.message);
+      toast.error(error.message);
+
     }
   };
 
@@ -153,6 +159,8 @@ const MembershipLayout = () => {
         {auth.userPoints && <p className="mt-4 text-gray-300">Your Points: {auth.userPoints}</p>}
       </div>
     </div>
+    <ToastContainer />
+
   </div>
 
 
