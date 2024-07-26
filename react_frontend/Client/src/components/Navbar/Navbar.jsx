@@ -53,29 +53,29 @@ const Navbar = () => {
             <Link to="/" className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
           </li>
           <li>
-            <Link to={auth.membership_id ? `/epsilon_program_membership/${auth.membership_id}` : '/membership'} className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Membership</Link>
+            <Link to={auth.membership_id ? `/epsilon_program_membership/${auth.membership_id}` : '/membership'} className="block py-2 px-4 rounded hover:underline hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Membership</Link>
           </li>
           <li>
-            <Link to="/storyPage" className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Stories</Link>
+            <Link to="/storyPage" className="block py-2 px-4 rounded hover:underline hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Stories</Link>
           </li>
           <li>
-            <Link to="/Blog" className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Blog</Link>
+            <Link to="/Blog" className="block py-2 px-4 rounded hover:underline  hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Blog</Link>
           </li>
           <li>
-            <Link to="/Donate" className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Donate</Link>
+            <Link to="/Donate" className="block py-2 px-4 rounded hover:underline hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Donate</Link>
           </li>
           <li>
-            <Link to='/About' className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>About</Link>
+            <Link to='/About' className="block py-2 px-4 rounded hover:underline hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>About</Link>
           </li>
           <li>
-            <Link to='/Quiz' className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Quiz</Link>
+            <Link to='/Quiz' className="block py-2 px-4 rounded hover:underline hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Quiz</Link>
           </li>
           <li>
-            <Link to='/epsilonMap' className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>EpsilonMap</Link>
+            <Link to='/epsilonMap' className="block py-2 px-4 rounded  hover:underline hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>EpsilonMap</Link>
           </li>
           {auth.isAdmin && (
             <li>
-              <Link to='/events' className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Events</Link>
+              <Link to='/events' className="block py-2 px-4 rounded hover:underline hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Events</Link>
             </li>
           )}
         </ul>
@@ -98,45 +98,45 @@ const Navbar = () => {
       {/* Desktop Menu Content */}
       <nav className="hidden md:flex items-center space-x-6">
         {auth.isLoggedIn && (
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 hover:underline">
             <FaRegUser size="1.5em" />
             <span className="ml-2">{auth.username}</span>
           </div>
         )}
         {auth.isLoggedIn && (
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 hover:underline">
             <MdCurrencyBitcoin size="1.5em" />
             <span className="ml-2">{auth.userPoints}</span>
           </div>
         )}
         <ul className="flex space-x-6">
           <li>
-            <Link to="/" className={`hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Home</Link>
+            <Link to="/" className={` hover:underline hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Home</Link>
           </li>
           <li>
-            <Link to={auth.membership_id ? `/epsilon_program_membership/${auth.membership_id}` : '/membership'} className={`hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === `/epsilon_program_membership/${auth.membership_id}` || window.location.pathname === '/membership' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Membership</Link>
+            <Link to={auth.membership_id ? `/epsilon_program_membership/${auth.membership_id}` : '/membership'} className={`hover:underline hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === `/epsilon_program_membership/${auth.membership_id}` || window.location.pathname === '/membership' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Membership</Link>
           </li>
           <li>
-            <Link to="/storyPage" className={`hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/storyPage' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Stories</Link>
+            <Link to="/storyPage" className={` hover:underline  hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/storyPage' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Stories</Link>
           </li>
           <li>
-            <Link to="/Blog" className={`hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/Blog' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Blog</Link>
+            <Link to="/Blog" className={`hover:underline hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/Blog' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Blog</Link>
           </li>
           <li>
-            <Link to="/Donate" className={`hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/Donate' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Donate</Link>
+            <Link to="/Donate" className={`hover:underline hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/Donate' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Donate</Link>
           </li>
           <li>
-            <Link to='/About' className={`hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/About' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>About</Link>
+            <Link to='/About' className={`hover:underline hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/About' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>About</Link>
           </li>
           <li>
-            <Link to='/Quiz' className={`hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/Quiz' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Quiz</Link>
+            <Link to='/Quiz' className={`hover:underline hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/Quiz' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Quiz</Link>
           </li>
           <li>
-            <Link to='/epsilonMap' className={`hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/epsilonMap' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>EpsilonMap</Link>
+            <Link to='/epsilonMap' className={`hover:underline hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/epsilonMap' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>EpsilonMap</Link>
           </li>
           {auth.isAdmin && (
             <li>
-              <Link to='/events' className={`hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/events' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Events</Link>
+              <Link to='/events' className={`hover:underline hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/events' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Events</Link>
             </li>
           )}
         </ul>
@@ -146,10 +146,10 @@ const Navbar = () => {
           </button>
         ) : (
           <div className="flex space-x-4">
-            <Link to="/login" className={`text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ${buttonClass}`}>
+            <Link to="/login" className={`text-gray-800 hover:bg-red-500 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ${buttonClass}`}>
               Log in
             </Link>
-            <Link to="/signup" className={buttonClass}>
+            <Link to="/signup" className={`text-gray-800 hover:bg-red-500 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ${buttonClass}`}>
               Get started
             </Link>
           </div>

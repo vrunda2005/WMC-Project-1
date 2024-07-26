@@ -2,9 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 export default function Footer() {
+    const bgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
+    const textColor = theme === 'blue' ? 'text-blue-light' : 'text-gray-100';
+    const buttonColor = theme === 'blue' ? 'bg-blue-600 hover:bg-blue-800' : 'bg-green-600 hover:bg-green-800';
+    const overlayColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-gray-800';
+    
     return (
-        <footer className="bg-dark border-y">
-            <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+        <footer className={`${bgColor} border-y`}>
+            <div className={`mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 ${textColor}`}>
                 <div className="md:flex md:justify-between">
                     <div className="mb-6 md:mb-0">
                         <Link to="/" className="flex items-center">
@@ -36,7 +41,7 @@ export default function Footer() {
                             <ul className="text-gray-500 font-medium">
                                 <li className="mb-4">
                                     <a
-                                        href="https://github.com/hiteshchoudhary"
+                                        href="https://github.com/vrunda2005"
                                         className="hover:underline"
                                         target="_blank"
                                         rel="noreferrer"
@@ -72,13 +77,13 @@ export default function Footer() {
                 <div className="sm:flex sm:items-center sm:justify-between">
                     <span className="text-sm text-gray-500 sm:text-center">
                         © 2023
-                        <a href="https://vrunda_moin.com/" className="hover:underline">
+                        <a href="https://wmc-project-frontend.vercel.app/" className="hover:underline">
                            vrunda_moin
                         </a>
                         . All Rights Reserved.
                     </span>
                     <div className="flex mt-4 space-x-5 sm:justify-center sm:mt-0">
-                        <Link to="#" className="text-gray-500 hover:text-gray-900">
+                        <Link to="#" className="text-blue-500 hover:text-gray-900">
                             <svg
                                 className="w-4 h-4"
                                 aria-hidden="true"

@@ -78,6 +78,8 @@ const customIcon = new L.Icon({
   
 const EpsilonMap = () => {
   return (
+    <div className="relative h-screen">
+
     <MapContainer center={[36.778259, -119.417931]} zoom={13} style={{ height: "100vh", width: "100%" }}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -92,6 +94,7 @@ const EpsilonMap = () => {
         </Marker>
       ))}
     </MapContainer>
+    </div>
   );
 }
 
