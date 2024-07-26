@@ -127,61 +127,44 @@ const MembershipLayout = () => {
   const textPrimary = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
   const textSecondary = theme === 'blue' ? 'text-blue-text-blue' : 'text-dark-text-blue';
   return (
-    <>
-    {/* <div className={`container mx-auto p-6 lg:p-8 ${containerBgColor}`}>
-      <h1 className="text-4xl font-bold text-center text-blue-900 mb-6">Membership Details</h1>
-      {error && (
-        <div className="text-red-600 text-center mb-4">
-          <p>{error}</p>
+    <div id="card_container" className="relative mx-auto max-w-3xl p-4">
+    <div className="pg">
+      <img src="../../assets/images/GTA-5-Cris-Formage.jpg" alt="GTA 5 Cris Formage" className="w-full rounded-lg" />
+    </div>
+    <div id="card" className="relative bg-cover bg-center text-white p-6 rounded-lg shadow-lg">
+      <div className="shine absolute inset-0"></div>
+      <div className="text-block relative z-10">
+        {error && (
+          <div className="text-red-600 text-center mb-4">
+            <p>{error}</p>
+          </div>
+        )}
+        <h1 className="text-3xl font-bold uppercase mb-2">
+          Membership Details <small className="text-gray-300 text-sm">(2018)</small>
+        </h1>
+        <h3 className="text-xl font-bold mb-4">Action | Adventure</h3>
+        {/* <p className="mb-4">
+          Arthur Curry learns that he is the heir to the underwater kingdom of Atlantis, and must step forward to lead his people and be a hero to the world.
+        </p> */}
+        <MembershipDetails {...membershipDetails} />
+        <div className="flex flex-wrap gap-2">
+          <button className="bg-transparent border-4 border-white text-white py-2 px-4 rounded hover:bg-blue-800">
+            Watch Trailer
+          </button>
+          <button
+            onClick={() => updatePoints(membershipDetails.up, membership_id)}
+            className="bg-transparent border-4 border-white text-white py-2 px-4 rounded hover:bg-blue-800"
+          >
+            Get Membership
+          </button>
         </div>
-      )}
-      <MembershipDetails {...membershipDetails} />
-      <div className="text-center mt-6">
-        <button
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
-          onClick={() => updatePoints(membershipDetails.up, membership_id)}
-        >
-          Get Membership
-        </button>
-        {auth.userPoints && <p className="mt-4 text-gray-700">Your Points: {auth.userPoints}</p>}
+        {auth.userPoints && <p className="mt-4 text-gray-300">Your Points: {auth.userPoints}</p>}
       </div>
-    </div> */}
-
-
-    <div id="card_container" data-offset="2">
-  <div class="pg">
-    <img src="../../assets/images/GTA-5-Cris-Formage.jpg" alt="GTA 5 Cris Formage"/>
-  </div>
-  <div id="card">
-    <div class="shine"></div>
-    <div class="text-block">
-    {error && (
-        <div className="text-red-600 text-center mb-4">
-          <p>{error}</p>
-        </div>
-      )}
-      <h1>Membership Details <small>(2018)</small></h1>
-      <h3>Action | Adventure</h3>
-      {/* <p>
-        Arthur Curry learns that he is the heir to the underwater kingdom of Atlantis, and must step forward to lead his people and be a hero to the world.
-      </p> */}
-      <MembershipDetails {...membershipDetails} />
-      <button>Watch Trailer</button>
-      <button
-          onClick={() => updatePoints(membershipDetails.up, membership_id)}
-        >
-          Get Membership
-        </button>
-        {auth.userPoints && <p className="mt-4 text-gray-700">Your Points: {auth.userPoints}</p>}
-
-
     </div>
   </div>
-</div>
 
 
-</>
-  );
+    )
 };
 
 export default MembershipLayout;
