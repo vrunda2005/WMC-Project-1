@@ -170,10 +170,18 @@ const Try1 = () => {
   </section>
   <section class="col-3 ss-style-slit">
     <div class="column">
-
+    About the Epsilon Program
+    <p className="mb-6">
+          The Epsilon Program is a fictional religious cult in the Grand Theft Auto series. Founded by Cris Formage, the program is known for its mysterious teachings, often revolving around the number 157, extraterrestrial life, and unconventional spiritual practices. As a member, you will explore the deepest truths of the universe and connect with like-minded individuals.
+        </p>
     </div>
     <div class="column">
-
+    <p className="mb-6">
+          Members are encouraged to donate generously, attend exclusive events, and participate in various rituals to advance their spiritual enlightenment. The program promises profound personal growth, eternal salvation, and a deeper understanding of the cosmos.
+        </p>
+        <p className="mb-6">
+          As you progress through the membership tiers, you'll gain access to more exclusive content, personalized guidance from Cris Formage, and invitations to high-level ceremonies. Embrace the path to enlightenment and join the ranks of the enlightened today!
+        </p>
 
     </div>
   </section>
@@ -188,6 +196,9 @@ const Try1 = () => {
 
     </div>
   </section>
+
+
+
   <svg id="bigTriangleShadow" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 100 100" preserveAspectRatio="none">
         <path id="trianglePath1" d="M0 0 L50 100 L100 0 Z" />
         <path id="trianglePath2" d="M50 100 L100 40 L100 0 Z" />

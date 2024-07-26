@@ -30,11 +30,6 @@ const MembershipTier = ({ tier, benefits, profileLink, newsLink, message, onCanc
       </ul>
         </div>
         <div class="column">
-        <h1 className="text-4xl font-bold mb-8 text-center">Your {tier} Profile</h1>
-        <p>View your membership details, track your progress, and access exclusive content through your {tier} profile.</p>
-        <a href={profileLink} className="text-highlight hover:text-accent">View Profile</a>
-
-
         </div>
     </section>
     
@@ -55,6 +50,11 @@ const MembershipTier = ({ tier, benefits, profileLink, newsLink, message, onCanc
             </a>
           </li>
         </ul>
+        <h1 className="text-4xl font-bold mb-8 text-center">Your {tier} Profile</h1>
+        <p>View your membership details, track your progress, and access exclusive content through your {tier} profile.</p>
+        <a href={profileLink} className="text-highlight hover:text-accent">View Profile</a>
+
+
     </div>    
   </section>
 
@@ -187,18 +187,37 @@ const MembershipLayout = () => {
       ) : (
         <MembershipTier {...membershipTier} onCancelMembership={handleCancelMembership} />
       )}
-      <div className="bg-secondary-bg text-light shadow-md p-8 mb-10 border border-white rounded-lg animate-fadeIn">
-        <h2 className="text-3xl font-bold mb-6 text-highlight">About the Epsilon Program</h2>
-        <p className="mb-6">
-          The Epsilon Program is a fictional religious cult in the Grand Theft Auto series. Founded by Cris Formage, the program is known for its mysterious teachings, often revolving around the number 157, extraterrestrial life, and unconventional spiritual practices. As a member, you will explore the deepest truths of the universe and connect with like-minded individuals.
-        </p>
-        <p className="mb-6">
-          Members are encouraged to donate generously, attend exclusive events, and participate in various rituals to advance their spiritual enlightenment. The program promises profound personal growth, eternal salvation, and a deeper understanding of the cosmos.
-        </p>
-        <p className="mb-6">
-          As you progress through the membership tiers, you'll gain access to more exclusive content, personalized guidance from Cris Formage, and invitations to high-level ceremonies. Embrace the path to enlightenment and join the ranks of the enlightened today!
-        </p>
-      </div>
+      <section class="color ss-style-roundedges">
+
+</section>
+<section class="col-3 ss-style-slit">
+  <div class="column">
+  About the Epsilon Program
+  <p className="mb-6">
+        The Epsilon Program is a fictional religious cult in the Grand Theft Auto series. Founded by Cris Formage, the program is known for its mysterious teachings, often revolving around the number 157, extraterrestrial life, and unconventional spiritual practices. As a member, you will explore the deepest truths of the universe and connect with like-minded individuals.
+      </p>
+  </div>
+  <div class="column">
+  <p className="mb-6">
+        Members are encouraged to donate generously, attend exclusive events, and participate in various rituals to advance their spiritual enlightenment. The program promises profound personal growth, eternal salvation, and a deeper understanding of the cosmos.
+      </p>
+      <p className="mb-6">
+        As you progress through the membership tiers, you'll gain access to more exclusive content, personalized guidance from Cris Formage, and invitations to high-level ceremonies. Embrace the path to enlightenment and join the ranks of the enlightened today!
+      </p>
+
+  </div>
+</section>
+<svg id="bigHalfCircle" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <path d="M0 100 C40 0 60 0 100 100 Z"/>
+    </svg>
+<section class="col-2 color">
+  <div class="column text">
+
+  </div>
+  <div class="column">
+
+  </div>
+</section>
       
     </div>
   );
