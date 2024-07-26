@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function App() {
   const [value, setValue] = useState({
@@ -9,8 +11,6 @@ export default function App() {
   });
 
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -25,9 +25,6 @@ export default function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); // Clear previous errors
-    setSuccess(''); // Clear previous success message
-
     try {
       const response = await axios.post("https://wmc-project-av5d.onrender.com/register", value);
       console.log(response.data);
@@ -36,18 +33,17 @@ export default function App() {
         email: "",
         password: "",
       });
-      setSuccess("Account created successfully!");
+      toast.success("Account created successfully!");
     } catch (err) {
       if (err.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        setError(`Error ${err.response.status}: ${err.response.data.message || 'An error occurred'}`);
+        // Handle server errors
+        toast.error(`Error ${err.response.status}: ${err.response.data.message || 'An error occurred'}`);
       } else if (err.request) {
-        // The request was made but no response was received
-        setError('No response received from the server');
+        // Handle no response errors
+        toast.error('No response received from the server');
       } else {
-        // Something happened in setting up the request that triggered an Error
-        setError('Error setting up the request');
+        // Handle request setup errors
+        toast.error('Error setting up the request');
       }
     }
   };
@@ -63,9 +59,6 @@ export default function App() {
               alt="Logo"
             />
             <h2 className="text-5xl font-bold mt-2 mb-8 text-center">Sign Up</h2>
-
-            {error && <div className="text-red-500 mb-4">{error}</div>}
-            {success && <div className="text-green-500 mb-4">{success}</div>}
 
             <input 
               placeholder="Username" 
@@ -113,10 +106,13 @@ export default function App() {
               Submit
             </button>
 
-            <h4 className='mt-4 text-center'>Already have an account? <a href='\login' className='text-blue-500 font-bold hover:cursor-pointer hover:text-blue-400 transition-all'>Log In</a></h4>
+            <h4 className='mt-4 text-center'>
+              Already have an account? <a href='\login' className='text-blue-500 font-bold hover:cursor-pointer hover:text-blue-400 transition-all'>Log In</a>
+            </h4>
           </form>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }
