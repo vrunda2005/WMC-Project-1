@@ -5,20 +5,15 @@ import { useTheme } from '../../usetheamContext';
 import './layout.css'
 
 const MembershipDetails = ({ title, description, benefits }) => (
-  <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-    <h2 className="text-2xl font-bold mb-3 text-blue-900">{title}</h2>
-    <p className="text-gray-700 mb-4">{description}</p>
-    <ul className="list-disc list-inside mb-4 text-gray-800">
-      {benefits.map((benefit, index) => (
-        <li key={index} className="flex items-center mb-2">
-          <svg className="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-          </svg>
-          <span>{benefit}</span>
-        </li>
-      ))}
-    </ul>
-  </div>
+  <div>
+  <h2 className="text-xl font-bold mb-2">{title}</h2>
+  <p className="mb-4">{description}</p>
+  <ul className="list-disc pl-5 mb-4">
+    {benefits.map((benefit, index) => (
+      <li key={index} className="text-gray-300">{benefit}</li>
+    ))}
+  </ul>
+</div>
 );
 
 const MembershipLayout = () => {
