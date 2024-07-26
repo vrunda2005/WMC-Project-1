@@ -127,9 +127,9 @@ const MembershipLayout = () => {
   const textPrimary = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
   const textSecondary = theme === 'blue' ? 'text-blue-text-blue' : 'text-dark-text-blue';
   return (
-    <div id="card_container" className="relative mx-auto max-w-3xl p-4">
+    <div id="card_container" className="relative mx-auto max-w-3xl p-4 mt-20">
     <div className="pg">
-      <img src="../../assets/images/GTA-5-Cris-Formage.jpg" alt="GTA 5 Cris Formage" className="w-full rounded-lg" />
+      <img src="https://th.bing.com/th/id/OIP.y6ZKND2A3XLBHfF8QmkuRgHaHn?rs=1&pid=ImgDetMain" alt="GTA 5 Cris Formage" className="w-full rounded-lg" />
     </div>
     <div id="card" className="relative bg-cover bg-center text-white p-6 rounded-lg shadow-lg">
       <div className="shine absolute inset-0"></div>
