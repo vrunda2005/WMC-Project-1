@@ -1,7 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { useTheme } from '../../usetheamContext';
 
 export default function Footer() {
+
+    const { theme } = useTheme();
+
     const bgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
     const textColor = theme === 'blue' ? 'text-blue-light' : 'text-gray-100';
     const buttonColor = theme === 'blue' ? 'bg-blue-600 hover:bg-blue-800' : 'bg-green-600 hover:bg-green-800';
