@@ -10,20 +10,20 @@ html, body {
   min-height: 100%;
 }
 
-body {
+/* body {
   background: linear-gradient(#f6f7fc 0%, #d5e1e8 40%);
   font-family: 'Lato', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 10%;
-}
+} */
 
 #card_container {
   width: 90%;
   max-width: 700px;
   position: relative;
-  margin: 0 auto;
+  margin: 10%;
 }
 
 #card {
