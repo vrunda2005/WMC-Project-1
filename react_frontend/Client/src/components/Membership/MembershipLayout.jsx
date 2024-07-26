@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../creatContext';
 import { useTheme } from '../../usetheamContext';
+import './layout.css'
 
 const MembershipDetails = ({ title, description, benefits }) => (
   <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
@@ -71,36 +72,51 @@ const MembershipLayout = () => {
 
   if (membership_id === '1') {
     membershipDetails = {
-      title: 'Basic Membership',
-      description: 'On choosing our Basic membership! With this membership, you’ll get access to exclusive content including tutorials, webinars, and more. You’ll also receive discounts on our products and services.',
+      title: 'Epsilon Enthusiast',
+      description: `Unlock the door to a world of exclusive Epsilon content with our Basic membership! 
+                    As an Epsilon Enthusiast, you’ll gain access to a treasure trove of exclusive tutorials, 
+                    insightful webinars, and a wealth of additional resources designed to elevate your experience. 
+                    Enjoy special discounts on our premium products and services, and receive priority support 
+                    from our dedicated customer care team. This is your first step into a vibrant community of like-minded individuals!`,
       benefits: [
-        'Access to exclusive content',
-        'Discounts on products and services',
-        'Priority customer support',
+        'Exclusive Content: Access a variety of tutorials, webinars, and articles available only to members.',
+        'Discounts: Enjoy exclusive discounts on our products and services.',
+        'Priority Support: Receive faster responses and enhanced support from our customer service team.',
+        'Community Access: Connect with fellow enthusiasts through exclusive forums and events.'
       ],
       up: 10,
     };
   } else if (membership_id === '2') {
     membershipDetails = {
-      title: 'Premium Membership',
-      description: 'As a Premium member, you’ll receive all the benefits of our Basic membership, plus additional perks like personalized coaching, priority customer support, and access to our premium content library.',
+      title: 'Epsilon Evangelist',
+      description: `Elevate your Epsilon journey with the Premium membership! The Epsilon Evangelist tier includes 
+                    all the benefits of the Basic membership, with a host of additional perks designed to offer 
+                    a more personalized and enriching experience. Enjoy one-on-one coaching from experts, access 
+                    to our exclusive content library, and receive priority support tailored to your needs. Immerse 
+                    yourself in a world of premium resources and elevate your role within our community.`,
       benefits: [
-        'All Basic membership benefits',
-        'Personalized coaching',
-        'Priority customer support',
-        'Access to premium content library',
+        'All Basic Benefits: Continue enjoying all the benefits of the Epsilon Enthusiast membership.',
+        'Personalized Coaching: Receive expert guidance and coaching tailored to your goals.',
+        'Premium Content: Unlock access to an exclusive library of advanced resources and content.',
+        'Enhanced Support: Get priority support with personalized attention to your needs.',
+        'Special Events: Invitations to premium events and webinars hosted by industry leaders.'
       ],
       up: 20,
     };
   } else if (membership_id === '3') {
     membershipDetails = {
-      title: 'Elite Membership',
-      description: 'As an Elite member, you’ll enjoy all the benefits of our Premium membership, plus exclusive access to VIP events, personalized consulting, and a dedicated account manager.',
+      title: 'Epsilon Visionary',
+      description: `Step into the upper echelon of the Epsilon community with our Elite membership! The Epsilon 
+                    Visionary tier offers an unparalleled level of access and exclusivity. Enjoy all the benefits 
+                    of the Premium membership, plus exclusive invitations to VIP events, personalized consulting, 
+                    and a dedicated account manager to ensure your every need is met. This is the ultimate membership 
+                    for those who are truly committed to making the most of their Epsilon experience.`,
       benefits: [
-        'All Premium membership benefits',
-        'Exclusive access to VIP events',
-        'Personalized consulting',
-        'Dedicated account manager',
+        'All Premium Benefits: Enjoy all the perks and privileges of the Epsilon Evangelist membership.',
+        'VIP Events: Exclusive invitations to high-profile events and networking opportunities.',
+        'Personalized Consulting: Receive tailored consulting services to achieve your personal and professional goals.',
+        'Dedicated Account Manager: Get personalized attention and support from a dedicated account manager.',
+        'Recognition: Be recognized as a top supporter within the Epsilon community.'
       ],
       up: 30,
     };
@@ -111,6 +127,7 @@ const MembershipLayout = () => {
   const textPrimary = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
   const textSecondary = theme === 'blue' ? 'text-blue-text-blue' : 'text-dark-text-blue';
   return (
+    <>
     <div className={`container mx-auto p-6 lg:p-8 ${containerBgColor}`}>
       <h1 className="text-4xl font-bold text-center text-blue-900 mb-6">Membership Details</h1>
       {error && (
@@ -129,6 +146,26 @@ const MembershipLayout = () => {
         {auth.userPoints && <p className="mt-4 text-gray-700">Your Points: {auth.userPoints}</p>}
       </div>
     </div>
+
+    <div id="card_container" data-offset="2">
+  <div class="pg">
+    <img src="https://pluspng.com/img-png/aquaman-png-aquaman-png-clipart-666.png"/>
+  </div>
+  <div id="card">
+    <div class="shine"></div>
+    <div class="text-block">
+      <h1>Aquaman <small>(2018)</small></h1>
+      <h3>Action | Adventure</h3>
+      <p>
+        Arthur Curry learns that he is the heir to the underwater kingdom of Atlantis, and must step forward to lead his people and be a hero to the world.
+      </p>
+      <button>Watch Trailer</button>
+    </div>
+  </div>
+</div>
+
+
+</>
   );
 };
 

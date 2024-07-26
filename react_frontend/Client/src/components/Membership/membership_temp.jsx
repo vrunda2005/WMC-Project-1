@@ -40,7 +40,7 @@ function MembershipPage() {
         <div className="flex flex-col md:flex-row md:flex-wrap justify-center gap-8 md:gap-10 lg:gap-12 mb-12">
           {/* Basic Membership */}
           <div className={`bg-white ${textPrimary} bg-opacity-80 p-6 md:p-8 lg:p-10 shadow-lg rounded-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out w-full md:w-1/3 lg:w-1/4`}>
-            <h3 className={`text-xl font-semibold text-center mb-4 ${textPrimary}`}>Basic Membership</h3>
+            <h3 className={`text-xl font-semibold text-center mb-4 ${textPrimary}`}>Epsilon Enthusiast</h3>
             <div className="flex items-center justify-center mb-4">
               <h2 className={`text-4xl font-bold ${theme === 'blue' ? 'text-blue-highlight' : 'text-dark-highlight'}`}>$10</h2>
               <span className="text-sm ml-2">per month</span>
@@ -62,12 +62,12 @@ function MembershipPage() {
   
           {/* Premium Membership */}
           <div className={`bg-white bg-opacity-80 ${textPrimary} p-6 md:p-8 lg:p-10 shadow-lg rounded-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out w-full md:w-1/3 lg:w-1/4`}>
-            <h3 className={`text-xl font-semibold text-center mb-4 ${textPrimary}`}>Premium Membership</h3>
+            <h3 className={`text-xl font-semibold text-center mb-4 ${textPrimary}`}>Epsilon Evangelist</h3>
             <div className="flex items-center justify-center mb-4">
             <h2 className={`text-4xl font-bold ${theme === 'blue' ? 'text-blue-highlight' : 'text-dark-highlight'}`}>$20</h2>
             <span className="text-sm ml-2">per month</span>
             </div>
-            <p className={`text-lg font-semibold mb-4 ${textPrimary}`}>Advanced membership</p>
+            <p className={`text-lg font-semibold mb-4 ${textPrimary}`}>Epsilon Visionary</p>
             <ul className={`list-disc list-inside mb-4 text-sm ${textPrimary}`}>
               <li>Full access to Epsilon Program resources.</li>
               <li>Discounts on events and merchandise.</li>
