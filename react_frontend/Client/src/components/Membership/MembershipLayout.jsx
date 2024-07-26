@@ -52,8 +52,8 @@ const MembershipLayout = () => {
         localStorage.setItem('userData', JSON.stringify(data.user));
         localStorage.setItem(auth.username, membership_id); // Store membership status
 
-        navigate(`/epsilon_program_membership/${membership_id}`);
         toast.success("Membership updated successfully!");
+        navigate(`/epsilon_program_membership/${membership_id}`);
 
       }
     } catch (error) {

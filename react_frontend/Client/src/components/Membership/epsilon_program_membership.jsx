@@ -10,24 +10,44 @@ const MembershipTier = ({ tier, benefits, profileLink, newsLink, message, onCanc
   const textSecondary = theme === 'blue' ? 'text-blue-text-blue' : 'text-dark-text-blue';
   
   return (
-    <div className={`${containerBgColor} ${textPrimary}shadow-md p-8 mb-10 border rounded-lg transform hover:scale-105 transition-transform duration-300`}>
-      <h2 className="text-3xl font-bold mb-6 text-highlight">{tier} Membership Benefits</h2>
-      <ul className="list-disc pl-6 text-muted mb-6">
+<div class="container">
+    <div class="codrops-top clearfix">
+    <h1 className="text-4xl font-bold mb-8 text-center">HI Congratulations</h1>
+
+        <span class="righ text-2xl">On choosing Epsilon Program Membership</span>
+        
+    </div>
+
+    <section class=" col-2 ss-style-triangles">
+    <h1 className="text-4xl font-bold mb-8 text-center">{tier} Membership Benefits</h1>
+
+        <div class="column text">
+        {/* <h1 className="text-4xl font-bold mb-8 text-center">Epsilon Program Membership</h1> */}
+        <ul className="list-disc pl-6 text-muted mb-6">
         {benefits.map((benefit, index) => (
           <li key={index} className="mb-2">{benefit}</li>
         ))}
       </ul>
-
-      <div className="mt-8">
-        <h2 className="text-3xl font-bold mb-6">Your {tier} Profile</h2>
-        <p className="mb-6">View your membership details, track your progress, and access exclusive content through your {tier} profile.</p>
+        </div>
+        <div class="column">
+        <h1 className="text-4xl font-bold mb-8 text-center">Your {tier} Profile</h1>
+        <p>View your membership details, track your progress, and access exclusive content through your {tier} profile.</p>
         <a href={profileLink} className="text-highlight hover:text-accent">View Profile</a>
-      </div>
 
-      <div className="mt-8">
-        <h2 className="text-3xl font-bold mb-6">{tier} News and Updates</h2>
-        <p className="mb-6">Stay informed about the latest developments in the {tier} program, including new content, events, and initiatives.</p>
-        <ul className="list-none pl-0 mb-6">
+
+        </div>
+    </section>
+    
+  <section class="color">
+  <h1 className="text-4xl font-bold mb-8 text-center">News and Updates</h1>
+  <p className="mb-6">Stay informed about the latest developments in the {tier} program, including new content, events, and initiatives.</p>
+
+    
+  </section>
+
+  <section class="col-3 ss-style-doublediagonal">
+    <div class="column">
+    <ul className="list-none pl-0 mb-6">
           <li>
             <a href={newsLink} className="text-highlight hover:text-accent">
               <i className="fas fa-newspaper mr-2" />
@@ -35,21 +55,39 @@ const MembershipTier = ({ tier, benefits, profileLink, newsLink, message, onCanc
             </a>
           </li>
         </ul>
-      </div>
+    </div>    
+  </section>
 
-      <div className="mt-8">
-        <h2 className="text-3xl font-bold mb-6">Message from Cris Formage</h2>
-        <p className="mb-6">{message}</p>
-      </div>
 
-      <div className="mt-8">
-        <button
+  <section class="col-2 ss-style-halfcircle">
+    <div class="column">
+    Message from Cris Formage
+    </div>
+    <div class="column text">
+    {message}
+    </div>
+  </section>
+
+  <section class="color ss-style-bigtriangle">
+
+  </section>
+  <svg id="bigTriangleColor" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 100 102" preserveAspectRatio="none">
+        <path d="M0 0 L50 100 L100 0 Z" />
+      </svg>
+  <section class="col-3">
+    <div class="column">
+    <button
           className="bg-highlight hover:bg-accent text-primary-bg font-bold py-2 px-4 rounded-lg transition-all"
           onClick={onCancelMembership}
         >
           Cancel Membership
         </button>
-      </div>
+    </div>
+    <div class="column">
+
+    </div>
+  </section>
+      
     </div>
   );
 };
@@ -161,6 +199,7 @@ const MembershipLayout = () => {
           As you progress through the membership tiers, you'll gain access to more exclusive content, personalized guidance from Cris Formage, and invitations to high-level ceremonies. Embrace the path to enlightenment and join the ranks of the enlightened today!
         </p>
       </div>
+      
     </div>
   );
 };
