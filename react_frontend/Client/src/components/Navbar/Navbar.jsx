@@ -49,15 +49,35 @@ const Navbar = () => {
           </button>
         </div>
         <ul className="flex flex-col space-y-4">
-          <li><Link to="/" onClick={() => setIsMobileMenuOpen(false)}>Home</Link></li>
-          <li><Link to={auth.membership_id ? `/epsilon_program_membership/${auth.membership_id}` : '/membership'} onClick={() => setIsMobileMenuOpen(false)}>Membership</Link></li>
-          <li><Link to="/storyPage" onClick={() => setIsMobileMenuOpen(false)}>Stories</Link></li>
-          <li><Link to="/Blog" onClick={() => setIsMobileMenuOpen(false)}>Blog</Link></li>
-          <li><Link to="/Donate" onClick={() => setIsMobileMenuOpen(false)}>Donate</Link></li>
-          <li><Link to='/About' onClick={() => setIsMobileMenuOpen(false)}>About</Link></li>
-          <li><Link to='/Quiz' onClick={() => setIsMobileMenuOpen(false)}>Quiz</Link></li>
-          <li><Link to='/epsilonMap' onClick={() => setIsMobileMenuOpen(false)}>EpsilonMap</Link></li>
-          {auth.isAdmin && <li><Link to='/events' onClick={() => setIsMobileMenuOpen(false)}>Events</Link></li>}
+          <li>
+            <Link to="/" className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
+          </li>
+          <li>
+            <Link to={auth.membership_id ? `/epsilon_program_membership/${auth.membership_id}` : '/membership'} className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Membership</Link>
+          </li>
+          <li>
+            <Link to="/storyPage" className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Stories</Link>
+          </li>
+          <li>
+            <Link to="/Blog" className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Blog</Link>
+          </li>
+          <li>
+            <Link to="/Donate" className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Donate</Link>
+          </li>
+          <li>
+            <Link to='/About' className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>About</Link>
+          </li>
+          <li>
+            <Link to='/Quiz' className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Quiz</Link>
+          </li>
+          <li>
+            <Link to='/epsilonMap' className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>EpsilonMap</Link>
+          </li>
+          {auth.isAdmin && (
+            <li>
+              <Link to='/events' className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Events</Link>
+            </li>
+          )}
         </ul>
         {auth.isLoggedIn ? (
           <button onClick={handleLogout} className={`mt-4 text-gray-800 hover:bg-red-500 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ${buttonClass}`}>
@@ -65,7 +85,7 @@ const Navbar = () => {
           </button>
         ) : (
           <div className="mt-4 flex flex-col space-y-2">
-            <Link to="/login" className={`text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ${buttonClass}`}>
+            <Link to="/login" className={`block text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ${buttonClass}`}>
               Log in
             </Link>
             <Link to="/signup" className={buttonClass}>
@@ -76,37 +96,57 @@ const Navbar = () => {
       </nav>
 
       {/* Desktop Menu Content */}
-      <nav className="hidden md:flex flex-wrap justify-between items-center">
+      <nav className="hidden md:flex items-center space-x-6">
         {auth.isLoggedIn && (
-          <div className="flex items-center mb-2">
+          <div className="flex items-center space-x-2">
             <FaRegUser size="1.5em" />
             <span className="ml-2">{auth.username}</span>
           </div>
         )}
         {auth.isLoggedIn && (
-          <div className="flex items-center mb-2">
+          <div className="flex items-center space-x-2">
             <MdCurrencyBitcoin size="1.5em" />
             <span className="ml-2">{auth.userPoints}</span>
           </div>
         )}
-        <ul className="flex flex-wrap justify-between">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to={auth.membership_id ? `/epsilon_program_membership/${auth.membership_id}` : '/membership'}>Membership</Link></li>
-          <li><Link to="/storyPage">Stories</Link></li>
-          <li><Link to="/Blog">Blog</Link></li>
-          <li><Link to="/Donate">Donate</Link></li>
-          <li><Link to='/About'>About</Link></li>
-          <li><Link to='/Quiz'>Quiz</Link></li>
-          <li><Link to='/epsilonMap'>EpsilonMap</Link></li>
-          {auth.isAdmin && <li><Link to='/events'>Events</Link></li>}
+        <ul className="flex space-x-6">
+          <li>
+            <Link to="/" className={`hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Home</Link>
+          </li>
+          <li>
+            <Link to={auth.membership_id ? `/epsilon_program_membership/${auth.membership_id}` : '/membership'} className={`hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === `/epsilon_program_membership/${auth.membership_id}` || window.location.pathname === '/membership' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Membership</Link>
+          </li>
+          <li>
+            <Link to="/storyPage" className={`hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/storyPage' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Stories</Link>
+          </li>
+          <li>
+            <Link to="/Blog" className={`hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/Blog' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Blog</Link>
+          </li>
+          <li>
+            <Link to="/Donate" className={`hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/Donate' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Donate</Link>
+          </li>
+          <li>
+            <Link to='/About' className={`hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/About' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>About</Link>
+          </li>
+          <li>
+            <Link to='/Quiz' className={`hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/Quiz' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Quiz</Link>
+          </li>
+          <li>
+            <Link to='/epsilonMap' className={`hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/epsilonMap' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>EpsilonMap</Link>
+          </li>
+          {auth.isAdmin && (
+            <li>
+              <Link to='/events' className={`hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/events' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Events</Link>
+            </li>
+          )}
         </ul>
         {auth.isLoggedIn ? (
           <button onClick={handleLogout} className={`text-gray-800 hover:bg-red-500 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ${buttonClass}`}>
             Logout
           </button>
         ) : (
-          <div className="flex items-center">
-            <Link to="/login" className={`text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 mr-2 ${buttonClass}`}>
+          <div className="flex space-x-4">
+            <Link to="/login" className={`text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ${buttonClass}`}>
               Log in
             </Link>
             <Link to="/signup" className={buttonClass}>
