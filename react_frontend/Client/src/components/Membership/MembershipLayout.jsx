@@ -123,9 +123,9 @@ const MembershipLayout = () => {
   const textSecondary = theme === 'blue' ? 'text-blue-text-blue' : 'text-dark-text-blue';
   return (
     <div id="card_container" className="relative mx-auto max-w-3xl p-4 mt-20">
-    <div className="pg">
+    {/* <div className="pg">
       <img src="https://th.bing.com/th/id/OIP.y6ZKND2A3XLBHfF8QmkuRgHaHn?rs=1&pid=ImgDetMain" alt="GTA 5 Cris Formage" className="w-full rounded-lg" />
-    </div>
+    </div> */}
     <div id="card" className="relative bg-cover bg-center text-white p-6 rounded-lg shadow-lg">
       <div className="shine absolute inset-0"></div>
       <div className="text-block relative z-10">
@@ -143,9 +143,6 @@ const MembershipLayout = () => {
         </p> */}
         <MembershipDetails {...membershipDetails} />
         <div className="flex flex-wrap gap-2">
-          <button className="bg-transparent border-4 border-white text-white py-2 px-4 rounded hover:bg-blue-800">
-            Watch Trailer
-          </button>
           <button
             onClick={() => updatePoints(membershipDetails.up, membership_id)}
             className="bg-transparent border-4 border-white text-white py-2 px-4 rounded hover:bg-blue-800"
