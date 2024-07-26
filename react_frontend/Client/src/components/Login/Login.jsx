@@ -31,9 +31,9 @@ export default function Login() {
         setAuth(newAuth);
         localStorage.setItem("auth", JSON.stringify(newAuth));
 
-      
-        navigate('/');
+        
         toast.success(isAdmin ? "Admin Login successful" : "Login successful");
+        // navigate('/');
       }
     } catch (error) {
       toast.error(error.response?.data?.error || 'An error occurred. Please try again.');
