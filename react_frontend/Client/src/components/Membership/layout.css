@@ -16,7 +16,7 @@ body {
 }
 #card_container {
   width:700px;
-  height:350px;
+  height:auto;
   position:absolute;
   top:50%;
   left:50%;

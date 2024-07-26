@@ -150,7 +150,7 @@ const MembershipLayout = () => {
 
     <div id="card_container" data-offset="2">
   <div class="pg">
-    <img src="../../assets/images/GTA-5-Cris-Formage" alt="GTA 5 Cris Formage"/>
+    <img src="../../assets/images/GTA-5-Cris-Formage.jpg" alt="GTA 5 Cris Formage"/>
   </div>
   <div id="card">
     <div class="shine"></div>
@@ -162,9 +162,9 @@ const MembershipLayout = () => {
       )}
       <h1>Membership Details <small>(2018)</small></h1>
       <h3>Action | Adventure</h3>
-      <p>
+      {/* <p>
         Arthur Curry learns that he is the heir to the underwater kingdom of Atlantis, and must step forward to lead his people and be a hero to the world.
-      </p>
+      </p> */}
       <MembershipDetails {...membershipDetails} />
       <button>Watch Trailer</button>
       <button
