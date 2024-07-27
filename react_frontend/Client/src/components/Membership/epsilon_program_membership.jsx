@@ -133,7 +133,7 @@ const MembershipLayout = () => {
     if (storedAuth) {
       setAuth(storedAuth);
     }
-  }, [setAuth,auth]);
+  }, [setAuth]);
 
   if (!membershipTier) {
     return <div>Invalid membership ID</div>;
