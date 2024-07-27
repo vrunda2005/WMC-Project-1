@@ -52,7 +52,17 @@ const Navbar = () => {
           <li>
             <Link to="/" className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
           </li>
-          <li>
+          
+          {auth.isAdmin ? (
+            <>
+            
+            <li>
+              <Link to='/events' className="block py-2 px-4 rounded hover:underline hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Events</Link>
+            </li>
+            </>
+          ) : (
+            <>
+             <li>
             <Link to={auth.membership_id ? `/epsilon_program_membership/${auth.membership_id}` : '/membership'} className="block py-2 px-4 rounded hover:underline hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Membership</Link>
           </li>
           <li>
@@ -73,11 +83,11 @@ const Navbar = () => {
           <li>
             <Link to='/epsilonMap' className="block py-2 px-4 rounded  hover:underline hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>EpsilonMap</Link>
           </li>
-          {auth.isAdmin && (
-            <li>
-              <Link to='/events' className="block py-2 px-4 rounded hover:underline hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Events</Link>
-            </li>
-          )}
+            
+            </>
+          )
+        }
+
         </ul>
         {auth.isLoggedIn ? (
           <button onClick={handleLogout} className={`mt-4 text-gray-800 hover:bg-red-500 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ${buttonClass}`}>
@@ -110,10 +120,18 @@ const Navbar = () => {
           </div>
         )}
         <ul className="flex space-x-6">
-          <li>
+        <li>
             <Link to="/" className={` hover:underline hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Home</Link>
           </li>
-          <li>
+          {auth.isAdmin ? (
+            <>
+                <li>
+              <Link to='/events' className={`hover:underline hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/events' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Events</Link>
+            </li>
+            </>
+          ):(
+            <>
+              <li>
             <Link to={auth.membership_id ? `/epsilon_program_membership/${auth.membership_id}` : '/membership'} className={`hover:underline hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === `/epsilon_program_membership/${auth.membership_id}` || window.location.pathname === '/membership' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Membership</Link>
           </li>
           <li>
@@ -134,11 +152,12 @@ const Navbar = () => {
           <li>
             <Link to='/epsilonMap' className={`hover:underline hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/epsilonMap' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>EpsilonMap</Link>
           </li>
-          {auth.isAdmin && (
-            <li>
-              <Link to='/events' className={`hover:underline hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/events' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Events</Link>
-            </li>
-          )}
+            </>
+          )
+        
+        }
+
+
         </ul>
         {auth.isLoggedIn ? (
           <button onClick={handleLogout} className={`text-gray-800 hover:bg-red-500 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ${buttonClass}`}>
