@@ -20,6 +20,7 @@ import StoryPage from './components/stories/storyPage.jsx'
 import EpsilonMap from './components/epsilonMap/EpsilonMap.jsx'
 import Try1 from './components/Membership/try1.jsx'
 import AllUsers from './components/Admin/Alluser.jsx'
+import InquiryForm from './components/InquiryForm/Inquiryform.jsx'
 
 
 
@@ -87,6 +88,10 @@ const router=createBrowserRouter([
       {
         path:"allusers",
         element:<AllUsers/>
+      },
+      {
+        path:"inquiryForm",
+        element:<InquiryForm/>
       }
   
     ]

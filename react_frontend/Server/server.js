@@ -416,5 +416,15 @@ app.post('/stories', async (req, res) => {
   }
 });
 
+app.post('/api/inquiries', (req, res) => {
+  const { name, email, message } = req.body;
+
+  // Add your logic to handle the inquiry, e.g., saving to a database or sending an email
+
+  console.log('Inquiry received:', { name, email, message });
+  res.status(200).json({ success: true });
+});
+
+
 
 app.listen(PORT);
