@@ -51,6 +51,8 @@ const MembershipLayout = () => {
           ...auth,
           username: data.user.name,
           userPoints: data.user.points,
+          membership_id:membership_id,
+        
         });
 
         localStorage.setItem('auth', JSON.stringify(auth));

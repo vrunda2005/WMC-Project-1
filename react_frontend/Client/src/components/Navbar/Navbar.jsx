@@ -12,6 +12,10 @@ const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  useEffect(() => {
+    console.log('Auth state:', auth);
+  }, [auth]);
+
   const handleLogout = () => {
     alert("You have logged out");
     setAuth({ user: null, token: '', isLoggedIn: false });
