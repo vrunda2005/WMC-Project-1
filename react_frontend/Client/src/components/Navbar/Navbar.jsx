@@ -5,6 +5,7 @@ import { MdCurrencyBitcoin } from 'react-icons/md';
 import { useAuth } from '../../creatContext';
 import { useTheme } from '../../usetheamContext';
 import './Navbar.css';
+import { useEffect } from 'react';
 
 const Navbar = () => {
   const navigate = useNavigate();
