@@ -124,7 +124,7 @@ app.post('/login', async (req, res) => {
     // const refreshtoken = jwt.sign({ username: User.name }, 'SECRET_KEY', { expiresIn: '1h' });
     res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'strict' });
     // res.cookie('refreshtoken', refreshtoken, { httpOnly: true, secure: true, sameSite: 'strict' });
-    res.status(200).json({ message: "Login successful", token,username:user.name ,points :user.points,Login:true });
+    res.status(200).json({ message: "Login successful", token,username:user.name,email:user.email ,points :user.points,Login:true });
      } 
     }
 catch (error) {
