@@ -154,59 +154,54 @@ app.get('/getalluser/:username', async (req, res) => {
   res.json(user);
 });
 
-//update membership amount code 
 app.put('/updateuser/:username', async (req, res) => {
   const username = req.params.username;
   const userPoints = req.body.points;
-  const {addPoints} =req.body;
-  const {membership_id} =req.body;
+  const addPoints = Number(req.body.addPoints); // Ensure it's a number
+  const membership_id = Number(req.body.membership_id); // Ensure it's a number
 
-
-  // console.log(typeof membership_id);
   try {
     const user = await User.findOne({ name: username });
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
-    console.log(`Updating user: ${username}, Points: ${userPoints}, AddPoints: ${addPoints}, Membership ID: ${membership_id}`);
 
+    // Validate points based on membership_id
     let errorResponse;
-  
-    if (Number(membership_id) === 1) {
-      if (userPoints < 10) {
-        errorResponse = { error: 'User must have at least 10 points for membership ID 1' };
-      }
-    } else if (Number(membership_id) === 2) {
-      if (userPoints < 20) {
-        errorResponse = { error: 'User must have at least 20 points for membership ID 2' };
-      }
-    } else if (Number(membership_id) === 3) {
-      if (userPoints < 30) {
-        errorResponse = { error: 'User must have at least 30 points for membership ID 3' };
-      }
+    if (membership_id === 1 && userPoints < 10) {
+      errorResponse = { error: 'User must have at least 10 points for membership ID 1' };
+    } else if (membership_id === 2 && userPoints < 20) {
+      errorResponse = { error: 'User must have at least 20 points for membership ID 2' };
+    } else if (membership_id === 3 && userPoints < 30) {
+      errorResponse = { error: 'User must have at least 30 points for membership ID 3' };
     }
-  
+
     if (errorResponse) {
       return res.status(400).json(errorResponse);
-    }else{
-    console.log("goes here");
-    const adminUser = await User.findOne({ name: 'admin' });
-    adminUser.points = adminUser.points + addPoints;
-    await adminUser.save();
-  
-    user.membership_id = membership_id;
-    user.points = req.body.points + addPoints;
-    const updatedUser = await user.save();
-    console.log("last step");
-    res.json({ user: updatedUser, admin: adminUser });
     }
+
+    // Check admin user
+    const adminUser = await User.findOne({ name: 'admin' });
+    if (!adminUser) {
+      return res.status(404).json({ error: 'Admin user not found' });
+    }
+
+    // Update points and membership ID
+    adminUser.points += addPoints;
+    await adminUser.save();
+
+    user.membership_id = membership_id;
+    user.points += addPoints;
+    const updatedUser = await user.save();
+
+    res.json({ user: updatedUser, admin: adminUser });
+
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal error' });
+    console.error('Internal server error:', error); // Detailed error log
+    res.status(500).json({ error: 'Internal server error' });
   }
-
-
 });
+
 
 const donationSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },

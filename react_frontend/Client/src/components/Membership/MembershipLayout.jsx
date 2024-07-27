@@ -5,6 +5,7 @@ import { useTheme } from '../../usetheamContext';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './layout.css'
+import axios from 'axios';
 
 const MembershipDetails = ({ title, description, benefits }) => (
   <div>
