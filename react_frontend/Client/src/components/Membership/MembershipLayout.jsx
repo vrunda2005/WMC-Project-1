@@ -40,11 +40,13 @@ const MembershipLayout = () => {
         const errorResponse = await response.json();
         throw new Error(errorResponse.error);
       } else {
+        console.log(auth);
+        console.log(data);
+
         const data = await response.json();
         setUserData({ ...data.user, membershipStatus: membership_id });
         setAuth({
           ...auth,
-          username: data.user.name,
           userPoints: data.user.points,
         });
 
