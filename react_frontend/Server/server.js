@@ -168,7 +168,8 @@ app.put('/updateuser/:username', async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
-  
+    console.log(`Updating user: ${username}, Points: ${userPoints}, AddPoints: ${addPoints}, Membership ID: ${membership_id}`);
+
     let errorResponse;
   
     if (Number(membership_id) === 1) {
@@ -188,7 +189,7 @@ app.put('/updateuser/:username', async (req, res) => {
     if (errorResponse) {
       return res.status(400).json(errorResponse);
     }else{
-  
+    console.log("goes here");
     const adminUser = await User.findOne({ name: 'admin' });
     adminUser.points = adminUser.points + addPoints;
     await adminUser.save();
@@ -196,6 +197,7 @@ app.put('/updateuser/:username', async (req, res) => {
     user.membership_id = membership_id;
     user.points = req.body.points + addPoints;
     const updatedUser = await user.save();
+    console.log("last step");
     res.json({ user: updatedUser, admin: adminUser });
     }
   } catch (error) {
