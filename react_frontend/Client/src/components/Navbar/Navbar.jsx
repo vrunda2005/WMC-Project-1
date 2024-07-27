@@ -94,6 +94,9 @@ const Navbar = () => {
           <li>
             <Link to='/epsilonMap' className="block py-2 px-4 rounded  hover:underline hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>EpsilonMap</Link>
           </li>
+          <li>
+            <Link to='/inquiryForm' className="block py-2 px-4 rounded  hover:underline hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Inquiry Form </Link>
+          </li>
             
             </>
           )
@@ -172,6 +175,10 @@ const Navbar = () => {
           <li>
             <Link to='/epsilonMap' className={`hover:underline hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/epsilonMap' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>EpsilonMap</Link>
           </li>
+          <li>
+            <Link to='/inquiryForm' className={`hover:underline hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/epsilonMap' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Inquiry Form</Link>
+          </li>
+          
             </>
           )
         
