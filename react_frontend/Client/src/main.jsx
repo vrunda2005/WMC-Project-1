@@ -21,6 +21,7 @@ import EpsilonMap from './components/epsilonMap/EpsilonMap.jsx'
 import Try1 from './components/Membership/try1.jsx'
 import AllUsers from './components/Admin/Alluser.jsx'
 import InquiryForm from './components/InquiryForm/Inquiryform.jsx'
+import AdminInquiries from './components/Admin/AdminInquiries.jsx'
 
 
 
@@ -92,7 +93,12 @@ const router=createBrowserRouter([
       {
         path:"inquiryForm",
         element:<InquiryForm/>
+      },
+      {
+        path:"allinquires",
+        element:<AdminInquiries/>
       }
+      
   
     ]
   }
