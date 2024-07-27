@@ -46,7 +46,7 @@ const MembershipLayout = () => {
         const data = await response.json();
         console.log(auth);
         console.log("data",data);
-        setUserData({ ...data.username, membershipStatus: membership_id });
+        setUserData({ ...data.username, membership_id: membership_id });
         setAuth({
           ...auth,
           username: data.user.name,
