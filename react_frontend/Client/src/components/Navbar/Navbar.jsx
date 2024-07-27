@@ -59,7 +59,14 @@ const Navbar = () => {
             <li>
               <Link to='/events' className="block py-2 px-4 rounded hover:underline hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Events</Link>
             </li>
-            </>
+            
+             <li>
+             <Link to='/admin' className="block py-2 px-4 rounded hover:underline hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Donation Users</Link>
+           </li>
+           <li>
+             <Link to='/allusers' className="block py-2 px-4 rounded hover:underline hover:bg-gray-200 dark:hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Show Users</Link>
+           </li>
+           </>
           ) : (
             <>
              <li>
@@ -125,8 +132,14 @@ const Navbar = () => {
           </li>
           {auth.isAdmin ? (
             <>
-                <li>
+            <li>
               <Link to='/events' className={`hover:underline hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/events' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Events</Link>
+            </li>
+            <li>
+              <Link to='/admin' className={`hover:underline hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/events' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Doantion Users</Link>
+            </li>
+            <li>
+              <Link to='/allusers' className={`hover:underline hover:text-blue-500 dark:hover:text-blue-300 ${window.location.pathname === '/events' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Show Users</Link>
             </li>
             </>
           ):(

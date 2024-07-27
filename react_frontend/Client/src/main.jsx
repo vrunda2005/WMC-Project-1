@@ -11,7 +11,7 @@ import Events from './components/Events/Events.jsx'
 import Blog from './components/Blog/Blog.jsx'
 import { RouterProvider,createBrowserRouter } from 'react-router-dom'
 import Quiz from './components/Quiz/Quiz.jsx'
-import Admin from './components/Admin.jsx'
+import Admin from './components/Admin/Admin.jsx'
 import MembershipPage from './components/Membership/membership_temp.jsx'
 import MembershipLayout from './components/Membership/MembershipLayout.jsx'
 import MembershipTier from './components/Membership/epsilon_program_membership.jsx'
@@ -19,6 +19,7 @@ import { AuthProvider } from './creatContext.jsx'
 import StoryPage from './components/stories/storyPage.jsx'
 import EpsilonMap from './components/epsilonMap/EpsilonMap.jsx'
 import Try1 from './components/Membership/try1.jsx'
+import AllUsers from './components/Admin/Alluser.jsx'
 
 
 
@@ -84,8 +85,8 @@ const router=createBrowserRouter([
         element:<EpsilonMap/>
       },
       {
-        path:"try1",
-        element:<Try1/>
+        path:"allusers",
+        element:<AllUsers/>
       }
   
     ]
