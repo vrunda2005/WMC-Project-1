@@ -14,8 +14,8 @@ const Navbar = () => {
 
   const handleLogout = () => {
     alert("You have logged out");
-    localStorage.removeItem('auth');
     setAuth({ user: null, token: '', isLoggedIn: false });
+    localStorage.removeItem('auth');
     navigate('/login', { replace: true });
   };
 

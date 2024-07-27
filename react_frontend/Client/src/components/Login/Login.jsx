@@ -18,7 +18,7 @@ export default function Login() {
     try {
       const response = await axios.post('https://wmc-project-av5d.onrender.com/login', { email, password });
       if (response.status === 200) {
-        const { username, token, points, isAdmin } = response.data;
+        const { username, token, points, isAdmin ,email} = response.data;
         
         const newAuth = {
           username,
@@ -26,6 +26,7 @@ export default function Login() {
           isLoggedIn: true,
           isAdmin: isAdmin || false,
           points: points,
+          email,
         };
 
         setAuth(newAuth);

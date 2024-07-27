@@ -7,7 +7,7 @@ const AuthProvider = ({ children }) => {
   const initialAuthState = () => {
     const data = localStorage.getItem("auth");
     return data ? JSON.parse(data) 
-    : { username: "", token: "", isLoggedIn: false, isAdmin: false, membership_id: null, userPoints: 0, lastAttempt: null };
+    : { username: "", token: "", isLoggedIn: false, isAdmin: false, membership_id: null, userPoints: 0, lastAttempt: null,email: "" };
   };
 
   const [auth, setAuth] = useState(initialAuthState);
@@ -41,6 +41,9 @@ const AuthProvider = ({ children }) => {
     }
     if (userData?.lastAttempt) {
       setAuth(prevAuth => ({ ...prevAuth, lastAttempt: userData.lastAttempt }));
+    }
+    if (userData?.email) {
+      setAuth(prevAuth => ({ ...prevAuth, email: userData.email }));
     }
   }, [userData]);
 
