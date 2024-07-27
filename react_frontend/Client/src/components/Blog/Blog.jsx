@@ -9,7 +9,7 @@ function Blog() {
   const [auth] = useAuth();
 
   useEffect(() => {
-    axios.get('https://wmc-project-av5d.onrender.com/api/events')
+    axios.get('http://localhost:5000/api/events')
       .then(response => {
         setEvents(response.data || []);
         setLoading(false); // Stop loading after data is fetched
@@ -22,7 +22,7 @@ function Blog() {
   }, []);
 
   const handleRemoveEvent = (eventId, index) => {
-    axios.delete(`https://wmc-project-av5d.onrender.com/api/events/${eventId}`)
+    axios.delete(`http://localhost:5000/api/events/${eventId}`)
       .then(() => {
         const updatedEvents = [...events];
         updatedEvents.splice(index, 1);

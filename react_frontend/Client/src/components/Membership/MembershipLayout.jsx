@@ -27,7 +27,7 @@ const MembershipLayout = () => {
 
   const updatePoints = async (pointsToUpdate, membership_id) => {
     try {
-      const response = await fetch(`https://wmc-project-av5d.onrender.com/updateuser/${auth.username}`, {
+      const response = await fetch(`http://localhost:5000/updateuser/${auth.username}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

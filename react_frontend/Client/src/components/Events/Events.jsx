@@ -13,7 +13,7 @@ function AddEvent() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('https://wmc-project-av5d.onrender.com/api/events', { title, description, date, time, image })
+    axios.post('http://localhost:5000/api/events', { title, description, date, time, image })
       .then(response => {
         alert('Event registered successfully');
         navigate('/Blog');

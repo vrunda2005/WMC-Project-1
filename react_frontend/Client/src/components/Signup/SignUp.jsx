@@ -26,7 +26,7 @@ export default function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://wmc-project-av5d.onrender.com/register", value);
+      const response = await axios.post("http://localhost:5000/register", value);
       console.log(response.data);
       setValue({
         name: "",
