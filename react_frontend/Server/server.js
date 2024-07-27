@@ -206,6 +206,14 @@ app.put('/updateuser/:username', async (req, res) => {
 
 });
 
+const donationSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  amount: { type: Number, required: true },
+  date: { type: Date, default: Date.now },
+});
+
+const Donation = mongoose.model('Donation', donationSchema);
+
 //donate code 
 app.put('/donate/:username', async (req, res) => {
   const username = req.params.username;
@@ -223,7 +231,10 @@ app.put('/donate/:username', async (req, res) => {
     if (user.points < addPoints) {
       return res.status(400).json({ error: 'Insufficient balance' });
     }else{
-
+      await new Donation({
+        userId: user._id,
+        amount: addPoints,
+      }).save();
     
      const adminUser = await User.findOne({ name: 'admin' });
       adminUser.points = adminUser.points + Number(addPoints);
@@ -239,7 +250,22 @@ app.put('/donate/:username', async (req, res) => {
   }
 });
 
+app.get('/total-donations', async (req, res) => {
+  try {
+    const totalDonations = await Donation.aggregate([
+      { $group: { _id: null, total: { $sum: '$amount' } } },
+    ]);
 
+    res.json({ total: totalDonations.length > 0 ? totalDonations[0].total : 0 });
+  } catch (error) {
+    console.error('Error fetching total donations:', error);
+    res.status(500).json({ error: 'Unable to fetch total donations' });
+  }
+});
+
+
+
+//cancel membership 
 app.post('/cancel', async (req, res) => {
   const { userId } = req.body;
 
@@ -273,9 +299,6 @@ app.post('/quizPoints', async (req, res) => {
 });
 
 
-app.get('/display',async(req,res)=>{
-  res.send('ajbajba');
-})
 
 
 // Events

@@ -1,22 +1,19 @@
-import React, { useState ,useEffect} from 'react'
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../creatContext';
 import { useNavigate } from 'react-router-dom';
-import {motion} from 'framer-motion'
+import { motion } from 'framer-motion';
 import { useTheme } from '../../usetheamContext';
 
 function Donate() {
-  const [auth,setAuth]=useAuth();
+  const [auth, setAuth] = useAuth();
   const [userData, setUserData] = useState({});
-  const navigate=useNavigate();
   const [error, setError] = useState(null);
+  const [amount, setAmount] = useState(0);
+  const [totalDonations, setTotalDonations] = useState(0); // State for total donations
+  const navigate = useNavigate();
   const { theme } = useTheme();
 
-
-
-  const [amount ,setAmount]=useState(0);
-
-  // console.log("here is donation ",auth);
-
+  // Fetch user data
   const fetchData = async () => {
     if (auth.username) {
       try {
@@ -29,80 +26,81 @@ function Donate() {
     }
   };
 
+  // Fetch total donations
+  const fetchTotalDonations = async () => {
+    try {
+      const response = await fetch(`https://wmc-project-av5d.onrender.com/total-donations`);
+      const data = await response.json();
+      setTotalDonations(data.total);
+    } catch (error) {
+      console.error('Failed to fetch total donations:', error);
+    }
+  };
+
   useEffect(() => {
     fetchData();
+    fetchTotalDonations(); // Fetch total donations when component mounts
   }, [auth.username]);
 
-  
   useEffect(() => {
     if (auth.username) {
       setAuth({ ...auth, userPoints: userData.points });
     }
   }, [userData.points]);
 
-
-
-  const handleDonate = async()=>{
+  const handleDonate = async () => {
     event.preventDefault();
-          try {
-            console.log(`amount ${amount}`);
+    try {
       const response = await fetch(`https://wmc-project-av5d.onrender.com/donate/${auth.username}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ points: auth.userPoints - amount ,
-                                addPoints : amount,
-
+        body: JSON.stringify({
+          points: auth.userPoints - amount,
+          addPoints: amount,
         }),
       });
-      if(!response.ok){
+      if (!response.ok) {
         const errorResponse = await response.json();
         throw new Error(errorResponse.error);
-      }else{
-      const data = await response.json();
-      // console.log(data);
-      // console.log(data.user);
-      setUserData(data.user);
-      const newAuth = {...auth,
-        username: data.user.name,
-        userPoints: data.user.points,
-      };
-      setAuth(newAuth);
-    
-      localStorage.setItem('auth', JSON.stringify(newAuth));
-      localStorage.setItem('userData', JSON.stringify(data.user));
-      // console.log("updated auth ");
-      // console.log(`Admin points: ${data.admin}`); 
-      navigate(`/`);
-    }
-      
+      } else {
+        const data = await response.json();
+        setUserData(data.user);
+        const newAuth = {
+          ...auth,
+          username: data.user.name,
+          userPoints: data.user.points,
+        };
+        setAuth(newAuth);
+
+        localStorage.setItem('auth', JSON.stringify(newAuth));
+        localStorage.setItem('userData', JSON.stringify(data.user));
+        navigate(`/`);
+        fetchTotalDonations(); // Update total donations after a successful donation
+      }
     } catch (error) {
       setError(error.message);
       console.error(error);
     }
-  }
+  };
 
   // Define theme-based classes
   const bgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
   const textColor = theme === 'blue' ? 'text-blue-light' : 'text-gray-100';
   const buttonColor = theme === 'blue' ? 'bg-blue-600 hover:bg-blue-800' : 'bg-green-600 hover:bg-green-800';
   const overlayColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-gray-800';
-  
+
   return (
     <div className={`relative bg-hero-pattern bg-cover bg-center text-${textColor}`}>
-      <div className={`absolute inset-0 ${overlayColor} bg-opacity-50`} /> {/* Optional overlay for better readability */}
+      <div className={`absolute inset-0 ${overlayColor} bg-opacity-50`} />
 
       {/* Background Decoration */}
       <div className="absolute inset-0 z-0">
-        <svg
-          className="absolute top-0 left-0 w-full h-full"
-          viewBox="0 0 1200 800"
-          fill="none"
-        >
+        <svg className="absolute top-0 left-0 w-full h-full" viewBox="0 0 1200 800" fill="none">
           <circle cx="800" cy="500" r="600" fill="rgba(255, 165, 0, 0.1)" />
           <circle cx="400" cy="300" r="400" fill="rgba(255, 255, 255, 0.05)" />
         </svg>
       </div>
-      
+
       {/* Main Content */}
       <div className="relative z-10 p-6 md:p-12">
         {/* Header Section */}
@@ -136,6 +134,12 @@ function Donate() {
               • $2,000: "Beacon of Enlightenment"<br />
               • $10,000: "Ultimate Believer - Guaranteed Enlightenment"
             </p>
+
+            <div className="text-center mb-6">
+              <h3 className={`text-2xl font-semibold ${textColor}`}>
+                Total Accumulated Donations: ${totalDonations}
+              </h3>
+            </div>
 
             <div className="flex flex-wrap justify-center -mx-4 mb-6">
               <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
