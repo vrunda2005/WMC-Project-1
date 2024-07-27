@@ -264,6 +264,43 @@ app.get('/total-donations', async (req, res) => {
 });
 
 
+app.get('/user-donations', async (req, res) => {
+  try {
+    // Aggregate donations grouped by user
+    const userDonations = await Donation.aggregate([
+      { 
+        $group: {
+          _id: '$userId', // Group by userId
+          totalDonations: { $sum: '$amount' } // Calculate total donations for each user
+        }
+      },
+      {
+        $lookup: {
+          from: 'users', // Name of the collection for User model
+          localField: '_id',
+          foreignField: '_id',
+          as: 'user'
+        }
+      },
+      { $unwind: '$user' }, // Unwind the user array to get individual user documents
+      {
+        $project: {
+          _id: 0, // Exclude the _id field
+          username: '$user.name', // Include username
+          totalDonations: 1 // Include total donations
+        }
+      }
+    ]);
+
+    res.json({ userDonations });
+  } catch (error) {
+    console.error('Error fetching user donations:', error);
+    res.status(500).json({ error: 'Unable to fetch user donations' });
+  }
+});
+
+
+
 
 //cancel membership 
 app.post('/cancel', async (req, res) => {
