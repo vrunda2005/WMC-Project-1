@@ -129,9 +129,23 @@ function Donate() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
+            {auth.isLoggedIn ? (<>
             <h2 className={`text-3xl font-semibold mb-4 text-center ${textColor}`}>
               Dear {auth.username}!
             </h2>
+            </>):(
+              <div className="mt-2 text-center mb-12">
+              <h2 className={`text-2xl font-bold mb-4`}>Sign in to Donate</h2>
+              <p className="text-gray-600">Please sign in to donate and contribute to our community.</p>
+              <button
+                className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg mt-4"
+                onClick={() => {
+                  navigate(`/Login`);
+                }}
+              >
+                Sign In
+              </button>
+            </div>)}
             {error && <p className="text-red-500 text-center mb-4">{error}</p>}
             {showThankYou ? ( // Display thank you message if donation is successful
               <div className={`text-lg mb-6 text-center ${textColor}`}>
@@ -144,9 +158,9 @@ function Donate() {
                   Your donation will help us level up our resources and support our community.<br />
                   "Support the Epsilon Program - Your donations help us spread the truth and enlighten more souls."<br />
                   Donation Levels:<br />
-                  • $500: "Seeker of Truth"<br />
-                  • $2,000: "Beacon of Enlightenment"<br />
-                  • $10,000: "Ultimate Believer - Guaranteed Enlightenment"
+                  • $50: "Seeker of Truth"<br />
+                  • $100: "Beacon of Enlightenment"<br />
+                  • $500: "Ultimate Believer - Guaranteed Enlightenment"
                 </p>
 
                 <div className="text-center mb-6">
@@ -154,6 +168,8 @@ function Donate() {
                     Total Accumulated Donations: ${totalDonations}
                   </h3>
                 </div>
+
+                {auth.isLoggedIn ? (<>
 
                 <div className="flex flex-wrap justify-center -mx-4 mb-6">
                   <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
@@ -211,6 +227,7 @@ function Donate() {
                     Donate Now
                   </motion.button>
                 </form>
+                </>):(<></>)}
               </>
             )}
           </motion.div>

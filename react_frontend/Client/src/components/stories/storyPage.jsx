@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../creatContext';
 import { useTheme } from '../../usetheamContext';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const StoryPage = () => {
   const [stories, setStories] = useState([]);
   const [newStory, setNewStory] = useState('');
   const [auth] = useAuth();
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
   axios.defaults.withCredentials=true;
 
 
@@ -24,7 +26,7 @@ const StoryPage = () => {
       } catch (error) {
         console.error('Error fetching stories:', error);
       } finally {
-        setLoading(false); // Stop loading
+        setLoading(false);
       }
     };
 
@@ -65,44 +67,63 @@ const StoryPage = () => {
   return (
     <div className={`bg-opacity-70 ${textPrimary} ${overlay} max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8`}>
 
-      <div className="mt-8">
-        <h2 className={`text-2xl font-bold mb-4 ${textSecondary}`}>Add Your Story</h2>
-        <textarea
-          className="w-full p-4 border rounded-lg mb-4"
-          rows="5"
-          placeholder="Share your story..."
-          value={newStory}
-          onChange={(e) => setNewStory(e.target.value)}
-        />
+    {auth.isLoggedIn ? (
+      <>
+        <div className="mt-8">
+          <h2 className={`text-2xl font-bold mb-4 ${textSecondary}`}>Add Your Story</h2>
+          <textarea
+            className="w-full p-4 border rounded-lg mb-4"
+            rows="5"
+            placeholder="Share your story..."
+            value={newStory}
+            onChange={(e) => setNewStory(e.target.value)}
+          />
+          <button
+            className="bg-orange-700 hover:bg-orange-800 text-white font-medium py-2 px-4 rounded-lg"
+            onClick={handleAddStory}
+          >
+            Submit Story
+          </button>
+        </div>
+      </>
+    ) : (
+      <div className="mt-8 text-center">
+        <h2 className={`text-2xl font-bold mb-4 ${textSecondary}`}>Sign in to Add Your Story</h2>
+        <p className="text-gray-600">Please sign in to share your story and contribute to our community.</p>
         <button
-          className="bg-orange-700 hover:bg-orange-800 text-white font-medium py-2 px-4 rounded-lg"
-          onClick={handleAddStory}
+          className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg mt-4"
+          onClick={() => {
+            navigate(`/Login`);
+          }}
         >
-          Submit Story
+          Sign In
         </button>
       </div>
+    )}
 
       
-      <h1 className="text-3xl font-bold text-center mb-8">Stories</h1>
 
-      {loading ? (
-        <div className="text-center py-8">
-          <div className="spinner-border text-orange-600 mb-4" role="status">
-            <span className="visually-hidden">Loading...</span>
+      
+    <h1 className="mt-12 text-3xl font-bold text-center mb-8">Stories</h1>
+
+    {loading ? (
+      <div className="text-center py-8">
+        <div className="spinner-border text-orange-600 mb-4" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+        <p>Loading stories...</p>
+      </div>
+    ) : (
+      <div className="space-y-4">
+        {stories.map((story) => (
+          <div key={story._id} className="bg-white p-6 rounded-lg shadow-md">
+            <h2 className="text-xl font-bold mb-2">{story.username}</h2>
+            <p className="text-gray-700 mb-2">{story.story}</p>
+            <p className="text-gray-500 text-sm">{new Date(story.date).toLocaleString()}</p>
           </div>
-          <p>Loading stories...</p>
-        </div>
-      ) : (
-        <div className="space-y-4">
-          {stories.map((story) => (
-            <div key={story._id} className="bg-white p-6 rounded-lg shadow-md">
-              <h2 className="text-xl font-bold mb-2">{story.username}</h2>
-              <p className="text-gray-700 mb-2">{story.story}</p>
-              <p className="text-gray-500 text-sm">{new Date(story.date).toLocaleString()}</p>
-            </div>
-          ))}
-        </div>
-      )}
+        ))}
+      </div>
+    )}
 
     </div>
   );

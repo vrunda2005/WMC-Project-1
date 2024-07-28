@@ -28,13 +28,29 @@ function MembershipPage() {
     return (
       <div className={`container mx-auto px-4 py-8 md:px-8 md:py-7 lg:px-12 lg:py-16 ${overlay} ` }>
         <div className="text-center mb-12">
+        {auth.isLoggedIn ? (<>
           <h1 className={`text-4xl font-bold mb-4 marke text-white `}>Join the Epsilon Program</h1>
           <h2 className={`text-3xl font-semibold text-white mb-4`}>
-            Welcome, {auth.username ? auth.username : 'Guest'}
+            Welcome, {auth.username ? auth.username : ''}
           </h2>
           <p className={`text-lg text-white`}>
             Choose your membership level and start your journey to happiness and freedom from thoughts!
           </p>
+        </>):(<>
+          <h1 className="text-4xl font-bold mb-4 marke text-white">Join the Epsilon Program</h1>
+          <h2 className="text-3xl font-semibold text-white mb-4">Become a Member</h2>
+          <p className="text-lg text-white">
+            Please sign in to access membership options and start your journey to happiness and freedom from thoughts!
+          </p>
+          <button
+            className="mb-12 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg mt-4"
+            onClick={() => {
+              navigate(`/Login`)
+            }}
+          >
+            Sign In
+          </button>
+        </>)}
         </div>
   
         <div className="flex flex-col md:flex-row md:flex-wrap justify-center gap-8 md:gap-10 lg:gap-12 mb-12">
@@ -53,7 +69,9 @@ function MembershipPage() {
               <li>Limited access to events (e.g., online webinars).</li>
             </ul>
             <Link to={`/MembershipLayout/${1}`}>
-              <button className={`w-full py-2 px-4 ${buttonBgColorBasic} text-white rounded-lg focus:ring-4 focus:ring-blue-300`}>
+            <button
+            disabled={!auth.isLoggedIn}
+            className={`w-full py-2 px-4 text-white rounded-lg  ${buttonBgColorBasic} ${auth.isLoggedIn ?  'focus:ring-4 focus:ring-blue-300' : 'text-gray-500 cursor-not-allowed'}`}>
                 Read More Basic
               </button>
             </Link>
@@ -75,7 +93,9 @@ function MembershipPage() {
               <li>Exclusive access to Epsilon Program's inner circle (e.g., private Facebook group).</li>
             </ul>
             <Link to={`/MembershipLayout/${2}`}>
-              <button className={`w-full py-2 px-4 ${buttonBgColorPremium} text-white rounded-lg focus:ring-4 focus:ring-indigo-300`}>
+            <button
+            disabled={!auth.isLoggedIn}
+            className={`w-full py-2 px-4 text-white rounded-lg  ${buttonBgColorBasic} ${auth.isLoggedIn ?  'focus:ring-4 focus:ring-blue-300' : 'text-gray-500 cursor-not-allowed'}`}>
                 Read More Premium
               </button>
             </Link>
@@ -87,7 +107,7 @@ function MembershipPage() {
             <h3 className={`text-xl font-semibold text-center mb-4 ${textPrimary}`}>Elite Membership</h3>
             <div className="flex items-center justify-center mb-4">
             <h2 className={`text-4xl font-bold ${theme === 'blue' ? 'text-blue-highlight' : 'text-dark-highlight'}`}>$30</h2>
-            <span className="text-sm ml-2">per month</span>
+            <span className="text-sm ml-2 text-black">per month</span>
             </div>
             <p className={`text-lg font-semibold mb-4 ${textPrimary}`}>Elite membership</p>
             <ul className={`list-disc list-inside mb-4 text-sm ${textPrimary}`}>
@@ -97,8 +117,10 @@ function MembershipPage() {
               <li>VIP access to exclusive events (e.g., private meetings with Epsilon Program leaders).</li>
             </ul>
             <Link to={`/MembershipLayout/${3}`}>
-            <button className={`w-full py-2 px-4 ${buttonBgColorBasic} text-white rounded-lg focus:ring-4 focus:ring-blue-300`}>
-            Read More Elite
+            <button
+            disabled={!auth.isLoggedIn}
+            className={`w-full py-2 px-4 text-white rounded-lg  ${buttonBgColorBasic} ${auth.isLoggedIn ?  'focus:ring-4 focus:ring-blue-300' : 'text-gray-500 cursor-not-allowed'}`}>
+                Read More Elite
               </button>
             </Link>
             {auth.userPoints && <p className={`text-center mt-4 ${textPrimary}`}>Your Points: {auth.userPoints}</p>}
