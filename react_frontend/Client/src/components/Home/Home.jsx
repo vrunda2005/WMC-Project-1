@@ -115,11 +115,11 @@ function Home() {
 
       {/* Five Upcoming Events Section */}
       <div className={upcomingEventsClass}>
-        <h2 className="text-3xl font-bold mb-6 p-4 bg-white rounded-lg text-center">Upcoming Events</h2>
+        <h2 className="text-black text-3xl font-bold mb-6 p-4 bg-white rounded-lg text-center">Upcoming Events</h2>
         {loading ? (
           <p>Loading events...</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-screen-xl m-auto">
+          <div className="text-black grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-screen-xl m-auto">
             {upcomingEvents.map((event, index) => (
               <div key={index} className="bg-white shadow-md rounded-lg p-4">
                 <img src={event.image} alt={event.title} className="w-full h-60 object-cover mb-2"/>
@@ -133,11 +133,11 @@ function Home() {
 
       {/* Last Five Stories Section */}
       <div className={latestStoriesClass}>
-        <h2 className="text-3xl font-bold mb-6 p-4 bg-gray-100 rounded-lg text-center">Latest Stories</h2>
+        <h2 className="text-black text-3xl font-bold mb-6 p-4 bg-gray-100 rounded-lg text-center">Latest Stories</h2>
         {loading ? (
           <p>Loading stories...</p>
         ) : (
-          <div className="space-y-4 max-w-screen-xl m-auto">
+          <div className="text-black space-y-4 max-w-screen-xl m-auto">
             {lastFiveStories.map((story) => (
               <div key={story._id} className="h-40 overflow-scroll bg-white p-6 rounded-lg shadow-md">
                 <h2 className="text-xl font-bold mb-2">{story.username}</h2>
