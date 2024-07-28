@@ -157,13 +157,13 @@ function Quiz() {
   };
 
   return (
-    <div className={`${containerBgColor} h-[100vh] border`}>
-      <div className={`${sectionBgColor} mt-10 max-h-screen border ${textPrimaryColor} border-blue-400 w-[666px] mx-auto p-6 rounded-xl py-10`}>
+    <div className={`${containerBgColor} min-h-screen flex justify-center items-center`}>
+      <div className={`${sectionBgColor} border ${textPrimaryColor} border-blue-400 w-full max-w-lg mx-auto p-6 rounded-xl py-10`}>
         {acceptedTerms ? (
           canTakeQuiz ? (
             result ? (
               <>
-                <h2 className="mt-10 text-lg">
+                <h2 className="text-center text-lg mt-4">
                   You scored <span className="font-semibold text-2xl">{score}</span> out of {randomQuestions.length}
                 </h2>
                 <button
@@ -175,50 +175,50 @@ function Quiz() {
               </>
             ) : (
               <>
-                <h2 className="mt-10 text-xl">
+                <h2 className="text-center text-xl">
                   {index + 1}. {question.question}
                 </h2>
                 <ul className="mt-8 flex flex-col gap-2">
-                  <li ref={option1} onClick={(e) => checkAns(e, 1)} className="border-[1px] p-2 ml-8 hover:cursor-pointer">
+                  <li ref={option1} onClick={(e) => checkAns(e, 1)} className="border-[1px] p-2 mx-4 hover:cursor-pointer">
                     {question.option1}
                   </li>
-                  <li ref={option2} onClick={(e) => checkAns(e, 2)} className="border-[1px] p-2 ml-8 hover:cursor-pointer">
+                  <li ref={option2} onClick={(e) => checkAns(e, 2)} className="border-[1px] p-2 mx-4 hover:cursor-pointer">
                     {question.option2}
                   </li>
-                  <li ref={option3} onClick={(e) => checkAns(e, 3)} className="border-[1px] p-2 ml-8 hover:cursor-pointer">
+                  <li ref={option3} onClick={(e) => checkAns(e, 3)} className="border-[1px] p-2 mx-4 hover:cursor-pointer">
                     {question.option3}
                   </li>
-                  <li ref={option4} onClick={(e) => checkAns(e, 4)} className="border-[1px] p-2 ml-8 hover:cursor-pointer">
+                  <li ref={option4} onClick={(e) => checkAns(e, 4)} className="border-[1px] p-2 mx-4 hover:cursor-pointer">
                     {question.option4}
                   </li>
                 </ul>
                 <button onClick={next} className={`bg-blue-200 block mx-auto w-28 mt-8 p-2 rounded-lg ${buttonHoverBgColor} transition-all`}>
                   Next
                 </button>
-                <div className="mt-4 text-sm">
+                <div className="text-center mt-4 text-sm">
                   {index + 1} of {randomQuestions.length} questions
                 </div>
               </>
             )
           ) : (
-            <div className="mt-10 text-lg">
+            <div className="text-center text-lg">
               <h2>You have already taken the quiz. Please come back after 24 hours.</h2>
               <p>Time remaining: {formatRemainingTime(remainingTime)}</p>
               <button
                 onClick={() => setAcceptedTerms(false)}
-                className="mt-12 text-sm hover:font-bold transition-all flex items-center"
+                className="mt-12 text-sm hover:font-bold transition-all flex items-center justify-center"
               >
                 <svg
-                  width="20"  // Adjust the size as needed
-                  height="20"  // Adjust the size as needed
+                  width="20"
+                  height="20"
                   viewBox="0 0 512 512"
                   xmlns="http://www.w3.org/2000/svg"
+                  className="mr-2"
                 >
                   <polygon points="352,128.4 319.7,96 160,256 160,256 160,256 319.7,416 352,383.6 224.7,256" />
                 </svg>
                 Back to Terms
               </button>
-
             </div>
           )
         ) : (
@@ -230,3 +230,4 @@ function Quiz() {
 }
 
 export default Quiz;
+
