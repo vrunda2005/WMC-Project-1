@@ -15,9 +15,9 @@ function Donate() {
   const { theme } = useTheme();
 
   const fetchData = async () => {
-    if (auth.username) {
+    if (auth.email) {
       try {
-        const response = await fetch(`http://localhost:5000/getalluser/${auth.username}`);
+        const response = await fetch(`http://localhost:5000/getalluser/${auth.email}`);
         const data = await response.json();
         setUserData(data);
       } catch (error) {
@@ -55,7 +55,7 @@ function Donate() {
     }
     setError(null);
     try {
-      const response = await fetch(`http://localhost:5000/donate/${auth.username}`, {
+      const response = await fetch(`http://localhost:5000/donate/${auth.email}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

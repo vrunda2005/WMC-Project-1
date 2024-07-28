@@ -16,6 +16,8 @@ function Home() {
 
 
   useEffect(() => {
+    setLoading(true);
+
     axios.get('http://localhost:5000/api/events')
       .then(response => {
         const sortedEvents = response.data.sort((a, b) => new Date(a.date) - new Date(b.date));

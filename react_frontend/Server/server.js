@@ -5,7 +5,6 @@ import cors from 'cors';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
-import session from 'express-session';
 
 
 
@@ -16,11 +15,12 @@ const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI;
 const SECRET_KEY = process.env.SECRET_KEY;
 
+// Allow requests from your client origin
 app.use(cors({
-  origin: process.env.CLIENT_ORIGIN,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  headers: ['Content-Type', 'Authorization'],
-  credentials: true
+  origin: process.env.CLIENT_ORIGIN,  // Make sure this matches your client URL exactly
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: 'Content-Type, Authorization',
+  credentials: true,
 }));
 app.use(express.json());
 app.use(cookieParser());
@@ -145,23 +145,23 @@ app.get('/getallusers', async (req, res) => {
 });
 
 //find one particular user 
-app.get('/getalluser/:username', async (req, res) => {
-  const username = req.params.username;
-  const user = await User.findOne({ name: username });
+app.get('/getalluser/:email', async (req, res) => {
+  const email = req.params.email;
+  const user = await User.findOne({ email: email });
   if (!user) {
     return res.status(404).json({ error: 'User not found' });
   }
   res.json(user);
 });
 
-app.put('/updateuser/:username', async (req, res) => {
-  const username = req.params.username;
+app.put('/updateuser/:email', async (req, res) => {
+  const email = req.params.email;
   const userPoints = req.body.points;
   const addPoints = Number(req.body.addPoints); // Ensure it's a number
   const membership_id = Number(req.body.membership_id); // Ensure it's a number
 
   try {
-    const user = await User.findOne({ name: username });
+    const user = await User.findOne({ email: email });
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
@@ -218,7 +218,7 @@ app.put('/donate/:username', async (req, res) => {
   const {addPoints} =req.body;
 
   try {
-    const user = await User.findOne({ name: username });
+    const user = await User.findOne({ email: username });
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
