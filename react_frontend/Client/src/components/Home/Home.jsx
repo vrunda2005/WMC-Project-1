@@ -12,6 +12,9 @@ function Home() {
   const [loading, setLoading] = useState(true);
   const { theme } = useTheme();
 
+  axios.defaults.withCredentials = true;
+
+
   useEffect(() => {
     axios.get('http://localhost:5000/api/events')
       .then(response => {
