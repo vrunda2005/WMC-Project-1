@@ -10,6 +10,7 @@ function Donate() {
   const [error, setError] = useState(null);
   const [amount, setAmount] = useState(0);
   const [totalDonations, setTotalDonations] = useState(0);
+  const [showThankYou, setShowThankYou] = useState(false); // State for thank you message
   const navigate = useNavigate();
   const { theme } = useTheme();
 
@@ -76,7 +77,7 @@ function Donate() {
         setAuth(newAuth);
         localStorage.setItem('auth', JSON.stringify(newAuth));
         localStorage.setItem('userData', JSON.stringify(data.user));
-        navigate(`/`);
+        setShowThankYou(true); // Show thank you message
         fetchTotalDonations();
       }
     } catch (error) {
@@ -89,6 +90,10 @@ function Donate() {
     setAmount(amount);
     setError(null);
   };
+
+  const goHome = () => {
+    navigate(`/`);
+  }
 
   const bgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
   const textColor = theme === 'blue' ? 'text-blue-light' : 'text-gray-100';
@@ -128,77 +133,86 @@ function Donate() {
               Dear {auth.username}!
             </h2>
             {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-            <p className={`text-lg mb-6 text-center ${textColor}`}>
-              Your donation will help us level up our resources and support our community.<br />
-              "Support the Epsilon Program - Your donations help us spread the truth and enlighten more souls."<br />
-              Donation Levels:<br />
-              • $500: "Seeker of Truth"<br />
-              • $2,000: "Beacon of Enlightenment"<br />
-              • $10,000: "Ultimate Believer - Guaranteed Enlightenment"
-            </p>
-
-            <div className="text-center mb-6">
-              <h3 className={`text-2xl font-semibold ${textColor}`}>
-                Total Accumulated Donations: ${totalDonations}
-              </h3>
-            </div>
-
-            <div className="flex flex-wrap justify-center -mx-4 mb-6">
-              <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
-                <motion.button
-                  className={`text-white font-bold py-2 px-4 rounded shadow-md ${buttonColor}`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => handleButtonClick(50)}
-                >
-                  $50
-                </motion.button>
+            {showThankYou ? ( // Display thank you message if donation is successful
+              <div className={`text-lg mb-6 text-center ${textColor}`}>
+                <p>Thank you for your generous donation! Your support helps us continue our mission.</p>
+                <button onClick={goHome} className='mt-16 hover:text-gray-500 transition-all'>Go to home</button>
               </div>
-              <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
-                <motion.button
-                  className={`text-white font-bold py-2 px-4 rounded shadow-md ${buttonColor}`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => handleButtonClick(100)}
-                >
-                  $100
-                </motion.button>
-              </div>
-              <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
-                <motion.button
-                  className={`text-white font-bold py-2 px-4 rounded shadow-md ${buttonColor}`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => handleButtonClick(500)}
-                >
-                  $500
-                </motion.button>
-              </div>
-            </div>
+            ) : (
+              <>
+                <p className={`text-lg mb-6 text-center ${textColor}`}>
+                  Your donation will help us level up our resources and support our community.<br />
+                  "Support the Epsilon Program - Your donations help us spread the truth and enlighten more souls."<br />
+                  Donation Levels:<br />
+                  • $500: "Seeker of Truth"<br />
+                  • $2,000: "Beacon of Enlightenment"<br />
+                  • $10,000: "Ultimate Believer - Guaranteed Enlightenment"
+                </p>
 
-            <form className={`max-w-md mx-auto p-4 pt-6 ${bgColor} rounded-lg shadow-md`}>
-              <label className="block mb-4">
-                <h1 className={`text-lg mb-4 ${textColor}`}>Custom Donation Amount:</h1>
-                <input 
-                  type="number" 
-                  className="w-full p-2 text-sm text-gray-300 border border-gray-600 rounded" 
-                  onChange={(e) => setAmount(e.target.value)}
-                  value={amount}
-                  id="donation-amount"
-                />
-              </label>
-              <motion.button
-                className={`text-white font-bold py-2 px-4 rounded shadow-md w-full ${buttonColor}`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleDonate(amount);
-                }}
-              >
-                Donate Now
-              </motion.button>
-            </form>
+                <div className="text-center mb-6">
+                  <h3 className={`text-2xl font-semibold ${textColor}`}>
+                    Total Accumulated Donations: ${totalDonations}
+                  </h3>
+                </div>
+
+                <div className="flex flex-wrap justify-center -mx-4 mb-6">
+                  <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
+                    <motion.button
+                      className={`text-white font-bold py-2 px-4 rounded shadow-md ${buttonColor}`}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => handleButtonClick(50)}
+                    >
+                      $50
+                    </motion.button>
+                  </div>
+                  <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
+                    <motion.button
+                      className={`text-white font-bold py-2 px-4 rounded shadow-md ${buttonColor}`}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => handleButtonClick(100)}
+                    >
+                      $100
+                    </motion.button>
+                  </div>
+                  <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
+                    <motion.button
+                      className={`text-white font-bold py-2 px-4 rounded shadow-md ${buttonColor}`}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => handleButtonClick(500)}
+                    >
+                      $500
+                    </motion.button>
+                  </div>
+                </div>
+
+                <form className={`max-w-md mx-auto p-4 pt-6 ${bgColor} rounded-lg shadow-md`}>
+                  <label className="block mb-4">
+                    <h1 className={`text-lg mb-4 ${textColor}`}>Custom Donation Amount:</h1>
+                    <input 
+                      type="number" 
+                      className="w-full p-2 text-sm text-gray-300 border border-gray-600 rounded" 
+                      onChange={(e) => setAmount(e.target.value)}
+                      value={amount}
+                      id="donation-amount"
+                    />
+                  </label>
+                  <motion.button
+                    className={`text-white font-bold py-2 px-4 rounded shadow-md w-full ${buttonColor}`}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleDonate(amount);
+                    }}
+                  >
+                    Donate Now
+                  </motion.button>
+                </form>
+              </>
+            )}
           </motion.div>
         </section>
       </div>
