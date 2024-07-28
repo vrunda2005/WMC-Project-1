@@ -4,6 +4,7 @@ import { ReactTyped } from "react-typed";
 import { useTheme } from '../../usetheamContext';
 import axios from 'axios';
 import moment from 'moment';
+import './Home.css'; // If you still need custom styles
 
 function Home() {
   const [auth] = useAuth();
@@ -11,9 +12,9 @@ function Home() {
   const [stories, setStories] = useState([]);
   const [loading, setLoading] = useState(true);
   const { theme } = useTheme();
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   axios.defaults.withCredentials = true;
-
 
   useEffect(() => {
     setLoading(true);
@@ -37,36 +38,57 @@ function Home() {
   const upcomingEvents = events.slice(0, 3);
   const lastFiveStories = stories.slice(0, 5);
 
-  const goals = [
-    "We are making an assault on happiness.",
-    "We will be generous, in ways that are upwards and ways that are manifest.",
-    "We will live by the proven scientific truth of the metaphors.",
-    "We will fight superstition, limited thinking and dogma wherever we find it.",
-    "We will be clear thinking, independent minded and do exactly what we are told.",
-    "We will practice science by not doubting.",
-    "We will display infinite power by closing out those with doubt with our life choices.",
-    "We will practice kindness and mercy by a relentless assault on insavables, always reminding them of what awaits.",
-    "We will be everywhere, all at once, but also right here, right now.",
-    "We will invest in a structured study program, because we know that knowledge is not free.",
-    "We will be open minded to new experiences apart from those that are wrong, insavable, or against teachings.",
-    "We will promote epsilonism in everything we do, while we await both the writing of the tract and the ending of the 9th paradigm.",
+  const storyStyles = [
+    "bg-yellow-300 rotate-2",
+    "bg-pink-200 -rotate-1",
+    "bg-blue-200 rotate-1",
+    "bg-green-200 -rotate-2",
+    "bg-purple-200 rotate-3",
   ];
 
   const containerClass = `max-w-[800px] mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center items-center ${theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light'}`;
   const sectionClass = `w-full py-16 px-4 ${theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg'} text-white`;
   const goalItemClass = `flex items-center mb-2 animate-fadeIn ${theme === 'blue' ? 'bg-blue-highlight' : 'bg-dark-highlight'} rounded-lg shadow-md p-4 md:p-6 lg:p-8`;
-
   const upcomingEventsClass = `py-16 px-4 ${theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg'} text-white`;
   const latestStoriesClass = `py-16 px-4 ${theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg'} text-white`;
 
+  const handleNextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % upcomingEvents.length);
+  };
+
+  const handlePrevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + upcomingEvents.length) % upcomingEvents.length);
+  };
+
   return (
     <div className={`${theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg'}`}>
+      {/* Five Upcoming Events Section */}
+      <div className={upcomingEventsClass}>
+        <h2 className="text-black text-3xl font-bold mb-6 p-4 bg-white rounded-lg text-center">Upcoming Events</h2>
+        {loading ? (
+          <p>Loading events...</p>
+        ) : (
+          <div className="relative text-black max-w-screen-xl m-auto">
+            <div className="overflow-hidden">
+              <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
+                {upcomingEvents.map((event, index) => (
+                  <div key={index} className="bg-white shadow-md rounded-lg p-4 w-full min-w-full">
+                    <img src={event.image} alt={event.title} className="w-full h-60 object-cover mb-2"/>
+                    <h3 className="text-xl font-bold">{event.title}</h3>
+                    <p>{moment(event.date).format('DD MMMM YYYY')}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <button onClick={handlePrevSlide} className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 rounded-full p-2 shadow-lg focus:outline-none">&#8249;</button>
+            <button onClick={handleNextSlide} className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 rounded-full p-2 shadow-lg focus:outline-none">&#8250;</button>
+          </div>
+        )}
+      </div>
+      
       <div className={containerClass}>
         <div className='container opacity-80 bg-white'>
           <p className='md:text-5xl sm:text-4xl font-bold md:py-6'>
-            Hi user: {auth.username}<br/>
-            Membership ID: {auth.membership_id}<br/>
-            Your points: {auth.userPoints}<br/>
             Now here we implement our home page!!!
           </p>
           <ReactTyped
@@ -106,45 +128,15 @@ function Home() {
         </div>
       </div>
 
-      <div className="flex flex-col justify-center bg-secondary-bg p-8 gap-8 md:p-12 lg:p-16">
-        <h1 className="text-3xl font-bold text-center mb-4 md:text-4xl lg:text-5xl">Epsilonism Goals</h1>
-        <ul className="list-none mb-4">
-          {goals.map((goal, index) => (
-            <li key={index} className={goalItemClass}>
-              <span className="text-lg font-bold">{`${index + 1}. `}</span>
-              <span className="text-lg">{goal}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Five Upcoming Events Section */}
-      <div className={upcomingEventsClass}>
-        <h2 className="text-black text-3xl font-bold mb-6 p-4 bg-white rounded-lg text-center">Upcoming Events</h2>
-        {loading ? (
-          <p>Loading events...</p>
-        ) : (
-          <div className="text-black grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-screen-xl m-auto">
-            {upcomingEvents.map((event, index) => (
-              <div key={index} className="bg-white shadow-md rounded-lg p-4">
-                <img src={event.image} alt={event.title} className="w-full h-60 object-cover mb-2"/>
-                <h3 className="text-xl font-bold">{event.title}</h3>
-                <p>{moment(event.date).format('DD MMMM YYYY')}</p>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Last Five Stories Section */}
+      {/* Last Five Stories Section with Sticky Notes Style */}
       <div className={latestStoriesClass}>
         <h2 className="text-black text-3xl font-bold mb-6 p-4 bg-gray-100 rounded-lg text-center">Latest Stories</h2>
         {loading ? (
           <p>Loading stories...</p>
         ) : (
-          <div className="text-black space-y-4 max-w-screen-xl m-auto">
-            {lastFiveStories.map((story) => (
-              <div key={story._id} className="h-40 overflow-scroll bg-white p-6 rounded-lg shadow-md">
+          <div className="relative flex flex-wrap justify-center gap-4 max-w-screen-xl m-auto">
+            {lastFiveStories.map((story, index) => (
+              <div key={story._id} className={`relative h-auto w-96 p-4 rounded-lg shadow-md text-black ${storyStyles[index % storyStyles.length]} ${index % 2 === 0 ? 'rotate-2' : '-rotate-2'} hover:shadow-xl transition-transform transform hover:scale-105`}>
                 <h2 className="text-xl font-bold mb-2">{story.username}</h2>
                 <p className="text-gray-700 mb-2">{story.story}</p>
                 <p className="text-gray-500 text-sm">{new Date(story.date).toLocaleString()}</p>
@@ -153,7 +145,6 @@ function Home() {
           </div>
         )}
       </div>
-      
     </div>
   );
 }

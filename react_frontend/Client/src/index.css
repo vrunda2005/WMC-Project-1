@@ -1,4 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap'); */
+/* @import url('https://fonts.adobe.com/fonts/gyst-variable'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Josefin+Sans&family=Tektur:wght@500&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Josefin+Sans&family=Just+Me+Again+Down+Here&family=Tektur:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Josefin+Sans&family=Just+Me+Again+Down+Here&family=Teko:wght@300..700&family=Tektur:wght@400..900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Josefin+Sans&family=Just+Me+Again+Down+Here&family=Teko:wght@300..700&family=Tektur:wght@400..900&display=swap');
+
 
 @tailwind base;
 @tailwind components;
@@ -8,7 +14,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: "Tektur", sans-serif;
 }
 
 /* Apply the Poppins font family globally */
