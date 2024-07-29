@@ -10,39 +10,39 @@ const MembershipTier = ({ tier, benefits, profileLink, newsLink, message, onCanc
   const textSecondary = theme === 'blue' ? 'text-blue-text-blue' : 'text-dark-text-blue';
   
   return (
-<div class="container">
-    <div class="codrops-top clearfix">
-    <h1 className="text-4xl font-bold mb-8 text-center">HI Congratulations</h1>
+    <div className={`min-h-screen ${containerBgColor} ${textPrimary} p-10`}>
+          <div class="codrops-top clearfix">
+          <h1 className="text-4xl font-bold mb-8 text-center">HI Congratulations</h1>
 
-        <span class="righ text-2xl">On choosing Epsilon Program Membership</span>
-        
-    </div>
+              <span class="righ text-2xl">On choosing Epsilon Program Membership</span>
+              
+          </div>
 
-    <section class=" col-2 ss-style-triangles">
-    <h1 className="text-4xl font-bold mb-8 text-center">{tier} Membership Benefits</h1>
+          <section class=" col-2 ss-style-triangles">
+          <h1 className="text-4xl font-bold mb-8 text-center">{tier} Membership Benefits</h1>
 
-        <div class="column text">
-        {/* <h1 className="text-4xl font-bold mb-8 text-center">Epsilon Program Membership</h1> */}
-        <ul className="list-disc pl-6 text-muted mb-6">
-        {benefits.map((benefit, index) => (
-          <li key={index} className="mb-2">{benefit}</li>
-        ))}
-      </ul>
-        </div>
-        <div class="column">
-          <img className='w-[300px] h-[300px] mx-auto my-4 rounded-full animate-pulse' src="https://i.ytimg.com/vi/4pPNTzlfxsk/maxresdefault.jpg" alt="img" />
-        </div>
-    </section>
+              <div class="column text">
+              {/* <h1 className="text-4xl font-bold mb-8 text-center">Epsilon Program Membership</h1> */}
+              <ul className="list-disc pl-6 text-muted mb-6">
+              {benefits.map((benefit, index) => (
+                <li key={index} className="mb-2">{benefit}</li>
+              ))}
+            </ul>
+              </div>
+              <div class="column">
+                <img className='w-[300px] h-[300px] mx-auto my-4 rounded-full animate-pulse' src="https://i.ytimg.com/vi/4pPNTzlfxsk/maxresdefault.jpg" alt="img" />
+              </div>
+          </section>
     
-  <section class="color">
-  <h1 className="text-4xl font-bold mb-8 text-center">News and Updates</h1>
-  <p className="mb-6">Stay informed about the latest developments in the {tier} program, including new content, events, and initiatives.</p>
+        <section class="color">
+        <h1 className="text-4xl font-bold mb-8 text-center">News and Updates</h1>
+        <p className="mb-6">Stay informed about the latest developments in the {tier} program, including new content, events, and initiatives.</p>
 
-    
-  </section>
+          
+        </section>
 
-  <section class="col-3 ss-style-doublediagonal">
-    <div class="column">
+  <section class="col-3">
+ 
     <ul className="list-none pl-0 mb-6">
           <li>
             <a href={newsLink} className="text-highlight hover:text-accent">
@@ -56,7 +56,6 @@ const MembershipTier = ({ tier, benefits, profileLink, newsLink, message, onCanc
         <a href={profileLink} className="text-highlight hover:text-accent">View Profile</a>
 
 
-    </div>    
   </section>
 
 
@@ -68,7 +67,7 @@ const MembershipTier = ({ tier, benefits, profileLink, newsLink, message, onCanc
     {message}
     </div>
     <button
-          className={`bg-blue-text-dark hover:bg-red-500 ${textPrimary} font-bold py-2 px-4 rounded-lg transition-all`}
+          className={`bg-blue-text-dark hover:bg-red-500 ${textPrimary}  font-bold py-2 px-4 rounded-lg transition-all`}
           onClick={onCancelMembership}
         >
           Cancel Membership
@@ -180,7 +179,7 @@ const MembershipLayout = () => {
         <MembershipTier {...membershipTier} onCancelMembership={handleCancelMembership} />
       )}
     
-<section class="col-3 ss-style-slit">
+<section class="col-3 t">
   <div class="column">
   About the Epsilon Program
   <p className="mb-6">

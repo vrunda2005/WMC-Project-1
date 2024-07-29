@@ -9,7 +9,7 @@ export default {
     extend: {
       colors: {
         blue: {
-          'primary-bg': '#7dd3fc',       // Deep blue for background to ensure readability
+          'primary-bg': '#0284c7',       // Deep blue for background to ensure readability
           'secondary-bg': '#0ea5e9',     // Lighter blue for sections, good contrast with text
           'highlight': '#60A5FA',        // Bright blue for call-to-action elements
           'overlay': 'rgba(15,23,42,.5)', // Blue overlay for contrast

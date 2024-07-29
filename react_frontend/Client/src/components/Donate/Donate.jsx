@@ -96,9 +96,9 @@ function Donate() {
   }
 
   const bgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
-  const textColor = theme === 'blue' ? 'text-blue-light' : 'text-gray-100';
-  const buttonColor = theme === 'blue' ? 'bg-blue-600 hover:bg-blue-800' : 'bg-green-600 hover:bg-green-800';
-  const overlayColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-gray-800';
+  const textColor = theme === 'blue' ? 'text-blue-text-light' : 'text-blue-text-dark';
+  const buttonColor = theme === 'blue' ? 'bg-blue-600 hover:bg-green-800' : 'bg-green-600 hover:bg-green-800';
+  const overlayColor = theme === 'blue' ? 'bg-blue-overlay' : 'bg-gray-800';
 
   return (
     <div className={`relative bg-hero-pattern bg-cover bg-center text-${textColor}`}>
@@ -114,7 +114,7 @@ function Donate() {
       <div className="relative z-10 p-6 md:p-12">
         <header className="text-center py-12">
           <motion.h1
-            className={`text-5xl font-bold mb-4 ${textColor}`}
+            className={`text-5xl font-bold mb-4 text-white`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
