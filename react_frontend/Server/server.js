@@ -457,5 +457,38 @@ app.get('/admin/inquiries', async (req, res) => {
   }
 });
 
+const registrationSchema = new mongoose.Schema({
+  eventId: { type: mongoose.Schema.Types.ObjectId, ref: 'Event', required: true },
+  eventName: { type: String, required: true }, // Add this line
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  phone: { type: String }
+});
+
+const Registration = mongoose.model('Registration', registrationSchema);
+
+app.post('/api/eventRegister', async (req, res) => {
+  const { eventId, eventName, name, email, phone } = req.body;
+
+  if (!eventId || !eventName || !name || !email) {
+    return res.status(400).json({ error: 'All fields are required' });
+  }
+
+  try {
+    const newRegistration = new Registration({
+      eventId,
+      eventName, // Save event name
+      name,
+      email,
+      phone,
+    });
+
+    const savedRegistration = await newRegistration.save();
+    res.status(201).json(savedRegistration);
+  } catch (error) {
+    console.error('Error saving registration:', error);
+    res.status(500).json({ error: 'Failed to register' });
+  }
+});
 
 app.listen(PORT);

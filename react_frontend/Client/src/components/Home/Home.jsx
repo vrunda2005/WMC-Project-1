@@ -4,7 +4,6 @@ import { ReactTyped } from "react-typed";
 import { useTheme } from '../../usetheamContext';
 import axios from 'axios';
 import moment from 'moment';
-// import './Home.css'; // If you still need custom styles
 
 function Home() {
   const [auth] = useAuth();
@@ -21,10 +20,12 @@ function Home() {
 
     axios.get('http://localhost:5000/api/events')
       .then(response => {
-        const sortedEvents = response.data.sort((a, b) => new Date(a.date) - new Date(b.date));
-        setEvents(sortedEvents || []);
+        const today = moment().startOf('day');
+        const upcomingEvents = response.data.filter(event => moment(event.date).isAfter(today));
+        const sortedEvents = upcomingEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
+        setEvents(sortedEvents);
       })
-      .catch(error => console.error(error));
+      .catch(error => console.error(error))
 
     axios.get('http://localhost:5000/stories')
       .then(response => {
@@ -35,8 +36,9 @@ function Home() {
       .finally(() => setLoading(false));
   }, []);
 
-  const upcomingEvents = events.slice(0, 3);
+  const upcomingEvents = events.slice(0, 5);
   const lastFiveStories = stories.slice(0, 5);
+  const today = moment().format('YYYY-MM-DD');
 
   const storyStyles = [
     "bg-yellow-300 rotate-2",
@@ -72,16 +74,19 @@ function Home() {
             <div className="overflow-hidden">
               <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
                 {upcomingEvents.map((event, index) => (
-                  <div key={index} className="bg-white shadow-md rounded-lg p-4 w-full min-w-full">
+                  <div key={index} className="relative bg-white shadow-md rounded-lg p-2 w-full min-w-full">
                     <img src={event.image} alt={event.title} className="w-full h-60 object-cover mb-2"/>
                     <h3 className="text-xl font-bold">{event.title}</h3>
                     <p>{moment(event.date).format('DD MMMM YYYY')}</p>
+                    {moment(event.date).format('YYYY-MM-DD') === today && (
+                      <div className="absolute top-2 right-2 bg-red-500 text-white text-sm px-2 py-1 rounded">Current Event</div>
+                    )}
                   </div>
                 ))}
               </div>
             </div>
-            <button onClick={handlePrevSlide} className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 rounded-full p-2 shadow-lg focus:outline-none">&#8249;</button>
-            <button onClick={handleNextSlide} className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 rounded-full p-2 shadow-lg focus:outline-none">&#8250;</button>
+            <button onClick={handlePrevSlide} className="absolute top-[45%] -left-10 bg-transparent duration-200 scale-110 hover:scale-150">&#8249;</button>
+            <button onClick={handleNextSlide} className="absolute top-[45%] -right-10 bg-transparent duration-200 scale-110 hover:scale-150">&#8250;</button>
           </div>
         )}
       </div>

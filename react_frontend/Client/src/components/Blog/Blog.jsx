@@ -2,42 +2,54 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../creatContext';
 import moment from 'moment';
+import EventRegistrationForm from './RegistrationForm'; // Import the new component
 
 function Blog() {
   const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true);
+  const [selectedEvent, setSelectedEvent] = useState(null); // State for the selected event
   const [auth] = useAuth();
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/events')
       .then(response => {
         setEvents(response.data || []);
-        setLoading(false); // Stop loading after data is fetched
+        setLoading(false);
       })
       .catch(error => {
         console.error(error);
         alert('Error loading events: ' + error.message);
-        setLoading(false); // Stop loading on error
+        setLoading(false);
       });
   }, []);
 
-  const handleRemoveEvent = (eventId, index) => {
-    axios.delete(`http://localhost:5000/api/events/${eventId}`)
-      .then(() => {
-        const updatedEvents = [...events];
-        updatedEvents.splice(index, 1);
-        setEvents(updatedEvents);
-      })
-      .catch(error => {
-        console.error(error);
-        alert('Error deleting event: ' + error.message);
-      });
+  const handleRegister = (event) => {
+    setSelectedEvent(event); // Set the event for which the registration form should open
+  };
+
+  const handleRemoveEvent = (id) => {
+    if (window.confirm('Are you sure you want to remove this event?')) {
+      axios.delete(`http://localhost:5000/api/events/${id}`)
+        .then(() => {
+          setEvents(events.filter(event => event._id !== id));
+        })
+        .catch(error => {
+          console.error('Error removing event:', error);
+          alert('Error removing event: ' + error.message);
+        });
+    }
   };
 
   const currentDate = moment();
 
-  const upcomingEvents = events.filter(event => moment(event.date).isSameOrAfter(currentDate));
-  const pastEvents = events.filter(event => moment(event.date).isBefore(currentDate));
+  // Sorting upcoming events (ascending) and past events (descending)
+  const upcomingEvents = events
+    .filter(event => moment(event.date).isSameOrAfter(currentDate))
+    .sort((a, b) => moment(a.date) - moment(b.date));
+
+  const pastEvents = events
+    .filter(event => moment(event.date).isBefore(currentDate))
+    .sort((a, b) => moment(b.date) - moment(a.date));
 
   const renderEvent = (event, index) => (
     <div
@@ -55,12 +67,21 @@ function Blog() {
           <div>
             <p className="mb-2">{event.description}</p>
             <p>{event.time}</p>
-            {auth.isAdmin && (
+            {auth.isAdmin ? (<>
               <button
-                onClick={() => handleRemoveEvent(event._id, index)}
-                className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+              onClick={() => handleRemoveEvent(event._id)}
+              className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+            >
+              Remove Event
+            </button>
+            </>):(<></>)}
+            
+            {moment(event.date).isSameOrAfter(currentDate) && (
+              <button
+                onClick={() => handleRegister(event)}
+                className="mt-4 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
               >
-                Remove Event
+                Register
               </button>
             )}
           </div>
@@ -75,7 +96,10 @@ function Blog() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h2 className="text-3xl font-bold mb-8">Events</h2>
+      {auth.isAdmin ? (<></>):(<>
+        <h2 className="text-3xl font-bold mb-8 text-center">Events</h2>
+      </>)}
+      <hr className='mb-12' />
       {loading ? (
         <div className="text-center py-8">
           <div className="spinner-border text-orange-600 mb-4" role="status">
@@ -86,26 +110,33 @@ function Blog() {
       ) : (
         <>
           <div className="mb-8">
-            <h3 className="text-2xl font-bold mb-4">Upcoming Events</h3>
+            <h3 className="text-2xl font-bold mb-4 text-center">Upcoming Events</h3>
             {upcomingEvents.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {upcomingEvents.map(renderEvent)}
               </div>
             ) : (
-              <p className="text-gray-600">No upcoming events found.</p>
+              <p className="text-gray-600 text-center">No upcoming events found.</p>
             )}
           </div>
           <div>
-            <h3 className="text-2xl font-bold mb-4">Past Events</h3>
+            <h3 className="text-2xl font-bold mb-4 text-center">Past Events</h3>
             {pastEvents.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {pastEvents.map(renderEvent)}
               </div>
             ) : (
-              <p className="text-gray-600">No past events found.</p>
+              <p className="text-gray-600 text-center">No past events found.</p>
             )}
           </div>
         </>
+      )}
+      {selectedEvent && (
+        <EventRegistrationForm
+          isOpen={Boolean(selectedEvent)}
+          onClose={() => setSelectedEvent(null)}
+          event={selectedEvent}
+        />
       )}
     </div>
   );

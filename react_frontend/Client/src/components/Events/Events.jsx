@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useAuth } from '../../creatContext';
 import { useNavigate } from 'react-router-dom';
+import Blog from '../Blog/Blog';
 
-function AddEvent() {
+function Events() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [image, setImage] = useState('');
+  const [auth] = useAuth();
   const navigate = useNavigate();
   axios.defaults.withCredentials=true;
 
@@ -25,7 +28,9 @@ function AddEvent() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-4 pt-6 pb-8 mb-4 bg-white rounded shadow-md">
+    <>
+    {auth.isadmin ? (<>
+    <div className="max-w-md mx-auto p-4 pt-6 pb-8 mb-4 mt-4 bg-white rounded shadow-md">
       <h2 className="text-2xl font-bold mb-4">Add New Event</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -87,8 +92,17 @@ function AddEvent() {
           Add Event
         </button>
       </form>
+
     </div>
+    <Blog />
+    </>):(<>
+      <div className='text-center'>
+        <h1 className='mt-20 text-5xl bg-red-500 text-yellow-500 p-4'>You are in wrong direnction !!</h1>
+        <h1 className='mt-20 mb-20 text-5xl bg-red-500 text-yellow-500 p-4'>Please go back to <a className='text-6xl text-blue-500 underline' href="/">home</a>. It can be dangerous !!!</h1>
+      </div>
+    </>)}
+    </>
   );
 };
 
-export default AddEvent;
+export default Events;
