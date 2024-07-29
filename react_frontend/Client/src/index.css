@@ -80,7 +80,8 @@ p {
 /* Button styles */
 button {
   font-family: 'Tektur', sans-serif;
-  background-color: var(--accent-color); /* Accent color for buttons */
+  background-color: var(--accent-color);
+   /* Accent color for buttons */
   color: var(--text-color);
   border: none;
   padding: 0.5rem 1rem;

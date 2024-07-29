@@ -4,12 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../creatContext';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useTheme } from '../../usetheamContext';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
+  const {theme}=useTheme();
 
   axios.defaults.withCredentials = true;
 
@@ -41,16 +43,25 @@ export default function Login() {
     }
   };
 
+  
+  const containerBgColor = theme === 'blue' ? 'bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700' : 'bg-gradient-to-r from-gray-800 via-gray-900 to-black';
+  const overlayColor = theme === 'blue' ? 'bg-blue-light bg-opacity-50' : 'bg-gray-900 bg-opacity-50';
+  const sectionBgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
+  const textPrimaryColor = theme === 'blue' ? 'text-blue-text-blue': 'text-dark-text-blue';
+  const textSecondaryColor = theme === 'blue' ? 'text-blue-text-dark' : 'text-dark-text-dark';
+  const buttonBgColor = theme === 'blue' ? 'bg-green-500' : 'bg-yellow-500';
+  const buttonHoverBgColor = theme === 'blue' ? 'hover:bg-green-600' : 'hover:bg-yellow-600';
+
   return (
-    <div className="h-[540px] flex justify-center items-center bg-gray-100">
-      <div className="max-w-md h-fit w-full p-6 bg-white rounded shadow-md">
-        <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
+    <div className={`h-[540px] flex justify-center items-center ${overlayColor} `}>
+      <div className={`max-w-md h-fit w-full p-6 ${containerBgColor} rounded shadow-md`}>
+        <form className={`flex flex-col gap-2`} onSubmit={handleSubmit}>
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/4/47/Epsilon_Program_Logo.png"
-            className="h-36 shadow-sm"
+            className={`h-36 shadow-sm`}
             alt="Logo"
           />
-          <h2 className="text-5xl font-bold mt-2 mb-8 text-center">Log In</h2>
+          <h2 className={`text-5xl font-bold mt-2 mb-8 text-center`}>Log In</h2>
           <h1>Welcome, {auth.username ? auth.username : 'Guest'}</h1>
           <input
             type="email"
@@ -59,9 +70,9 @@ export default function Login() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full p-2 pl-5 text-sm text-gray-700 border border-gray-300 rounded"
+            className={`w-full p-2 pl-5 text-sm text-gray-700 border border-gray-300 rounded`}
           />
-
+  
           <input
             type="password"
             placeholder="Password"
@@ -69,22 +80,25 @@ export default function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full p-2 pl-5 text-sm text-gray-700 border border-gray-300 rounded mt-4"
+            className={`w-full p-2 pl-5 text-sm text-gray-700 border border-gray-300 rounded mt-4`}
           />
-
+  
           <button
             type="submit"
-            className="w-full bg-orange-500 hover:bg-orange-600 transition-all text-white font-bold py-2 px-4 rounded mt-4"
+            className={`w-full bg-orange-500 hover:bg-orange-600 transition-all text-white font-bold py-2 px-4 rounded mt-4`}
           >
             Log In
           </button>
-
-          <h4 className='mt-4 text-center'>
-            Don't have an account? <a href='\signup' className='text-blue-500 font-bold hover:cursor-pointer hover:text-blue-400 transition-all'>Sign Up</a>
+  
+          <h4 className={`mt-4 text-center`}>
+            Don&apos;t have an account?{' '}
+            <a href='\signup' className={`text-blue-500 font-bold hover:cursor-pointer hover:text-blue-400 transition-all`}>
+              Sign Up
+            </a>
           </h4>
         </form>
       </div>
       <ToastContainer />
     </div>
   );
-}
+}  
