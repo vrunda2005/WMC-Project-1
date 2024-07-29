@@ -26,11 +26,13 @@ export default {
           'secondary-bg': '#1E293B',     // Slightly lighter dark color for sections
           'highlight': '#3B82F6',        // Vibrant blue for highlights and calls-to-action
           'overlay': 'rgba(15, 23, 42, 0.5)', // Dark overlay for contrast
-          'text-light': '#E0F2FE',       // Light blue text color for readability on dark backgrounds
-          'text-blue': '#60A5FA',        // Light blue for text
-          'text-dark': '#1E293B',        // Dark text color for light backgrounds
-          'accent': '#2563EB',           // Bright blue for accents
-          'muted': '#4B5563',            // Muted grayish blue for less important text
+
+          'text-light': '#FFFFFF',       // Light blue text color for readability on dark backgrounds
+          'text-blue': '#E0FFFF',        // Light blue for text
+          'text-dark': '#FFD700',        // Dark text color for light backgrounds
+          'accent': '#98FF98',           // Bright blue for accents
+
+          'muted': '#D3D3D3',            // Muted grayish blue for less important text
           'success': '#48BB78',          // Green color for success messages
           'error': '#F87171',            // Red color for error messages
         },

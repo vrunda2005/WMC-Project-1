@@ -13,7 +13,7 @@ function TermsAndConditions({ onAccept }) {
   };
 
   return (
-    <div className="terms-and-conditions bg-gray-100 p-6 rounded-lg shadow-lg">
+    <div className="terms-and-conditions  p-6 rounded-lg shadow-lg">
       <h1 className="text-2xl font-bold mb-4">Terms and Conditions</h1>
       <p className="mb-4">Please read the terms and conditions carefully before taking the quiz.</p>
       <ul className="list-disc list-inside mb-4">
@@ -195,7 +195,7 @@ function Quiz() {
                       {question.option4}
                     </li>
                   </ul>
-                  <button onClick={next} className={`bg-blue-200 block mx-auto w-28 mt-8 p-2 rounded-lg ${buttonHoverBgColor} transition-all`}>
+                  <button onClick={next} className={` block mx-auto w-28 mt-8 p-2 rounded-lg ${buttonHoverBgColor} transition-all`}>
                     Next
                   </button>
                   <div className="mt-4 text-sm">

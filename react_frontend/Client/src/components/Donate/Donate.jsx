@@ -96,12 +96,14 @@ function Donate() {
   }
 
   const bgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
-  const textColor = theme === 'blue' ? 'text-blue-text-light' : 'text-blue-text-dark';
-  const buttonColor = theme === 'blue' ? 'bg-blue-600 hover:bg-green-800' : 'bg-green-600 hover:bg-green-800';
-  const overlayColor = theme === 'blue' ? 'bg-blue-overlay' : 'bg-gray-800';
+  const textColor = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
+  const buttonColor = theme === 'blue' ? 'bg-green-600 hover:bg-green-800' : 'bg-green-600 hover:bg-green-800';
+  const overlayColor = theme === 'blue' ? 'bg-blue-overlay' : 'bg-dark-overlay';
 
   return (
-    <div className={`relative bg-hero-pattern bg-cover bg-center text-${textColor}`}>
+    <div className={`${bgColor} `}>
+    {/* //         <div className={` mt-10 max-h-screen  mx-auto p-6 rounded-xl py-10  `}> */}
+    <div className={`relative bg-center text-${textColor}  `}>
       <div className={`absolute inset-0 ${overlayColor} bg-opacity-50`} />
 
       <div className="absolute inset-0 z-0">
@@ -119,11 +121,11 @@ function Donate() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
           >
-            Support the Epsilon Program
+            <h1>Support the Epsilon Program</h1>
           </motion.h1>
         </header>
 
-        <section className={`max-w-4xl mx-auto my-12 ${bgColor} p-8 rounded-lg shadow-lg relative`}>
+        <section className={`max-w-4xl mx-auto my-12 ${bgColor} p-8 rounded-lg shadow-lg relative border`}>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -234,6 +236,8 @@ function Donate() {
         </section>
       </div>
     </div>
+    </div>
+
   );
 }
 

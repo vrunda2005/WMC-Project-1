@@ -14,13 +14,13 @@ const App = () => {
     <AuthProvider>
       
        {/* <div className='bg-hero-pattern bg-cover bg-center text-text-light' > */}
-        {/* <div className="absolute inset-1 bg-overlay"></div> Optional overlay for better readability */}
+        <div className="page-background">
       <ThemeProvider>
             <Navbar/>
             <Outlet />
             <Footer />
       </ThemeProvider>
-      {/* </div> */}
+      </div>
     </AuthProvider>
   )
 }

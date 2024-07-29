@@ -1,6 +1,7 @@
 // src/components/InquiryForm.js
 import React, { useState, useContext } from 'react';
 import { useAuth } from '../../creatContext';
+import { useTheme } from '../../usetheamContext';
 
 const InquiryForm = () => {
   const [auth,setAuth] = useAuth();
@@ -8,6 +9,7 @@ const InquiryForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const {theme}=useTheme();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,10 +33,19 @@ const InquiryForm = () => {
     }
   };
 
+  const containerBgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
+  const sectionBgColor = theme === 'blue' ? 'bg-blue-secondary-bg' : 'bg-dark-secondary-bg';
+  const textPrimaryColor = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
+  const buttonHoverBgColor = theme === 'blue' ? 'hover:bg-blue-accent' : 'hover:bg-dark-accent';
+
   return (
-    <div className="max-w-lg mx-auto p-6 bg-gray-800 text-white rounded-lg shadow-lg">
+
+    <div className={`max-w-lg mx-auto p-6 text-white rounded-lg shadow-lg ${containerBgColor} `}>
       {auth.isLoggedIn ? (
       <>
+            <div className={`${containerBgColor}   border`}>
+            <div className={` mt-10 max-h-screen  mx-auto p-6 rounded-xl py-10  `}>
+
         <h2 className="text-2xl font-bold mb-4">Inquiry Form</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -60,12 +71,14 @@ const InquiryForm = () => {
           {successMessage && <p className="text-green-500 mt-2">{successMessage}</p>}
           {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
         </form>
+        </div>
+        </div>
       </>):(
-        <div className="mt-2 text-center mb-12">
-        <h2 className={`text-2xl font-bold mb-4`}>Sign in to continue</h2>
+        <div className="m-6 text-center mb-12 border ">
+        <h2 className={`text-2xl font-bold mb-4 p-6`}>Sign in to continue</h2>
         <p className="text-gray-600">Please sign in to inquiry and contribute to our community.</p>
         <button
-          className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg mt-4"
+          className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg m-4"
           onClick={() => {
             navigate(`/Login`);
           }}

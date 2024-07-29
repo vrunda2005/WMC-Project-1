@@ -4,7 +4,7 @@ import { ReactTyped } from "react-typed";
 import { useTheme } from '../../usetheamContext';
 import axios from 'axios';
 import moment from 'moment';
-import './Home.css'; // If you still need custom styles
+// import './Home.css'; // If you still need custom styles
 
 function Home() {
   const [auth] = useAuth();
