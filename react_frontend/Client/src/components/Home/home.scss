@@ -71,9 +71,12 @@ body {
   &:nth-child(3) {
     background: url(../../assets/images/bg.png);
   }
+  &:nth-child(4) {
+    background: url(../../assets/images/bg.png);
+  }
 
   &:last-child {
-    background: url(../../assets/images/CAR3.0.jpeg);
+    background: url(../../assets/images/bg.png);
   }
 }
 
