@@ -107,7 +107,7 @@ export default function App() {
               <button 
                 type="button"
                 onClick={handleShowPassword} 
-                className={`border w-10 rounded mt-4 p-1`}
+                className={`border w-7 rounded mt-4 p-1`}
               >
                 {showPassword ? <RiEye2Fill />
  : <RiEyeCloseFill/>}
