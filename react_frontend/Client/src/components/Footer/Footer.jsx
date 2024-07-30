@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { useTheme } from '../../usetheamContext';
+import './Footer.css'
 
 export default function Footer() {
 

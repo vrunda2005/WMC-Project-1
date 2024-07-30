@@ -1,0 +1,139 @@
+$parallax-offset: 30vh;
+$content-offset: 40vh;
+$transition-speed: 1.2s;
+$slide-number: 3;
+
+@mixin transition($time, $property: all, $easing: ease-in) {
+  transition: $property $time $easing !important;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+}
+
+html,
+body {
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 1.5rem;
+}
+
+.app {
+  justify-content: center;
+  display: flex;
+}
+
+.section {
+  @include transition($transition-speed, all, cubic-bezier(0.22, 0.44, 0, 1));
+
+  backface-visibility: hidden;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh + $parallax-offset;
+  overflow: hidden;
+  position: fixed;
+  transform: translateY($parallax-offset);
+  width: 100%;
+  will-change: transform;
+
+  &::before {
+    background-color: rgba(0, 0, 0, 0.3);
+    bottom: 0;
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  &:first-child {
+    background: url(../../assets/images/Epsilon_bg.png);
+    transform: translateY(-$parallax-offset / 2);
+
+    .parallax-wrapper {
+      transform: translateY($parallax-offset / 2);
+    }
+  }
+
+  &:nth-child(2) {
+    background: url(../../assets/images/CrisFormage-GTAV.png);
+  }
+  &:nth-child(3) {
+    background: url(../../assets/images/bg.png);
+  }
+
+  &:last-child {
+    background: url(../../assets/images/CAR3.0.jpeg);
+  }
+}
+
+@for $i from 1 to ($slide-number + 1) {
+  .section:nth-child(#{$i}) {
+    z-index: ($slide-number + 1) - $i;
+  }
+}
+
+.parallax {
+  &-wrapper {
+    @include transition(
+      $transition-speed + 0.5,
+      all,
+      cubic-bezier(0.22, 0.44, 0, 1)
+    );
+
+    backface-visibility: hidden;
+    color: #fff;
+    display: flex;
+    flex-flow: column nowrap;
+    height: 50vh;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    transform: translateY($content-offset);
+    will-change: transform;
+  }
+}
+
+.section.up-scroll {
+  transform: translate3d(0, -$parallax-offset / 2, 0);
+
+  .parallax-wrapper {
+    transform: translateY($parallax-offset / 2);
+  }
+
+  + .section {
+    transform: translate3d(0, $parallax-offset, 0);
+
+    .parallax-wrapper {
+      transform: translateY($parallax-offset);
+    }
+  }
+}
+
+.section.down-scroll {
+  transform: translate3d(0, -(100vh + $parallax-offset), 0);
+
+  .parallax-wrapper {
+    transform: translateY($content-offset);
+  }
+
+  + .section:not(.down-scroll) {
+    transform: translate3d(0, -$parallax-offset / 2, 0);
+
+    .parallax-wrapper {
+      transform: translateY($parallax-offset / 2);
+    }
+  }
+}
+
