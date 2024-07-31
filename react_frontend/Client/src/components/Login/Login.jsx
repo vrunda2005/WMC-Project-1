@@ -5,6 +5,8 @@ import { useAuth } from '../../creatContext';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTheme } from '../../usetheamContext';
+import Swal from 'sweetalert2';
+
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -34,12 +36,24 @@ export default function Login() {
         setAuth(newAuth);
         localStorage.setItem("auth", JSON.stringify(newAuth));
 
+        await Swal.fire({
+          title: 'Success!',
+          text: isAdmin ? "Admin Login successful" : "Login successful",
+          icon: 'success',
+          confirmButtonText: 'OK'
+        })
+            navigate('/');
         
-        toast.success(isAdmin ? "Admin Login successful" : "Login successful");
-        navigate('/');
+        
       }
     } catch (error) {
-      toast.error(error.response?.data?.error || 'An error occurred. Please try again.');
+      console.error('Error:', error);
+      await Swal.fire({
+        title: 'Error!',
+        text: error.response?.data?.error || 'An error occurred. Please try again.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
     }
   };
 

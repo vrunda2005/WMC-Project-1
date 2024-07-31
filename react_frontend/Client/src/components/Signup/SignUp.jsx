@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useTheme } from "../../usetheamContext";
 import { RiEye2Fill } from "react-icons/ri";
 import { RiEyeCloseFill } from "react-icons/ri";
+import Swal from 'sweetalert2';
 
 
 
@@ -38,18 +39,30 @@ export default function App() {
         email: "",
         password: "",
       });
-      toast.success("Account created successfully!");
+      await Swal.fire({
+        title: 'Success!',
+        text: 'Account created successfully!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
     } catch (err) {
+      let errorMessage = 'An error occurred';
       if (err.response) {
         // Handle server errors
-        toast.error(`Error ${err.response.status}: ${err.response.data.message || 'An error occurred'}`);
+        errorMessage=(`Error ${err.response.status}: ${err.response.data.message || 'An error occurred'}`);
       } else if (err.request) {
         // Handle no response errors
-        toast.error('No response received from the server');
+        errorMessage=('No response received from the server');
       } else {
         // Handle request setup errors
-        toast.error('Error setting up the request');
+        errorMessage=('Error setting up the request');
       }
+      await Swal.fire({
+        title: 'Error!',
+        text: errorMessage,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
     }
   };
 

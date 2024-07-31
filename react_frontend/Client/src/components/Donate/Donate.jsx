@@ -3,6 +3,7 @@ import { useAuth } from '../../creatContext';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useTheme } from '../../usetheamContext';
+import Swal from 'sweetalert2'
 
 function Donate() {
   const [auth, setAuth] = useAuth();
@@ -50,7 +51,12 @@ function Donate() {
   const handleDonate = async (donationAmount) => {
     event.preventDefault();
     if (donationAmount <= 0) {
-      setError("Please enter a valid amount.");
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please enter a valid amount.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
       return;
     }
     setError(null);
@@ -77,11 +83,25 @@ function Donate() {
         setAuth(newAuth);
         localStorage.setItem('auth', JSON.stringify(newAuth));
         localStorage.setItem('userData', JSON.stringify(data.user));
+
+        await Swal.fire({
+          title: 'Thank You!',
+          text: 'Your donation was successful!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+  
         setShowThankYou(true); // Show thank you message
         fetchTotalDonations();
       }
     } catch (error) {
       setError(error.message);
+      await Swal.fire({
+        title: 'Error!',
+        text: error.message,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
       console.error(error);
     }
   };
@@ -151,7 +171,7 @@ function Donate() {
             {error && <p className="text-red-500 text-center mb-4">{error}</p>}
             {showThankYou ? ( // Display thank you message if donation is successful
               <div className={`text-lg mb-6 text-center ${textColor}`}>
-                <p>Thank you for your generous donation! Your support helps us continue our mission.</p>
+                <p className={`${textColor}`}> Thank you for your generous donation! Your support helps us continue our mission.</p>
                 <button onClick={goHome} className='mt-16 hover:text-gray-500 transition-all'>Go to home</button>
               </div>
             ) : (

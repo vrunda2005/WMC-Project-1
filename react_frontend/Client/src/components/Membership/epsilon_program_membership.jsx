@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext, useAuth } from '../../creatContext';
 import { useTheme } from '../../usetheamContext';
+import Swal from 'sweetalert2';
 
 const MembershipTier = ({ tier, benefits, profileLink, newsLink, message, onCancelMembership }) => {
   const {theme}=useTheme();
@@ -152,13 +153,33 @@ const MembershipLayout = () => {
         setAuth(updatedAuth);
         localStorage.setItem('auth', JSON.stringify(updatedAuth));
         setCancellationMessage('Your membership has been cancelled.');
+
+        await Swal.fire({
+          title: 'Success!',
+          text: 'Your membership has been cancelled.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
         navigate('/');
+        
       } else {
         setCancellationMessage('Failed to cancel membership. Please try again later.');
+        await Swal.fire({
+          title: 'Error!',
+          text: 'Failed to cancel membership. Please try again later.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
       }
     } catch (error) {
       console.error('Error cancelling membership:', error);
       setCancellationMessage('Failed to cancel membership. Please try again later.');
+      await Swal.fire({
+        title: 'Error!',
+        text: 'Failed to cancel membership. Please try again later.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
     }
   };
 

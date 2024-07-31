@@ -6,6 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './layout.css'
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 const MembershipDetails = ({ title, description, benefits }) => (
   <div>
@@ -59,13 +60,24 @@ const MembershipLayout = () => {
         localStorage.setItem('userData', JSON.stringify(data.user));
         localStorage.setItem(auth.username, membership_id); // Store membership status
 
-        toast.success("Membership updated successfully!");
+        await Swal.fire({
+          title: 'Success!',
+          text: 'Membership updated successfully!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+
         navigate(`/epsilon_program_membership/${membership_id}`);
 
       }
     } catch (error) {
       setError(error.message);
-      toast.error(error.message);
+      await Swal.fire({
+        title: 'Error!',
+        text: error.message,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
 
     }
   };

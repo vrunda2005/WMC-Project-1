@@ -5,6 +5,8 @@ import { MdCurrencyBitcoin } from 'react-icons/md';
 import { useAuth } from '../../creatContext';
 import { useTheme } from '../../usetheamContext';
 import './Navbar.css';
+import Swal from 'sweetalert2';
+
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -16,13 +18,33 @@ const Navbar = () => {
     console.log('Auth state:', auth);
   }, [auth]);
 
-  const handleLogout = () => {
-    alert("You have logged out");
-    setAuth({ user: null, token: '', isLoggedIn: false });
-    localStorage.removeItem('auth');
-    navigate('/login', { replace: true });
-  };
+ 
 
+  const handleLogout = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will be logged out of your account.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, log out!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Perform the logout action
+        setAuth({ user: null, token: '', isLoggedIn: false });
+        localStorage.removeItem('auth');
+        navigate('/login', { replace: true });
+  
+        Swal.fire(
+          'Logged Out!',
+          'You have been logged out.',
+          'success'
+        );
+      }
+    });
+  };
+  
   const headerClass = `sticky top-0 z-50 p-4 md:p-6 flex justify-between items-center ${
     theme === 'blue' ? 'bg-blue-primary-bg text-blue-text-light' : 'bg-dark-primary-bg text-dark-text-light'
   }`;
