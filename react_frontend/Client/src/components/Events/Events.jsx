@@ -14,6 +14,7 @@ function Events() {
   const navigate = useNavigate();
   axios.defaults.withCredentials=true;
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post('http://localhost:5000/api/events', { title, description, date, time, image })
@@ -29,7 +30,7 @@ function Events() {
 
   return (
     <>
-    {auth.isadmin ? (<>
+    {auth.isAdmin ? (<>
     <div className="max-w-md mx-auto p-4 pt-6 pb-8 mb-4 mt-4 bg-white rounded shadow-md">
       <h2 className="text-2xl font-bold mb-4">Add New Event</h2>
       <form onSubmit={handleSubmit}>

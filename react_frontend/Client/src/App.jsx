@@ -18,7 +18,6 @@ const App = () => {
       <ThemeProvider>
             <Navbar/>
             <Outlet />
-            <Footer />
       </ThemeProvider>
       </div>
     </AuthProvider>

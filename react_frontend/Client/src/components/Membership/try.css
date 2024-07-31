@@ -29,7 +29,7 @@ body {
 section {
   position: relative;
   padding: 10em 10%;
-  background: #2980b9;
+  background: #000000;
   color: #fff;
   text-align: center;
 }
@@ -92,7 +92,7 @@ section.color h2 {
 }
 
 .color {
-  background: #3498db;
+  background: #233e50;
 }
 
 
@@ -137,7 +137,7 @@ section::after {
 .ss-style-doublediagonal {
   z-index: 1;
   padding-top: 6em;
-  background: #2072a7;
+  background: #99cdef;
 }
 
 .ss-style-doublediagonal::before,
@@ -156,7 +156,7 @@ section::after {
 
 .ss-style-doublediagonal::before {
   height: 50%;
-  background: #116094;
+  background: #a4c8e1;
   -webkit-transform: rotate(-3deg);
   transform: rotate(-3deg);
   -webkit-transform-origin: 3% 0;
@@ -195,7 +195,7 @@ svg#bigTriangleColor {
 
 #bigTriangleColor path {
   fill: #3498db;
-  stroke: #3498db;
+  stroke: #34dbd0;
   stroke-width: 2;
 }
 
@@ -666,7 +666,7 @@ a {
 }
 
 .codrops-top a:hover {
-  color: #1a6292;
+  color:white;
 }
 
 .codrops-top span.right {
@@ -700,13 +700,13 @@ a {
 
 .related {
   background: #ecf0f1;
-  color: #777;
+  color: white;
   text-align: center;
 }
 
 .related a {
   font-weight: 700;
-  color: #3498db;
+  color: white;
   opacity: 0.7;
 }
 

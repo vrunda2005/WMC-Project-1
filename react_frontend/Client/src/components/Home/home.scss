@@ -6,6 +6,7 @@ $slide-number: 3;
 @mixin transition($time, $property: all, $easing: ease-in) {
   transition: $property $time $easing !important;
 }
+
 *,
 *::before,
 *::after {
@@ -37,7 +38,7 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh + $parallax-offset;
+  height: calc(100vh + #{$parallax-offset});
   overflow: hidden;
   position: fixed;
   transform: translateY($parallax-offset);
@@ -57,7 +58,9 @@ body {
   }
 
   &:first-child {
-    background: url(../../assets/images/Epsilon_bg.png);
+    // background: white;
+    background: url(../../assets/images/bg.png);
+    
     transform: translateY(-$parallax-offset / 2);
 
     .parallax-wrapper {
@@ -68,21 +71,26 @@ body {
   &:nth-child(2) {
     background: url(../../assets/images/CrisFormage-GTAV.png);
   }
+
   &:nth-child(3) {
     background: url(../../assets/images/bg.png);
   }
-  &:nth-child(4) {
-    background: url(../../assets/images/bg.png);
-  }
 
+  &:nth-child(4) {
+    background: url(../../assets/images/CrisFormage-GTAV.png);
+  }
+  &:nth-child(5) {
+    background: url(../../assets/images/CrisFormage-GTAV.png);
+  }
+ 
   &:last-child {
     background: url(../../assets/images/bg.png);
   }
 }
 
-@for $i from 1 to ($slide-number + 1) {
+@for $i from 1 to ($slide-number + 2 ) {
   .section:nth-child(#{$i}) {
-    z-index: ($slide-number + 1) - $i;
+    z-index: ($slide-number + 2) - $i;
   }
 }
 
@@ -139,4 +147,3 @@ body {
     }
   }
 }
-

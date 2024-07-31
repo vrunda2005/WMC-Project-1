@@ -1,18 +1,35 @@
 import './home.scss';
 import React, { useState, useEffect } from 'react';
-import _ from 'lodash';
+import _, { over } from 'lodash';
 import axios from 'axios';
 import moment from 'moment';
 import { useTheme } from '../../usetheamContext';
 import { useAuth } from '../../creatContext';
 import Style from './style';
+import Page_description from './Page_description';
+import { ReactTyped } from 'react-typed';
 
-const PageOne = () => (
-  <div>
-    <h1>HELLOOOOO</h1>
-    <p>Scroll down ⬇</p>
+const PageOne = () => {
+  
+  return (
+  <div className='flex flex-col items-center justify-center h-screen'>
+  <ReactTyped
+
+      className='md:text-3xl sm:text-4xl font-bold p-20 md:py-6 w-auto h-auto flex justify-center items-center text-sky-200 border-2 rounded-lg border-sky-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f]'
+      strings={[
+        "Welcome to the Epsilon Program!",
+        "Discover cosmic truths and transcend the ordinary.",
+        "Join our journey to spiritual enlightenment.",
+        "Explore our beliefs and embrace inner peace.",
+        "Become a member today and start your transformation!"
+      ]}
+      typeSpeed={80}
+      backSpeed={10}
+      loop
+    />
   </div>
-);
+  )
+};
 
 
 
@@ -87,12 +104,12 @@ const PageThree = ({ events, loading }) => {
     setCurrentSlide((prev) => (prev - 1 + events.length) % events.length);
   };
 
-  const containerClass = `relative text-black p-40 overflow-hidden'}`;
+  const containerClass = `relative text-black p-10 overflow-hidden'}`;
 
   return (
       <div>
       <div className=" flex flex-col items-center justify-center h-screen ">
-        <h2 className="text-black text-3xl font-bold mb-6 bg-white rounded-lg text-center">Upcoming Events</h2>
+        <h2 className="text-black text-4xl font-bold mb-6 p-5 bg-white rounded-lg text-center">Upcoming Events</h2>
         {loading ? (
           <p>Loading events...</p>
         ) : (
@@ -142,6 +159,7 @@ const Home = () => {
   const [stories, setStories] = useState([]);
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const {theme} = useTheme();
 
 
 
@@ -200,15 +218,21 @@ const Home = () => {
   const scrollUp = () => setSlideIdx(prevIdx => Math.max(prevIdx - 1, 0));
 
   const content = [
-    <Style/>,
+    <PageOne/>,
+    <Page_description/>,
     <PageTwo key="pageTwo" stories={stories} />,
     <PageThree key="pageThree" events={events} loading={loading}  />,
-    <PageOne/>,
   ];
   const totalSlideNumber = content.length;
+  console.log(totalSlideNumber);
+
+  const bgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
+  const textColor = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
+  const buttonColor = theme === 'blue' ? 'bg-green-600 hover:bg-green-800' : 'bg-green-600 hover:bg-green-800';
+  const overlayColor = theme === 'blue' ? 'bg-blue-overlay' : 'bg-dark-overlay';
 
   return (
-    <div className="app" onWheel={parallaxScroll}>
+    <div className={`app ${overlayColor} ${textColor}`} onWheel={parallaxScroll}>
       {content.map((Component, i) => {
         const classNames = [
           "section",
@@ -219,9 +243,9 @@ const Home = () => {
           .trim();
 
         return (
-          <section key={i} className={classNames}>
-            <div className="parallax-wrapper">
-              <div className="content">
+          <section key={i} className={`${textColor} ${classNames}`}>
+            <div className={`${textColor} parallax-wrapper`}>
+              <div className={`${textColor}content`}>
                 {Component}
               </div>
             </div>
