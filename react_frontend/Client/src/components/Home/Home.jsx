@@ -34,6 +34,11 @@ const PageOne = () => {
 
 
 const PageTwo = ({ stories }) => {
+  const{theme}=useTheme();
+  const containerBgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
+  const sectionBgColor = theme === 'blue' ? 'bg-blue-secondary-bg' : 'bg-dark-secondary-bg';
+  const textPrimaryColor = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
+
   const storyStyles = [
     "bg-yellow-300 rotate-2",
     "bg-pink-200 -rotate-1",
@@ -52,7 +57,7 @@ const PageTwo = ({ stories }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-green-100">
+    <div className={`flex flex-col items-center justify-center bg-opacity-65 border-2 p-4 m-2 h-screen ${containerBgColor}`}>
       <div className="text-center">
         <h1 className="text-4xl font-bold">Latest Stories</h1>
         <div className="relative flex flex-wrap justify-center gap-4 max-w-screen-xl m-auto">
@@ -94,6 +99,11 @@ const PageTwo = ({ stories }) => {
 
 
 const PageThree = ({ events, loading }) => {
+  const{theme}=useTheme();
+  const containerBgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
+  const sectionBgColor = theme === 'blue' ? 'bg-blue-secondary-bg' : 'bg-dark-secondary-bg';
+  const textPrimaryColor = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
+
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const handleNextSlide = () => {
@@ -104,12 +114,12 @@ const PageThree = ({ events, loading }) => {
     setCurrentSlide((prev) => (prev - 1 + events.length) % events.length);
   };
 
-  const containerClass = `relative text-black p-10 overflow-hidden'}`;
+  const containerClass = `relative p-10 overflow-hidden ${containerBgColor} ${textPrimaryColor} `;
 
   return (
       <div>
       <div className=" flex flex-col items-center justify-center h-screen ">
-        <h2 className="text-black text-4xl font-bold mb-6 p-5 bg-white rounded-lg text-center">Upcoming Events</h2>
+        <h2 className={` text-4xl font-bold mb-6 p-5 ${containerBgColor} ${textPrimaryColor}rounded-lg text-center`}>Upcoming Events</h2>
         {loading ? (
           <p>Loading events...</p>
         ) : (
@@ -118,10 +128,10 @@ const PageThree = ({ events, loading }) => {
             <div className="relative">
               <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
                 {events.map((event, index) => (
-                  <div key={index} className="bg-white shadow-md rounded-lg p-4 w-full min-w-full ">
+                  <div key={index} className={`${containerBgColor} ${textPrimaryColor} shadow-md rounded-lg p-4 w-full min-w-full `}>
                     <img src={event.image} alt={event.title} className="w-full h-80 object-cover mb-2"/>
                     <h3 className="text-xl font-bold">{event.title}</h3>
-                    <p>{moment(event.date).format('DD MMMM YYYY')}</p>
+                    <p className={`${textPrimaryColor}`} >{moment(event.date).format('DD MMMM YYYY')}</p>
                   </div>
                 ))}
               </div>

@@ -74,13 +74,13 @@ const services = [
 
 const ServiceBox = ({ imgSrc, title, hoverContent, description }) => (
   <div className="relative group ">
-    <div className="bg-white p-2 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
+    <div className="bg-dark-primary-bg p-2 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
       <img src={imgSrc} alt={title} className="w-full h-80 " />
-      <p className="text-center mt-2 text-lg font-bold">{title}</p>
+      <p className="text-center mt-2 text-xl font-bold text-white">{title}</p>
     </div>
     <div className="absolute inset-0 bg-black bg-opacity-75  flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-      <h1 className="text-white text-2xl font-bold">{hoverContent}</h1>
-      <p className="text-white text-xl mt-2 text-center">{description}</p>
+      <h1 className="text-4xl font-bold m-5 text-sky-200 border-1 rounded-lg border-sky-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f]">{hoverContent}</h1>
+      <p className="text-sky-200 text-xl mt-2 border-2 p-5 m-5 shadow-sm text-center">{description}</p>
     </div>
   </div>
 );
