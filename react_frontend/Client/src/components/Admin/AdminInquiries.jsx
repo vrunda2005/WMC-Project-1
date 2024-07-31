@@ -39,7 +39,7 @@ const AdminInquiries = () => {
         </thead>
         <tbody>
           {inquiries.map((inquiry) => (
-            <tr key={inquiry._id}>
+            <tr key={inquiry._id}  className='hover:bg-gray-600'>
               <td className="p-2 border-b border-gray-700">{inquiry.name}</td>
               <td className="p-2 border-b border-gray-700">{inquiry.email}</td>
               <td className="p-2 border-b border-gray-700">{inquiry.message}</td>

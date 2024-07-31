@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTheme } from '../../usetheamContext';
 
 const AdminDonations = () => {
   const [userDonations, setUserDonations] = useState([]);
@@ -23,36 +24,48 @@ const AdminDonations = () => {
     fetchUserDonations();
   }, []);
 
-  return (
-    <div>
-      <h1>User Donations</h1>
-      {error && <p className="text-red-500">{error}</p>}
-      <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-50">
-          <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Username
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Total Donations
-            </th>
-          </tr>
-        </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
-          {userDonations.map((donation) => (
-            <tr key={donation.username}>
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                {donation.username}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                ${donation.totalDonations.toFixed(2)}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-};
+  const {theme}=useTheme();
+  const bgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
+  const textColor = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
+  const buttonColor = theme === 'blue' ? 'bg-green-600 hover:bg-green-800' : 'bg-green-600 hover:bg-green-800';
+  const overlayColor = theme === 'blue' ? 'bg-blue-overlay' : 'bg-dark-overlay';
 
+  return (
+      <div className={`p-6 ${bgColor} min-h-screen`}>
+        <h1 className={`text-3xl font-bold mb-6 `}>User Donations</h1>
+        {error && (
+          <p className={`text-red-600 bg-red-100 border border-red-300 rounded p-4 mb-6`}>
+            {error}
+          </p>
+        )}
+        <div className={`overflow-x-auto ${bgColor} shadow-md rounded-sm border-2 border-sky-100`}>
+          <table className={`min-w-full divide-y ${bgColor} divide-gray-200`}>
+            <thead className={`border-3`}>
+              <tr>
+                <th className={`px-6 py-3  text-2xl font-xl  uppercase tracking-wider`}>
+                  Username
+                </th>
+                <th className={`px-6 py-3  text-2xl font-xl  uppercase tracking-wider`}>
+                  Total Donations
+                </th>
+              </tr>
+            </thead>
+            <tbody className={` divide-y ${textColor} `}>
+              {userDonations.map((donation) => (
+                <tr key={donation.username} className='hover:bg-gray-600'>
+                  <td className={`px-6 py-4 whitespace-nowrap text-lg  `}>
+                    {donation.username}
+                  </td>
+                  <td className={`px-6 py-4 whitespace-nowrap text-lg `}>
+                    ${donation.totalDonations.toFixed(2)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  };
+  
 export default AdminDonations;

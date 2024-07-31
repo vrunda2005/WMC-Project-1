@@ -2,6 +2,7 @@
 import React, { useState, useContext } from 'react';
 import { useAuth } from '../../creatContext';
 import { useTheme } from '../../usetheamContext';
+import Swal from 'sweetalert2';
 
 const InquiryForm = () => {
   const [auth,setAuth] = useAuth();
@@ -24,10 +25,22 @@ const InquiryForm = () => {
 
       if (!response.ok) throw new Error('Network response was not ok');
 
-      setSuccessMessage('Your inquiry has been sent successfully!');
+     await  Swal.fire({
+      title: 'Thank You!',
+      text: 'Your Inquiry has been send successful!',
+      icon: 'success',
+      confirmButtonText: 'OK'
+      })
+
+      // setSuccessMessage('Your inquiry has been sent successfully!');
       setMessage('');
     } catch (error) {
-      setErrorMessage('There was a problem sending your inquiry.');
+      await Swal.fire({
+        title: 'Error!',
+        text: errorMessage,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
     } finally {
       setIsSubmitting(false);
     }
