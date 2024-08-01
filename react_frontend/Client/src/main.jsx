@@ -22,9 +22,8 @@ import Try1 from './components/Membership/try1.jsx'
 import AllUsers from './components/Admin/Alluser.jsx'
 import InquiryForm from './components/InquiryForm/Inquiryform.jsx'
 import AdminInquiries from './components/Admin/AdminInquiries.jsx'
-
-
-
+import AdminNewsForm from './components/Admin/News_Add.jsx'
+import UserNews from './components/InquiryForm/News_See.jsx'
 
 const router=createBrowserRouter([
   {
@@ -97,8 +96,14 @@ const router=createBrowserRouter([
       {
         path:"allinquires",
         element:<AdminInquiries/>
-      }
-      
+      },{
+        path:"AddNews",
+        element:<AdminNewsForm/>
+      },
+      {
+        path:"News",
+        element:<UserNews/>
+      },    
   
     ]
   }

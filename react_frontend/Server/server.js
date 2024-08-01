@@ -492,4 +492,58 @@ app.post('/api/eventRegister', async (req, res) => {
   }
 });
 
+//news 
+
+const newsSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  image: { type: String }, // URL to the image
+  createdAt: { type: Date, default: Date.now },
+});
+
+const News = mongoose.model('News', newsSchema);
+
+
+app.post('/news', async (req, res) => {
+  try {
+    const news = new News(req.body);
+    await news.save();
+    res.status(201).json(news);
+  } catch (error) {
+    res.status(400).json({ error: 'Error creating news' });
+  }
+});
+
+// Get all news items
+app.get('/news', async (req, res) => {
+  try {
+    const news = await News.find().sort({ createdAt: -1 });
+    res.json(news);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching news' });
+  }
+});
+
+// Update a news item
+app.put('/news/:id', async (req, res) => {
+  try {
+    const news = await News.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(news);
+  } catch (error) {
+    res.status(400).json({ error: 'Error updating news' });
+  }
+});
+
+// Delete a news item
+app.delete('/news/:id', async (req, res) => {
+  try {
+    await News.findByIdAndDelete(req.params.id);
+    res.status(204).end();
+  } catch (error) {
+    res.status(500).json({ error: 'Error deleting news' });
+  }
+});
+
+
+
 app.listen(PORT);
