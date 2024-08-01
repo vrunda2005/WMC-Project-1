@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../creatContext';
 import moment from 'moment';
-import EventRegistrationForm from './RegistrationForm'; // Import the new component
+import EventRegistrationForm from './RegistrationForm';
+import Swal from 'sweetalert2';
 
 function Blog() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedEvent, setSelectedEvent] = useState(null); // State for the selected event
+  const [selectedEvent, setSelectedEvent] = useState(null);
   const [auth] = useAuth();
 
   useEffect(() => {
@@ -24,12 +25,21 @@ function Blog() {
   }, []);
 
   const handleRegister = (event) => {
-    setSelectedEvent(event); // Set the event for which the registration form should open
+    setSelectedEvent(event);
   };
 
   const handleRemoveEvent = (id) => {
-    if (window.confirm('Are you sure you want to remove this event?')) {
-      axios.delete(`http://localhost:5000/api/events/${id}`)
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'This event will be removed from events.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`http://localhost:5000/api/events/${id}`)
         .then(() => {
           setEvents(events.filter(event => event._id !== id));
         })
@@ -37,12 +47,18 @@ function Blog() {
           console.error('Error removing event:', error);
           alert('Error removing event: ' + error.message);
         });
-    }
+  
+        Swal.fire(
+          'Removed!',
+          'Event has been removed.',
+          'success'
+        );
+      }
+    });
   };
 
   const currentDate = moment();
 
-  // Sorting upcoming events (ascending) and past events (descending)
   const upcomingEvents = events
     .filter(event => moment(event.date).isSameOrAfter(currentDate))
     .sort((a, b) => moment(a.date) - moment(b.date));
@@ -51,95 +67,128 @@ function Blog() {
     .filter(event => moment(event.date).isBefore(currentDate))
     .sort((a, b) => moment(b.date) - moment(a.date));
 
-  const renderEvent = (event, index) => (
-    <div
-      key={index}
-      className="bg-white shadow-md rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-lg relative"
-      style={{ minHeight: '300px' }}
-    >
-      <div className="relative h-auto">
-        <img
-          className="object-cover w-full h-64"
-          src={event.image || './src/assets/images/placeholder.png'}
-          alt={event.title}
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-6 text-white">
-          <div>
-            <p className="mb-2">{event.description}</p>
-            <p>{event.time}</p>
-            {auth.isAdmin ? (<>
-              <button
-              onClick={() => handleRemoveEvent(event._id)}
-              className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-            >
-              Remove Event
-            </button>
-            </>):(<></>)}
-            
-            {moment(event.date).isSameOrAfter(currentDate) && (
-              <button
-                onClick={() => handleRegister(event)}
-                className="mt-4 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
-              >
-                Register
-              </button>
-            )}
+    return (
+      <div className='flex justify-end p-10 ml-[25vw] min-h-screen'>
+        {auth.isAdmin ? (
+          <div className='fixed left-0 top-30 flex flex-col p-16'>
+            <h1 className='text-9xl text-left text-white m-0 p-0'>EVENTS</h1>
           </div>
-        </div>
-      </div>
-      <div className="p-6">
-        <h3 className="text-xl font-bold mb-2">{event.title}</h3>
-        <p className="text-gray-600">{moment(event.date).format('DD MMMM YYYY')}</p>
-      </div>
-    </div>
-  );
+        ) : (
+          <div className='fixed left-0 top-30 flex flex-col p-16'>
+            <h1 className='text-9xl text-left text-white m-0 p-0'>EVENT</h1>
+            <h1 className='text-8xl text-left text-white m-0 p-0'>CALENDAR</h1>
+          </div>
+        )}
+        <div className="max-w-screen-xl justify-end w-full">
+          {loading ? (
+            <div className="text-center py-16">
+              <div className="spinner-border text-orange-500 mb-4" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+              <p>Loading events...</p>
+            </div>
+          ) : (
+            <>
+              <div className="mb-18">
+                <h3 className="sticky top-0 mt-0 text-white text-5xl font-semibold mb-6 text-center">Upcoming Events</h3>
+                {upcomingEvents.length > 0 ? (
+                  <div className='flex justify-end gap-8'>
+                    <div className="space-y-8 relative right-0 w-full">
+                      {upcomingEvents.map((event) => (
+                        <div
+                          key={event._id}
+                          className="flex bg-white shadow-lg rounded-lg overflow-hidden transform transition-all duration-300"
+                        >
+                          <div className="w-80 bg-gray-800 text-white flex-shrink-0 p-4 text-center flex flex-col justify-center items-center relative">
+                            <img src={event.image || './src/assets/images/blank.png'} className="absolute inset-0 object-cover w-full h-full opacity-30" />
+                            <p className="text-8xl font-bold">{moment(event.date).format('D')}</p>
+                            <p className="text-4xl">{moment(event.date).format('MMM')}</p>
+                          </div>
 
-  return (
-    <div className="container mx-auto px-4 py-8">
-      {auth.isAdmin ? (<></>):(<>
-        <h2 className="text-3xl font-bold mb-8 text-center">Events</h2>
-      </>)}
-      <hr className='mb-12' />
-      {loading ? (
-        <div className="text-center py-8">
-          <div className="spinner-border text-orange-600 mb-4" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-          <p>Loading events...</p>
+                          <div className="flex flex-col justify-items-start p-6 flex-1">
+                            <h3 className="text-left text-3xl mb-2 font-semibold text-blue-600">{event.title}</h3>
+                            <hr className='bg-black mb-4' />
+                            <p className="text-left text-2xl text-gray-600 mb-4">{event.description}</p>
+                            <p className='text-left text-2xl text-gray-600 mb-4'><span className='font-bold'>{moment(event.date).format('h:mm A')}</span> | <span className='font-bold'>{event.venue}</span> | <span className='font-bold'>{event.duration}</span> | <span className='font-bold'>{event.mode}</span></p>
+
+                            {auth.isAdmin && (
+                              <button
+                                onClick={() => handleRemoveEvent(event._id)}
+                                className="w-fit mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                              >
+                                Remove Event
+                              </button>
+                            )}
+
+                            {moment(event.date).isSameOrAfter(currentDate) && (
+                              <button
+                                onClick={() => handleRegister(event)}
+                                className="w-fit mt-4 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                              >
+                                Register
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <p className="text-gray-600 text-center">No upcoming events found.</p>
+                )}
+              </div>
+              <div>
+                <h3 className="text-5xl text-white font-semibold mb-6 text-center">Past Events</h3>
+                {pastEvents.length > 0 ? (
+                  <div className='flex justify-end gap-8'>
+                    <div className="space-y-8 max-w-screen-lg relative right-0 w-full">
+                      {pastEvents.map((event) => (
+                        <div
+                          key={event._id}
+                          className="flex bg-white shadow-lg rounded-lg overflow-hidden transform transition-all duration-300"
+                        >
+                          <div className="w-80 bg-gray-800 text-white flex-shrink-0 p-4 text-center flex flex-col justify-center items-center relative">
+                            <img src={event.image || './src/assets/images/blank.png'} className="absolute inset-0 object-cover w-full h-full opacity-30" />
+                            <p className="text-8xl font-bold">{moment(event.date).format('D')}</p>
+                            <p className="text-4xl">{moment(event.date).format('MMM')}</p>
+                          </div>
+
+                          <div className="flex flex-col justify-items-start p-6 flex-1">
+                            <h3 className="text-left text-3xl mb-2 font-semibold text-blue-600">{event.title}</h3>
+                            <hr className='bg-black mb-4' />
+                            <p className="text-left text-2xl text-gray-600 mb-4">{event.description}</p>
+                            <p className='text-left text-2xl text-gray-600 mb-4'><span className='font-bold'>{moment(event.date).format('h:mm A')}</span> | <span className='font-bold'>{event.venue}</span> | <span className='font-bold'>{event.duration}</span> | <span className='font-bold'>{event.mode}</span></p>
+
+                            {auth.isAdmin && (
+                              <button
+                                onClick={() => handleRemoveEvent(event._id)}
+                                className="w-fit mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                              >
+                                Remove Event
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <p className="text-gray-600 text-center">No past events found.</p>
+                )}
+              </div>
+            </>
+          )}
+          {selectedEvent && (
+            <EventRegistrationForm
+              isOpen={Boolean(selectedEvent)}
+              onClose={() => setSelectedEvent(null)}
+              event={selectedEvent}
+            />
+          )}
         </div>
-      ) : (
-        <>
-          <div className="mb-8">
-            <h3 className="text-2xl font-bold mb-4 text-center">Upcoming Events</h3>
-            {upcomingEvents.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {upcomingEvents.map(renderEvent)}
-              </div>
-            ) : (
-              <p className="text-gray-600 text-center">No upcoming events found.</p>
-            )}
-          </div>
-          <div>
-            <h3 className="text-2xl font-bold mb-4 text-center">Past Events</h3>
-            {pastEvents.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {pastEvents.map(renderEvent)}
-              </div>
-            ) : (
-              <p className="text-gray-600 text-center">No past events found.</p>
-            )}
-          </div>
-        </>
-      )}
-      {selectedEvent && (
-        <EventRegistrationForm
-          isOpen={Boolean(selectedEvent)}
-          onClose={() => setSelectedEvent(null)}
-          event={selectedEvent}
-        />
-      )}
-    </div>
-  );
+      </div>
+    );
+  
 }
 
 export default Blog;

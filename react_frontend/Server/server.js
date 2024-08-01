@@ -32,9 +32,6 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
   .then(() => console.log(`Mongodb is connected on port ${PORT}`))
   .catch((err) => console.error('Mongodb connection error', err));
 
-  
-const db = mongoose.connection;
-
 const userSchema = new mongoose.Schema({
   name: String,
   email: String,
@@ -342,7 +339,10 @@ const eventSchema = new mongoose.Schema({
   description: { type: String, required: true },
   date: { type: Date, required: true },
   time: { type: String, required: true },
-  image: { type: String }
+  image: { type: String },
+  venue: { type: String, required: true },
+  duration: { type: String, required: true },
+  mode: { type: String, required: true, enum: ['online', 'offline'] },
 });
 
 const Event = mongoose.model('Event', eventSchema);
@@ -359,8 +359,14 @@ app.get('/api/events', async (req, res) => {
 });
 
 app.post('/api/events', async (req, res) => {
-  const { title, description, date, time, image } = req.body;
-  const newEvent = new Event({ title, description, date, time, image });
+  const { title, description, date, time, image, venue, duration, mode } = req.body;
+
+  if (!title || !description || !date || !time || !venue || !duration || !mode) {
+    return res.status(400).json({ error: 'All fields are required' });
+  }
+
+  const newEvent = new Event({ title, description, date, time, image, venue, duration, mode });
+
   try {
     const savedEvent = await newEvent.save();
     res.status(201).json(savedEvent);
@@ -380,6 +386,28 @@ app.delete('/api/events/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+app.put('/api/events/:id', async (req, res) => {
+  const { title, description, date, time, image, venue, duration, mode } = req.body;
+
+  try {
+    const updatedEvent = await Event.findByIdAndUpdate(
+      req.params.id,
+      { title, description, date, time, image, venue, duration, mode },
+      { new: true }
+    );
+
+    if (!updatedEvent) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+
+    res.json(updatedEvent);
+  } catch (error) {
+    console.error('Error updating event:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 
 // Stories
 const storySchema = new mongoose.Schema({

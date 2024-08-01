@@ -121,143 +121,153 @@ function Donate() {
   const overlayColor = theme === 'blue' ? 'bg-blue-overlay' : 'bg-dark-overlay';
 
   return (
-    <div className={`${bgColor} `}>
-    {/* //         <div className={` mt-10 max-h-screen  mx-auto p-6 rounded-xl py-10  `}> */}
-    <div className={`relative bg-center text-${textColor}  `}>
-      <div className={`absolute inset-0 ${overlayColor} bg-opacity-50`} />
+    <div className='flex justify-end p-10'>
+        {auth.isAdmin ? (<>
+          <div className='fixed left-0 top-30 flex flex-col p-16'>
+            <h1 className='text-9xl text-left text-white m-0 p-0'>EVENTS</h1>
+          </div>
+          </>):(<>
+          <div className='fixed left-0 top-30 flex flex-col p-16'>
+            <h1 className='text-9xl text-left text-white m-0 p-0'>EVENT</h1>
+            <h1 className='text-8xl text-left text-white m-0 p-0'>CALENDAR</h1>
+          </div>
+        </>)}
+      <div className={`${bgColor} `}>
+        <div className={`relative bg-center text-${textColor}  `}>
+          <div className={`absolute inset-0 ${overlayColor} bg-opacity-50`} />
 
-      <div className="absolute inset-0 z-0">
-        <svg className="absolute top-0 left-0 w-full h-full" viewBox="0 0 1200 800" fill="none">
-          <circle cx="800" cy="500" r="600" fill="rgba(255, 165, 0, 0.1)" />
-          <circle cx="400" cy="300" r="400" fill="rgba(255, 255, 255, 0.05)" />
-        </svg>
-      </div>
+          <div className="absolute inset-0 z-0">
+            <svg className="absolute top-0 left-0 w-full h-full" viewBox="0 0 1200 800" fill="none">
+              <circle cx="800" cy="500" r="600" fill="rgba(255, 165, 0, 0.1)" />
+              <circle cx="400" cy="300" r="400" fill="rgba(255, 255, 255, 0.05)" />
+            </svg>
+          </div>
 
-      <div className="relative z-10 p-6 md:p-12">
-        <header className="text-center py-12">
-          <motion.h1
-            className={`text-5xl font-bold mb-4 text-white`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-          >
-            <h1>Support the Epsilon Program</h1>
-          </motion.h1>
-        </header>
-
-        <section className={`max-w-4xl mx-auto my-12 ${bgColor} p-8 rounded-lg shadow-lg relative border`}>
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-          >
-            {auth.isLoggedIn ? (<>
-            <h2 className={`text-3xl font-semibold mb-4 text-center ${textColor}`}>
-              Dear {auth.username}!
-            </h2>
-            </>):(
-              <div className="mt-2 text-center mb-12">
-              <h2 className={`text-2xl font-bold mb-4`}>Sign in to Donate</h2>
-              <p className="text-gray-600">Please sign in to donate and contribute to our community.</p>
-              <button
-                className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg mt-4"
-                onClick={() => {
-                  navigate(`/Login`);
-                }}
+          <div className="relative z-10 p-6 md:p-12">
+            <header className="text-center py-12">
+              <motion.h1
+                className={`text-5xl font-bold mb-4 text-white`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1 }}
               >
-                Sign In
-              </button>
-            </div>)}
-            {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-            {showThankYou ? ( // Display thank you message if donation is successful
-              <div className={`text-lg mb-6 text-center ${textColor}`}>
-                <p className={`${textColor}`}> Thank you for your generous donation! Your support helps us continue our mission.</p>
-                <button onClick={goHome} className='mt-16 hover:text-gray-500 transition-all'>Go to home</button>
-              </div>
-            ) : (
-              <>
-                <p className={`text-lg mb-6 text-center ${textColor}`}>
-                  Your donation will help us level up our resources and support our community.<br />
-                  "Support the Epsilon Program - Your donations help us spread the truth and enlighten more souls."<br />
-                  Donation Levels:<br />
-                  • $50: "Seeker of Truth"<br />
-                  • $100: "Beacon of Enlightenment"<br />
-                  • $500: "Ultimate Believer - Guaranteed Enlightenment"
-                </p>
+                <h1>Support the Epsilon Program</h1>
+              </motion.h1>
+            </header>
 
-                <div className="text-center mb-6">
-                  <h3 className={`text-2xl font-semibold ${textColor}`}>
-                    Total Accumulated Donations: ${totalDonations}
-                  </h3>
-                </div>
-
+            <section className={`max-w-4xl mx-auto my-12 ${bgColor} p-8 rounded-lg shadow-lg relative border`}>
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+              >
                 {auth.isLoggedIn ? (<>
-
-                <div className="flex flex-wrap justify-center -mx-4 mb-6">
-                  <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
-                    <motion.button
-                      className={`text-white font-bold py-2 px-4 rounded shadow-md ${buttonColor}`}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => handleButtonClick(50)}
-                    >
-                      $50
-                    </motion.button>
-                  </div>
-                  <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
-                    <motion.button
-                      className={`text-white font-bold py-2 px-4 rounded shadow-md ${buttonColor}`}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => handleButtonClick(100)}
-                    >
-                      $100
-                    </motion.button>
-                  </div>
-                  <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
-                    <motion.button
-                      className={`text-white font-bold py-2 px-4 rounded shadow-md ${buttonColor}`}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => handleButtonClick(500)}
-                    >
-                      $500
-                    </motion.button>
-                  </div>
-                </div>
-
-                <form className={`max-w-md mx-auto p-4 pt-6 ${bgColor} rounded-lg shadow-md`}>
-                  <label className="block mb-4">
-                    <h1 className={`text-lg mb-4 ${textColor}`}>Custom Donation Amount:</h1>
-                    <input 
-                      type="number" 
-                      className="w-full p-2 text-sm text-gray-300 border border-gray-600 rounded" 
-                      onChange={(e) => setAmount(e.target.value)}
-                      value={amount}
-                      id="donation-amount"
-                    />
-                  </label>
-                  <motion.button
-                    className={`text-white font-bold py-2 px-4 rounded shadow-md w-full ${buttonColor}`}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleDonate(amount);
+                <h2 className={`text-3xl font-semibold mb-4 text-center ${textColor}`}>
+                  Dear {auth.username}!
+                </h2>
+                </>):(
+                  <div className="mt-2 text-center mb-12">
+                  <h2 className={`text-2xl font-bold mb-4`}>Sign in to Donate</h2>
+                  <p className="text-gray-600">Please sign in to donate and contribute to our community.</p>
+                  <button
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg mt-4"
+                    onClick={() => {
+                      navigate(`/Login`);
                     }}
                   >
-                    Donate Now
-                  </motion.button>
-                </form>
-                </>):(<></>)}
-              </>
-            )}
-          </motion.div>
-        </section>
+                    Sign In
+                  </button>
+                </div>)}
+                {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+                {showThankYou ? ( // Display thank you message if donation is successful
+                  <div className={`text-lg mb-6 text-center ${textColor}`}>
+                    <p className={`${textColor}`}> Thank you for your generous donation! Your support helps us continue our mission.</p>
+                    <button onClick={goHome} className='mt-16 hover:text-gray-500 transition-all'>Go to home</button>
+                  </div>
+                ) : (
+                  <>
+                    <p className={`text-lg mb-6 text-center ${textColor}`}>
+                      Your donation will help us level up our resources and support our community.<br />
+                      "Support the Epsilon Program - Your donations help us spread the truth and enlighten more souls."<br />
+                      Donation Levels:<br />
+                      • $50: "Seeker of Truth"<br />
+                      • $100: "Beacon of Enlightenment"<br />
+                      • $500: "Ultimate Believer - Guaranteed Enlightenment"
+                    </p>
+
+                    <div className="text-center mb-6">
+                      <h3 className={`text-2xl font-semibold ${textColor}`}>
+                        Total Accumulated Donations: ${totalDonations}
+                      </h3>
+                    </div>
+
+                    {auth.isLoggedIn ? (<>
+
+                    <div className="flex flex-wrap justify-center -mx-4 mb-6">
+                      <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
+                        <motion.button
+                          className={`text-white font-bold py-2 px-4 rounded shadow-md ${buttonColor}`}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => handleButtonClick(50)}
+                        >
+                          $50
+                        </motion.button>
+                      </div>
+                      <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
+                        <motion.button
+                          className={`text-white font-bold py-2 px-4 rounded shadow-md ${buttonColor}`}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => handleButtonClick(100)}
+                        >
+                          $100
+                        </motion.button>
+                      </div>
+                      <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
+                        <motion.button
+                          className={`text-white font-bold py-2 px-4 rounded shadow-md ${buttonColor}`}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => handleButtonClick(500)}
+                        >
+                          $500
+                        </motion.button>
+                      </div>
+                    </div>
+
+                    <form className={`max-w-md mx-auto p-4 pt-6 ${bgColor} rounded-lg shadow-md`}>
+                      <label className="block mb-4">
+                        <h1 className={`text-lg mb-4 ${textColor}`}>Custom Donation Amount:</h1>
+                        <input 
+                          type="number" 
+                          className="w-full p-2 text-sm text-gray-300 border border-gray-600 rounded" 
+                          onChange={(e) => setAmount(e.target.value)}
+                          value={amount}
+                          id="donation-amount"
+                        />
+                      </label>
+                      <motion.button
+                        className={`text-white font-bold py-2 px-4 rounded shadow-md w-full ${buttonColor}`}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleDonate(amount);
+                        }}
+                      >
+                        Donate Now
+                      </motion.button>
+                    </form>
+                    </>):(<></>)}
+                  </>
+                )}
+              </motion.div>
+            </section>
+          </div>
+        </div>
       </div>
     </div>
-    </div>
-
   );
 }
 
