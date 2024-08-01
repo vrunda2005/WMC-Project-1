@@ -123,6 +123,9 @@ const Navbar = () => {
               <li>
                 <Link to='/inquiryForm' className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700 truncate" onClick={() => setIsMobileMenuOpen(false)}>Inquiry Form</Link>
               </li>
+              <li>
+                <Link to='/News' className="block py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700 truncate" onClick={() => setIsMobileMenuOpen(false)}>News</Link>
+              </li>
             </>
           )}
         </ul>
@@ -174,6 +177,9 @@ const Navbar = () => {
               <li>
                 <Link to='/allinquires' className={`hover:underline ${window.location.pathname === '/allinquires' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>All Inquires</Link>
               </li>
+              <li>
+                <Link to='/AddNews' className={`hover:underline ${window.location.pathname === '/allinquires' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Add News</Link>
+              </li>
             </>
           ) : (
             <>
@@ -200,6 +206,9 @@ const Navbar = () => {
               </li>
               <li>
                 <Link to='/inquiryForm' className={`hover:underline ${window.location.pathname === '/inquiryForm' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Inquiry Form</Link>
+              </li>
+              <li>
+                <Link to='/News' className={`hover:underline ${window.location.pathname === '/inquiryForm' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>News</Link>
               </li>
             </>
           )}
