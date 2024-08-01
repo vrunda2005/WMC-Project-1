@@ -14,7 +14,7 @@ const AboutUs = () => {
   const buttonHoverBgColor = theme === 'blue' ? 'hover:bg-green-600' : 'hover:bg-yellow-600';
 
   return (
-    <div className={`relative overflow-hidden min-h-screen page-background`}>
+    <div className={`relative overflow-hidden min-h-screen page-background opacity-65`}>
       {/* Background Image */}
   
         <div className={`absolute inset-0 ${overlayColor}`}></div> {/* Overlay for better text visibility */}
@@ -23,14 +23,16 @@ const AboutUs = () => {
       <div className={`relative z-10 p-6 md:p-12 `}>
         {/* Header Section */}
         <header className="text-center py-12">
+          <heading>
           <motion.h1
             className={`text-5xl font-bold mb-4 ${textPrimaryColor}`}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
+            animate={{ opacity: 7 }}
+            transition={{ duration: 6 }}
           >
             About the Epsilon Program
           </motion.h1>
+          </heading>
         </header>
 
         {/* Core Values Section */}

@@ -65,17 +65,47 @@ body {
   z-index: 1;
 }
 
-/* Headings and text styling */
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Tektur', sans-serif;
-  color: var(--accent-color); /* Accent color for headings */
-  margin-bottom: 0.5rem;
+/* Dark blue theme styling for headings */
+@media (prefers-color-scheme: dark) {
+  h1, h2, h3 {
+    font-family: 'Tektur', sans-serif;
+    text-shadow: 1px 0px 0px rgba(255, 255, 255, 0.6); /* Adds a subtle glow effect */
+    padding: 0.5rem; /* Padding around the text */
+    margin-bottom: 1rem; /* Spacing between headings and content */
+    letter-spacing: 0.09em; /* Adjust spacing between characters */
+    line-height: 1.2; /* Adjust spacing between lines of text */
+    word-spacing: 0.1em; /* Adjust spacing between words */
+  }
+
+  h1 {
+    font-size: 3rem; /* Size for main headings */
+    color: #a6ff00; /* Light Steel Blue */
+    margin-bottom: 1.5rem; /* More spacing for larger headings */
+  }
+
+  h2 {
+    font-size: 2.5rem; /* Size for secondary headings */
+    color: #bae22b; /* Blue Violet */
+    margin-bottom: 1.25rem;
+  }
+
+  h3 {
+    font-size: 2rem; /* Size for tertiary headings */
+    color: #e131a1; /* Steel Blue */
+    margin-bottom: 1rem;
+  }
+  p {
+    font-family: 'Tektur',; /* Distinct font for paragraphs */
+    /* color: #f59e0b; */
+    line-height: 2.6;
+    font-size: medium;
+    color:#eee8aa;
+  }
 }
 
-p {
-  font-family: 'Just Me Again Down Here',; /* Distinct font for paragraphs */
-  line-height: 1.6;
-}
+
+
+
 
 /* Button styles */
 button {

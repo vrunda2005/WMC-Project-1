@@ -8,15 +8,19 @@ import './layout.css'
 import axios from 'axios';
 import Swal from 'sweetalert2'
 
+
+
 const MembershipDetails = ({ title, description, benefits }) => (
   <div>
-  <h2 className="text-xl font-bold mb-2">{title}</h2>
+  <h2 className="font-bold mb-2">{title}</h2>
   <p className="mb-4">{description}</p>
-  <ul className="list-disc pl-5 mb-4">
+  <p className={`text-3xl `}>
+  <ul className="pl-5 mb-4">
     {benefits.map((benefit, index) => (
-      <li key={index} className="text-gray-300">{benefit}</li>
+      <li key={index} className="">{benefit}</li>
     ))}
   </ul>
+  </p>
 </div>
 );
 
@@ -28,47 +32,55 @@ const MembershipLayout = () => {
 
   const updatePoints = async (pointsToUpdate, membership_id) => {
     try {
-      const response = await fetch(`http://localhost:5000/updateuser/${auth.email}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          points: userData.userPoints,
-          addPoints: pointsToUpdate,
-          membership_id: membership_id,
-        }),
+      // Show a confirmation alert before proceeding
+      const result = await Swal.fire({
+        title: 'Are you sure?',
+        text: `Your coins will be reduced by ${pointsToUpdate}. Do you want to proceed?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, proceed',
+        cancelButtonText: 'Cancel',
+        reverseButtons: true
       });
-
-      if (!response.ok) {
-        const errorResponse = await response.json();
-        throw new Error(errorResponse.error);
-      } else {
-       
-
-        const data = await response.json();
-        console.log(auth);
-        console.log("data",data);
-        setUserData({ ...data.username, membership_id: membership_id });
-        setAuth({
-          ...auth,
-          username: data.user.name,
-          userPoints: data.user.points,
-          membership_id:membership_id,
-        
+  
+      // Check if the user confirmed the action
+      if (result.isConfirmed) {
+        const response = await fetch(`http://localhost:5000/updateuser/${auth.email}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            points: userData.userPoints,
+            addPoints: pointsToUpdate,
+            membership_id: membership_id,
+          }),
         });
-
-        localStorage.setItem('auth', JSON.stringify(auth));
-        localStorage.setItem('userData', JSON.stringify(data.user));
-        localStorage.setItem(auth.username, membership_id); // Store membership status
-
-        await Swal.fire({
-          title: 'Success!',
-          text: 'Membership updated successfully!',
-          icon: 'success',
-          confirmButtonText: 'OK'
-        });
-
-        navigate(`/epsilon_program_membership/${membership_id}`);
-
+  
+        if (!response.ok) {
+          const errorResponse = await response.json();
+          throw new Error(errorResponse.error);
+        } else {
+          const data = await response.json();
+          setUserData({ ...data.username, membership_id: membership_id });
+          setAuth({
+            ...auth,
+            username: data.user.name,
+            userPoints: data.user.points,
+            membership_id: membership_id,
+          });
+  
+          localStorage.setItem('auth', JSON.stringify(auth));
+          localStorage.setItem('userData', JSON.stringify(data.user));
+          localStorage.setItem(auth.username, membership_id); // Store membership status
+  
+          await Swal.fire({
+            title: 'Success!',
+            text: 'Membership updated successfully!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
+  
+          navigate(`/epsilon_program_membership/${membership_id}`);
+        }
       }
     } catch (error) {
       setError(error.message);
@@ -78,9 +90,9 @@ const MembershipLayout = () => {
         icon: 'error',
         confirmButtonText: 'OK'
       });
-
     }
   };
+  
 
   const { membership_id } = useParams();
 
@@ -90,62 +102,51 @@ const MembershipLayout = () => {
     benefits: [],
   };
 
+
   if (membership_id === '1') {
     membershipDetails = {
       title: 'Epsilon Enthusiast',
-      description: `Unlock the door to a world of exclusive Epsilon content with our Basic membership! 
-                    As an Epsilon Enthusiast, you’ll gain access to a treasure trove of exclusive tutorials, 
-                    insightful webinars, and a wealth of additional resources designed to elevate your experience. 
-                    Enjoy special discounts on our premium products and services, and receive priority support 
-                    from our dedicated customer care team. This is your first step into a vibrant community of like-minded individuals!`,
+      description: `Embark on your Epsilon journey with our Basic membership! As an Epsilon Enthusiast, you'll unlock a world of exclusive content and perks designed to elevate your experience. This tier is perfect for those new to the Epsilon Program, offering a gateway to a vibrant community of like-minded individuals.`,
       benefits: [
-        'Exclusive Content: Access a variety of tutorials, webinars, and articles available only to members.',
-        'Discounts: Enjoy exclusive discounts on our products and services.',
-        'Priority Support: Receive faster responses and enhanced support from our customer service team.',
-        'Community Access: Connect with fellow enthusiasts through exclusive forums and events.'
+        '📚 **Exclusive Content**: Access tutorials, webinars, and articles only available to members.',
+        '💸 **Discounts**: Enjoy special discounts on our premium products and services.',
+        '🚀 **Priority Support**: Receive enhanced support from our dedicated customer service team.',
+        '🌐 **Community Access**: Connect with fellow enthusiasts through exclusive forums and events.'
       ],
       up: 10,
     };
   } else if (membership_id === '2') {
     membershipDetails = {
       title: 'Epsilon Evangelist',
-      description: `Elevate your Epsilon journey with the Premium membership! The Epsilon Evangelist tier includes 
-                    all the benefits of the Basic membership, with a host of additional perks designed to offer 
-                    a more personalized and enriching experience. Enjoy one-on-one coaching from experts, access 
-                    to our exclusive content library, and receive priority support tailored to your needs. Immerse 
-                    yourself in a world of premium resources and elevate your role within our community.`,
+      description: `Take your Epsilon experience to the next level with the Premium membership! The Epsilon Evangelist tier builds on the Basic membership, offering additional perks and personalized support. Perfect for those seeking a deeper connection with the program and more tailored guidance.`,
       benefits: [
-        'All Basic Benefits: Continue enjoying all the benefits of the Epsilon Enthusiast membership.',
-        'Personalized Coaching: Receive expert guidance and coaching tailored to your goals.',
-        'Premium Content: Unlock access to an exclusive library of advanced resources and content.',
-        'Enhanced Support: Get priority support with personalized attention to your needs.',
-        'Special Events: Invitations to premium events and webinars hosted by industry leaders.'
+        '🔑 **All Basic Benefits**: Continue enjoying all the perks of the Epsilon Enthusiast membership.',
+        '🎓 **Personalized Coaching**: Get one-on-one guidance from experts tailored to your goals.',
+        '📖 **Premium Content**: Access an exclusive library of advanced resources and materials.',
+        '🌟 **Enhanced Support**: Receive priority support with personalized attention.',
+        '🎟️ **Special Events**: Invitations to exclusive events and webinars with industry leaders.'
       ],
       up: 20,
     };
   } else if (membership_id === '3') {
     membershipDetails = {
       title: 'Epsilon Visionary',
-      description: `Step into the upper echelon of the Epsilon community with our Elite membership! The Epsilon 
-                    Visionary tier offers an unparalleled level of access and exclusivity. Enjoy all the benefits 
-                    of the Premium membership, plus exclusive invitations to VIP events, personalized consulting, 
-                    and a dedicated account manager to ensure your every need is met. This is the ultimate membership 
-                    for those who are truly committed to making the most of their Epsilon experience.`,
+      description: `Join the elite ranks of the Epsilon community with our top-tier membership! The Epsilon Visionary tier provides unparalleled access and exclusivity, including VIP events and personalized consulting. Ideal for those fully committed to maximizing their Epsilon experience.`,
       benefits: [
-        'All Premium Benefits: Enjoy all the perks and privileges of the Epsilon Evangelist membership.',
-        'VIP Events: Exclusive invitations to high-profile events and networking opportunities.',
-        'Personalized Consulting: Receive tailored consulting services to achieve your personal and professional goals.',
-        'Dedicated Account Manager: Get personalized attention and support from a dedicated account manager.',
-        'Recognition: Be recognized as a top supporter within the Epsilon community.'
+        '🏆 **All Premium Benefits**: Enjoy all the perks of the Epsilon Evangelist membership.',
+        '🎉 **VIP Events**: Receive exclusive invitations to high-profile events and networking opportunities.',
+        '🤝 **Personalized Consulting**: Benefit from tailored consulting services to achieve your goals.',
+        '📊 **Dedicated Account Manager**: Get personalized support from a dedicated account manager.',
+        '🌟 **Recognition**: Be acknowledged as a top supporter within the Epsilon community.'
       ],
       up: 30,
     };
   }
 
   const {theme}=useTheme();
-  const containerBgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
   const textPrimary = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
   const textSecondary = theme === 'blue' ? 'text-blue-text-blue' : 'text-dark-text-blue';
+  const Hightlight = theme === 'blue' ? 'text-blue-text-dark' : 'text-dark-text-dark';
   return (
     <div id="card_container" className="relative mx-auto max-w-3xl p-4 mt-20">
     {/* <div className="pg">
@@ -159,18 +160,19 @@ const MembershipLayout = () => {
             <p>{error}</p>
           </div>
         )}
-        <h1 className="text-3xl font-bold uppercase mb-2">
-          Membership Details <small className="text-gray-300 text-sm">(2018)</small>
+        <h1 className="font-bold uppercase mb-2">
+          Membership Details <small className="text-gray-300 text-sm">What you can get?</small>
         </h1>
-        <h3 className="text-xl font-bold mb-4">Action | Adventure</h3>
+        <h3 className="font-bold mb-4">Goals | Mission</h3>
         {/* <p className="mb-4">
           Arthur Curry learns that he is the heir to the underwater kingdom of Atlantis, and must step forward to lead his people and be a hero to the world.
         </p> */}
         <MembershipDetails {...membershipDetails} />
-        <div className="flex flex-wrap gap-2">
+        <div>
           <button
+            
             onClick={() => updatePoints(membershipDetails.up, membership_id)}
-            className="bg-transparent border-4 border-white text-white py-2 px-4 rounded hover:bg-blue-800"
+            className="bg-transparent border-4  border-white text-white py-2 px-4 rounded hover:bg-blue-800"
           >
             Get Membership
           </button>

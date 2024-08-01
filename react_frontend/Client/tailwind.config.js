@@ -13,9 +13,11 @@ export default {
           'secondary-bg': '#0ea5e9',     // Lighter blue for sections, good contrast with text
           'highlight': '#60A5FA',        // Bright blue for call-to-action elements
           'overlay': 'rgba(15,23,42,.5)', // Blue overlay for contrast
+
           'text-light': '#082f49',       // Light blue text color, readable on dark backgrounds
           'text-blue': '#93c5fd',        // Darker blue text color, good on lighter backgrounds
           'text-dark': '#06b6d4',        // Very dark blue for text on light backgrounds
+          
           'accent': '#d8b4fe',           // Accents in bright blue
           'muted': '#BFDBFE',            // Muted light blue for less prominent text
           'success': '#34D399',          // Green for success messages
@@ -27,9 +29,9 @@ export default {
           'highlight': '#3B82F6',        // Vibrant blue for highlights and calls-to-action
           'overlay': 'rgba(15, 23, 42, 0.5)', // Dark overlay for contrast
 
-          'text-light': '#FFFFFF',       // Light blue text color for readability on dark backgrounds
-          'text-blue': '#E0FFFF',        // Light blue for text
-          'text-dark': '#FFD700',        // Dark text color for light backgrounds
+          'text-light': '#f59e0b',       // Light blue text color for readability on dark backgrounds
+          'text-blue': '#bae22b',        // Light blue for text
+          'text-dark': '#eee8aa',        // Dark text color for light backgrounds
           'accent': '#98FF98',           // Bright blue for accents
 
           'muted': '#D3D3D3',            // Muted grayish blue for less important text

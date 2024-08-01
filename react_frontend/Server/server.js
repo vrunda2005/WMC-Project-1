@@ -32,6 +32,7 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
   .then(() => console.log(`Mongodb is connected on port ${PORT}`))
   .catch((err) => console.error('Mongodb connection error', err));
 
+  
 const db = mongoose.connection;
 
 const userSchema = new mongoose.Schema({
