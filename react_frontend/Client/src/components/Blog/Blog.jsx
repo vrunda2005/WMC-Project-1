@@ -104,13 +104,13 @@ function Blog() {
                             <p className="text-8xl font-bold">{moment(event.date).format('D')}</p>
                             <p className="text-4xl">{moment(event.date).format('MMM')}</p>
                           </div>
-
+    
                           <div className="flex flex-col justify-items-start p-6 flex-1">
                             <h3 className="text-left text-3xl mb-2 font-semibold text-blue-600">{event.title}</h3>
                             <hr className='bg-black mb-4' />
                             <p className="text-left text-2xl text-gray-600 mb-4">{event.description}</p>
                             <p className='text-left text-2xl text-gray-600 mb-4'><span className='font-bold'>{moment(event.date).format('h:mm A')}</span> | <span className='font-bold'>{event.venue}</span> | <span className='font-bold'>{event.duration}</span> | <span className='font-bold'>{event.mode}</span></p>
-
+    
                             {auth.isAdmin && (
                               <button
                                 onClick={() => handleRemoveEvent(event._id)}
@@ -119,7 +119,7 @@ function Blog() {
                                 Remove Event
                               </button>
                             )}
-
+    
                             {moment(event.date).isSameOrAfter(currentDate) && (
                               <button
                                 onClick={() => handleRegister(event)}
@@ -141,7 +141,7 @@ function Blog() {
                 <h3 className="text-5xl text-white font-semibold mb-6 text-center">Past Events</h3>
                 {pastEvents.length > 0 ? (
                   <div className='flex justify-end gap-8'>
-                    <div className="space-y-8 max-w-screen-lg relative right-0 w-full">
+                    <div className="space-y-8 relative right-0 w-full">
                       {pastEvents.map((event) => (
                         <div
                           key={event._id}
@@ -152,13 +152,13 @@ function Blog() {
                             <p className="text-8xl font-bold">{moment(event.date).format('D')}</p>
                             <p className="text-4xl">{moment(event.date).format('MMM')}</p>
                           </div>
-
+    
                           <div className="flex flex-col justify-items-start p-6 flex-1">
                             <h3 className="text-left text-3xl mb-2 font-semibold text-blue-600">{event.title}</h3>
                             <hr className='bg-black mb-4' />
                             <p className="text-left text-2xl text-gray-600 mb-4">{event.description}</p>
                             <p className='text-left text-2xl text-gray-600 mb-4'><span className='font-bold'>{moment(event.date).format('h:mm A')}</span> | <span className='font-bold'>{event.venue}</span> | <span className='font-bold'>{event.duration}</span> | <span className='font-bold'>{event.mode}</span></p>
-
+    
                             {auth.isAdmin && (
                               <button
                                 onClick={() => handleRemoveEvent(event._id)}
@@ -188,7 +188,7 @@ function Blog() {
         </div>
       </div>
     );
-  
+     
 }
 
 export default Blog;
