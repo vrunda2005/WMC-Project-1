@@ -4,14 +4,23 @@ import { useTheme } from '../../usetheamContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+const getRandomColor = () => {
+  const letters = '582839'; // use letters for light colors
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * letters.length)];
+  }
+  return color;
+};
+
 const StoryPage = () => {
   const [stories, setStories] = useState([]);
   const [newStory, setNewStory] = useState('');
   const [auth] = useAuth();
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  axios.defaults.withCredentials=true;
-
+  const [colors, setColors] = useState([]);
+  axios.defaults.withCredentials = true;
 
   useEffect(() => {
     const fetchStories = async () => {
@@ -23,6 +32,9 @@ const StoryPage = () => {
         }
         const data = await response.json();
         setStories(data);
+        // Generate random colors for each story
+        const newColors = data.map(() => getRandomColor());
+        setColors(newColors);
       } catch (error) {
         console.error('Error fetching stories:', error);
       } finally {
@@ -58,73 +70,75 @@ const StoryPage = () => {
     }
   };
 
-  const {theme}=useTheme();
+  const { theme } = useTheme();
   const containerBgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
   const textPrimary = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
   const textSecondary = theme === 'blue' ? 'text-blue-text-blue' : 'text-dark-text-blue';
-  const overlay=theme==='blue' ? 'bg-blue-overlay' : 'bg-dark-overlay'; 
+  const overlay = theme === 'blue' ? 'bg-blue-overlay' : 'bg-dark-overlay';
 
   return (
-    <div className={`bg-opacity-70 ${textPrimary} ${overlay} max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8`}>
+    <div className='ml-[25vw] flex justify-end p-10'>
+          <div className='fixed left-0 top-30 flex flex-col p-16'>
+            <h1 className='text-9xl text-left text-white m-0 p-0'>Stories</h1>
+          </div>
+      <div className={`min-h-screen ${overlay} max-w-screen-lg mx-auto py-8 px-4 sm:px-6 lg:px-8`}>
+        {auth.isLoggedIn ? (
+          <>
+            <div className="mt-8">
+              <h2 className={`text-2xl font-bold mb-4 ${textSecondary}`}>Add Your Story</h2>
+              <textarea
+                className="w-full p-4 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                rows="5"
+                placeholder="Share your story..."
+                value={newStory}
+                onChange={(e) => setNewStory(e.target.value)}
+              />
+              <button
+                className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-lg"
+                onClick={handleAddStory}
+              >
+                Submit Story
+              </button>
+            </div>
+          </>
+        ) : (
+          <div className="mt-8 text-center">
+            <h2 className={`text-2xl font-bold mb-4 ${textSecondary}`}>Sign in to Add Your Story</h2>
+            <p className="text-gray-600">Please sign in to share your story and contribute to our community.</p>
+            <button
+              className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg mt-4"
+              onClick={() => {
+                navigate(`/Login`);
+              }}
+            >
+              Sign In
+            </button>
+          </div>
+        )}
 
-    {auth.isLoggedIn ? (
-      <>
-        <div className="mt-8">
-          <h2 className={`text-2xl font-bold mb-4 ${textSecondary}`}>Add Your Story</h2>
-          <textarea
-            className="w-full p-4 border rounded-lg mb-4"
-            rows="5"
-            placeholder="Share your story..."
-            value={newStory}
-            onChange={(e) => setNewStory(e.target.value)}
-          />
-          <button
-            className="bg-orange-700 hover:bg-orange-800 text-white font-medium py-2 px-4 rounded-lg"
-            onClick={handleAddStory}
+        <h1 className="mt-12 text-3xl font-bold text-center mb-8">Stories</h1>
+
+        {loading ? (
+          <div className="text-center py-8">
+            <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
+            <p>Loading stories...</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 overflow-auto">
+        {stories.map((story, index) => (
+          <div
+            key={story._id}
+            className="border-2 border-gray-300 bg-white p-6 rounded-lg shadow-lg transform transition-transform hover:shadow-2xl h-84 overflow-scroll"
+            style={{ backgroundColor: colors[index] }}
           >
-            Submit Story
-          </button>
-        </div>
-      </>
-    ) : (
-      <div className="mt-8 text-center">
-        <h2 className={`text-2xl font-bold mb-4 ${textSecondary}`}>Sign in to Add Your Story</h2>
-        <p className="text-gray-600">Please sign in to share your story and contribute to our community.</p>
-        <button
-          className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg mt-4"
-          onClick={() => {
-            navigate(`/Login`);
-          }}
-        >
-          Sign In
-        </button>
-      </div>
-    )}
-
-      
-
-      
-    <h1 className="mt-12 text-3xl font-bold text-center mb-8">Stories</h1>
-
-    {loading ? (
-      <div className="text-center py-8">
-        <div className="spinner-border text-orange-600 mb-4" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-        <p>Loading stories...</p>
-      </div>
-    ) : (
-      <div className="space-y-4">
-        {stories.map((story) => (
-          <div key={story._id} className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-bold mb-2">{story.username}</h2>
-            <p className="text-gray-700 mb-2">{story.story}</p>
-            <p className="text-gray-500 text-sm">{new Date(story.date).toLocaleString()}</p>
+            <p className="text-white mb-4">"{story.story}"</p>
+            <h2 className="text-xl font-bold mb-2 text-white text-right">-{story.username}</h2>
+            <p className="text-white text-sm text-right">{new Date(story.date).toLocaleString()}</p>
           </div>
         ))}
       </div>
-    )}
-
+        )}
+      </div>
     </div>
   );
 };

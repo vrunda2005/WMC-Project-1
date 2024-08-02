@@ -52,54 +52,59 @@ const InquiryForm = () => {
   const buttonHoverBgColor = theme === 'blue' ? 'hover:bg-blue-accent' : 'hover:bg-dark-accent';
 
   return (
+    <div className='flex justify-end p-10 ml-[25vw] min-h-screen'>
+      <div className='fixed left-0 top-30 flex flex-col p-16'>
+        <h1 className='text-8xl text-left text-white m-0 p-0'>INQUIRY</h1>
+        <h1 className='text-9xl text-left text-white m-0 p-0'>FORM</h1>
+      </div>
+      <div className={`mx-auto p-6 text-white rounded-lg shadow-lg ${containerBgColor} w-full`}>
+        {auth.isLoggedIn ? (
+        <>
+              <div className={`${containerBgColor}`}>
+              <div className={` mt-10 max-h-screen  mx-auto p-6 rounded-xl py-10  `}>
 
-    <div className={`max-w-lg mx-auto p-6 text-white rounded-lg shadow-lg ${containerBgColor} `}>
-      {auth.isLoggedIn ? (
-      <>
-            <div className={`${containerBgColor}   border`}>
-            <div className={` mt-10 max-h-screen  mx-auto p-6 rounded-xl py-10  `}>
-
-        <h2 className="text-2xl font-bold mb-4">Inquiry Form</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium mb-1">Message</label>
-            <textarea
-              id="message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              className="w-full p-2 border border-gray-700 rounded-md bg-gray-900 text-white"
-              rows="4"
-              required
-            ></textarea>
+          <p className="text-3xl text-gray-400 mb-8 p-8">Feel free to reach out with any questions or concerns, and we will respond to you promptly via your email address.</p>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="message" className="block text-3xl font-medium mb-6">Message</label>
+              <textarea
+                id="message"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                className="w-full p-4 border border-gray-500 rounded-md bg-gray-900 text-white"
+                rows="4"
+                required
+              ></textarea>
+            </div>
+            <div className="flex items-center justify-between">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+              >
+                {isSubmitting ? 'Submitting...' : 'Submit'}
+              </button>
+            </div>
+            {successMessage && <p className="text-green-500 mt-2">{successMessage}</p>}
+            {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
+          </form>
           </div>
-          <div className="flex items-center justify-between">
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
-            >
-              {isSubmitting ? 'Submitting...' : 'Submit'}
-            </button>
           </div>
-          {successMessage && <p className="text-green-500 mt-2">{successMessage}</p>}
-          {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
-        </form>
-        </div>
-        </div>
-      </>):(
-        <div className="m-6 text-center mb-12 border ">
-        <h2 className={`text-2xl font-bold mb-4 p-6`}>Sign in to continue</h2>
-        <p className="text-gray-600">Please sign in to inquiry and contribute to our community.</p>
-        <button
-          className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg m-4"
-          onClick={() => {
-            navigate(`/Login`);
-          }}
-        >
-          Sign In
-        </button>
-        </div>
-      )}
+        </>):(
+          <div className="m-6 text-center mb-12">
+          <h2 className={`text-2xl font-bold mb-4 p-6`}>Sign in to continue</h2>
+          <p className="text-gray-600">Please sign in to inquiry and contribute to our community.</p>
+          <button
+            className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg m-4"
+            onClick={() => {
+              navigate(`/Login`);
+            }}
+          >
+            Sign In
+          </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

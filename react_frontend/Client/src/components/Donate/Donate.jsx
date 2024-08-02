@@ -121,18 +121,11 @@ function Donate() {
   const overlayColor = theme === 'blue' ? 'bg-blue-overlay' : 'bg-dark-overlay';
 
   return (
-    <div className='flex justify-end p-10'>
-        {auth.isAdmin ? (<>
+    <div className='flex justify-end p-10 ml-[25vw] min-h-screen'>
           <div className='fixed left-0 top-30 flex flex-col p-16'>
-            <h1 className='text-9xl text-left text-white m-0 p-0'>EVENTS</h1>
+            <h1 className='text-9xl text-left text-white m-0 p-0'>DONATE</h1>
           </div>
-          </>):(<>
-          <div className='fixed left-0 top-30 flex flex-col p-16'>
-            <h1 className='text-9xl text-left text-white m-0 p-0'>EVENT</h1>
-            <h1 className='text-8xl text-left text-white m-0 p-0'>CALENDAR</h1>
-          </div>
-        </>)}
-      <div className={`${bgColor} `}>
+      <div className={`${bgColor} w-full`}>
         <div className={`relative bg-center text-${textColor}  `}>
           <div className={`absolute inset-0 ${overlayColor} bg-opacity-50`} />
 
@@ -151,18 +144,18 @@ function Donate() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1 }}
               >
-                <h1>Support the Epsilon Program</h1>
+                <h1 className='m-0 text-green-400'>Support the Epsilon Program</h1>
               </motion.h1>
             </header>
 
-            <section className={`max-w-4xl mx-auto my-12 ${bgColor} p-8 rounded-lg shadow-lg relative border`}>
+            <section className={`max-w-screen-lg mx-auto my-12 ${bgColor} p-8 rounded-lg shadow-lg relative border`}>
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1 }}
               >
                 {auth.isLoggedIn ? (<>
-                <h2 className={`text-3xl font-semibold mb-4 text-center ${textColor}`}>
+                <h2 className={`text-4xl mt-8 font-semibold mb-6 text-center ${textColor}`}>
                   Dear {auth.username}!
                 </h2>
                 </>):(
@@ -186,7 +179,7 @@ function Donate() {
                   </div>
                 ) : (
                   <>
-                    <p className={`text-lg mb-6 text-center ${textColor}`}>
+                    <p className={`text-2xl mb-6 text-center ${textColor}`}>
                       Your donation will help us level up our resources and support our community.<br />
                       "Support the Epsilon Program - Your donations help us spread the truth and enlighten more souls."<br />
                       Donation Levels:<br />
@@ -238,10 +231,10 @@ function Donate() {
 
                     <form className={`max-w-md mx-auto p-4 pt-6 ${bgColor} rounded-lg shadow-md`}>
                       <label className="block mb-4">
-                        <h1 className={`text-lg mb-4 ${textColor}`}>Custom Donation Amount:</h1>
+                        <h1 className={`text-2xl mb-4 ${textColor}`}>Custom Donation Amount:</h1>
                         <input 
                           type="number" 
-                          className="w-full p-2 text-sm text-gray-300 border border-gray-600 rounded" 
+                          className="w-full p-2 text-black border border-gray-600 rounded" 
                           onChange={(e) => setAmount(e.target.value)}
                           value={amount}
                           id="donation-amount"
