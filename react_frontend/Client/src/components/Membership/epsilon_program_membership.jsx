@@ -5,60 +5,85 @@ import { useTheme } from '../../usetheamContext';
 import Swal from 'sweetalert2';
 
 // Component for displaying membership tier information
-const MembershipTier = ({ tier, benefits, profileLink, newsLink, message, onCancelMembership }) => {
+const MembershipTier = ({ tier, benefits, profileLink, newsLink,whatYouCanDo, message, onCancelMembership }) => {
   const { theme } = useTheme();
   const containerBgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
   const textPrimary = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
   const textSecondary = theme === 'blue' ? 'text-blue-text-blue' : 'text-dark-text-blue';
 
   return (
-    <div className={`min-h-screen ${containerBgColor} ${textPrimary} `}>
+    <div className={`min-h-screen ${containerBgColor} ${textPrimary} flex-row`}>
       <div className={`text-center mb-2 ${containerBgColor}`}>
-        <h1 className={`text-4xl font-bold`}>Congratulations!</h1>
-        <p className={`text-2xl`}>On choosing Epsilon Program {tier} Membership</p>
+        <h1 className={` font-bold`}>Congratulations!</h1>
+        <p className={``}>Thank you for choosing Epsilon Program {tier} Membership</p>
       </div>
-
-      <section className={` ${containerBgColor} ${textPrimary}`}>
-        <h2 className={`text-3xl font-bold text-center`}>{tier} Membership Benefits</h2>
-        <ul className={`list-disc pl-6 `}>
-          {benefits.map((benefit, index) => (
-            <li key={index} className={`mb-2`}>{benefit}</li>
-          ))}
-        </ul>
-        <div className={`text-center `}>
-          <img className={` mx-auto rounded-full`} src="https://i.ytimg.com/vi/4pPNTzlfxsk/maxresdefault.jpg" alt="Membership" />
+      <div className={`text-center `}>
+                <img
+          className="w-120 h-72  object-cover rounded-full border-4 border-gray-300 shadow-lg"
+          src="https://i.ytimg.com/vi/4pPNTzlfxsk/maxresdefault.jpg"
+          alt="Membership"
+        />
         </div>
-      </section>
+        <div className="flex flex-wrap justify-center items-center gap-4 p-4 min-h-screen">
+        <div>
+        <a href="#" class="block max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
-      <section className={` ${containerBgColor} ${textPrimary}`}>
-        <h2 className={`text-3xl font-bold mb-2 text-center`}>News and Updates</h2>
-        <p className={`mb-2`}>Stay informed about the latest developments in the {tier} program, including new content, events, and initiatives.</p>
-        <a href={newsLink} className={`text-highlight hover:text-accent`}>
-          <i className={`fas fa-newspaper mr-2`} />
-          {tier} Newsletter
+        <h1 class="mb-2 font-bold ">{tier} Membership Benefits</h1>
+        <p class="">
+        <ul className={`list-disc pl-6 `}>
+                  {benefits.map((benefit, index) => (
+                    <li key={index} className={`mb-2`}>{benefit}</li>
+                  ))}
+                </ul>
+        </p>
         </a>
-      </section>
+        </div>
+        <div>
+         <a href="#" class="block max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
-      <section className={`${containerBgColor} ${textPrimary}`}>
-        <h2 className={`text-3xl font-bold  text-center`}>Your {tier} Profile</h2>
-        <p className={`mb-2`}>View your membership details, track your progress, and access exclusive content through your {tier} profile.</p>
-        <a href={profileLink} className={`text-highlight hover:text-accent`}>View Profile</a>
-      </section>
+          <h1 class="mb-2 font-bold ">what you can do ?</h1>
+          <p>{whatYouCanDo}</p>  
+          </a>
+          </div>
 
-      <section className={`mb-2 ${containerBgColor} ${textPrimary}`}>
-        <h2 className={`text-3xl font-bold mb-4 text-center`}>Message from Cris Formage</h2>
-        <p className={`mb-2`}>{message}</p>
-        <button
+          <div>
+         <a href="#" class="block max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+          <h1 class="mb-2 font-bold ">News and Updates</h1>
+          <p className={`mb-2`}>Stay informed about the latest developments in the {tier} program, including new content, events, and initiatives.</p>
+          </a>
+          </div>
+
+          <div>
+         <a href="#" class="block max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+          <h1 class="mb-2 font-bold ">Your {tier} Profile</h1>
+          <p className={`mb-2`}>View your membership details, track your progress, and access exclusive content through your {tier} profile.</p>
+          <a href={profileLink} className={`text-highlight hover:text-accent`}>View Profile</a>
+
+          </a>
+          </div>
+
+
+
+          <div>
+         <a href="#" class="block max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+          <h1 class="mb-2 font-bold ">Message from Cris Formage</h1>
+          <p className={`mb-2`}>{message}</p>
+          </a>
+          </div>    
+</div>  
+<button
           className={`bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg`}
           onClick={onCancelMembership}
         >
           Cancel Membership
         </button>
-      </section>
-
       <svg className={`${containerBgColor}`} xmlns="http://www.w3.org/2000/svg" width="100%" height="100" viewBox="0 0 100 102" preserveAspectRatio="none">
         <path d="M0 0 L50 100 L100 0 Z" />
       </svg>
+      
     </div>
   );
 };
@@ -132,8 +157,7 @@ const MembershipLayout = () => {
 
   return (
     <div className={`min-h-screen ${containerBgColor} ${textPrimary} page-background opacity-75 ${overlay} p-10`}>
-      <h1 className="text-4xl font-bold mb-8 text-center">Epsilon Program Membership</h1>
-      {auth.username && <p className="text-center mb-8">Welcome, {auth.username}</p>}
+      {auth.username && <h1>Welcome, {auth.username}</h1>}
       {cancellationMessage ? (
         <div className="bg-red-100 text-red-700 p-6 mb-10 rounded-lg">
           {cancellationMessage}
@@ -160,39 +184,53 @@ const MembershipLayout = () => {
 };
 
 const membershipTiers = {
-  1: {
-    tier: 'Epsilon Enthusiast',
-    benefits: [
-      'Access to exclusive Epsilon Program content',
-      'Personalized guidance from Cris Formage',
-      'Invitations to exclusive events and ceremonies',
+  "1": {
+    "tier": "Epsilon Enthusiast",
+    "introduction": "Welcome to the Epsilon Enthusiast tier! As an Enthusiast, you are embarking on a journey of enlightenment and discovery.",
+    "benefits": [
+      "Exclusive Content: Gain access to a library of Epsilon Program materials, including articles, videos, and guides.",
+      "Personal Guidance: Receive personalized guidance from our esteemed leader, Cris Formage.",
+      "Exclusive Invitations: Attend private events and ceremonies designed for Enthusiasts."
     ],
-    profileLink: '#',
-    newsLink: '#',
-    message: 'Welcome to the Epsilon Program, Enthusiast!',
-  },
-  2: {
-    tier: 'Epsilon Evangelist',
-    benefits: [
-      'All Epsilon Enthusiast benefits',
-      'Access to advanced Epsilon Program content',
-      'Priority invitations to exclusive events and ceremonies',
+    "whatYouCanDo": [
+      "Engage with content and deepen your understanding of the Epsilon Program.",
+      "Participate in events and connect with other Enthusiasts.",
+      "Seek guidance from Cris Formage."
     ],
-    profileLink: '#',
-    newsLink: '#',
-    message: 'Congratulations on taking the next step, Evangelist!',
+    "profileLink": "#",
+    "newsLink": "#",
+    "message": "Welcome to the Epsilon Program, Enthusiast! Your journey begins here."
   },
-  3: {
-    tier: 'Epsilon Visionary',
-    benefits: [
-      'All Epsilon Evangelist benefits',
-      'Access to exclusive Epsilon Program masterclasses',
-      'Personalized mentorship from Cris Formage',
+  "2": {
+    "tier": "Epsilon Evangelist",
+    "introduction": "As an Epsilon Evangelist, you are advancing your journey with deeper insights and enhanced opportunities.",
+    "benefits": [
+      "Advanced Content: Access to more in-depth and advanced Epsilon Program materials.",
+      "Priority Invitations: Receive priority access to exclusive events and ceremonies."
     ],
-    profileLink: '#',
-    newsLink: '#',
-    message: 'Welcome to the inner circle, Visionary!',
+    "whatYouCanDo": [
+      "Explore advanced content that builds on your Enthusiast experience.",
+      "Enjoy priority invitations to special events and ceremonies."
+    ],
+    "profileLink": "#",
+    "newsLink": "#",
+    "message": "Congratulations on taking the next step, Evangelist! Your dedication is commendable."
   },
+  "3": {
+    "tier": "Epsilon Visionary",
+    "introduction": "Welcome to the Epsilon Visionary tier, where you gain unparalleled access and opportunities within the Epsilon Program.",
+    "benefits": [
+      "Masterclasses: Participate in exclusive masterclasses led by Cris Formage.",
+      "Personalized Mentorship: Receive one-on-one mentorship from our leader, offering deep insights and guidance."
+    ],
+    "whatYouCanDo": [
+      "Attend masterclasses to further your knowledge and practice.",
+      "Receive direct mentorship to refine your journey and understanding."
+    ],
+    "profileLink": "#",
+    "newsLink": "#",
+    "message": "Welcome to the inner circle, Visionary! Your commitment to the Epsilon Program is extraordinary."
+  }
 };
 
 export default MembershipLayout;

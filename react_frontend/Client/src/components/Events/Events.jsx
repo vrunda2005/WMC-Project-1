@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Assuming you're using react-router-dom
 
-const EventForm = () => {
+const Events = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
@@ -160,4 +160,5 @@ const EventForm = () => {
   );
 };
 
-export default EventForm;
+export default Events;
+

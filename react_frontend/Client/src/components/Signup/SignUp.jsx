@@ -77,8 +77,8 @@ export default function App() {
 
   return (
     <>
-      <div className={`h-[600px] flex justify-center items-center`}>
-        <div className={`max-w-md h-fit w-full p-6 ${containerBgColor} rounded shadow-md`}>
+      <div className={`h-screen flex justify-center items-center ${overlayColor}`}>
+        <div className={` max-w-md  w-full p-6 ${containerBgColor} rounded shadow-md`}>
           <form className={`flex flex-col gap-2`} onSubmit={handleSubmit}>
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/4/47/Epsilon_Program_Logo.png"

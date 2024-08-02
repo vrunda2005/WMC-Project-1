@@ -67,8 +67,8 @@ export default function Login() {
   const buttonHoverBgColor = theme === 'blue' ? 'hover:bg-green-600' : 'hover:bg-yellow-600';
 
   return (
-    <div className={`h-[540px] flex justify-center items-center ${overlayColor} `}>
-      <div className={`max-w-md h-fit w-full p-6 ${containerBgColor} rounded shadow-md`}>
+    <div className={`h-screen flex justify-center items-center ${overlayColor} `}>
+      <div className={`max-w-md h-fit w-full p-6 ${containerBgColor} rounded-lg opacity-90 shadow-md`}>
         <form className={`flex flex-col gap-2`} onSubmit={handleSubmit}>
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/4/47/Epsilon_Program_Logo.png"
