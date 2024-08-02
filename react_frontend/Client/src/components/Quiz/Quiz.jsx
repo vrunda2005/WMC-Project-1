@@ -159,88 +159,93 @@ function Quiz() {
   };
 
   return (
-    <div className={`${containerBgColor} min-h-screen flex flex-col items-center justify-center border`}>
-      {auth.isLoggedIn ? (
-        <div className={`${sectionBgColor} mt-10 border ${textPrimaryColor} border-blue-400 w-full max-w-4xl mx-auto p-6 md:p-8 lg:p-10 rounded-xl py-10`}>
-          {acceptedTerms ? (
-            canTakeQuiz ? (
-              result ? (
-                <>
-                  <h2 className="mt-10 text-lg md:text-xl lg:text-2xl">
-                    You scored <span className="font-semibold text-2xl">{score}</span> out of {randomQuestions.length}
-                  </h2>
-                  <button
-                    onClick={finishQuiz}
-                    className={`bg-blue-200 block mx-auto w-28 md:w-32 lg:w-36 mt-8 p-2 rounded-lg ${buttonHoverBgColor} transition-all`}
-                  >
-                    Finish
-                  </button>
-                </>
+    <div className='flex justify-end p-10 ml-[25vw] min-h-screen'>
+      <div className='fixed left-0 top-30 flex flex-col p-16'>
+        <h1 className='text-9xl text-left text-white m-0 p-0'>QUIZ</h1>
+      </div>
+      <div className={`${containerBgColor} min-h-screen flex flex-col items-center justify-center border w-full`}>
+        {auth.isLoggedIn ? (
+          <div className={`${sectionBgColor} mt-10 border ${textPrimaryColor} border-blue-400 w-full max-w-4xl mx-auto p-6 md:p-8 lg:p-10 rounded-xl py-10`}>
+            {acceptedTerms ? (
+              canTakeQuiz ? (
+                result ? (
+                  <>
+                    <h2 className="mt-10 text-lg md:text-xl lg:text-2xl">
+                      You scored <span className="font-semibold text-2xl">{score}</span> out of {randomQuestions.length}
+                    </h2>
+                    <button
+                      onClick={finishQuiz}
+                      className={`bg-blue-200 block mx-auto w-28 md:w-32 lg:w-36 mt-8 p-2 rounded-lg ${buttonHoverBgColor} transition-all`}
+                    >
+                      Finish
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <h2 className="mt-10 text-xl md:text-2xl lg:text-3xl">
+                      {index + 1}. {question.question}
+                    </h2>
+                    <ul className="mt-8 flex flex-col gap-2">
+                      <li ref={option1} onClick={(e) => checkAns(e, 1)} className="border p-2 rounded-md ml-8 hover:cursor-pointer">
+                        {question.option1}
+                      </li>
+                      <li ref={option2} onClick={(e) => checkAns(e, 2)} className="border p-2 rounded-md ml-8 hover:cursor-pointer">
+                        {question.option2}
+                      </li>
+                      <li ref={option3} onClick={(e) => checkAns(e, 3)} className="border p-2 rounded-md ml-8 hover:cursor-pointer">
+                        {question.option3}
+                      </li>
+                      <li ref={option4} onClick={(e) => checkAns(e, 4)} className="border p-2 rounded-md ml-8 hover:cursor-pointer">
+                        {question.option4}
+                      </li>
+                    </ul>
+                    <button onClick={next} className={`block mx-auto w-28 md:w-32 lg:w-36 mt-8 p-2 rounded-lg ${buttonHoverBgColor} transition-all`}>
+                      Next
+                    </button>
+                    <div className="mt-4 text-sm md:text-base">
+                      {index + 1} of {randomQuestions.length} questions
+                    </div>
+                  </>
+                )
               ) : (
-                <>
-                  <h2 className="mt-10 text-xl md:text-2xl lg:text-3xl">
-                    {index + 1}. {question.question}
-                  </h2>
-                  <ul className="mt-8 flex flex-col gap-2">
-                    <li ref={option1} onClick={(e) => checkAns(e, 1)} className="border p-2 rounded-md ml-8 hover:cursor-pointer">
-                      {question.option1}
-                    </li>
-                    <li ref={option2} onClick={(e) => checkAns(e, 2)} className="border p-2 rounded-md ml-8 hover:cursor-pointer">
-                      {question.option2}
-                    </li>
-                    <li ref={option3} onClick={(e) => checkAns(e, 3)} className="border p-2 rounded-md ml-8 hover:cursor-pointer">
-                      {question.option3}
-                    </li>
-                    <li ref={option4} onClick={(e) => checkAns(e, 4)} className="border p-2 rounded-md ml-8 hover:cursor-pointer">
-                      {question.option4}
-                    </li>
-                  </ul>
-                  <button onClick={next} className={`block mx-auto w-28 md:w-32 lg:w-36 mt-8 p-2 rounded-lg ${buttonHoverBgColor} transition-all`}>
-                    Next
+                <div className="mt-10 text-lg md:text-xl lg:text-2xl">
+                  <h2>You have already taken the quiz. Please come back after 24 hours.</h2>
+                  <p>Time remaining: {formatRemainingTime(remainingTime)}</p>
+                  <button
+                    onClick={() => setAcceptedTerms(false)}
+                    className="mt-12 text-sm md:text-base lg:text-lg hover:font-bold transition-all flex items-center"
+                  >
+                    <svg
+                      width="20"  // Adjust the size as needed
+                      height="20"  // Adjust the size as needed
+                      viewBox="0 0 512 512"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <polygon points="352,128.4 319.7,96 160,256 160,256 160,256 319.7,416 352,383.6 224.7,256" />
+                    </svg>
+                    Back to Terms
                   </button>
-                  <div className="mt-4 text-sm md:text-base">
-                    {index + 1} of {randomQuestions.length} questions
-                  </div>
-                </>
+                </div>
               )
             ) : (
-              <div className="mt-10 text-lg md:text-xl lg:text-2xl">
-                <h2>You have already taken the quiz. Please come back after 24 hours.</h2>
-                <p>Time remaining: {formatRemainingTime(remainingTime)}</p>
-                <button
-                  onClick={() => setAcceptedTerms(false)}
-                  className="mt-12 text-sm md:text-base lg:text-lg hover:font-bold transition-all flex items-center"
-                >
-                  <svg
-                    width="20"  // Adjust the size as needed
-                    height="20"  // Adjust the size as needed
-                    viewBox="0 0 512 512"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <polygon points="352,128.4 319.7,96 160,256 160,256 160,256 319.7,416 352,383.6 224.7,256" />
-                  </svg>
-                  Back to Terms
-                </button>
-              </div>
-            )
-          ) : (
-            <TermsAndConditions onAccept={() => setAcceptedTerms(true)} />
-          )}
-        </div>
-      ) : (
-        <div className="mt-2 text-center mb-12 px-4">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">Sign in to continue</h2>
-          <p className="text-gray-600 mb-4">Please sign in to continue to quiz and contribute to our community.</p>
-          <button
-            className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg mt-4"
-            onClick={() => {
-              navigate(`/Login`);
-            }}
-          >
-            Sign In
-          </button>
-        </div>
-      )}
+              <TermsAndConditions onAccept={() => setAcceptedTerms(true)} />
+            )}
+          </div>
+        ) : (
+          <div className="mt-2 text-center mb-12 px-4">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">Sign in to continue</h2>
+            <p className="text-gray-600 mb-4">Please sign in to continue to quiz and contribute to our community.</p>
+            <button
+              className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg mt-4"
+              onClick={() => {
+                navigate(`/Login`);
+              }}
+            >
+              Sign In
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
