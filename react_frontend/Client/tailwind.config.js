@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+
+
 export default {
   mode: 'jit',
   content: [
@@ -7,6 +9,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        pricedown: ['Pricedown', 'sans-serif'],
+      },
       colors: {
         blue: {
           'primary-bg': '#0284c7',       // Deep blue for background to ensure readability
@@ -17,7 +22,7 @@ export default {
           'text-light': '#082f49',       // Light blue text color, readable on dark backgrounds
           'text-blue': '#93c5fd',        // Darker blue text color, good on lighter backgrounds
           'text-dark': '#06b6d4',        // Very dark blue for text on light backgrounds
-          
+           
           'accent': '#d8b4fe',           // Accents in bright blue
           'muted': '#BFDBFE',            // Muted light blue for less prominent text
           'success': '#34D399',          // Green for success messages
@@ -52,6 +57,7 @@ export default {
           '0%': { opacity: 1, transform: 'translateY(0)' },
           '100%': { opacity: 0, transform: 'translateY(20px)' },
         },
+
       },
       animation: {
         fadeIn: 'fadeIn 1s ease-in-out',

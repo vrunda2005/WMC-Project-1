@@ -1,4 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Josefin+Sans&family=Just+Me+Again+Down+Here&family=Teko:wght@300..700&family=Tektur:wght@400..900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Pricedown&display=swap'); */
+
+@font-face{
+  font-family: myvrunda;
+  src: url('../src/assets/pricedown.otf');
+}
+
 
 @tailwind base;
 @tailwind components;
@@ -8,7 +14,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Josefin Sans', sans-serif; /* Updated to a modern font for better readability */
+  font-family: 'Poppins'; /* Default font */
 }
 
 body {
@@ -17,10 +23,8 @@ body {
   background-size: cover;
   background-position: center;
   color: var(--text-color);
- font-family: "Tektur", sans-serif; 
- background-color: var(--bg-color); /* Fallback color */
-
-  /* Ensure body fills the viewport */
+  font-family: 'Pricedown', sans-serif; /* Apply GTA V font to body */
+  background-color: var(--bg-color); /* Fallback color */
 }
 
 :root {
@@ -36,19 +40,16 @@ body {
   --text-color: #edf2f7;
   --accent-color: #fbbf24; /* Light Accent Color for dark theme */
   --overlay-opacity: rgba(0, 0, 0, 0.7); /* Darker overlay for dark theme */
-  --background-image:  url('./assets/images/bg.png'); /* Dark Theme Background Image */
+  --background-image: url('./assets/images/bg.png'); /* Dark Theme Background Image */
 }
 
-/* Background image for the container */
 .page-background {
-  background-image:  url('./assets/images/bg.png'); 
+  background-image: url('./assets/images/bg.png'); 
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
 
-
-/* Overlay for readability */
 .overlay {
   position: absolute;
   top: 0;
@@ -59,17 +60,15 @@ body {
   z-index: 0; /* Place it behind content */
 }
 
-/* Ensure text is above the overlay */
 .content {
   position: relative;
   z-index: 1;
 }
 
-/* Dark blue theme styling for headings */
 @media (prefers-color-scheme: dark) {
   h1, h2, h3 {
-    font-family: 'Tektur', sans-serif;
-    text-shadow: 1px 0px 0px rgba(255, 255, 255, 0.6); /* Adds a subtle glow effect */
+    font-family: '', sans-serif; /* GTA V theme font */
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6); /* Subtle glow effect */
     padding: 0.5rem; /* Padding around the text */
     margin-bottom: 1rem; /* Spacing between headings and content */
     letter-spacing: 0.09em; /* Adjust spacing between characters */
@@ -94,24 +93,18 @@ body {
     color: #e131a1; /* Steel Blue */
     margin-bottom: 1rem;
   }
+
   p {
-    font-family: 'Tektur',; /* Distinct font for paragraphs */
-    /* color: #f59e0b; */
+    font-family: 'Pricedown', sans-serif; /* GTA V font for paragraphs */
     line-height: 2.6;
     font-size: medium;
-    color:#eee8aa;
+    color: #eee8aa;
   }
 }
 
-
-
-
-
-/* Button styles */
 button {
-  font-family: 'Tektur', sans-serif;
+  font-family: 'Pricedown', sans-serif; /* GTA V font for buttons */
   background-color: var(--accent-color);
-   /* Accent color for buttons */
   color: var(--text-color);
   border: none;
   padding: 0.5rem 1rem;
@@ -121,16 +114,15 @@ button {
 }
 
 button:hover {
-  background-color: darken(var(--accent-color), 10%); /* Darker shade on hover */
-  transform: scale(1.05); /* Slightly scale button on hover */
+  background-color: #d97706;
+  transform: scale(1.05);
 }
 
 button:active {
-  background-color: darken(var(--accent-color), 20%); /* Even darker on click */
-  transform: scale(0.95); /* Slightly scale button down on click */
+  background-color: #b45309;
+  transform: scale(0.95);
 }
 
-/* Add some spacing and shadow to card elements */
 .card {
   background-color: var(--bg-color);
   border-radius: 0.5rem;
@@ -138,12 +130,8 @@ button:active {
   padding: 1.5rem;
   margin: 1rem;
 }
+
 .footer {
   position: relative;
   z-index: 10; /* Higher than parallax sections */
 }
-
-
-
-
-/* font-family: "Tektur", sans-serif; */
