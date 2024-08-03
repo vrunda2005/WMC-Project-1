@@ -84,17 +84,17 @@ const StoryPage = () => {
       <div className={`min-h-screen ${overlay} max-w-screen-lg mx-auto py-8 px-4 sm:px-6 lg:px-8`}>
         {auth.isLoggedIn ? (
           <>
-            <div className="mt-8">
-              <h2 className={`text-2xl font-bold mb-4 ${textSecondary}`}>Add Your Story</h2>
+            <div className="mb-12 bg-white rounded-lg shadow-xl p-6">
+              <h2 className={`text-3xl font-bold mb-4 ${textSecondary}`}>Add Your Story</h2>
               <textarea
-                className="w-full p-4 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-4 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 rows="5"
                 placeholder="Share your story..."
                 value={newStory}
                 onChange={(e) => setNewStory(e.target.value)}
               />
               <button
-                className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-lg"
+                className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1"
                 onClick={handleAddStory}
               >
                 Submit Story

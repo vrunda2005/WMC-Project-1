@@ -184,6 +184,9 @@ const Navbar = () => {
           ) : (
             <>
               <li>
+                <Link to="/Profile" className={`hover:underline ${window.location.pathname === '/Profile' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Profile</Link>
+              </li>
+              <li>
                 <Link to={auth.membership_id ? `/epsilon_program_membership/${auth.membership_id}` : '/membership'} className={`hover:underline ${window.location.pathname.includes('/epsilon_program_membership') || window.location.pathname === '/membership' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Membership</Link>
               </li>
               <li>
