@@ -118,7 +118,7 @@ function Donate() {
   const bgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
   const textColor = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
   const buttonColor = theme === 'blue' ? 'bg-green-600 hover:bg-green-800' : 'bg-green-600 hover:bg-green-800';
-  const overlayColor = theme === 'blue' ? 'bg-blue-overlay' : 'bg-dark-overlay';
+  const overlayColor = theme === 'blue' ? 'bg-blue-light bg-opacity-50' : 'bg-gray-900 bg-opacity-50';
 
   return (
     <div className='flex justify-end p-10 ml-[25vw] min-h-screen'>
@@ -136,7 +136,17 @@ function Donate() {
             </svg>
           </div>
 
+    
+
           <div className="relative z-10 p-6 md:p-12">
+            <div className='flex justify-center'>
+          <img
+  className="w-[48%] h-[48%] max-w-full object-cover rounded-full shadow-md border-2 "
+  src="https://static1.srcdn.com/wordpress/wp-content/uploads/2020/03/GTA-Red-Dead-Redemption-2-Time-Travel.jpg"
+  alt="img"
+/>
+</div>
+    
             <header className="text-center py-12">
               <motion.h1
                 className={`text-5xl font-bold mb-4 text-white`}

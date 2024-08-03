@@ -27,7 +27,7 @@ const InquiryForm = () => {
 
      await  Swal.fire({
       title: 'Thank You!',
-      text: 'Your Inquiry has been send successful!',
+      text: 'Your Inquiry has been send successful! Thank you for connecting with the Epsilon Program.',
       icon: 'success',
       confirmButtonText: 'OK'
       })
@@ -50,6 +50,9 @@ const InquiryForm = () => {
   const sectionBgColor = theme === 'blue' ? 'bg-blue-secondary-bg' : 'bg-dark-secondary-bg';
   const textPrimaryColor = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
   const buttonHoverBgColor = theme === 'blue' ? 'hover:bg-blue-accent' : 'hover:bg-dark-accent';
+  const overlayColor = theme === 'blue' ? 'bg-blue-light bg-opacity-50' : 'bg-gray-900 bg-opacity-50';
+  const shade = theme === 'blue' ? 'bg-white bg-opacity-50' : 'bg-blue- bg-opacity-50';
+
 
   return (
     <div className='flex justify-end p-10 ml-[25vw] min-h-screen'>
@@ -57,13 +60,23 @@ const InquiryForm = () => {
         <h1 className='text-8xl text-left text-white m-0 p-0'>INQUIRY</h1>
         <h1 className='text-9xl text-left text-white m-0 p-0'>FORM</h1>
       </div>
-      <div className={`mx-auto p-6 text-white rounded-lg shadow-lg ${containerBgColor} w-full`}>
+      <div className={`mx-auto  text-white rounded-lg shadow-lg ${containerBgColor} ${overlayColor} w-full`}>
         {auth.isLoggedIn ? (
         <>
-              <div className={`${containerBgColor}`}>
-              <div className={` mt-10 max-h-screen  mx-auto p-6 rounded-xl py-10  `}>
-
-          <p className="text-3xl text-gray-400 mb-8 p-8">Feel free to reach out with any questions or concerns, and we will respond to you promptly via your email address.</p>
+              <div className={``}>
+              <div className={` mt-10 max-h-screen  mx-auto p-10 rounded-xl py-10 mb-10 `}>
+                <div className='flex flex-row'>
+                <h1>Your problem our soultion</h1>
+                <img
+  className="w-[55%] h-auto max-w-full object-cover rounded-full shadow-md border-2 "
+  src="https://static1.srcdn.com/wordpress/wp-content/uploads/2020/03/GTA-Red-Dead-Redemption-2-Time-Travel.jpg"
+  alt="img"
+/>
+                </div>
+          <p className='pt-6'>At the Epsilon Program, we cherish the quest for wisdom and truth. If you have any questions or need further guidance, please don’t hesitate to reach out to us. Our dedicated team is here to assist you and provide the support you need on your journey.
+          </p>
+          <p >
+            Feel free to reach out with any questions or concerns, and we will respond to you promptly via your email address.</p>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="message" className="block text-3xl font-medium mb-6">Message</label>
@@ -71,7 +84,7 @@ const InquiryForm = () => {
                 id="message"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="w-full p-4 border border-gray-500 rounded-md bg-gray-900 text-white"
+                className="w-[50%] p-4 border border-gray-500 rounded-md bg-gray-900 text-white"
                 rows="4"
                 required
               ></textarea>
@@ -110,3 +123,7 @@ const InquiryForm = () => {
 };
 
 export default InquiryForm;
+
+
+
+
