@@ -1,4 +1,3 @@
-// server
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
@@ -6,8 +5,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import { v2 as cloudinary } from 'cloudinary';
-// import multer from 'multer';
-// const upload = multer({ dest: 'uploads/' });
+import fileUpload from 'express-fileupload';
 
 
 dotenv.config();
@@ -365,18 +363,6 @@ cloudinary.config({
   api_key: '868667515988417', 
   api_secret: 'y9S2ipJCaLIV52IQ6lFQQtdipk8' // Click 'View Credentials' below to copy your API secret
 });
-
-// async function uploadFileToCloudinary(file, folder, quality){
-//   const options = {folder};
-//   options.resource_type = "auto";
-
-//   if(quality){
-//       options.quality = quality;
-//   }
-
-//   return await cloudinary.uploader.upload(file.tempFilePath, options);
-// }
-import fileUpload from 'express-fileupload';
 
 app.use(fileUpload({
   useTempFiles: true,
