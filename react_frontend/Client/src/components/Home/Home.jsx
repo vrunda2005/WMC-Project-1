@@ -94,8 +94,40 @@ const PageTwo = ({ stories }) => {
 };
 
 
-// export default PageTwo;
+const HoverCard = ({ title, description, image }) => {
+  return (
+    <div className="max-w-2xl rounded overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl transform hover:-translate-y-2">
+      <div className="relative overflow-hidden">
+        <img className="w-full object-cover transition-transform duration-300 transform hover:scale-110" src={image} alt={title} />
+      </div>
+      <div className="px-6 py-4 bg-white">
+        <div className="font-bold text-xl mb-2 text-gray-800">{title}</div>
+        <p className="text-gray-700 text-base h-0 opacity-0 transition-all duration-300 overflow-hidden group-hover:h-auto group-hover:opacity-100">{description}</p>
+      </div>
+    </div>
+  );
+};
 
+const PageFour = ({news,loading}) => {
+  const { theme } = useTheme();
+  const containerBgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
+  const textPrimaryColor = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
+
+  const displayNews = news.slice(0, 3);
+
+  return (
+    <div className={`flex flex-col items-center justify-center min-h-screen  ${textPrimaryColor} p-8`}>
+      <h1 className=" font-bold mb-10">Epsilon News </h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {displayNews.map((card, index) => (
+          <div key={index} className="group">
+            <HoverCard {...card} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 
 const PageThree = ({ events, loading }) => {
@@ -158,6 +190,11 @@ const PageThree = ({ events, loading }) => {
 
 
 
+   
+
+
+
+
 // export default PageThree;
 // Content mapping
 
@@ -168,6 +205,7 @@ const Home = () => {
   const [slideIdx, setSlideIdx] = useState(0);
   const [stories, setStories] = useState([]);
   const [events, setEvents] = useState([]);
+  const [News, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const {theme} = useTheme();
 
@@ -192,6 +230,19 @@ const Home = () => {
       })
       .catch(error => console.error(error))
       .finally(() => setLoading(false));
+
+      axios.get('http://localhost:5000/news')
+      .then(response => {
+        const News = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setNews(News || []);
+      })
+      .catch(error => console.error(error))
+      .finally(() => setLoading(false));
+
+      
+      
+
+
   }, []);
 
   const slideDurationTimeout = (slideDuration) => {
@@ -230,8 +281,10 @@ const Home = () => {
   const content = [
     <PageOne/>,
     <Page_description/>,
+    <PageFour key="pageFour" news={News} loading={loading}  />,
     <PageTwo key="pageTwo" stories={stories} />,
     <PageThree key="pageThree" events={events} loading={loading}  />,
+  
   ];
   const totalSlideNumber = content.length;
   console.log(totalSlideNumber);
