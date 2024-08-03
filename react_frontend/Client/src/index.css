@@ -4,7 +4,10 @@
   font-family: myvrunda;
   src: url('../src/assets/pricedown.otf');
 }
-
+@font-face{
+  font-family: sitter;
+  src: url('../src/assets/Slitter-W2GE.ttf');
+}
 
 @tailwind base;
 @tailwind components;
