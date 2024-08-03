@@ -5,7 +5,9 @@ import cors from 'cors';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
-
+import { v2 as cloudinary } from 'cloudinary';
+// import multer from 'multer';
+// const upload = multer({ dest: 'uploads/' });
 
 
 dotenv.config();
@@ -358,16 +360,57 @@ app.get('/api/events', async (req, res) => {
   }
 });
 
-app.post('/api/events', async (req, res) => {
-  const { title, description, date, time, image, venue, duration, mode } = req.body;
+cloudinary.config({ 
+  cloud_name: 'dbztb7wzq', 
+  api_key: '868667515988417', 
+  api_secret: 'y9S2ipJCaLIV52IQ6lFQQtdipk8' // Click 'View Credentials' below to copy your API secret
+});
 
-  if (!title || !description || !date || !time || !venue || !duration || !mode) {
+// async function uploadFileToCloudinary(file, folder, quality){
+//   const options = {folder};
+//   options.resource_type = "auto";
+
+//   if(quality){
+//       options.quality = quality;
+//   }
+
+//   return await cloudinary.uploader.upload(file.tempFilePath, options);
+// }
+import fileUpload from 'express-fileupload';
+
+app.use(fileUpload({
+  useTempFiles: true,
+  tempFileDir: '/tmp/'
+}));
+
+app.post('/api/events', async (req, res) => {
+  const { title, description, date, time, venue, duration, mode } = req.body;
+  const file = req.files && req.files.file;
+
+  if (!title || !description || !date || !time || !venue || !duration || !mode ) {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
-  const newEvent = new Event({ title, description, date, time, image, venue, duration, mode });
+  const options = {
+    folder: "events",
+    quality: 90,
+    resource_type: "auto",
+  };
 
   try {
+    const response = await cloudinary.uploader.upload(file.tempFilePath, options);
+
+    const newEvent = new Event({ 
+      title, 
+      description, 
+      date, 
+      time, 
+      image: response.secure_url,
+      venue, 
+      duration, 
+      mode 
+    });
+
     const savedEvent = await newEvent.save();
     res.status(201).json(savedEvent);
   } catch (error) {
@@ -375,6 +418,7 @@ app.post('/api/events', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 app.delete('/api/events/:id', async (req, res) => {
   try {
