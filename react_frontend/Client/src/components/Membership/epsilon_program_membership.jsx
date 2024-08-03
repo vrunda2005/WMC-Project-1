@@ -262,7 +262,7 @@ const MembershipLayout = () => {
 
   const handleCancelMembership = async () => {
     try {
-      const response = await fetch('http://localhost:5000/cancel', {
+      const response = await fetch('https://wmc-project-av5d.onrender.com/cancel', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: auth.username }),

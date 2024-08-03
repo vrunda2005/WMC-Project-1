@@ -8,7 +8,7 @@ const AdminNewsForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/news', {
+      const response = await fetch('https://wmc-project-av5d.onrender.com/news', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title, description, image }),

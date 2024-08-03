@@ -19,14 +19,14 @@ function Home() {
   useEffect(() => {
     setLoading(true);
 
-    axios.get('http://localhost:5000/api/events')
+    axios.get('https://wmc-project-av5d.onrender.com/api/events')
       .then(response => {
         const sortedEvents = response.data.sort((a, b) => new Date(a.date) - new Date(b.date));
         setEvents(sortedEvents || []);
       })
       .catch(error => console.error(error));
 
-    axios.get('http://localhost:5000/stories')
+    axios.get('https://wmc-project-av5d.onrender.com/stories')
       .then(response => {
         const sortedStories = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
         setStories(sortedStories || []);

@@ -29,7 +29,7 @@ const Events = () => {
     formData.append('duration', duration);
     formData.append('mode', mode);
 
-    axios.post('http://localhost:5000/api/events', formData, {
+    axios.post('https://wmc-project-av5d.onrender.com/api/events', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
