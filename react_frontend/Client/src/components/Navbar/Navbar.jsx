@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaRegUser, FaSun, FaMoon, FaBars, FaTimes } from 'react-icons/fa';
+import { FaRegUser, FaSun, FaMoon, FaBars, FaTimes ,FaCaretDown} from 'react-icons/fa';
 import { MdCurrencyBitcoin } from 'react-icons/md';
 import { useAuth } from '../../creatContext';
 import { useTheme } from '../../usetheamContext';
@@ -13,6 +13,8 @@ const Navbar = () => {
   const [auth, setAuth] = useAuth();
   const { theme, toggleTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
 
   useEffect(() => {
     console.log('Auth state:', auth);
@@ -45,7 +47,7 @@ const Navbar = () => {
     });
   };
   
-  const headerClass = `sticky top-0 z-50 p-4 md:p-6 flex justify-between items-center ${
+  const headerClass = `sticky top-0 z-50 p-4 md:p-6 flex justify-between  ${
     theme === 'blue' ? 'bg-blue-primary-bg text-blue-text-light' : 'bg-dark-primary-bg text-dark-text-light'
   }`;
 
@@ -146,9 +148,9 @@ const Navbar = () => {
       </nav>
 
       {/* Desktop Menu */}
-      <nav className="hidden md:flex items-center space-x-4 flex-wrap">
+      <nav className="hidden md:flex items-center space-x-10 flex-wrap  flex-center justify-between">
         {auth.isLoggedIn && (
-          <div className="flex items-center space-x-2 hover:underline">
+          <div className="flex  space-x-2 hover:underline">
             <FaRegUser size="1.5em" />
             <span className="ml-2 truncate">{auth.username}</span>
           </div>
@@ -159,7 +161,7 @@ const Navbar = () => {
             <span className="ml-2 truncate">{auth.userPoints}</span>
           </div>
         )}
-        <ul className="flex space-x-4">
+        <ul className="flex flex-center items-center justify-between space-x-10">
           <li>
             <Link to="/" className={`hover:underline ${window.location.pathname === '/' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Home</Link>
           </li>
@@ -198,13 +200,13 @@ const Navbar = () => {
               <li>
                 <Link to="/Donate" className={`hover:underline ${window.location.pathname === '/Donate' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Donate</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to='/About' className={`hover:underline ${window.location.pathname === '/About' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>About</Link>
               </li>
               <li>
                 <Link to='/Quiz' className={`hover:underline ${window.location.pathname === '/Quiz' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Quiz</Link>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <Link to='/epsilonMap' className={`hover:underline ${window.location.pathname === '/epsilonMap' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>EpsilonMap</Link>
               </li>
               <li>
@@ -212,7 +214,56 @@ const Navbar = () => {
               </li>
               <li>
                 <Link to='/News' className={`hover:underline ${window.location.pathname === '/inquiryForm' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>News</Link>
+              </li> */}
+
+                    {/* Dropdown Menu */}
+          <div className="relative">
+            <button
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className={`relative inline-block px-4 py-2 hover:underline ${isDropdownOpen ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}
+            >
+              More <FaCaretDown className="inline ml-2" />
+            </button>
+            {isDropdownOpen && (
+              <ul className="absolute mt-2 right-0 bg-white dark:bg-gray-800 shadow-lg rounded-lg w-48 z-10" >
+                <li>
+                  <Link
+                    to="/About"
+                    className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${location.pathname === '/About' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}
+                  >
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/epsilonMap"
+                    className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${location.pathname === '/epsilonMap' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}
+                  >
+                    EpsilonMap
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/inquiryForm"
+                    className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${location.pathname === '/inquiryForm' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}
+                  >
+                    Inquiry Form
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/News"
+                    className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${location.pathname === '/News' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}
+                  >
+                    News
+                  </Link>
+                </li>
+                <li>
+                <Link to='/Quiz' className={`hover:underline ${window.location.pathname === '/Quiz' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Quiz</Link>
               </li>
+              </ul>
+            )}
+          </div>
             </>
           )}
         </ul>
@@ -231,6 +282,12 @@ const Navbar = () => {
           </div>
         )}
       </nav>
+
+
+
+
+
+      
     </header>
   );
 };
