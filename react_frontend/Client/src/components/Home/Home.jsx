@@ -8,28 +8,34 @@ import { useAuth } from '../../creatContext';
 import Style from './style';
 import Page_description from './Page_description';
 import { ReactTyped } from 'react-typed';
+import 'bootstrap/dist/css/bootstrap.css';
+import vid from '../../assets/images/video_gta.mp4'
 
 const PageOne = () => {
-  
   return (
-  <div className='flex flex-col items-center justify-center h-screen'>
-  <ReactTyped
-
-      className='md:text-3xl sm:text-4xl font-bold p-20 md:py-6 w-auto h-auto flex justify-center items-center text-sky-200 border-2 rounded-lg border-sky-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f]'
-      strings={[
-        "Welcome to the Epsilon Program!",
-        "Discover cosmic truths and transcend the ordinary.",
-        "Join our journey to spiritual enlightenment.",
-        "Explore our beliefs and embrace inner peace.",
-        "Become a member today and start your transformation!"
-      ]}
-      typeSpeed={80}
-      backSpeed={10}
-      loop
-    />
-  </div>
-  )
+    <>
+     
+        <video className="background-video" src={vid} alt="Video" autoPlay loop muted />
+        <div className="parallax-wrapper">
+          <ReactTyped
+            className='md:text-3xl sm:text-4xl font-bold p-20 md:py-6 w-auto h-auto flex text-zinc-900 border-2 rounded-lg border-zinc-800 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f]'
+            strings={[
+              "Welcome to the Epsilon Program!",
+              "Discover cosmic truths and transcend the ordinary.",
+              "Join our journey to spiritual enlightenment.",
+              "Explore our beliefs and embrace inner peace.",
+              "Become a member today and start your transformation!"
+            ]}
+            typeSpeed={80}
+            backSpeed={10}
+            loop
+          />
+        </div>
+      
+    </>
+  );
 };
+
 
 
 
@@ -307,8 +313,8 @@ const Home = () => {
 
         return (
           <section key={i} className={`${textColor} ${classNames}`}>
-            <div className={`${textColor} parallax-wrapper`}>
-              <div className={`${textColor}content`}>
+            <div className={`${textColor}`}>
+              <div className={`${textColor}`}>
                 {Component}
               </div>
             </div>
