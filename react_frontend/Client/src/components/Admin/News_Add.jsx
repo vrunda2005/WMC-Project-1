@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
+ 
 
 const AdminNewsForm = () => {
   const [title, setTitle] = useState('');

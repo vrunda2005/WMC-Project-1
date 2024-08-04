@@ -71,12 +71,12 @@ function Blog() {
       <div className='flex justify-end p-10 ml-[25vw] min-h-screen'>
         {auth.isAdmin ? (
           <div className='fixed left-0 top-30 flex flex-col p-16'>
-            <h1 className='text-9xl text-left text-white m-0 p-0'>EVENTS</h1>
+            <h1 className='text-5xl text-left text-white m-0 p-0'>EVENTS</h1>
           </div>
         ) : (
           <div className='fixed left-0 top-30 flex flex-col p-16'>
-            <h1 className='text-9xl text-left text-white m-0 p-0'>EVENT</h1>
-            <h1 className='text-8xl text-left text-white m-0 p-0'>CALENDAR</h1>
+            <h1 className='text-5xl text-left text-white m-0 p-0'>EVENT</h1>
+            <h1 className='text-4xl text-left text-white m-0 p-0'>CALENDAR</h1>
           </div>
         )}
         <div className="max-w-screen-xl justify-end w-full">
@@ -97,7 +97,7 @@ function Blog() {
                       {upcomingEvents.map((event) => (
                         <div
                           key={event._id}
-                          className="flex bg-white shadow-lg rounded-lg overflow-hidden transform transition-all duration-300"
+                          className="flex bg-zinc-900 shadow-lg rounded-lg overflow-hidden transform transition-all duration-300"
                         >
                           <div className="w-80 bg-gray-800 text-white flex-shrink-0 p-4 text-center flex flex-col justify-center items-center relative">
                             <img src={event.image || './src/assets/images/blank.png'} className="absolute inset-0 object-cover w-full h-full opacity-30" />
@@ -108,8 +108,8 @@ function Blog() {
                           <div className="flex flex-col justify-items-start p-6 flex-1">
                             <h3 className="text-left text-3xl mb-2 font-semibold text-blue-600">{event.title}</h3>
                             <hr className='bg-black mb-4' />
-                            <p className="text-left text-2xl text-gray-600 mb-4">{event.description}</p>
-                            <p className='text-left text-2xl text-gray-600 mb-4'><span className='font-bold'>{moment(event.date).format('h:mm A')}</span> | <span className='font-bold'>{event.venue}</span> | <span className='font-bold'>{event.duration}</span> | <span className='font-bold'>{event.mode}</span></p>
+                            <p className="text-left text-2xl  mb-4">{event.description}</p>
+                            <p className='text-left text-2xl  mb-4'><span className='font-bold'>{moment(event.date).format('h:mm A')}</span> | <span className='font-bold'>{event.venue}</span> | <span className='font-bold'>{event.duration}</span> | <span className='font-bold'>{event.mode}</span></p>
     
                             {auth.isAdmin && (
                               <button

@@ -560,6 +560,7 @@ function Home() {
                 <p className="text-white mb-2 w-50">{story.story}</p>
                 <p className="text-lg mb-2 text-white text-right">- {story.username}</p>
                 <p className="text-white text-sm italic text-right">{moment(story.date).fromNow()}</p>
+             
               </div>
             ))}
           </div>

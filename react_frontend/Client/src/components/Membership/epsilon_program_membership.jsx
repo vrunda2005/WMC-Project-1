@@ -183,9 +183,9 @@ const displayNews = News.slice(0, 3);
           <Card title="Upcoming Event: The Enlightenment Gala" icon="🌟">
             <p className="mb-4">Prepare for an evening of virtual ceremonies, cosmic discussions, and interactive enlightenment exercises at the Epsilon Program's Enlightenment Gala. This is your chance to embrace the universe and connect with fellow members.</p>
             <p className="mb-4">
-              <strong>Date:</strong> [Insert Date]<br />
+              {/* <strong>Date:</strong> [Insert Date]<br />
               <strong>Time:</strong> [Insert Time]<br />
-              <strong>Location:</strong> [Insert Virtual Event Link]
+              <strong>Location:</strong> [Insert Virtual Event Link] */}
             </p>
             <p>Don your finest ceremonial robe and get ready for an unforgettable experience!</p>
           </Card>

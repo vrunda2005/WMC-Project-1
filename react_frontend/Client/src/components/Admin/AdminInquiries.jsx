@@ -24,30 +24,34 @@ const AdminInquiries = () => {
   }, []);
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-gray-800 text-white rounded-lg shadow-lg">
+    <div className="max-w mx-auto p-6 bg-gray-800 text-white rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold mb-4">All Inquiries</h2>
       {loading && <p>Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}
-      <table className="w-full bg-gray-900 border border-gray-700 rounded-lg">
-        <thead>
-          <tr>
-            <th className="p-2 border-b border-gray-700">Name</th>
-            <th className="p-2 border-b border-gray-700">Email</th>
-            <th className="p-2 border-b border-gray-700">Message</th>
-            <th className="p-2 border-b border-gray-700">Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {inquiries.map((inquiry) => (
-            <tr key={inquiry._id}  className='hover:bg-gray-600'>
-              <td className="p-2 border-b border-gray-700">{inquiry.name}</td>
-              <td className="p-2 border-b border-gray-700">{inquiry.email}</td>
-              <td className="p-2 border-b border-gray-700">{inquiry.message}</td>
-              <td className="p-2 border-b border-gray-700">{new Date(inquiry.date).toLocaleString()}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      
+      <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+  {inquiries.map((inquiry) => (
+    <div key={inquiry._id} className="bg-gray-900 border border-gray-700 rounded-lg p-4 hover:bg-gray-800">
+      <div className="mb-2">
+        <span className="font-bold text-white">Name:</span>
+        <div className="text-gray-300">{inquiry.name}</div>
+      </div>
+      <div className="mb-2">
+        <span className="font-bold text-white">Email:</span>
+        <div className="text-gray-300">{inquiry.email}</div>
+      </div>
+      <div className="mb-2">
+        <span className="font-bold text-white">Message:</span>
+        <div className="text-gray-300">{inquiry.message}</div>
+      </div>
+      <div>
+        <span className="font-bold text-white">Date:</span>
+        <div className="text-gray-300">{new Date(inquiry.date).toLocaleString()}</div>
+      </div>
+    </div>
+  ))}
+</div>
+
     </div>
   );
 };

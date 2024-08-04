@@ -57,8 +57,8 @@ const InquiryForm = () => {
   return (
     <div className='flex justify-end p-10 ml-[25vw] min-h-screen'>
       <div className='fixed left-0 top-30 flex flex-col p-16'>
-        <h1 className='text-8xl text-left text-white m-0 p-0'>INQUIRY</h1>
-        <h1 className='text-9xl text-left text-white m-0 p-0'>FORM</h1>
+        <h1 className='text-5xl text-left text-white m-0 p-0'>INQUIRY</h1>
+        <h1 className='text-5xl text-left text-white m-0 p-0'>FORM</h1>
       </div>
       <div className={`mx-auto  text-white rounded-lg shadow-lg ${containerBgColor} ${overlayColor} w-full`}>
         {auth.isLoggedIn ? (

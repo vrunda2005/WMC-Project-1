@@ -6,6 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTheme } from '../../usetheamContext';
 import Swal from 'sweetalert2';
+import login_img from '../../assets/images/epsilon_house.jpg'
 
 
 export default function Login() {
@@ -67,16 +68,16 @@ export default function Login() {
   const buttonHoverBgColor = theme === 'blue' ? 'hover:bg-green-600' : 'hover:bg-yellow-600';
 
   return (
-    <div className={`h-screen flex justify-center items-center ${overlayColor} `}>
+    <div className={`flex justify-center items-center ${overlayColor} `}>
       <div className={`max-w-md h-fit w-full p-6 ${containerBgColor} rounded-lg opacity-90 shadow-md`}>
         <form className={`flex flex-col gap-2`} onSubmit={handleSubmit}>
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/4/47/Epsilon_Program_Logo.png"
-            className={`h-36 shadow-sm`}
+            src={login_img}
+            className={`h-40 shadow-lg`}
             alt="Logo"
           />
-          <h2 className={`text-5xl font-bold mt-2 mb-8 text-center`}>Log In</h2>
-          <h1>Welcome, {auth.username ? auth.username : 'Guest'}</h1>
+          <h2 className={` font-bold mt-2  text-center`}>Log In</h2>
+          <p>Welcome, {auth.username ? auth.username : 'Guest'}</p>
           <input
             type="email"
             placeholder="Email"
