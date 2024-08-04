@@ -2,7 +2,7 @@ const Event = require('../models/Event');
 const Registration = require('../models/Registration');
 const cloudinary = require('cloudinary').v2; // Add cloudinary import if used
 
-exports.getEvents = async (req, res) => {
+const getEvents = async (req, res) => {
     try {
         const events = await Event.find();
         res.json(events);
@@ -12,7 +12,7 @@ exports.getEvents = async (req, res) => {
     }
 };
 
-exports.addEvents = async (req, res) => {
+const addEvents = async (req, res) => {
     const { title, description, date, time, venue, duration, mode } = req.body;
     const file = req.files && req.files.file;
 
@@ -20,6 +20,10 @@ exports.addEvents = async (req, res) => {
         return res.status(400).json({ error: 'All fields are required' });
     }
 
+    if (!file) {
+        return res.status(400).json({ error: 'No file uploaded' });
+    }
+    console.log('File received:', file);
     const options = {
         folder: "events",
         quality: 90,
@@ -27,6 +31,11 @@ exports.addEvents = async (req, res) => {
     };
 
     try {
+        if (!file.tempFilePath) {
+            console.error('Temp file path is missing');
+            return res.status(400).json({ error: 'File path is missing' });
+        }
+
         const response = await cloudinary.uploader.upload(file.tempFilePath, options);
 
         const newEvent = new Event({
@@ -48,7 +57,7 @@ exports.addEvents = async (req, res) => {
     }
 };
 
-exports.deleteEvent = async (req, res) => {
+const deleteEvent = async (req, res) => {
     try {
         const eventId = req.params.id;
         await Event.findByIdAndDelete(eventId);
@@ -59,7 +68,7 @@ exports.deleteEvent = async (req, res) => {
     }
 };
 
-exports.updateEvent = async (req, res) => {
+const updateEvent = async (req, res) => {
     const { title, description, date, time, image, venue, duration, mode } = req.body;
 
     try {
@@ -80,7 +89,7 @@ exports.updateEvent = async (req, res) => {
     }
 };
 
-exports.eventRegister = async (req, res) => {
+const eventRegister = async (req, res) => {
     const { eventId, eventName, name, email, phone } = req.body;
 
     if (!eventId || !eventName || !name || !email) {
@@ -102,4 +111,13 @@ exports.eventRegister = async (req, res) => {
         console.error('Error saving registration:', error);
         res.status(500).json({ error: 'Failed to register' });
     }
+};
+
+// Export the functions using module.exports
+module.exports = {
+    getEvents,
+    addEvents,
+    deleteEvent,
+    updateEvent,
+    eventRegister
 };
