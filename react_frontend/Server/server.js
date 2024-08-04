@@ -7,13 +7,25 @@ import cookieParser from 'cookie-parser';
 import { v2 as cloudinary } from 'cloudinary';
 import fileUpload from 'express-fileupload';
 
-
 dotenv.config();
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI;
 const SECRET_KEY = process.env.SECRET_KEY;
+
+
+cloudinary.config({ 
+  cloud_name: 'dbztb7wzq', 
+  api_key: '868667515988417', 
+  api_secret: 'y9S2ipJCaLIV52IQ6lFQQtdipk8' // Click 'View Credentials' below to copy your API secret
+});
+
+app.use(fileUpload({
+  useTempFiles: true,
+  tempFileDir: '/tmp/'
+}));
+
+
 
 // Allow requests from your client origin
 app.use(cors({
@@ -32,14 +44,15 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
   .then(() => console.log(`Mongodb is connected on port ${PORT}`))
   .catch((err) => console.error('Mongodb connection error', err));
 
-const userSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  password: String,
-  points: Number,
-  isAdmin: Boolean,
-  membership_id: Number,
-});
+  const userSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+    password: String,
+    image: String,
+    points: Number,
+    isAdmin: Boolean,
+    membership_id: Number,
+  });
 
 const User = mongoose.model('User', userSchema);
 
@@ -51,16 +64,28 @@ app.get('/', async (req, res) => {
 app.post('/register', async (req, res) => {
   try {
     const { name, email, password } = req.body;
+    const file = req.files && req.files.file;
+
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(409).json({ error: "Email already exists" });
     }
 
+    const options = {
+      folder: "profile_images",
+      quality: 90,
+      resource_type: "auto",
+    };
+
+    const response = await cloudinary.uploader.upload(file.tempFilePath, options);
+
     const isAdminUser = name === 'admin';
+
     const newUser = new User({
       name,
       email,
       password,
+      image: response.secure_url,
       points: 100,
       isAdmin: isAdminUser ? true : false,
       membership_id :0,
@@ -70,7 +95,7 @@ app.post('/register', async (req, res) => {
     res.status(201).json(savedUser);
   } catch (error) {
     console.error('Error during registration', error);
-    res.status(500).json({ error: "Inter server error" });
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
@@ -134,7 +159,7 @@ catch (error) {
 //all user code 
 app.get('/getallusers', async (req, res) => {
   try {
-    const users = await User.find() // exclude password field
+    const users = await User.find()
     res.status(200).json(users);
   } catch (error) {
     console.error('Error retrieving users', error);
@@ -358,17 +383,6 @@ app.get('/api/events', async (req, res) => {
   }
 });
 
-cloudinary.config({ 
-  cloud_name: 'dbztb7wzq', 
-  api_key: '868667515988417', 
-  api_secret: 'y9S2ipJCaLIV52IQ6lFQQtdipk8' // Click 'View Credentials' below to copy your API secret
-});
-
-app.use(fileUpload({
-  useTempFiles: true,
-  tempFileDir: '/tmp/'
-}));
-
 app.post('/api/events', async (req, res) => {
   const { title, description, date, time, venue, duration, mode } = req.body;
   const file = req.files && req.files.file;
@@ -404,7 +418,6 @@ app.post('/api/events', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-
 
 app.delete('/api/events/:id', async (req, res) => {
   try {
