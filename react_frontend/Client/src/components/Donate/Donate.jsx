@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useTheme } from '../../usetheamContext';
 import Swal from 'sweetalert2'
+import pic from '../../assets/images/epsilon1.jpg'
 
 function Donate() {
   const [auth, setAuth] = useAuth();
@@ -141,8 +142,8 @@ function Donate() {
           <div className="relative z-10 p-6 md:p-12">
             <div className='flex justify-center'>
           <img
-              className="w-[48%] h-[48%] max-w-full object-cover rounded-full shadow-md border-2 "
-              src="https://static1.srcdn.com/wordpress/wp-content/uploads/2020/03/GTA-Red-Dead-Redemption-2-Time-Travel.jpg"
+              className="w-[38%] h-[38%] max-w-full object-cover rounded-full shadow-md border-2 border-white "
+              src={pic}
               alt="img"
             />
             </div>

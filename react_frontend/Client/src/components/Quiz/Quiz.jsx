@@ -16,9 +16,9 @@ function TermsAndConditions({ onAccept }) {
     <div className="terms-and-conditions  p-6 rounded-lg shadow-lg ">
       <h1 className="font-bold mb-4">Terms and Conditions</h1>
       <p className="mb-4">Please read the terms and conditions carefully before taking the quiz.</p>
-
-      <ul className="list-disc list-inside mb-4 text-3xl">
-        <li className="mb-2">There will be a total of 10 questions.</li>
+    <p>
+      <ul className="list-disc list-inside mb-4">
+        <li className="m-2">There will be a total of 10 questions.</li>
         <li className="mb-2">You can't undo the option and you can't go back to the previous question.</li>
         <li className="mb-2">
           If you select the correct option, it will turn green; if you select the wrong option, it will turn red, and the correct option will turn green.
@@ -27,6 +27,7 @@ function TermsAndConditions({ onAccept }) {
         <li className="mb-2">Points system: Your points will increase by the number of correct answers you give in the quiz.</li>
         <li className="mb-2">You can only take the quiz once every 24 hours.</li>
       </ul>
+      </p>
       <label className="flex items-center mb-4">
         <input 
           type="checkbox" 
@@ -34,12 +35,12 @@ function TermsAndConditions({ onAccept }) {
           onChange={handleAcceptChange} 
           className="mr-2 h-5 w-5"
         />
-        <span className='text-3xl'>I accept the terms and conditions</span>
+        <span className=''>I accept the terms and conditions</span>
       </label>
       <button 
         onClick={onAccept} 
         disabled={!accepted} 
-        className={`px-5 text-3xl py-4 rounded-lg ${accepted ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
+        className={`px-5  py-4 rounded-lg ${accepted ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
       >
         Go to Quiz
       </button>
@@ -183,11 +184,11 @@ function Quiz() {
                   </>
                 ) : (
                   <>
-                    <h2 className="m-10 p-7 md:text-2xl lg:text-3xl">
+                    <h2 className="m-10 p-7 md:text-2xl lg:">
                       {index + 1}. {question.question}
                     </h2>
                     
-                    <ul className="m-10 flex flex-col gap-2 text-3xl">
+                    <ul className="m-10 flex flex-col gap-2 ">
                       <li ref={option1} onClick={(e) => checkAns(e, 1)} className="border p-2 rounded-md ml-8 hover:cursor-pointer">
                         {question.option1}
                       </li>
@@ -201,16 +202,16 @@ function Quiz() {
                         {question.option4}
                       </li>
                     </ul>
-                    <button onClick={next} className={`block text-3xl mx-auto w-28 md:w-32 lg:w-36 mt-8 p-2 rounded-lg ${buttonHoverBgColor} transition-all`}>
+                    <button onClick={next} className={`block  mx-auto w-28 md:w-32 lg:w-36 mt-8 p-2 rounded-lg ${buttonHoverBgColor} transition-all`}>
                       Next
                     </button>
-                    <div className="mt-4 text-3xl md:text-base">
+                    <div className="mt-4  md:text-base">
                       {index + 1} of {randomQuestions.length} questions
                     </div>
                   </>
                 )
               ) : (
-                <div className="mt-10 text-lg md:text-xl lg:text-3xl">
+                <div className="mt-10 text-lg md:text-xl lg:">
                   <h2>You have already taken the quiz. Please come back after 24 hours.</h2>
                   <p>Time remaining: {formatRemainingTime(remainingTime)}</p>
                   <button
@@ -235,7 +236,7 @@ function Quiz() {
           </div>
         ) : (
           <div className="mt-2 text-center mb-12 px-4">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Sign in to continue</h2>
+            <h2 className="text-2xl md: font-bold mb-4">Sign in to continue</h2>
             <p className="text-gray-600 mb-4">Please sign in to continue to quiz and contribute to our community.</p>
             <button
               className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg mt-4"

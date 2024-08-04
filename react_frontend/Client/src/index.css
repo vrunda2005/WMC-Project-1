@@ -10,10 +10,12 @@
   font-family: sitter;
   src: url('../src/assets/Slitter-W2GE.ttf');
 }
+
 @font-face {
   font-family: Jovelyn;
   src: url('../src/assets/JovelynDemoRegular-V4q8y.otf');
 }
+
 @font-face{
   font-family: Mafia;
   src: url('../src/assets/MafiaHollowItalic-lxd25.ttf');
@@ -117,13 +119,13 @@ body {
   h1 {
     font-family: 'Mafia';
     text-shadow: 1px 1px 2px rgba(215, 255, 210, 0.6); 
-    font-size: 3rem; /* Size for main headings */
+    font-size: 2rem; /* Size for main headings */
     color: #a6ff00; /* Light Steel Blue */
     margin-bottom: 1.5rem; /* More spacing for larger headings */
   }
 
   h2 {
-    font-size: 2.5rem; /* Size for secondary headings */
+    font-size: 2rem; /* Size for secondary headings */
     color:gold; /* Blue Violet */
     margin-bottom: 1.25rem;
   }

@@ -3,23 +3,37 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext, useAuth } from '../../creatContext';
 import { useTheme } from '../../usetheamContext';
 import Swal from 'sweetalert2';
-import UserNews from '../InquiryForm/News_See';
+import axios from 'axios';
 
 
-const Modal = ({ isOpen, onClose, title, content, }) => {
+const HoverCard = ({ title, description, image }) => {
+  return (
+    <div className="max-w-2xl rounded overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl transform hover:-translate-y-2">
+      <div className="relative overflow-hidden">
+        <img className="w-full object-cover transition-transform duration-300 transform hover:scale-110" src={image} alt={title} />
+      </div>
+      <div className="px-6 py-4 bg-white">
+        <div className="font-bold text-xl mb-2 text-gray-800">{title}</div>
+        <p className="text-gray-700 text-base h-0 opacity-0 transition-all duration-300 overflow-hidden group-hover:h-auto group-hover:opacity-100">{description}</p>
+      </div>
+    </div>
+  );
+};
+
+const Modal = ({ isOpen, onClose, title, content }) => {
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-blue-200 flex justify-center items-center">
-      <div className=" p-6 rounded-lg shadow-lg w-11/12 max-w-3xl relative">
+      <div className="bg-white rounded-lg shadow-lg w-11/12 max-w-md max-h-[80vh] relative flex flex-col">
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
         >
           &times;
         </button>
-        <h2 className="font-bold mb-4 text-cyan-800">{title}</h2>
-        <div className="text-left">
+        <h2 className="font-bold mb-4 text-cyan-800 text-xl">{title}</h2>
+        <div className="flex-1 overflow-y-auto p-4">
           {content.map((goal, index) => (
             <div key={index} className="mb-2">
               <p className="text-blue-900">{goal}</p>
@@ -30,6 +44,7 @@ const Modal = ({ isOpen, onClose, title, content, }) => {
     </div>
   );
 };
+
 
 // Component for displaying membership tier information
 const MembershipTier = ({ tier, benefits, profileLink, newsLink, whatYouCanDo, message, onCancelMembership }) => {
@@ -104,8 +119,25 @@ const MembershipTier = ({ tier, benefits, profileLink, newsLink, whatYouCanDo, m
         "Description": "Formage advocates for the 'Path of Self-Actualization,' a journey where individuals strive to realize their fullest potential through a blend of self-discipline, technological integration, and spiritual practices. He believes that this path leads to ultimate fulfillment and enlightenment."
       }
     ]
-  }
+  } 
   
+  const [News, setNews] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:5000/news')
+    .then(response => {
+      const sortedNews = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+      setNews(sortedNews || []);
+    })
+    .catch(error => console.error(error))
+    .finally(() => setLoading(false));
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % upcomingEvents.length);
+    }, 2500);
+    return () => clearInterval(interval);
+}, []);
+
+const displayNews = News.slice(0, 3);
 
   return (
     <div className={`min-h-screen ${containerBgColor} ${textPrimary} py-12 px-4 sm:px-6 lg:px-8`}>
@@ -121,17 +153,13 @@ const MembershipTier = ({ tier, benefits, profileLink, newsLink, whatYouCanDo, m
             src="https://i.ytimg.com/vi/4pPNTzlfxsk/maxresdefault.jpg"
             alt="Membership"
           />
-             <img
-            className="h-80 rounded-lg object-cover"
-            src={auth.image || 'https://via.placeholder.com/150'}
-            alt={auth.username}
-          />
+           
           <Card title="Daily Enlightenment Tip: The Power of the Number 157" icon="🔮">
             <p>Did you know that the number 157 holds mystical powers that can unlock the deepest secrets of the cosmos? Embrace this number by incorporating it into your daily life. Try setting your alarm to 15:07 or making a wish when you see the number 157. The universe might just align in your favor!</p>
           </Card>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="block grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-18">
           <Card title="Special Ritual: The Great Cosmic Stretch" icon="🧘‍♂️">
             <p className="text-lg font-medium mb-4">To align your energies with the universe, perform the Great Cosmic Stretch:</p>
             <ul className="list-disc list-inside space-y-2">
@@ -185,6 +213,9 @@ const MembershipTier = ({ tier, benefits, profileLink, newsLink, whatYouCanDo, m
               Learn More
             </button>
           </Card>
+          </div>
+          
+          <div className="block grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
 
           <Card title="News and Updates">
             <p className="mb-2">Stay informed about the latest developments in the {tier} program, including new content, events, and initiatives.</p>
@@ -195,16 +226,42 @@ const MembershipTier = ({ tier, benefits, profileLink, newsLink, whatYouCanDo, m
               {showNews ? 'Hide News' : 'Show News'}
             </button>
             {showNews && (
-              <div className="mt-4 p-4 border rounded bg-white shadow-md">
-                {/* Replace with actual news content */}
+              <div className="mt-4 p-4 border rounded bg-black shadow-md">
+                
+                
                 <p>Latest news content goes here...</p>
+                <div>
+            <div className={`flex flex-col items-center justify-center min-h-screen   p-8`}>
+            <h1 className=" font-bold mb-10">Epsilon News </h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+              {displayNews.map((card, index) => (
+                <div key={index} className="group">
+                  <HoverCard {...card} />
+                </div>
+              ))}
+            </div>
+          </div>
+      </div>
+        
               </div>
             )}
           </Card>
 
           <Card title={`Your ${tier} Profile`}>
-            <p className="mb-2">View your membership details, track your progress, and access exclusive content through your {tier} profile.</p>
-            <a href={profileLink} className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">View Profile</a>
+            <div className='flex flex-row justify-center p-12'>
+              <div>
+              <p className="mb-2">View your membership details, track your progress, and access exclusive content through your {tier} profile.</p>
+              <a href={profileLink} className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">View Profile</a>
+
+              </div>
+            <img
+            className="h-80 rounded-lg object-cover"
+            src={auth.image || 'https://via.placeholder.com/150'}
+            alt={auth.username}
+          />
+        
+          </div>
+
           </Card>
 
           <Card title="Message from Cris Formage">
@@ -241,9 +298,15 @@ const Card = ({ title, children, icon }) => {
     <div className={`${cardBg} ${cardHover} rounded-lg shadow-lg p-6 transition duration-300 transform hover:-translate-y-1`}>
       <h2 className=" font-semibold mb-4 flex items-center">
         {icon && <span className="mr-3 text-3xl">{icon}</span>}
-        {title}
       </h2>
+      <h3>
+      {title}
+
+      </h3>
+      <p>
       {children}
+      </p>
+    
     </div>
   );
 };

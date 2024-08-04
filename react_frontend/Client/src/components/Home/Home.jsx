@@ -10,12 +10,14 @@ function Home() {
   const [auth] = useAuth();
   const [events, setEvents] = useState([]);
   const [stories, setStories] = useState([]);
-  const [news, setNews] = useState([]);
+  const [News, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const { theme } = useTheme();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   axios.defaults.withCredentials = true;
+
+
 
   useEffect(() => {
     setLoading(true);
@@ -65,6 +67,7 @@ function Home() {
 
   const upcomingEvents = events.slice(0, 3);
   const lastFiveStories = stories.slice(0, 5);
+  const displayNews = News.slice(0, 3);
 
   const storyStyles = [
     "bg-yellow-300 rotate-2",
@@ -88,7 +91,13 @@ function Home() {
         <div className="react_text bg-gradient-to-r from-blue-500 via-blue-300 to-blue-500 bg-opacity-30 backdrop-filter backdrop-blur-2xl p-4 rounded-lg shadow-lg w-auto">
           <ReactTyped
             className="md:text-3xl font-bold md:py-6 text-white text-center"
-            strings={['THIS IS OUR EPSILON PROGRAM WEBSITE']}
+            strings={[
+              "Welcome to the Epsilon Program!",
+              "Discover cosmic truths and transcend the ordinary.",
+              "Join our journey to spiritual enlightenment.",
+              "Explore our beliefs and embrace inner peace.",
+              "Become a member today and start your transformation!"
+            ]}
             typeSpeed={120}
             backSpeed={180}
             loop
@@ -384,155 +393,6 @@ function Home() {
           <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
           <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
         </div>
-      </div>
-
-      <div>
-      {/* <div className={sectionClass}>
-        <div className='max-w-[1240px] mx-auto grid md:grid-cols-2 opacity-85 backdrop-blur-sm rounded-lg shadow-lg'>
-          <img className='w-[300px] h-[300px] mx-auto my-4 rounded-full animate-pulse' src="https://orcz.com/images/a/a8/Gtavepsilonprogram.jpg" alt="IMAGE" />
-          <div className='flex flex-col justify-center p-4'>
-            <h1 className='font-bold md:text-4xl sm:text-3xl text-2xl'>OUR GURU</h1>
-            <h1 className='font-bold md:text-3xl sm:text-2xl text-xl'>Cris Formage: The Enigmatic Leader of the Epsilon Program</h1>
-            <p className='text-lg leading-relaxed'>
-              Cris Formage is a fictional character in the Grand Theft Auto series, specifically in Grand Theft Auto: San Andreas. He is the charismatic and mysterious leader of the Epsilon Program, a cult-like organization that claims to offer spiritual enlightenment and self-improvement to its members.
-            </p>
-          </div>
-        </div>
-      </div> */}
-
-      {/* <div className='sectionClass relative h-screen'> */}
-        {/* <div className='max-w-[1240px] mx-auto grid md:grid-cols-2 opacity-85 backdrop-blur-sm rounded-lg shadow-lg'>
-          <img className='w-[300px] h-[300px] mx-auto my-4 rounded-full animate-pulse' src="https://orcz.com/images/a/a8/Gtavepsilonprogram.jpg" alt="IMAGE" />
-          <div className='flex flex-col justify-center p-4'>
-            <h1 className='font-bold md:text-4xl sm:text-3xl text-2xl'>THE EPSILONIST PLEDGE</h1>
-            <p className='text-lg leading-relaxed'>
-              All good things come from Kraff, that is the fact on which Epsilonism is built.
-              Epsilonism is a science as well as a Religion - in fact, we are the only religion that is also a science and which is concerned with seeking the truth.
-              As real truth seekers, we are willing to pay to make the search go better. In this way we are investing in our future.
-            </p>
-          </div>
-        </div> */}
-        
-        {/* vertical */}
-        {/* <div className='absolute top-0 w-screen h-screen opacity-5 flex'>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-        </div> */}
-
-        {/* horizontal */}
-        {/* <div className='absolute top-0 w-screen h-screen opacity-5 flex flex-col'>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-        </div>
-      </div> */}
       </div>
 
       {/* Latest Stories */}
