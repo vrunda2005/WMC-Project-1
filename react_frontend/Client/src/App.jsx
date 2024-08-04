@@ -13,11 +13,11 @@ const App = () => {
   return (
     <AuthProvider>
       
-       {/* <div className='bg-hero-pattern bg-cover bg-center text-text-light' > */}
-        <div className="page-background">
+      <div className="page-background">
       <ThemeProvider>
             <Navbar/>
             <Outlet />
+            <Footer/>
       </ThemeProvider>
       </div>
     </AuthProvider>

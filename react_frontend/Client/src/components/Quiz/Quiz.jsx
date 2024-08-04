@@ -13,10 +13,11 @@ function TermsAndConditions({ onAccept }) {
   };
 
   return (
-    <div className="terms-and-conditions  p-6 rounded-lg shadow-lg">
-      <h1 className="text-2xl font-bold mb-4">Terms and Conditions</h1>
+    <div className="terms-and-conditions  p-6 rounded-lg shadow-lg ">
+      <h1 className="font-bold mb-4">Terms and Conditions</h1>
       <p className="mb-4">Please read the terms and conditions carefully before taking the quiz.</p>
-      <ul className="list-disc list-inside mb-4">
+
+      <ul className="list-disc list-inside mb-4 text-3xl">
         <li className="mb-2">There will be a total of 10 questions.</li>
         <li className="mb-2">You can't undo the option and you can't go back to the previous question.</li>
         <li className="mb-2">
@@ -33,12 +34,12 @@ function TermsAndConditions({ onAccept }) {
           onChange={handleAcceptChange} 
           className="mr-2 h-5 w-5"
         />
-        <span>I accept the terms and conditions</span>
+        <span className='text-3xl'>I accept the terms and conditions</span>
       </label>
       <button 
         onClick={onAccept} 
         disabled={!accepted} 
-        className={`px-4 py-2 rounded-lg ${accepted ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
+        className={`px-5 text-3xl py-4 rounded-lg ${accepted ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
       >
         Go to Quiz
       </button>
@@ -159,18 +160,18 @@ function Quiz() {
   };
 
   return (
-    <div className='flex justify-end p-10 ml-[25vw] min-h-screen'>
+    <div className='flex justify-center p-10 ml-[25vw] min-h-screen'>
       <div className='fixed left-0 top-30 flex flex-col p-16'>
         <h1 className='text-9xl text-left text-white m-0 p-0'>QUIZ</h1>
       </div>
-      <div className={`${containerBgColor} min-h-screen flex flex-col items-center justify-center border w-full`}>
+      <div className={`flex flex-col items-center justify-center `}>
         {auth.isLoggedIn ? (
-          <div className={`${sectionBgColor} mt-10 border ${textPrimaryColor} border-blue-400 w-full max-w-4xl mx-auto p-6 md:p-8 lg:p-10 rounded-xl py-10`}>
+          <div className={`${sectionBgColor} m-20  border w-full ${textPrimaryColor} border-blue-400 w-full  max-w mx-auto p-6 md:p-8 lg:p-10 rounded-xl py-10`}>
             {acceptedTerms ? (
               canTakeQuiz ? (
                 result ? (
                   <>
-                    <h2 className="mt-10 text-lg md:text-xl lg:text-2xl">
+                    <h2 className="mt-10  md:text-xl lg:text-2xl">
                       You scored <span className="font-semibold text-2xl">{score}</span> out of {randomQuestions.length}
                     </h2>
                     <button
@@ -182,10 +183,11 @@ function Quiz() {
                   </>
                 ) : (
                   <>
-                    <h2 className="mt-10 text-xl md:text-2xl lg:text-3xl">
+                    <h2 className="m-10 p-7 md:text-2xl lg:text-3xl">
                       {index + 1}. {question.question}
                     </h2>
-                    <ul className="mt-8 flex flex-col gap-2">
+                    
+                    <ul className="m-10 flex flex-col gap-2 text-3xl">
                       <li ref={option1} onClick={(e) => checkAns(e, 1)} className="border p-2 rounded-md ml-8 hover:cursor-pointer">
                         {question.option1}
                       </li>
@@ -199,16 +201,16 @@ function Quiz() {
                         {question.option4}
                       </li>
                     </ul>
-                    <button onClick={next} className={`block mx-auto w-28 md:w-32 lg:w-36 mt-8 p-2 rounded-lg ${buttonHoverBgColor} transition-all`}>
+                    <button onClick={next} className={`block text-3xl mx-auto w-28 md:w-32 lg:w-36 mt-8 p-2 rounded-lg ${buttonHoverBgColor} transition-all`}>
                       Next
                     </button>
-                    <div className="mt-4 text-sm md:text-base">
+                    <div className="mt-4 text-3xl md:text-base">
                       {index + 1} of {randomQuestions.length} questions
                     </div>
                   </>
                 )
               ) : (
-                <div className="mt-10 text-lg md:text-xl lg:text-2xl">
+                <div className="mt-10 text-lg md:text-xl lg:text-3xl">
                   <h2>You have already taken the quiz. Please come back after 24 hours.</h2>
                   <p>Time remaining: {formatRemainingTime(remainingTime)}</p>
                   <button

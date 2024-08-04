@@ -125,38 +125,38 @@ function Donate() {
           <div className='fixed left-0 top-30 flex flex-col p-16'>
             <h1 className='text-9xl text-left text-white m-0 p-0'>DONATE</h1>
           </div>
-      <div className={`${bgColor} w-full`}>
-        <div className={`relative bg-center text-${textColor}  `}>
-          <div className={`absolute inset-0 ${overlayColor} bg-opacity-50`} />
+      <div className={`${bgColor}  w-full`}>
+        <div className={`relative bg-center `}>
+          <div className={`absolute inset-0  bg-opacity-50`} />
 
-          <div className="absolute inset-0 z-0">
+           <div className="absolute inset-0 z-0">
             <svg className="absolute top-0 left-0 w-full h-full" viewBox="0 0 1200 800" fill="none">
               <circle cx="800" cy="500" r="600" fill="rgba(255, 165, 0, 0.1)" />
               <circle cx="400" cy="300" r="400" fill="rgba(255, 255, 255, 0.05)" />
             </svg>
-          </div>
+          </div> 
 
     
 
           <div className="relative z-10 p-6 md:p-12">
             <div className='flex justify-center'>
           <img
-  className="w-[48%] h-[48%] max-w-full object-cover rounded-full shadow-md border-2 "
-  src="https://static1.srcdn.com/wordpress/wp-content/uploads/2020/03/GTA-Red-Dead-Redemption-2-Time-Travel.jpg"
-  alt="img"
-/>
-</div>
+              className="w-[48%] h-[48%] max-w-full object-cover rounded-full shadow-md border-2 "
+              src="https://static1.srcdn.com/wordpress/wp-content/uploads/2020/03/GTA-Red-Dead-Redemption-2-Time-Travel.jpg"
+              alt="img"
+            />
+            </div>
     
-            <header className="text-center py-12">
+           <div className='flex flex-center items-center justify-center'>  
               <motion.h1
-                className={`text-5xl font-bold mb-4 text-white`}
+                className={``}
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1 }}
+                animate={{ opacity: 4 }}
+                transition={{ duration: 4 }}
               >
-                <h1 className='m-0 text-green-400'>Support the Epsilon Program</h1>
+                <h1>Support the Epsilon Program</h1>
               </motion.h1>
-            </header>
+              </div>
 
             <section className={`max-w-screen-lg mx-auto my-12 ${bgColor} p-8 rounded-lg shadow-lg relative border`}>
               <motion.div
@@ -165,7 +165,7 @@ function Donate() {
                 transition={{ duration: 1 }}
               >
                 {auth.isLoggedIn ? (<>
-                <h2 className={`text-4xl mt-8 font-semibold mb-6 text-center ${textColor}`}>
+                <h2 className={`mt-5 font-semibold mb-6 text-center ${textColor}`}>
                   Dear {auth.username}!
                 </h2>
                 </>):(
@@ -189,7 +189,7 @@ function Donate() {
                   </div>
                 ) : (
                   <>
-                    <p className={`text-2xl mb-6 text-center ${textColor}`}>
+                    <p className={`mb-6 text-center  ${textColor}`}>
                       Your donation will help us level up our resources and support our community.<br />
                       "Support the Epsilon Program - Your donations help us spread the truth and enlighten more souls."<br />
                       Donation Levels:<br />

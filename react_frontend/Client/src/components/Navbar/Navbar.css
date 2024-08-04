@@ -69,8 +69,7 @@
 header {
     background-color: var(--header-bg-color); /* Dynamic color based on theme */
     color: var(--header-text-color); /* Dynamic color based on theme */
-    border-bottom: 3px solid var(--border-color);
-    font-size:larger;
+    font-size:large;
   }
   
   header a {
