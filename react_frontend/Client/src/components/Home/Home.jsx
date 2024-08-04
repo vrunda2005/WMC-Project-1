@@ -6,119 +6,12 @@ import axios from 'axios';
 import moment from 'moment';
 import './Home.css'
 
-<<<<<<< HEAD
-const PageOne = () => {
-  return (
-    <>
-     
-        <video className="background-video" src={vid} alt="Video" autoPlay loop muted />
-        <div className="parallax-wrapper">
-          <ReactTyped
-            className='md:text-3xl sm:text-4xl font-bold p-20 md:py-6 w-auto h-auto flex text-zinc-900 border-2 rounded-lg border-zinc-800 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f]'
-            strings={[
-              "Welcome to the Epsilon Program!",
-              "Discover cosmic truths and transcend the ordinary.",
-              "Join our journey to spiritual enlightenment.",
-              "Explore our beliefs and embrace inner peace.",
-              "Become a member today and start your transformation!"
-            ]}
-            typeSpeed={80}
-            backSpeed={10}
-            loop
-          />
-        </div>
-      
-    </>
-  );
-};
-
-
-
-
-const PageTwo = ({ stories }) => {
-  const{theme}=useTheme();
-  const containerBgColor = theme === 'blue' ? 'bg-blue-primary-bg' : 'bg-dark-primary-bg';
-  const sectionBgColor = theme === 'blue' ? 'bg-blue-secondary-bg' : 'bg-dark-secondary-bg';
-  const textPrimaryColor = theme === 'blue' ? 'text-blue-text-light' : 'text-dark-text-light';
-
-  const storyStyles = [
-    "bg-yellow-300 rotate-2",
-    "bg-pink-200 -rotate-1",
-    "bg-blue-200 rotate-1",
-    "bg-green-200 -rotate-2",
-    "bg-purple-200 rotate-3",
-  ];
-  const topStories = stories.slice(0, 5);
-
-  // State to manage which story is expanded
-  const [expandedStory, setExpandedStory] = useState(null);
-
-  // Function to toggle story expansion
-  const handleToggleExpand = (id) => {
-    setExpandedStory(expandedStory === id ? null : id);
-  };
-
-  return (
-    <div className={`flex flex-col items-center justify-center bg-opacity-65 border-2 p-4 m-2 h-screen ${containerBgColor}`}>
-      <div className="text-center">
-        <h1 className="text-4xl font-bold">Latest Stories</h1>
-        <div className="relative flex flex-wrap justify-center gap-4 max-w-screen-xl m-auto">
-          {topStories.length > 0 ? (
-            topStories.map((story, index) => (
-              <div
-                key={story._id}
-                className={`relative w-full max-w-xs md:max-w-md lg:max-w-lg p-4 rounded-lg shadow-md text-black ${storyStyles[index % storyStyles.length]} ${index % 2 === 0 ? 'rotate-2' : '-rotate-2'} hover:shadow-xl transition-transform transform hover:scale-105`}
-              >
-                <h2 className="text-xl font-bold mb-2">{story.username}</h2>
-                <p className="text-gray-700 mb-2">
-                  {expandedStory === story._id 
-                    ? story.story 
-                    : story.story.length > 50 
-                      ? `${story.story.slice(0, 50)}...` 
-                      : story.story}
-                  <button
-                    onClick={() => handleToggleExpand(story._id)}
-                    className="text-blue-500 ml-2"
-                  >
-                    {expandedStory === story._id ? 'Read Less' : 'Read More'}
-                  </button>
-                </p>
-                <p className="text-gray-500 text-sm">{new Date(story.date).toLocaleString()}</p>
-              </div>
-            ))
-          ) : (
-            <p>No stories available.</p>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-
-const HoverCard = ({ title, description, image }) => {
-  return (
-    <div className="max-w rounded flex-wrap shadow-lg transition-all duration-300 hover:shadow-2xl transform hover:-translate-y-2">
-      <div className="relative overflow-hidden">
-        <img className="w-full object-cover transition-transform duration-300 transform hover:scale-110" src={image} alt={title} />
-      </div>
-      <div className="px-6 py-4 bg-white">
-        <div className="font-bold text-xl mb-2 text-gray-800">{title}</div>
-        <p className="text-zinc-800 transition-all duration-300  group-hover:h-auto group-hover:opacity-100">{description}</p>
-      </div>
-    </div>
-  );
-};
-
-const PageFour = ({news,loading}) => {
-=======
 function Home() {
   const [auth] = useAuth();
   const [events, setEvents] = useState([]);
   const [stories, setStories] = useState([]);
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
->>>>>>> 65f6ef666ab1fff9a66ccc446c91b31e83e3c324
   const { theme } = useTheme();
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -191,15 +84,6 @@ function Home() {
   return (
     <div className=''>
 
-<<<<<<< HEAD
-        return (
-          <section key={i} className={`${textColor} ${classNames}`}>
-            
-            <div className={`${textColor} `}>
-              <div className={`${textColor}`}>
-                {Component}
-              </div>
-=======
       <div className="page-1 h-screen flex items-center justify-center relative">
         <div className="react_text bg-gradient-to-r from-blue-500 via-blue-300 to-blue-500 bg-opacity-30 backdrop-filter backdrop-blur-2xl p-4 rounded-lg shadow-lg w-auto">
           <ReactTyped
@@ -349,7 +233,6 @@ function Home() {
                   <p>{moment(event.date).format('DD MMMM YYYY')}</p>
                 </div>
               ))}
->>>>>>> 65f6ef666ab1fff9a66ccc446c91b31e83e3c324
             </div>
           </div>
 
@@ -653,7 +536,7 @@ function Home() {
       </div>
 
       {/* Latest Stories */}
-      <div className='storiesContainer relative h-[80vh]'>
+      <div className='storiesContainer relative h-screen'>
         <h2 className="text-white text-4xl font-extrabold mb-6 p-4 text-center">Latest Stories</h2>
         {loading ? (
           <p>Loading stories...</p>
@@ -792,7 +675,7 @@ function Home() {
         </div>
 
       </div>
-    </div>
+  </div>
   );
 }
 

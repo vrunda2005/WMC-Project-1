@@ -17,31 +17,37 @@ const Events = () => {
     setImage(e.target.files[0]); // Ensure the file is set directly
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Basic validation
+    if (!title || !description || !date || !time || !venue || !duration || !mode || !image) {
+      alert('All fields are required.');
+      return;
+    }
+
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
     formData.append('date', date);
     formData.append('time', time);
-    formData.append('image', image); // Append the file directly
+    formData.append('file', image); // Append the file with the key 'file'
     formData.append('venue', venue);
     formData.append('duration', duration);
     formData.append('mode', mode);
 
-    axios.post('http://localhost:5000/api/events', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-    .then(response => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/events', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       alert('Event registered successfully');
       navigate('/Blog');
-    })
-    .catch(error => {
-      console.error(error);
+    } catch (error) {
+      console.error('Error creating event:', error);
       alert('Error creating event: ' + error.message);
-    });
+    }
   };
 
   return (
@@ -161,4 +167,3 @@ const Events = () => {
 };
 
 export default Events;
-
