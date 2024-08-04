@@ -10,10 +10,12 @@
   font-family: sitter;
   src: url('../src/assets/Slitter-W2GE.ttf');
 }
+
 @font-face {
   font-family: Jovelyn;
   src: url('../src/assets/JovelynDemoRegular-V4q8y.otf');
 }
+
 @font-face{
   font-family: Mafia;
   src: url('../src/assets/MafiaHollowItalic-lxd25.ttf');
