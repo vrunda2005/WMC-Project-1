@@ -15,7 +15,7 @@ const SECRET_KEY = process.env.SECRET_KEY;
 
 
 cloudinary.config({ 
-  cloud_name: 'dbztb7wzq', 
+  cloud_name: 'dbztb7wzq',
   api_key: '868667515988417', 
   api_secret: 'y9S2ipJCaLIV52IQ6lFQQtdipk8' // Click 'View Credentials' below to copy your API secret
 });

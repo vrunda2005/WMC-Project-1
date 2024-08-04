@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '../../usetheamContext';
+import { useAuth } from '../../creatContext';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const AdminDonations = () => {
   const [userDonations, setUserDonations] = useState([]);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const [auth] = useAuth();
 
   // Fetch user donations data
   const fetchUserDonations = async () => {
@@ -22,6 +27,15 @@ const AdminDonations = () => {
 
   useEffect(() => {
     fetchUserDonations();
+    if (!auth.isAdmin) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'You are not authorised!',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      })
+      navigate('/');
+    }
   }, []);
 
   const {theme}=useTheme();
@@ -32,6 +46,7 @@ const AdminDonations = () => {
 
   return (
       <div className={`p-6 ${bgColor} min-h-screen`}>
+        {auth.isAdmin ? (<>
         <h1 className={`text-3xl font-bold mb-6 `}>User Donations</h1>
         {error && (
           <p className={`text-red-600 bg-red-100 border border-red-300 rounded p-4 mb-6`}>
@@ -64,6 +79,7 @@ const AdminDonations = () => {
             </tbody>
           </table>
         </div>
+        </>):(<></>)}
       </div>
     );
   };

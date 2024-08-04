@@ -42,7 +42,7 @@ export default function Login() {
           icon: 'success',
           confirmButtonText: 'OK'
         })
-            navigate('/');
+        navigate('/');
         
         
       }

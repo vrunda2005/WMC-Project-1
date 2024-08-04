@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '../../creatContext';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const AdminNewsForm = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
+  const navigate = useNavigate();
+  const [auth] = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,6 +47,18 @@ const AdminNewsForm = () => {
       });
     }
   };
+
+  useEffect(() => {
+    if (!auth.isAdmin) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'You are not authorised!',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      })
+      navigate('/');
+    }
+  }, [auth.isAdmin, navigate]);
 
   return (
     <div className={`p-8 bg-gray-100 rounded-lg shadow-md max-w-lg mx-auto mt-10`}>

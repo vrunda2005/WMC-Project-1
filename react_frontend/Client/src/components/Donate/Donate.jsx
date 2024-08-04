@@ -122,9 +122,9 @@ function Donate() {
   const overlayColor = theme === 'blue' ? 'bg-blue-light bg-opacity-50' : 'bg-gray-900 bg-opacity-50';
 
   return (
-    <div className='flex justify-end p-10 ml-[25vw] min-h-screen'>
+    <div className='flex justify-end p-10 ml-[30vw] min-h-screen'>
           <div className='fixed left-0 top-30 flex flex-col p-16'>
-            <h1 className='text-9xl text-left text-white m-0 p-0'>DONATE</h1>
+            <h1 className='text-6xl text-left text-white m-0 p-0'>DONATE</h1>
           </div>
       <div className={`${bgColor}  w-full`}>
         <div className={`relative bg-center `}>
