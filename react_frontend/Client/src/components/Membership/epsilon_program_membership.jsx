@@ -338,18 +338,29 @@ const MembershipLayout = () => {
       });
 
       if (response.ok) {
-        const updatedAuth = { ...auth, membership_id: null };
-        setAuth(updatedAuth);
-        localStorage.setItem('auth', JSON.stringify(updatedAuth));
-        setCancellationMessage('Your membership has been cancelled.');
 
         await Swal.fire({
-          title: 'Success!',
-          text: 'Your membership has been cancelled.',
-          icon: 'success',
-          confirmButtonText: 'OK'
+          title: 'Are you sure?',
+          text: 'Your membership will be cancled and your money will not refunded.',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, cancel the membership!',
+          cancelButtonText: 'Back!',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const updatedAuth = { ...auth, membership_id: null };
+            setAuth(updatedAuth);
+            localStorage.setItem('auth', JSON.stringify(updatedAuth));
+            navigate('/membership', { replace: true });
+      
+            Swal.fire(
+              'Your membership has been cancelled.',
+              '.',
+              'success'
+            );
+          }
         });
-        navigate('/');
         
       } else {
         setCancellationMessage('Failed to cancel membership. Please try again later.');

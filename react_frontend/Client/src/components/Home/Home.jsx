@@ -6,20 +6,6 @@ import axios from 'axios';
 import moment from 'moment';
 import './Home.css'
 
-const HoverCard = ({ title, description, image }) => {
-  return (
-    <div className="max-w-2xl rounded overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl transform hover:-translate-y-2">
-      <div className="relative overflow-hidden">
-        <img className="w-full object-cover transition-transform duration-300 transform hover:scale-110" src={image} alt={title} />
-      </div>
-      <div className="px-6 py-4 bg-white">
-        <div className="font-bold text-xl mb-2 text-gray-800">{title}</div>
-        <p className="text-gray-700 text-base h-0 opacity-0 transition-all duration-300 overflow-hidden group-hover:h-auto group-hover:opacity-100">{description}</p>
-      </div>
-    </div>
-  );
-};
-
 function Home() {
   const [auth] = useAuth();
   const [events, setEvents] = useState([]);
@@ -409,145 +395,8 @@ function Home() {
         </div>
       </div>
 
-      <div>
-     <div className={sectionClass}>
-      <div>
-            <div className={`flex flex-col items-center justify-center min-h-screen   p-8`}>
-            <h1 className=" font-bold mb-10">Epsilon News </h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {displayNews.map((card, index) => (
-                <div key={index} className="group">
-                  <HoverCard {...card} />
-                </div>
-              ))}
-            </div>
-          </div>
-      </div>
-        
-        {/* vertical */}
-         <div className='absolute top-0 w-screen h-screen opacity-5 flex'>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-          <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
-        </div> 
-
-        {/* horizontal */}
-         <div className='absolute top-0 w-screen h-screen opacity-5 flex flex-col'>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-          <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
-        </div>
-      </div> 
-      </div>
-
       {/* Latest Stories */}
-      <div className='storiesContainer relative h-[80vh]'>
+      <div className='storiesContainer relative h-screen'>
         <h2 className="text-white text-4xl font-extrabold mb-6 p-4 text-center">Latest Stories</h2>
         {loading ? (
           <p>Loading stories...</p>
@@ -687,7 +536,7 @@ function Home() {
         </div>
 
       </div>
-    </div>
+  </div>
   );
 }
 

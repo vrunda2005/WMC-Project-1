@@ -22,7 +22,7 @@ cloudinary.config({
 
 app.use(fileUpload({
   useTempFiles: true,
-  tempFileDir: '/tmp/'
+  tempFilePath: '/tmp/'
 }));
 
 
