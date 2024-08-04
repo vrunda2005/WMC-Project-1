@@ -105,7 +105,13 @@ function Home() {
         <div className="react_text bg-gradient-to-r from-blue-500 via-blue-300 to-blue-500 bg-opacity-30 backdrop-filter backdrop-blur-2xl p-4 rounded-lg shadow-lg w-auto">
           <ReactTyped
             className="md:text-3xl font-bold md:py-6 text-white text-center"
-            strings={['THIS IS OUR EPSILON PROGRAM WEBSITE']}
+            strings={[
+              "Welcome to the Epsilon Program!",
+              "Discover cosmic truths and transcend the ordinary.",
+              "Join our journey to spiritual enlightenment.",
+              "Explore our beliefs and embrace inner peace.",
+              "Become a member today and start your transformation!"
+            ]}
             typeSpeed={120}
             backSpeed={180}
             loop

@@ -6,6 +6,7 @@ import { useAuth } from '../../creatContext';
 import { useTheme } from '../../usetheamContext';
 import './Navbar.css';
 import Swal from 'sweetalert2';
+import logo from '../../assets/images/character_ep.jpg'
 
 
 const Navbar = () => {
@@ -60,8 +61,12 @@ const Navbar = () => {
   return (
     <header className={headerClass}>
       {/* Logo */}
-      <a href="/" className="text-lg font-bold truncate relative left-4 bottom-1">Logo</a>
 
+      {/* <a href="/" className="text-lg font-bold truncate relative left-4 bottom-5">Logo</a> */}
+      <img
+          src="https://prod.cloud.rockstargames.com/crews/sc/9275/12545759/publish/emblem/emblem_512.png" // Replace with the URL of the profile picture
+          alt="Profile"
+          className="w-18 h-18  border-2 border-white text-lg font-bold truncate relative left-4 bottom-5"/>
       {/* Theme Toggle Button */}
       {/* <button onClick={toggleTheme} className={buttonClass} aria-label="Toggle Theme">
         {theme === 'dark' ? <FaSun className="text-yellow-500" /> : <FaMoon className="text-gray-500" />}
