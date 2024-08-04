@@ -7,6 +7,14 @@ import { useTheme } from '../../usetheamContext';
 import './Navbar.css';
 import Swal from 'sweetalert2';
 import logo from '../../assets/images/character_ep.jpg'
+import { MdOutlineQuiz } from "react-icons/md";
+import { GiNewspaper } from "react-icons/gi";
+import { FaPersonCircleQuestion } from "react-icons/fa6";
+import { FaMapMarkedAlt } from "react-icons/fa";
+import { FcAbout } from "react-icons/fc";
+import { FcDonate } from "react-icons/fc";
+
+
 
 
 const Navbar = () => {
@@ -238,15 +246,18 @@ const Navbar = () => {
             </button>
             {isDropdownOpen && (
               <ul className="absolute mt-2 right-0 bg-white dark:bg-gray-800 shadow-lg rounded-lg w-48 z-10" >
-                <li>
-                  <Link
+                <li className="flex items-center space-x-2 p-2">
+                  <FcAbout/>
+                <Link
                     to="/About"
                     className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${location.pathname === '/About' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}
                   >
                     About
                   </Link>
                 </li>
-                <li>
+                <li className="flex items-center space-x-2 p-2">
+                <FaMapMarkedAlt />
+
                   <Link
                     to="/epsilonMap"
                     className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${location.pathname === '/epsilonMap' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}
@@ -254,7 +265,9 @@ const Navbar = () => {
                     EpsilonMap
                   </Link>
                 </li>
-                <li>
+                <li className="flex items-center space-x-2 p-3">
+                <FaPersonCircleQuestion />
+
                   <Link
                     to="/inquiryForm"
                     className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${location.pathname === '/inquiryForm' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}
@@ -262,7 +275,8 @@ const Navbar = () => {
                     Inquiry Form
                   </Link>
                 </li>
-                <li>
+                <li className="flex items-center space-x-2 p-2">
+                  <GiNewspaper/>
                   <Link
                     to="/News"
                     className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${location.pathname === '/News' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}
@@ -270,7 +284,8 @@ const Navbar = () => {
                     News
                   </Link>
                 </li>
-                <li>
+                <li className="flex items-center space-x-2 p-2">
+                  <MdOutlineQuiz/>
                 <Link to='/Quiz' className={`hover:underline ${window.location.pathname === '/Quiz' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Quiz</Link>
               </li>
               </ul>
