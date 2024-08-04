@@ -1,5 +1,7 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Pricedown&display=swap'); */
 
+@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Josefin+Sans&family=Just+Me+Again+Down+Here&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Teko:wght@300..700&family=Tektur:wght@400..900&display=swap');
+
 @font-face{
   font-family: myvrunda;
   src: url('../src/assets/pricedown.otf');
@@ -28,6 +30,28 @@ body {
   color: var(--text-color);
   font-family: 'Pricedown', sans-serif; /* Apply GTA V font to body */
   background-color: var(--bg-color); /* Fallback color */
+}
+
+/* //Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  position: absolute;
+  background: black;
+  z-index: -1000;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #047bb3;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #f3f3f3; 
 }
 
 :root {
@@ -107,23 +131,13 @@ body {
 
 button {
   font-family: 'Pricedown', sans-serif; /* GTA V font for buttons */
-  background-color: var(--accent-color);
+  /* background-color: var(--accent-color); */
   color: var(--text-color);
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-button:hover {
-  background-color: #d97706;
-  transform: scale(1.05);
-}
-
-button:active {
-  background-color: #b45309;
-  transform: scale(0.95);
 }
 
 .card {
