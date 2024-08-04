@@ -1,9 +1,11 @@
 // src/EpsilonMap.js
 import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup,useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { FaMapMarkerAlt } from 'react-icons/fa';
+import { useEffect } from 'react';
+import './epslionmap.css'
 
 
 // Fix default icon issue with Leaflet
@@ -76,24 +78,47 @@ const customIcon = new L.Icon({
   });
   
   
-const EpsilonMap = () => {
-  return (
-    <div className="relative h-screen">
+ const InitialView = ({ center }) => {
+  const map = useMap();
+  useEffect(() => {
+    map.setView(center, map.getZoom(), {
+      animate: true,
+    });
+  }, [map, center]);
+  return null;
+};
 
-    <MapContainer center={[36.778259, -119.417931]} zoom={13} style={{ height: "100vh", width: "100%" }}>
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      />
-      {centers.map((center, index) => (
-        <Marker key={index} position={center.position}  icon={customIcon}>
-          <Popup>
-            <b>{center.name}</b><br />
-            {center.description}
-          </Popup>
-        </Marker>
-      ))}
-    </MapContainer>
+const EpsilonMap = () => {
+  const mapCenter = centers[0].position; // Use the position of the first marker as the initial view
+
+  return (
+    <div className="flex flex-col h-screen justify-center">
+      {/* Fixed header */}
+      <header className="bg-zinc-900 p-4 shadow-md">
+        <h1 className="text-xl font-bold">Epsilon Program Locations</h1>
+        <p className="text-sm">Explore the various centers and significant locations of the Epsilon Program.</p>
+      </header>
+
+      {/* Map container */}
+      <div className="map-wrapper">
+      <div className="flex-1 map-container">
+        <MapContainer center={mapCenter} zoom={13} style={{ height: "100%", width: "100%" }}>
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+          {centers.map((center, index) => (
+            <Marker key={index} position={center.position} icon={customIcon}>
+              <Popup>
+                <b>{center.name}</b><br />
+                {center.description}
+              </Popup>
+            </Marker>
+          ))}
+          <InitialView center={mapCenter} />
+        </MapContainer>
+      </div>
+    </div>
     </div>
   );
 }

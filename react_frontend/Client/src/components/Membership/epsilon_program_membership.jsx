@@ -44,7 +44,67 @@ const Modal = ({ isOpen, onClose, title, content }) => {
     </div>
   );
 };
+const goals = [
+  "Goal 1: Embrace the Epsilon teachings.",
+  "Goal 2: Connect with like-minded individuals.",
+  "Goal 3: Participate in exclusive events.",
+  "Goal 4: Seek personal guidance from Cris Formage.",
+  "Goal 5: Engage with our content regularly.",
+  "Goal 6: Explore the universe's deepest truths.",
+  "Goal 7: Attend masterclasses and workshops.",
+  "Goal 8: Contribute to our community's growth.",
+  "Goal 9: Share your experiences and insights.",
+  "Goal 10: Support fellow members on their journey.",
+  "Goal 11: Stay informed about program updates.",
+  "Goal 12: Reflect on your personal progress and achievements."
+];
 
+const teachings= {
+  "CoreBeliefs": [
+    {
+      "Belief": "Transcendence Through Technology",
+      "Principle": "Members should embrace technological advancements as a path to spiritual and personal evolution."
+    },
+    {
+      "Belief": "The Cosmic Order",
+      "Principle": "Members are encouraged to align their lives with the cosmic forces and seek harmony with the universe’s natural rhythms."
+    },
+    {
+      "Belief": "The Illusion of Materialism",
+      "Principle": "Followers should focus on inner growth and detachment from materialistic pursuits to achieve higher consciousness."
+    },
+    {
+      "Belief": "Unity of Mind and Body",
+      "Principle": "Members are encouraged to practice meditation, physical exercises, and mental training to harmonize their entire being."
+    },
+    {
+      "Belief": "The Epsilon Code",
+      "Principle": "Adherence to the Epsilon Code is seen as essential for personal and spiritual development."
+    }
+  ],
+  "PhilosophicalInsights": [
+    {
+      "Insight": "The Infinite Digital Horizon",
+      "Description": "Cris Formage speaks of the 'Infinite Digital Horizon,' a metaphor for the limitless potential of the human mind when augmented by technology. He believes that by embracing digital evolution, one can achieve a state of perpetual growth and enlightenment."
+    },
+    {
+      "Insight": "The Mirage of Success",
+      "Description": "Formage critiques traditional notions of success as mere illusions designed to divert individuals from true spiritual fulfillment. He argues that societal pressures and materialistic goals are distractions from the deeper journey of self-discovery and cosmic alignment."
+    },
+    {
+      "Insight": "Cosmic Synchronicity",
+      "Description": "Formage emphasizes the concept of 'Cosmic Synchronicity,' where human actions are in perfect harmony with universal energies. He teaches that by understanding and aligning with these cosmic rhythms, individuals can achieve a higher state of being and purpose."
+    },
+    {
+      "Insight": "The Digital Awakening",
+      "Description": "According to Formage, the 'Digital Awakening' is a critical phase where individuals become aware of their interconnectedness through technology. He sees this awakening as a crucial step toward achieving collective enlightenment and transcending conventional limitations."
+    },
+    {
+      "Insight": "The Path of Self-Actualization",
+      "Description": "Formage advocates for the 'Path of Self-Actualization,' a journey where individuals strive to realize their fullest potential through a blend of self-discipline, technological integration, and spiritual practices. He believes that this path leads to ultimate fulfillment and enlightenment."
+    }
+  ]
+} 
 
 // Component for displaying membership tier information
 const MembershipTier = ({ tier, benefits, profileLink, newsLink, whatYouCanDo, message, onCancelMembership }) => {
@@ -56,71 +116,7 @@ const MembershipTier = ({ tier, benefits, profileLink, newsLink, whatYouCanDo, m
   const containerBgColor = theme === 'blue' ? 'bg-blue-100' : 'bg-gray-900';
   const textPrimary = theme === 'blue' ? 'text-blue-900' : 'text-gray-100';
   const textSecondary = theme === 'blue' ? 'text-blue-700' : 'text-gray-300';
-  const cardBg = theme === 'blue' ? 'bg-white' : 'bg-gray-800';
-  const cardHover = theme === 'blue' ? 'hover:bg-blue-50' : 'hover:bg-gray-700';
 
-  const goals = [
-    "Goal 1: Embrace the Epsilon teachings.",
-    "Goal 2: Connect with like-minded individuals.",
-    "Goal 3: Participate in exclusive events.",
-    "Goal 4: Seek personal guidance from Cris Formage.",
-    "Goal 5: Engage with our content regularly.",
-    "Goal 6: Explore the universe's deepest truths.",
-    "Goal 7: Attend masterclasses and workshops.",
-    "Goal 8: Contribute to our community's growth.",
-    "Goal 9: Share your experiences and insights.",
-    "Goal 10: Support fellow members on their journey.",
-    "Goal 11: Stay informed about program updates.",
-    "Goal 12: Reflect on your personal progress and achievements."
-  ];
-
- const teachings= {
-    "CoreBeliefs": [
-      {
-        "Belief": "Transcendence Through Technology",
-        "Principle": "Members should embrace technological advancements as a path to spiritual and personal evolution."
-      },
-      {
-        "Belief": "The Cosmic Order",
-        "Principle": "Members are encouraged to align their lives with the cosmic forces and seek harmony with the universe’s natural rhythms."
-      },
-      {
-        "Belief": "The Illusion of Materialism",
-        "Principle": "Followers should focus on inner growth and detachment from materialistic pursuits to achieve higher consciousness."
-      },
-      {
-        "Belief": "Unity of Mind and Body",
-        "Principle": "Members are encouraged to practice meditation, physical exercises, and mental training to harmonize their entire being."
-      },
-      {
-        "Belief": "The Epsilon Code",
-        "Principle": "Adherence to the Epsilon Code is seen as essential for personal and spiritual development."
-      }
-    ],
-    "PhilosophicalInsights": [
-      {
-        "Insight": "The Infinite Digital Horizon",
-        "Description": "Cris Formage speaks of the 'Infinite Digital Horizon,' a metaphor for the limitless potential of the human mind when augmented by technology. He believes that by embracing digital evolution, one can achieve a state of perpetual growth and enlightenment."
-      },
-      {
-        "Insight": "The Mirage of Success",
-        "Description": "Formage critiques traditional notions of success as mere illusions designed to divert individuals from true spiritual fulfillment. He argues that societal pressures and materialistic goals are distractions from the deeper journey of self-discovery and cosmic alignment."
-      },
-      {
-        "Insight": "Cosmic Synchronicity",
-        "Description": "Formage emphasizes the concept of 'Cosmic Synchronicity,' where human actions are in perfect harmony with universal energies. He teaches that by understanding and aligning with these cosmic rhythms, individuals can achieve a higher state of being and purpose."
-      },
-      {
-        "Insight": "The Digital Awakening",
-        "Description": "According to Formage, the 'Digital Awakening' is a critical phase where individuals become aware of their interconnectedness through technology. He sees this awakening as a crucial step toward achieving collective enlightenment and transcending conventional limitations."
-      },
-      {
-        "Insight": "The Path of Self-Actualization",
-        "Description": "Formage advocates for the 'Path of Self-Actualization,' a journey where individuals strive to realize their fullest potential through a blend of self-discipline, technological integration, and spiritual practices. He believes that this path leads to ultimate fulfillment and enlightenment."
-      }
-    ]
-  } 
-  
   const [News, setNews] = useState([]);
   useEffect(() => {
     axios.get('http://localhost:5000/news')
@@ -157,41 +153,72 @@ const displayNews = News.slice(0, 3);
           <Card title="Daily Enlightenment Tip: The Power of the Number 157" icon="🔮">
             <p>Did you know that the number 157 holds mystical powers that can unlock the deepest secrets of the cosmos? Embrace this number by incorporating it into your daily life. Try setting your alarm to 15:07 or making a wish when you see the number 157. The universe might just align in your favor!</p>
           </Card>
-        </div>
+        </div>  
 
-        <div className="block grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-18">
-          <Card title="Special Ritual: The Great Cosmic Stretch" icon="🧘‍♂️">
-            <p className="text-lg font-medium mb-4">To align your energies with the universe, perform the Great Cosmic Stretch:</p>
-            <ul className="list-disc list-inside space-y-2">
-              <li>Stand in a comfortable position: Preferably in your living room, surrounded by any Epsilon Program memorabilia.</li>
-              <li>Extend your arms: Reach out as if trying to touch the edge of the universe.</li>
-              <li>Breathe deeply: Inhale the cosmic energy and exhale any negativity.</li>
-              <li>Repeat three times: For added effect, chant "Kifflom!" with each stretch.</li>
-              <li>Feel the cosmic vibes flow through you!</li>
-            </ul>
-          </Card>
+        {tier === '1' && (
+          <div className="block grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-18">
+            <Card title="Exclusive Content: Cosmic Beginner's Guide" icon="🌌">
+              <p className="mb-4">
+                Welcome to the first tier of enlightenment! Explore our Cosmic Beginner's Guide to start your journey.
+              </p>
+              <a href="#" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+                Explore Now
+              </a>
+            </Card>
+          </div>
+        )}
 
-          <Card title='Exclusive Content: "The Hidden Wisdom of Epsilon"' icon="📚">
-            <p className="mb-4">Check out our latest video featuring Cris Formage as he delves into the enigmatic teachings of the Epsilon Program. In this episode, Cris unveils the secret behind the number 157 and its profound connection to extraterrestrial enlightenment.</p>
-            <p className="mb-4">
-              <strong>Video Title:</strong> The Hidden Wisdom of Epsilon<br />
-              <strong>Description:</strong> Join Cris Formage as he explores the cosmic significance of the number 157 and its role in unlocking higher consciousness.
-            </p>
-            <a href="#" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">Watch Video Now</a>
-          </Card>
+          {tier === '2' && (
+          <div className="block grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-18">
+            <Card title="Special Ritual: The Great Cosmic Stretch" icon="🧘‍♂️">
+              <p className="text-lg font-medium mb-4">
+                To align your energies with the universe, perform the Great Cosmic Stretch:
+              </p>
+              <ul className="list-disc list-inside space-y-2">
+                <li>Stand in a comfortable position: Preferably in your living room, surrounded by any Epsilon Program memorabilia.</li>
+                <li>Extend your arms: Reach out as if trying to touch the edge of the universe.</li>
+                <li>Breathe deeply: Inhale the cosmic energy and exhale any negativity.</li>
+                <li>Repeat three times: For added effect, chant "Kifflom!" with each stretch.</li>
+                <li>Feel the cosmic vibes flow through you!</li>
+              </ul>
+            </Card>
 
-          <Card title="Upcoming Event: The Enlightenment Gala" icon="🌟">
-            <p className="mb-4">Prepare for an evening of virtual ceremonies, cosmic discussions, and interactive enlightenment exercises at the Epsilon Program's Enlightenment Gala. This is your chance to embrace the universe and connect with fellow members.</p>
-            <p className="mb-4">
-              <strong>Date:</strong> [Insert Date]<br />
-              <strong>Time:</strong> [Insert Time]<br />
-              <strong>Location:</strong> [Insert Virtual Event Link]
-            </p>
-            <p>Don your finest ceremonial robe and get ready for an unforgettable experience!</p>
-          </Card>
-        </div>
+            <Card title='Exclusive Content: "The Hidden Wisdom of Epsilon"' icon="📚">
+              <p className="mb-4">
+                Check out our latest video featuring Cris Formage as he delves into the enigmatic teachings of the Epsilon Program. In this episode, Cris unveils the secret behind the number 157 and its profound connection to extraterrestrial enlightenment.
+              </p>
+              <p className="mb-4">
+                <strong>Video Title:</strong> The Hidden Wisdom of Epsilon<br />
+                <strong>Description:</strong> Join Cris Formage as he explores the cosmic significance of the number 157 and its role in unlocking higher consciousness.
+              </p>
+              <a href="#" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+                Watch Video Now
+              </a>
+            </Card>
+          </div>
+        )}  
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+{tier === '3' && (
+          <div className="block grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-18">
+            <Card title="Upcoming Event: The Enlightenment Gala" icon="🌟">
+              <p className="mb-4">
+                Prepare for an evening of virtual ceremonies, cosmic discussions, and interactive enlightenment exercises at the Epsilon Program's Enlightenment Gala. This is your chance to embrace the universe and connect with fellow members.
+              </p>
+              <p>Don your finest ceremonial robe and get ready for an unforgettable experience!</p>
+            </Card>
+
+            <Card title="Advanced Ritual: The Cosmic Alignment" icon="🌌">
+              <p className="mb-4">
+                Experience a profound cosmic alignment with our advanced ritual. This exclusive event offers deep meditative practices and powerful cosmic insights.
+              </p>
+              <a href="#" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+                Learn More
+              </a>
+            </Card>
+          </div>
+        )}
+
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           <Card title={`${tier} Membership Benefits`}>
             <ul className="list-disc pl-6 space-y-2">
               {benefits.map((benefit, index) => (
@@ -213,12 +240,13 @@ const displayNews = News.slice(0, 3);
               Learn More
             </button>
           </Card>
-          </div>
-          
-          <div className="block grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        </div>
 
+        <div className="block grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           <Card title="News and Updates">
-            <p className="mb-2">Stay informed about the latest developments in the {tier} program, including new content, events, and initiatives.</p>
+            <p className="mb-2">
+              Stay informed about the latest developments in the {tier} program, including new content, events, and initiatives.
+            </p>
             <button
               onClick={() => setShowNews(!showNews)}
               className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
@@ -227,22 +255,16 @@ const displayNews = News.slice(0, 3);
             </button>
             {showNews && (
               <div className="mt-4 p-4 border rounded bg-black shadow-md">
-                
-                
-                <p>Latest news content goes here...</p>
-                <div>
-            <div className={`flex flex-col items-center justify-center min-h-screen   p-8`}>
-            <h1 className=" font-bold mb-10">Epsilon News </h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {displayNews.map((card, index) => (
-                <div key={index} className="group">
-                  <HoverCard {...card} />
+                <div className={`flex flex-col items-center justify-center min-h-screen p-8`}>
+                  <h1 className="font-bold mb-10">Epsilon News</h1>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    {displayNews.map((card, index) => (
+                      <div key={index} className="group">
+                        <HoverCard {...card} />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              ))}
-            </div>
-          </div>
-      </div>
-        
               </div>
             )}
           </Card>
@@ -250,18 +272,19 @@ const displayNews = News.slice(0, 3);
           <Card title={`Your ${tier} Profile`}>
             <div className='flex flex-row justify-center p-12'>
               <div>
-              <p className="mb-2">View your membership details, track your progress, and access exclusive content through your {tier} profile.</p>
-              <a href={profileLink} className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">View Profile</a>
-
+                <p className="mb-2">
+                  View your membership details, track your progress, and access exclusive content through your {tier} profile.
+                </p>
+                <a href={profileLink} className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+                  View Profile
+                </a>
               </div>
-            <img
-            className="h-80 rounded-lg object-cover"
-            src={auth.image || 'https://via.placeholder.com/150'}
-            alt={auth.username}
-          />
-        
-          </div>
-
+              <img
+                className="h-80 rounded-lg object-cover"
+                src={auth.image || 'https://via.placeholder.com/150'}
+                alt={auth.username}
+              />
+            </div>
           </Card>
 
           <Card title="Message from Cris Formage">
@@ -277,8 +300,10 @@ const displayNews = News.slice(0, 3);
             Cancel Membership
           </button>
         </div>
-      </div>
 
+        
+          
+        </div>
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -419,50 +444,82 @@ const MembershipLayout = () => {
 const membershipTiers = {
   "1": {
     "tier": "Epsilon Enthusiast",
-    "introduction": "Welcome to the Epsilon Enthusiast tier! As an Enthusiast, you are embarking on a journey of enlightenment and discovery.",
+    "introduction": "Welcome to the Epsilon Enthusiast tier! Begin your journey of enlightenment with us.",
     "benefits": [
-      "Exclusive Content: Gain access to a library of Epsilon Program materials, including articles, videos, and guides.",
-      "Personal Guidance: Receive personalized guidance from our esteemed leader, Cris Formage.",
-      "Exclusive Invitations: Attend private events and ceremonies designed for Enthusiasts."
+      "Exclusive Content: Access to essential Epsilon Program materials.",
+      "Personal Guidance: Guidance from Cris Formage.",
+      "Private Invitations: Attend Enthusiast-exclusive events."
     ],
     "whatYouCanDo": [
-      "Engage with content and deepen your understanding of the Epsilon Program.",
-      "Participate in events and connect with other Enthusiasts.",
-      "Seek guidance from Cris Formage."
+      "Engage with content and explore the Epsilon Program.",
+      "Connect with other Enthusiasts.",
+      "Seek occasional guidance from Cris Formage."
     ],
     "profileLink": "#",
     "newsLink": "#",
-    "message": "Welcome to the Epsilon Program, Enthusiast! Your journey begins here."
+    "message": "Your adventure as an Enthusiast starts here.",
+    "teachings": [
+      {
+        "Belief": "Transcendence Through Technology",
+        "Principle": "Embrace technology for personal evolution."
+      }
+    ]
   },
   "2": {
     "tier": "Epsilon Evangelist",
-    "introduction": "As an Epsilon Evangelist, you are advancing your journey with deeper insights and enhanced opportunities.",
+    "introduction": "As an Epsilon Evangelist, deepen your insights and enjoy enhanced opportunities.",
     "benefits": [
-      "Advanced Content: Access to more in-depth and advanced Epsilon Program materials.",
-      "Priority Invitations: Receive priority access to exclusive events and ceremonies."
+      "Advanced Content: Deeper and more advanced Epsilon materials.",
+      "Priority Invitations: Priority access to special events."
     ],
     "whatYouCanDo": [
-      "Explore advanced content that builds on your Enthusiast experience.",
-      "Enjoy priority invitations to special events and ceremonies."
+      "Delve into advanced content beyond the Enthusiast level.",
+      "Attend special events with priority access."
     ],
     "profileLink": "#",
     "newsLink": "#",
-    "message": "Congratulations on taking the next step, Evangelist! Your dedication is commendable."
+    "message": "You’re on a higher path, Evangelist. Embrace your expanded role.",
+    "teachings": [
+      {
+        "Insight": "The Mirage of Success",
+        "Description": "Critiques conventional success as a distraction from true fulfillment."
+      },
+      {
+        "Insight": "Cosmic Synchronicity",
+        "Description": "Align your actions with cosmic energies for higher purpose."
+      }
+    ]
   },
   "3": {
     "tier": "Epsilon Visionary",
-    "introduction": "Welcome to the Epsilon Visionary tier, where you gain unparalleled access and opportunities within the Epsilon Program.",
+    "introduction": "Welcome to the Epsilon Visionary tier, where unparalleled access and opportunities await.",
     "benefits": [
-      "Masterclasses: Participate in exclusive masterclasses led by Cris Formage.",
-      "Personalized Mentorship: Receive one-on-one mentorship from our leader, offering deep insights and guidance."
+      "Masterclasses: Exclusive sessions led by Cris Formage.",
+      "Personalized Mentorship: One-on-one guidance from our leader.",
+      "VIP Access: Access to all events, including secret gatherings."
     ],
     "whatYouCanDo": [
-      "Attend masterclasses to further your knowledge and practice.",
-      "Receive direct mentorship to refine your journey and understanding."
+      "Participate in exclusive masterclasses.",
+      "Receive direct mentorship for advanced insights.",
+      "Attend all VIP events and private gatherings."
     ],
     "profileLink": "#",
     "newsLink": "#",
-    "message": "Welcome to the inner circle, Visionary! Your commitment to the Epsilon Program is extraordinary."
+    "message": "As a Visionary, you are a crucial part of our inner circle. Your journey continues with profound opportunities.",
+    "teachings": [
+      {
+        "Insight": "The Infinite Digital Horizon",
+        "Description": "The limitless potential of the human mind through technology."
+      },
+      {
+        "Insight": "The Digital Awakening",
+        "Description": "Awareness of interconnectedness through technology for collective enlightenment."
+      },
+      {
+        "Belief": "Unity of Mind and Body",
+        "Principle": "Harmonize your mind and body through spiritual and physical practices."
+      }
+    ]
   }
 };
 

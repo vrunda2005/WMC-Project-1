@@ -7,6 +7,20 @@ import { useTheme } from '../../usetheamContext';
 import './Navbar.css';
 import Swal from 'sweetalert2';
 import logo from '../../assets/images/character_ep.jpg'
+import { MdOutlineQuiz } from "react-icons/md";
+import { GiNewspaper } from "react-icons/gi";
+import { FaPersonCircleQuestion } from "react-icons/fa6";
+import { FaMapMarkedAlt } from "react-icons/fa";
+import { FcAbout } from "react-icons/fc";
+import { FcDonate } from "react-icons/fc";
+import mem from '../../assets/images/member-card.png'
+import event from '../../assets/images/event.png'
+import story from '../../assets/images/stories.png'
+import profile from '../../assets/images/profile.png'
+import quiz from '../../assets/images/quiz.png'
+import { FcHome } from "react-icons/fc";
+
+
 
 
 const Navbar = () => {
@@ -167,7 +181,9 @@ const Navbar = () => {
           </div>
         )}
         <ul className="flex flex-center items-center justify-between space-x-10">
-          <li>
+        <li className="flex items-center space-x-1 ">
+        <FcHome/>
+
             <Link to="/" className={`hover:underline ${window.location.pathname === '/' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Home</Link>
           </li>
           {auth.isAdmin ? (
@@ -190,22 +206,32 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <li>
+              <li className="flex items-center space-x-2 ">
+              <img src={profile} alt="img" className="w-6 h-6" />
+
                 <Link to="/Profile" className={`hover:underline ${window.location.pathname === '/Profile' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Profile</Link>
               </li>
-              <li>
-                <Link to={auth.membership_id ? `/epsilon_program_membership/${auth.membership_id}` : '/membership'} className={`hover:underline ${window.location.pathname.includes('/epsilon_program_membership') || window.location.pathname === '/membership' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Membership</Link>
+
+              <li className="flex items-center space-x-2 ">
+              <img src={mem} alt="membership" className="w-6 h-6" />
+              <Link to={auth.membership_id ? `/epsilon_program_membership/${auth.membership_id}` : '/membership'} className={`hover:underline ${window.location.pathname.includes('/epsilon_program_membership') || window.location.pathname === '/membership' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Membership</Link>
               </li>
-              <li>
-                <Link to="/storyPage" className={`hover:underline ${window.location.pathname === '/storyPage' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Stories</Link>
+
+              <li className="flex items-center space-x-2 ">
+              <img src={story} alt="img" className="w-6 h-6" />
+
+              <Link to="/storyPage" className={`hover:underline ${window.location.pathname === '/storyPage' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Stories</Link>
               </li>
-              <li>
-                <Link to="/Blog" className={`hover:underline ${window.location.pathname === '/Blog' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Blog</Link>
+              <li className="flex items-center space-x-2 ">
+              <img src={event} alt="img" className="w-6 h-6" />
+
+              <Link to="/Blog" className={`hover:underline ${window.location.pathname === '/Blog' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Blog</Link>
               </li>
-              <li>
-                <Link to="/Donate" className={`hover:underline ${window.location.pathname === '/Donate' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Donate</Link>
+              <li className="flex items-center space-x-2 ">
+                <FcDonate/>
+              <Link to="/Donate" className={`hover:underline ${window.location.pathname === '/Donate' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Donate</Link>
               </li>
-              <li>
+              <li className="flex items-center space-x-2 ">
               <img
           src={auth.image} // Replace with the URL of the profile picture
           alt="Profile"
@@ -238,15 +264,18 @@ const Navbar = () => {
             </button>
             {isDropdownOpen && (
               <ul className="absolute mt-2 right-0 bg-white dark:bg-gray-800 shadow-lg rounded-lg w-48 z-10" >
-                <li>
-                  <Link
+                <li className="flex items-center space-x-2 p-2">
+                  <FcAbout/>
+                <Link
                     to="/About"
                     className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${location.pathname === '/About' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}
                   >
                     About
                   </Link>
                 </li>
-                <li>
+                <li className="flex items-center space-x-2 p-2">
+                <FaMapMarkedAlt />
+
                   <Link
                     to="/epsilonMap"
                     className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${location.pathname === '/epsilonMap' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}
@@ -254,7 +283,9 @@ const Navbar = () => {
                     EpsilonMap
                   </Link>
                 </li>
-                <li>
+                <li className="flex items-center space-x-2 p-3">
+                <FaPersonCircleQuestion />
+
                   <Link
                     to="/inquiryForm"
                     className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${location.pathname === '/inquiryForm' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}
@@ -262,7 +293,8 @@ const Navbar = () => {
                     Inquiry Form
                   </Link>
                 </li>
-                <li>
+                <li className="flex items-center space-x-2 p-2">
+                  <GiNewspaper/>
                   <Link
                     to="/News"
                     className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${location.pathname === '/News' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}
@@ -270,7 +302,9 @@ const Navbar = () => {
                     News
                   </Link>
                 </li>
-                <li>
+                <li className="flex items-center space-x-2 p-2">
+                <img src={quiz} alt="img" className="w-6 h-6" />
+
                 <Link to='/Quiz' className={`hover:underline ${window.location.pathname === '/Quiz' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Quiz</Link>
               </li>
               </ul>

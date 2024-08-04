@@ -72,6 +72,9 @@ const AllUsers = () => {
               <th className={`px-6 py-3 text-left text-xs font-medium uppercase tracking-wider`}>
                 Membership ID
               </th>
+              <th className={`px-6 py-3 text-left text-xs font-medium uppercase tracking-wider`}>
+               Profile
+              </th>
             </tr>
           </thead>
           <tbody className={`divide-y divide-gray-200`}>
@@ -80,14 +83,21 @@ const AllUsers = () => {
                 <td className={`px-6 py-4 whitespace-nowrap text-sm font-medium`}>
                   {user.name}
                 </td>
-                <td className={`px-6 py-4 whitespace-nowrap text-sm `}>
+                <td className={`px-6 py-4 whitespace-nowrap  `}>
                   {user.email}
                 </td>
-                <td className={`px-6 py-4 whitespace-nowrap text-sm `}>
+                <td className={`px-6 py-4 whitespace-nowrap  `}>
                   {user.points}
                 </td>
-                <td className={`px-6 py-4 whitespace-nowrap text-sm `}>
+                <td className={`px-6 py-4 whitespace-nowrap  `}>
                   {user.membership_id}
+                </td>
+                <td className={`px-6 py-4 whitespace-nowrap  `}>
+                <img
+                  className="w-60 h-60 object-cover border-4 border-gray-300 shadow-lg mb-6 md:mb-0 md:mr-6"
+                  src={user.image}
+                  alt="Membership"
+                />
                 </td>
               </tr>
             ))}

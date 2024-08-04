@@ -85,10 +85,10 @@ const StoryPage = () => {
       <div className={`min-h-screen ${overlay} max-w-screen-lg mx-auto py-8 px-4 sm:px-6 lg:px-8`}>
         {auth.isLoggedIn ? (
           <>
-            <div className="mb-12 bg-white rounded-lg shadow-xl p-6">
+            <div className="mb-12 bg-zinc-800 rounded-lg shadow-xl p-6">
               <h2 className={`text-3xl font-bold mb-4 ${textSecondary}`}>Add Your Story</h2>
               <textarea
-                className="w-full p-4 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full p-4 border bg-zinc-900 border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 rows="5"
                 placeholder="Share your story..."
                 value={newStory}

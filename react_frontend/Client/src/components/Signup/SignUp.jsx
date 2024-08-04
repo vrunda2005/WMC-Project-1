@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useTheme } from "../../usetheamContext";
 import { RiEye2Fill, RiEyeCloseFill } from "react-icons/ri";
 import Swal from 'sweetalert2';
+import signup_img from '../../assets/images/Group_image.jpg'
 
 export default function App() {
   const [value, setValue] = useState({
@@ -88,8 +89,8 @@ export default function App() {
         <div className={`max-w-md w-full p-6 ${containerBgColor} rounded shadow-md`}>
           <form className={`flex flex-col gap-2`} onSubmit={handleSubmit}>
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/4/47/Epsilon_Program_Logo.png"
-              className={`h-36 shadow-sm`}
+              src={signup_img}
+              className={`h-50 shadow-lg`}
               alt="Logo"
             />
             <h2 className={`text-5xl font-bold mt-2 mb-8 text-center`}>Sign Up</h2>

@@ -77,7 +77,7 @@ function Blog() {
         {eventsList.map((event) => (
           <div
             key={event._id}
-            className="flex bg-white shadow-lg rounded-lg overflow-hidden transform transition-all duration-300"
+            className="flex bg-zinc-800 shadow-lg rounded-lg overflow-hidden transform transition-all duration-300"
           >
             <div className="w-52 bg-gray-800 text-white flex-shrink-0 p-4 text-center flex flex-col justify-center items-center relative">
               <img src={event.image || './src/assets/images/blank.png'} className="absolute inset-0 object-cover w-full h-full opacity-30" />
