@@ -36,6 +36,7 @@ const MembershipTier = ({ tier, benefits, profileLink, newsLink, whatYouCanDo, m
   const { theme } = useTheme();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showNews, setShowNews] = useState(false);
+  const [auth] = useAuth();
 
   const containerBgColor = theme === 'blue' ? 'bg-blue-100' : 'bg-gray-900';
   const textPrimary = theme === 'blue' ? 'text-blue-900' : 'text-gray-100';
@@ -119,6 +120,11 @@ const MembershipTier = ({ tier, benefits, profileLink, newsLink, whatYouCanDo, m
             className="w-64 h-64 object-cover rounded-full border-4 border-gray-300 shadow-lg mb-6 md:mb-0 md:mr-6"
             src="https://i.ytimg.com/vi/4pPNTzlfxsk/maxresdefault.jpg"
             alt="Membership"
+          />
+             <img
+            className="h-80 rounded-lg object-cover"
+            src={auth.image || 'https://via.placeholder.com/150'}
+            alt={auth.username}
           />
           <Card title="Daily Enlightenment Tip: The Power of the Number 157" icon="🔮">
             <p>Did you know that the number 157 holds mystical powers that can unlock the deepest secrets of the cosmos? Embrace this number by incorporating it into your daily life. Try setting your alarm to 15:07 or making a wish when you see the number 157. The universe might just align in your favor!</p>

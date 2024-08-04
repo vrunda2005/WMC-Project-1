@@ -102,13 +102,13 @@ const PageTwo = ({ stories }) => {
 
 const HoverCard = ({ title, description, image }) => {
   return (
-    <div className="max-w-2xl rounded overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl transform hover:-translate-y-2">
+    <div className="max-w rounded flex-wrap shadow-lg transition-all duration-300 hover:shadow-2xl transform hover:-translate-y-2">
       <div className="relative overflow-hidden">
         <img className="w-full object-cover transition-transform duration-300 transform hover:scale-110" src={image} alt={title} />
       </div>
       <div className="px-6 py-4 bg-white">
         <div className="font-bold text-xl mb-2 text-gray-800">{title}</div>
-        <p className="text-gray-700 text-base h-0 opacity-0 transition-all duration-300 overflow-hidden group-hover:h-auto group-hover:opacity-100">{description}</p>
+        <p className="text-zinc-800 transition-all duration-300  group-hover:h-auto group-hover:opacity-100">{description}</p>
       </div>
     </div>
   );
@@ -313,7 +313,8 @@ const Home = () => {
 
         return (
           <section key={i} className={`${textColor} ${classNames}`}>
-            <div className={`${textColor}`}>
+            
+            <div className={`${textColor} `}>
               <div className={`${textColor}`}>
                 {Component}
               </div>

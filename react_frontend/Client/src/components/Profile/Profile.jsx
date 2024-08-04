@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../creatContext';
 
 const ProfilePage = () => {
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useAuth();
   const [auth] = useAuth();
   const [edit, setEdit] = useState(false);
 

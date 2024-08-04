@@ -8,6 +8,15 @@
   font-family: sitter;
   src: url('../src/assets/Slitter-W2GE.ttf');
 }
+@font-face {
+  font-family: Jovelyn;
+  src: url('../src/assets/JovelynDemoRegular-V4q8y.otf');
+}
+@font-face{
+  font-family: Mafia;
+  src: url('../src/assets/MafiaHollowItalic-lxd25.ttf');
+}
+
 
 @tailwind base;
 @tailwind components;
@@ -17,7 +26,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins'; /* Default font */
+  font-family: 'Jovelyn'; /* Default font */
 }
 
 body {
@@ -68,10 +77,12 @@ body {
   z-index: 1;
 }
 
+
+
 @media (prefers-color-scheme: dark) {
   h1, h2, h3 {
-    font-family: '', sans-serif; /* GTA V theme font */
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6); /* Subtle glow effect */
+    font-family: 'Mafia', sans-serif; 
+    
     padding: 0.5rem; /* Padding around the text */
     margin-bottom: 1rem; /* Spacing between headings and content */
     letter-spacing: 0.09em; /* Adjust spacing between characters */
@@ -80,6 +91,8 @@ body {
   }
 
   h1 {
+    font-family: 'Mafia';
+    text-shadow: 1px 1px 2px rgba(215, 255, 210, 0.6); 
     font-size: 3rem; /* Size for main headings */
     color: #a6ff00; /* Light Steel Blue */
     margin-bottom: 1.5rem; /* More spacing for larger headings */
@@ -98,7 +111,7 @@ body {
   }
 
   p {
-    font-family: 'Pricedown', sans-serif; /* GTA V font for paragraphs */
+    font-family: 'Jovelyn', sans-serif; /* GTA V font for paragraphs */
     line-height: 2.6;
     font-size: medium;
     /* color: #d6eeaa; */

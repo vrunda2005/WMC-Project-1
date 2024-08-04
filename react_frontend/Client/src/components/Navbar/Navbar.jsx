@@ -200,6 +200,13 @@ const Navbar = () => {
               <li>
                 <Link to="/Donate" className={`hover:underline ${window.location.pathname === '/Donate' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Donate</Link>
               </li>
+              <li>
+              <img
+          src={auth.image} // Replace with the URL of the profile picture
+          alt="Profile"
+          className="w-18 h-18 rounded-full border-2 border-white"
+        />
+              </li>
               {/* <li>
                 <Link to='/About' className={`hover:underline ${window.location.pathname === '/About' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>About</Link>
               </li>

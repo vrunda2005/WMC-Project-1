@@ -7,7 +7,7 @@ const AuthProvider = ({ children }) => {
   const initialAuthState = () => {
     const data = localStorage.getItem("auth");
     return data ? JSON.parse(data) 
-    : { username: "", token: "", isLoggedIn: false, isAdmin: false, membership_id: null, userPoints: 0, lastAttempt: null,email: "" };
+    : { username: "", token: "", isLoggedIn: false, isAdmin: false, membership_id: null, userPoints: 0, lastAttempt: null,email: "",  image: ""   };
   };
 
   const [auth, setAuth] = useState(initialAuthState);
@@ -44,6 +44,9 @@ const AuthProvider = ({ children }) => {
     }
     if (userData?.email) {
       setAuth(prevAuth => ({ ...prevAuth, email: userData.email }));
+    }
+    if (userData?.image) {  // Add this line
+      setAuth(prevAuth => ({ ...prevAuth, image: userData.image }));
     }
   }, [userData]);
 
