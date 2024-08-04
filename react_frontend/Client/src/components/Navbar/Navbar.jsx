@@ -47,11 +47,11 @@ const Navbar = () => {
     });
   };
   
-  const headerClass = `sticky top-0 z-50 p-4 md:p-6 flex justify-between  ${
+  const headerClass = `sticky h-18 top-0 z-50 p-4 md:p-6 flex justify-between  ${
     theme === 'blue' ? 'bg-blue-primary-bg text-blue-text-light' : 'bg-dark-primary-bg text-dark-text-light'
   }`;
 
-  const buttonClass = `p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+  const buttonClass = `px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 ${
     theme === 'blue'
       ? 'bg-blue-highlight hover:bg-blue-highlight-dark text-white'
       : 'bg-dark-highlight hover:bg-dark-highlight-dark text-white'
@@ -60,12 +60,12 @@ const Navbar = () => {
   return (
     <header className={headerClass}>
       {/* Logo */}
-      <a href="/" className="text-lg font-bold truncate">Logo</a>
+      <a href="/" className="text-lg font-bold truncate relative left-4 bottom-1">Logo</a>
 
       {/* Theme Toggle Button */}
-      <button onClick={toggleTheme} className={buttonClass} aria-label="Toggle Theme">
+      {/* <button onClick={toggleTheme} className={buttonClass} aria-label="Toggle Theme">
         {theme === 'dark' ? <FaSun className="text-yellow-500" /> : <FaMoon className="text-gray-500" />}
-      </button>
+      </button> */}
 
       {/* Mobile Menu Toggle Button */}
       <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={`md:hidden ${buttonClass}`} aria-label="Toggle Menu">
@@ -148,7 +148,7 @@ const Navbar = () => {
       </nav>
 
       {/* Desktop Menu */}
-      <nav className="hidden md:flex items-center space-x-10 flex-wrap  flex-center justify-between">
+      <nav className="hidden relative bottom-2 text-[17px] md:flex items-center space-x-10 flex-wrap  flex-center justify-between">
         {auth.isLoggedIn && (
           <div className="flex  space-x-2 hover:underline">
             <FaRegUser size="1.5em" />
