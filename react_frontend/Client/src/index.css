@@ -111,7 +111,7 @@ body {
 
   h2 {
     font-size: 2.5rem; /* Size for secondary headings */
-    color: #bae22b; /* Blue Violet */
+    color:gold; /* Blue Violet */
     margin-bottom: 1.25rem;
   }
 
@@ -125,7 +125,8 @@ body {
     font-family: 'Pricedown', sans-serif; /* GTA V font for paragraphs */
     line-height: 2.6;
     font-size: medium;
-    color: #eee8aa;
+    /* color: #d6eeaa; */
+    color:aliceblue;
   }
 }
 
