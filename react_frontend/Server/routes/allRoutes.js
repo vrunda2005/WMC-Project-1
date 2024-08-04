@@ -1,0 +1,47 @@
+import express from 'express';
+import { login, register } from '../controllers/authController.js';
+import { donationByUsername, totalDonations, userDonation } from '../controllers/donationController.js';
+import { getEvents, addEvents, deleteEvent, updateEvent, eventRegister } from '../controllers/eventController.js';
+import { addInquiry, getInquiries } from '../controllers/inquiryController.js';
+import { cancelMembership, quizPoints } from '../controllers/membershipController.js';
+import { addNews, getNews, updateNews, deleteNews } from '../controllers/newsController.js';
+import { getStories, addStory } from '../controllers/storyController.js';
+import { getAllUsers, getUserByEmail, updateUserByEmail } from '../controllers/userController.js';
+import { checkToken } from '../middlewares/Auth.js';
+
+const router = express.Router();
+
+router.post("/register", register);
+router.get("/api/me", checkToken);
+router.post("/login", login);
+
+router.get("/getallusers", getAllUsers);
+router.get("/getalluser/:email", getUserByEmail);
+router.put("/updateuser/:email", updateUserByEmail);
+
+router.put("/donate/:username", donationByUsername);
+router.get("/total-donations", totalDonations);
+router.get("/user-donations", userDonation);
+
+router.post("/cancel", cancelMembership);
+router.post("/quizPoints", quizPoints);
+
+router.get("/api/events", getEvents);
+router.post("/api/events", addEvents);
+router.delete("/api/events/:id", deleteEvent);
+router.put("/api/events/:id", updateEvent);
+
+router.post("/api/eventRegister", eventRegister);
+
+router.get("/stories", getStories);
+router.post("/stories", addStory);
+
+router.post("/api/inquiries", addInquiry);
+router.get("/admin/inquiries", getInquiries);
+
+router.post("/news", addNews);
+router.get("/news", getNews);
+router.put("/news/:id", updateNews);
+router.delete("/news/:id", deleteNews);
+
+export default router;

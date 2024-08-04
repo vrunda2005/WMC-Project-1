@@ -55,24 +55,24 @@ const InquiryForm = () => {
 
 
   return (
-    <div className='flex justify-end p-10 ml-[25vw] min-h-screen'>
+    <div className='flex justify-end p-10 ml-[30vw] min-h-screen'>
       <div className='fixed left-0 top-30 flex flex-col p-16'>
-        <h1 className='text-5xl text-left text-white m-0 p-0'>INQUIRY</h1>
+        <h1 className='text-6xl text-left text-white m-0 p-0'>INQUIRY</h1>
         <h1 className='text-5xl text-left text-white m-0 p-0'>FORM</h1>
       </div>
       <div className={`mx-auto  text-white rounded-lg shadow-lg ${containerBgColor} ${overlayColor} w-full`}>
         {auth.isLoggedIn ? (
         <>
-              <div className={``}>
-              <div className={` mt-10 max-h-screen  mx-auto p-10 rounded-xl py-10 mb-10 `}>
-                <div className='flex flex-row'>
-                <h1>Your problem our soultion</h1>
-                <img
-  className="w-[55%] h-auto max-w-full object-cover rounded-full shadow-md border-2 "
-  src="https://static1.srcdn.com/wordpress/wp-content/uploads/2020/03/GTA-Red-Dead-Redemption-2-Time-Travel.jpg"
-  alt="img"
-/>
-                </div>
+        <div className={``}>
+        <div className={` mt-10 max-h-screen  mx-auto p-10 rounded-xl py-10 mb-10 `}>
+          <div className='flex flex-row'>
+          <h1>Your problem our soultion</h1>
+          <img
+          className="w-[55%] h-auto max-w-full object-cover rounded-full shadow-md border-2 "
+          src="https://static1.srcdn.com/wordpress/wp-content/uploads/2020/03/GTA-Red-Dead-Redemption-2-Time-Travel.jpg"
+          alt="img"
+        />
+        </div>
           <p className='pt-6'>At the Epsilon Program, we cherish the quest for wisdom and truth. If you have any questions or need further guidance, please don’t hesitate to reach out to us. Our dedicated team is here to assist you and provide the support you need on your journey.
           </p>
           <p >

@@ -3,15 +3,16 @@ import { useAuth } from '../../creatContext';
 import { useTheme } from '../../usetheamContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../Home/Home.jsx'
 
-const getRandomColor = () => {
-  const letters = '582839'; // use letters for light colors
-  let color = '#';
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * letters.length)];
-  }
-  return color;
-};
+// const getRandomColor = () => {
+//   const letters = '582839'; // use letters for light colors
+//   let color = '#';
+//   for (let i = 0; i < 6; i++) {
+//     color += letters[Math.floor(Math.random() * letters.length)];
+//   }
+//   return color;
+// };
 
 const StoryPage = () => {
   const [stories, setStories] = useState([]);
@@ -77,9 +78,9 @@ const StoryPage = () => {
   const overlay = theme === 'blue' ? 'bg-blue-overlay' : 'bg-dark-overlay';
 
   return (
-    <div className='ml-[25vw] flex justify-end p-10'>
-          <div className='fixed left-0 top-30 flex flex-col p-16'>
-            <h1 className='text-5xl text-left text-white m-0 p-0'>Stories</h1>
+    <div className='ml-[30vw] flex justify-end p-10'>
+          <div className='fixed left-0 top-30 flex flex-col p-8'>
+            <h1 className='text-6xl text-left text-white m-0 p-0'>Stories</h1>
           </div>
       <div className={`min-h-screen ${overlay} max-w-screen-lg mx-auto py-8 px-4 sm:px-6 lg:px-8`}>
         {auth.isLoggedIn ? (
@@ -124,12 +125,11 @@ const StoryPage = () => {
             <p>Loading stories...</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 overflow-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {stories.map((story, index) => (
           <div
             key={story._id}
-            className="border-2 border-gray-300 bg-white p-6 rounded-lg shadow-lg transform transition-transform hover:shadow-2xl h-84 overflow-scroll"
-            style={{ backgroundColor: colors[index] }}
+            className="stories border-gray-300 bg-white p-6 rounded-lg shadow-lg transform transition-transform hover:shadow-2xl w-72"
           >
             <p className="text-white mb-4">"{story.story}"</p>
             <h2 className="text-xl font-bold mb-2 text-white text-right">-{story.username}</h2>

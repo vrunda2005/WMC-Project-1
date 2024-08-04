@@ -1,10 +1,14 @@
-// src/pages/AdminInquiries.js
 import React, { useState, useEffect } from 'react';
+import { useAuth } from '../../creatContext';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const AdminInquiries = () => {
   const [inquiries, setInquiries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const [auth] = useAuth();
 
   useEffect(() => {
     const fetchInquiries = async () => {
@@ -21,6 +25,16 @@ const AdminInquiries = () => {
     };
 
     fetchInquiries();
+    
+    if (!auth.isAdmin) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'You are not authorised!',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      })
+      navigate('/');
+    }
   }, []);
 
   return (

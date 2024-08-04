@@ -102,11 +102,11 @@ const ProfilePage = () => {
   }
 
   const cursorStyle = edit ? 'cursor-text border-gray-300' : 'cursor-not-allowed';
-  const textColor = edit ? 'text-white' : 'text-gray-300';
+  const textColor = edit ? 'text-white' : 'text-gray-100';
 
   return (
-    <div className='bg-slate-400 h-screen'>
-      <div className="max-w-screen-md m-auto mt-16 h-auto bg-gray-800 text-white shadow-lg rounded-lg">
+    <div className='profileContainer bg-slate-400 h-screen border-4'>
+      <div className="border-4 profile max-w-screen-md m-auto mt-16 h-auto bg-gray-800 text-white shadow-lg rounded-lg">
         <div className="p-6 flex">
           <div className="flex flex-col items-center">
             <img
@@ -114,7 +114,7 @@ const ProfilePage = () => {
               src={formData.image}
               alt='profile picture'
             />
-            <div className="mt-4">
+            <div className="mt-4 flex flex-col gap-4">
               <button
                 className="bg-yellow-500 text-gray-900 font-semibold py-1 px-2 rounded-lg mr-2"
                 onClick={() => edit && setFormData({ ...formData, image: 'new_image_url' })}
@@ -214,7 +214,7 @@ const ProfilePage = () => {
             </div>
 
             <div className="mt-6">
-              <h2 className="text-xl text-gray-300 mt-8 mb-4">Password</h2>
+              <h4 className="text-xl text-gray-300 mb-4">Password</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-white">Current Password</label>

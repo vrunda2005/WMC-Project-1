@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '../../usetheamContext';
+import { useAuth } from '../../creatContext';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const [auth] = useAuth();
 
   // Fetch users data
   const fetchUsers = async () => {
@@ -22,6 +27,15 @@ const AllUsers = () => {
 
   useEffect(() => {
     fetchUsers();
+    if (!auth.isAdmin) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'You are not authorised!',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      })
+      navigate('/');
+    }
   }, []);
 
 

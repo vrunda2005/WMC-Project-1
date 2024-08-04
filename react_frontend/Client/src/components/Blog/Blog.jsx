@@ -79,17 +79,17 @@ function Blog() {
             key={event._id}
             className="flex bg-zinc-800 shadow-lg rounded-lg overflow-hidden transform transition-all duration-300"
           >
-            <div className="w-80 bg-gray-800 text-white flex-shrink-0 p-4 text-center flex flex-col justify-center items-center relative">
+            <div className="w-52 bg-gray-800 text-white flex-shrink-0 p-4 text-center flex flex-col justify-center items-center relative">
               <img src={event.image || './src/assets/images/blank.png'} className="absolute inset-0 object-cover w-full h-full opacity-30" />
-              <p className="text-8xl font-bold">{moment(event.date).format('D')}</p>
+              <p className="text-5xl font-bold">{moment(event.date).format('D')}</p>
               <p className="text-4xl">{moment(event.date).format('MMM')}</p>
             </div>
 
             <div className="flex flex-col justify-items-start p-6 flex-1">
-              <h3 className="text-left text-3xl mb-2 font-semibold text-blue-600">{event.title}</h3>
+              <h3 className="text-left text-xl m-0 p-0 font-semibold text-blue-600">{event.title}</h3>
               <hr className='bg-black mb-4' />
-              <p className="text-left text-2xl text-gray-600 mb-4">{event.description}</p>
-              <p className='text-left text-2xl text-gray-600 mb-4'>
+              <p className="text-left text-lg text-gray-600 mb-2">{event.description}</p>
+              <p className='text-left text-lg text-gray-600 mb-2'>
                 <span className='font-bold'>{moment(event.date).format('h:mm A')}</span> | 
                 <span className='font-bold'>{event.venue}</span> | 
                 <span className='font-bold'>{event.duration}</span> | 
@@ -108,7 +108,7 @@ function Blog() {
               {moment(event.date).isSameOrAfter(currentDate) && (
                 <button
                   onClick={() => handleRegister(event)}
-                  className="w-fit mt-4 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                  className="w-fit mt-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
                 >
                   Register
                 </button>
@@ -124,15 +124,15 @@ function Blog() {
     <div className='flex justify-end p-10 ml-[25vw] min-h-screen'>
       {auth.isAdmin ? (
         <div className='fixed left-0 top-30 flex flex-col p-16'>
-          <h1 className='text-9xl text-left text-white m-0 p-0'>EVENTS</h1>
+          <h1 className='text-6xl text-left text-white m-0 p-0'>EVENTS</h1>
         </div>
       ) : (
         <div className='fixed left-0 top-30 flex flex-col p-16'>
-          <h1 className='text-9xl text-left text-white m-0 p-0'>EVENT</h1>
-          <h1 className='text-8xl text-left text-white m-0 p-0'>CALENDAR</h1>
+          <h1 className='text-6xl text-left text-white m-0 p-0'>EVENT</h1>
+          <h1 className='text-5xl text-left text-white m-0 p-0'>CALENDAR</h1>
         </div>
       )}
-      <div className="max-w-screen-xl justify-end w-full">
+      <div className="max-w-screen-lg justify-end w-full">
         {loading ? (
           <div className="text-center py-16">
             <div className="spinner-border text-orange-500 mb-4" role="status">
