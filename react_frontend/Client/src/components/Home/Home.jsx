@@ -85,7 +85,7 @@ function Home() {
 
   
   return (
-    <div className=''>
+    <div className='realtive'>
 
       <div className="page-1 h-screen flex items-center justify-center relative">
         <div className="react_text bg-gradient-to-r from-blue-500 via-blue-300 to-blue-500 bg-opacity-30 backdrop-filter backdrop-blur-2xl p-4 rounded-lg shadow-lg w-auto">

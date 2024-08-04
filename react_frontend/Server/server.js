@@ -52,6 +52,9 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
     points: Number,
     isAdmin: Boolean,
     membership_id: Number,
+    dob:Date, 
+    gender: { type: String, enum: ['male', 'female', 'non-binary', 'other'], default: 'other' }, 
+    phone:String,
   });
 
 const User = mongoose.model('User', userSchema);
@@ -177,16 +180,38 @@ app.get('/getalluser/:email', async (req, res) => {
   res.json(user);
 });
 
+
 app.put('/updateuser/:email', async (req, res) => {
   const email = req.params.email;
-  const userPoints = req.body.points;
-  const addPoints = Number(req.body.addPoints); // Ensure it's a number
-  const membership_id = Number(req.body.membership_id); // Ensure it's a number
+  const { points: userPoints, addPoints, membership_id, dob, gender, image, phone } = req.body;
 
   try {
-    const user = await User.findOne({ email: email });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
+    }
+    
+    // Validate fields
+    if (typeof userPoints !== 'number' || isNaN(userPoints)) {
+      return res.status(400).json({ error: 'Invalid userPoints value' });
+    }
+    if (typeof addPoints !== 'number' || isNaN(addPoints) || addPoints < 0) {
+      return res.status(400).json({ error: 'Invalid addPoints value' });
+    }
+    if (typeof membership_id !== 'number' || isNaN(membership_id)) {
+      return res.status(400).json({ error: 'Invalid membership_id value' });
+    }
+    if (dob && isNaN(new Date(dob).getTime())) {
+      return res.status(400).json({ error: 'Invalid date of birth value' });
+    }
+    if (gender && typeof gender !== 'string') {
+      return res.status(400).json({ error: 'Invalid gender value' });
+    }
+    if (image && typeof image !== 'string') {
+      return res.status(400).json({ error: 'Invalid image URL value' });
+    }
+    if (phone && typeof phone !== 'string') {
+      return res.status(400).json({ error: 'Invalid phone number value' });
     }
 
     // Validate points based on membership_id
@@ -215,6 +240,10 @@ app.put('/updateuser/:email', async (req, res) => {
 
     user.membership_id = membership_id;
     user.points += addPoints;
+    if (dob) user.dob = dob; // Update date of birth if provided
+    if (gender) user.gender = gender; // Update gender if provided
+    if (image) user.image = image; // Update image URL if provided
+    if (phone) user.phone = phone; // Update phone number if provided
     const updatedUser = await user.save();
 
     res.json({ user: updatedUser, admin: adminUser });
@@ -224,6 +253,7 @@ app.put('/updateuser/:email', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 
 const donationSchema = new mongoose.Schema({

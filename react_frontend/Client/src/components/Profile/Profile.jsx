@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../creatContext';
 import { RiEye2Fill, RiEyeCloseFill } from "react-icons/ri";
+import Swal from 'sweetalert2'
 
 const ProfilePage = () => {
   const [userData, setUserData] = useAuth();
@@ -15,6 +16,19 @@ const ProfilePage = () => {
     password: '',
     image: ''
   });
+
+  useEffect(() => {
+    if (userData) {
+      setFormData({
+        name: userData.username || '',
+        dob: userData.dob || '',
+        gender: userData.gender || '',
+        phone: userData.phone || '',
+        password: userData.password || '',
+        image: userData.image || '',
+      });
+    }
+  }, [userData]);
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -42,7 +56,9 @@ const ProfilePage = () => {
     }));
   };
 
+
   const handleSave = async () => {
+    console.log('Form Data:', formData); // Check formData content
     try {
       const response = await fetch(`http://localhost:5000/updateuser/${auth.email}`, {
         method: 'PUT',
@@ -51,53 +67,32 @@ const ProfilePage = () => {
         },
         body: JSON.stringify(formData),
       });
-
+  
+      console.log('Response Status:', response.status); // Check response status
+      const updatedData = await response.json();
+      console.log('Response Data:', updatedData); // Check response data
+  
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
-      const updatedData = await response.json();
+  
       setUserData(updatedData);
       setEdit(false);
+      Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: 'Profile updated successfully!',
+      });
     } catch (error) {
       console.error('Error updating user data:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Failed to update profile. Please try again.',
+      });
     }
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (auth.email) {
-        try {
-          const response = await fetch(`http://localhost:5000/getalluser/${auth.email}`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          });
-
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-
-          const data = await response.json();
-          setUserData(data);
-          setFormData({
-            name: data.name,
-            dob: data.dob || '',
-            gender: data.gender || '',
-            phone: data.phone || '',
-            password: data.password || '',
-            image: data.image || '',
-          });
-        } catch (error) {
-          console.error('Error fetching user data:', error);
-        }
-      }
-    };
-
-    fetchData();
-  }, [auth.email]);
-
+  
   if (!userData) {
     return (
       <div className="flex justify-center items-center h-screen bg-gray-900">
