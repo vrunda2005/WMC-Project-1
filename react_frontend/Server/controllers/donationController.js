@@ -1,0 +1,85 @@
+const User = require('../models/User');
+const Donation = require('../models/Donation');
+
+exports.donationByUsername =  async (req, res) => {
+    const username = req.params.username;
+    const updatedPoints = req.body.points;
+    const {addPoints} =req.body;
+  
+    try {
+      const user = await User.findOne({ email: username });
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+      if (addPoints <0) {
+        return res.status(400).json({ error: 'Invalid amount, please enter a valid number' });
+      }
+      if (user.points < addPoints) {
+        return res.status(400).json({ error: 'Insufficient balance' });
+      }else{
+        await new Donation({
+          userId: user._id,
+          amount: addPoints,
+        }).save();
+      
+       const adminUser = await User.findOne({ name: 'admin' });
+        adminUser.points = adminUser.points + Number(addPoints);
+        await adminUser.save();
+        
+      user.points = updatedPoints;
+      const updatedUser = await user.save();
+      res.json({user: updatedUser,admin:adminUser});
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+};
+  
+exports.totalDonations = async (req, res) => {
+    try {
+      const totalDonations = await Donation.aggregate([
+        { $group: { _id: null, total: { $sum: '$amount' } } },
+      ]);
+  
+      res.json({ total: totalDonations.length > 0 ? totalDonations[0].total : 0 });
+    } catch (error) {
+      console.error('Error fetching total donations:', error);
+      res.status(500).json({ error: 'Unable to fetch total donations' });
+    }
+};
+   
+exports.userDonation = async (req, res) => {
+    try {
+      // Aggregate donations grouped by user
+      const userDonations = await Donation.aggregate([
+        { 
+          $group: {
+            _id: '$userId', // Group by userId
+            totalDonations: { $sum: '$amount' } // Calculate total donations for each user
+          }
+        },
+        {
+          $lookup: {
+            from: 'users', // Name of the collection for User model
+            localField: '_id',
+            foreignField: '_id',
+            as: 'user'
+          }
+        },
+        { $unwind: '$user' }, // Unwind the user array to get individual user documents
+        {
+          $project: {
+            _id: 0, // Exclude the _id field
+            username: '$user.name', // Include username
+            totalDonations: 1 // Include total donations
+          }
+        }
+      ]);
+  
+      res.json({ userDonations });
+    } catch (error) {
+      console.error('Error fetching user donations:', error);
+      res.status(500).json({ error: 'Unable to fetch user donations' });
+    }
+};
