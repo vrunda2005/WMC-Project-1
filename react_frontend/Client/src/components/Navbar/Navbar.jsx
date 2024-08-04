@@ -148,7 +148,7 @@ const Navbar = () => {
       </nav>
 
       {/* Desktop Menu */}
-      <nav className="hidden relative bottom-2 text-[17px] md:flex items-center space-x-10 flex-wrap  flex-center justify-between">
+      <nav className="hidden relative bottom-8 text-[17px] md:flex items-center space-x-10 flex-wrap  flex-center justify-between">
         {auth.isLoggedIn && (
           <div className="flex  space-x-2 hover:underline">
             <FaRegUser size="1.5em" />

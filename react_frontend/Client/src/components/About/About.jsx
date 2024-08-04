@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../../usetheamContext';
+import pic1 from '../../assets/images/epsilon_house.jpg'
 
 const AboutUs = () => {
   const { theme } = useTheme();
@@ -16,7 +17,7 @@ const AboutUs = () => {
   return (
     <div className='flex justify-end p-10 ml-[25vw] min-h-screen'>
       <div className='fixed left-0 top-30 flex flex-col p-16'>
-        <h1 className='text-9xl text-left text-white m-0 p-0'>ABOUT</h1>
+        <h1 className='text-5xl text-left text-white m-0 p-0'>ABOUT</h1>
       </div>
       <div className={`relative overflow-hidden min-h-screen page-background opacity-65`}>
         {/* Background Image */}
@@ -26,10 +27,10 @@ const AboutUs = () => {
         {/* Main Content */}
         <div className={`relative z-10 p-6 md:p-12 `}>
           {/* Header Section */}
-          <header className="text-center py-12">
+          <header className="text-center">
             <heading>
             <motion.h1
-              className={`text-5xl font-bold mb-4 ${textPrimaryColor}`}
+              className={`text-3xl font-bold mb-4 ${textPrimaryColor}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 7 }}
               transition={{ duration: 6 }}
@@ -40,17 +41,23 @@ const AboutUs = () => {
           </header>
 
           {/* Core Values Section */}
-          <section className={`my-12 border ${containerBgColor}`}>
+          <section className={`my-6 border ${containerBgColor}`}>
             <motion.div
-              className={`p-8 rounded-lg shadow-lg mx-auto max-w-4xl ${sectionBgColor}`}
+              className={`p-1 rounded-lg shadow-lg mx-auto max-w-4xl ${sectionBgColor}`}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
             >
-              <h2 className={`text-4xl font-semibold mb-4 text-center ${textSecondaryColor}`}>Core Values</h2>
-              <p className={`text-lg ${textPrimaryColor}`}>
+              <div className='flex flex-center justify-center items-center'>
+                <div>
+              <h2 className={`font-semibold mb-4 text-center ${textSecondaryColor}`}>Core Values</h2>
+              <p className={`${textPrimaryColor}`}>
                 At the heart of the Epsilon Program are our core values: Truth, Enlightenment, and Unity. We strive to uncover the hidden truths of existence, seek enlightenment through our practices, and unite individuals who are on a similar spiritual journey. These values guide our actions and interactions within our community.
               </p>
+              </div>
+           
+              <img className="w-[48%] h-[100%] max-w object-cover rounded shadow-md border-1 border-white " src={pic1} alt="pic1" />
+              </div>
             </motion.div>
           </section>
 

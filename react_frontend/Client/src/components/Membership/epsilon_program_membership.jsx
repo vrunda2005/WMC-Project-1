@@ -20,33 +20,31 @@ const HoverCard = ({ title, description, image }) => {
   );
 };
 
-const Modal = ({ isOpen, onClose, title, content, }) => {
+const Modal = ({ isOpen, onClose, title, content }) => {
   if (!isOpen) return null;
 
   return (
- 
-        <div className="fixed inset-0 bg-blue-200 flex justify-center items-center">
-          <div className="bg-white rounded-lg shadow-lg w-4/5 max-w-md max-h-[80vh] relative overflow-hidden">
-            <button
-              onClick={onClose}
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-            >
-              &times;
-            </button>
-            <div className="p-4 h-full flex flex-col">
-              <h2 className="font-bold mb-4 text-cyan-800 text-xl">{title}</h2>
-              <div className="flex-1 overflow-y-auto">
-                {content.map((goal, index) => (
-                  <div key={index} className="mb-2">
-                    <p className="text-blue-900">{goal}</p>
-                  </div>
-                ))}
-              </div>
+    <div className="fixed inset-0 bg-blue-200 flex justify-center items-center">
+      <div className="bg-white rounded-lg shadow-lg w-11/12 max-w-md max-h-[80vh] relative flex flex-col">
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+        >
+          &times;
+        </button>
+        <h2 className="font-bold mb-4 text-cyan-800 text-xl">{title}</h2>
+        <div className="flex-1 overflow-y-auto p-4">
+          {content.map((goal, index) => (
+            <div key={index} className="mb-2">
+              <p className="text-blue-900">{goal}</p>
             </div>
-          </div>
+          ))}
         </div>
-      );
-    };
+      </div>
+    </div>
+  );
+};
+
 
 // Component for displaying membership tier information
 const MembershipTier = ({ tier, benefits, profileLink, newsLink, whatYouCanDo, message, onCancelMembership }) => {
