@@ -1,7 +1,8 @@
-const User = require('../models/User');
-const Donation = require('../models/Donation');
+import User from '../models/User.js';
+import Donation from '../models/Donation.js';
 
-exports.donationByUsername =  async (req, res) => {
+
+export const donationByUsername =  async (req, res) => {
     const username = req.params.username;
     const updatedPoints = req.body.points;
     const {addPoints} =req.body;
@@ -36,7 +37,7 @@ exports.donationByUsername =  async (req, res) => {
     }
 };
   
-exports.totalDonations = async (req, res) => {
+export const totalDonations = async (req, res) => {
     try {
       const totalDonations = await Donation.aggregate([
         { $group: { _id: null, total: { $sum: '$amount' } } },
@@ -49,7 +50,7 @@ exports.totalDonations = async (req, res) => {
     }
 };
    
-exports.userDonation = async (req, res) => {
+export const userDonation = async (req, res) => {
     try {
       // Aggregate donations grouped by user
       const userDonations = await Donation.aggregate([

@@ -1,6 +1,6 @@
-const Event = require('../models/Event');
-const Registration = require('../models/Registration');
-const cloudinary = require('cloudinary').v2; // Add cloudinary import if used
+import Event from '../models/Event.js';
+import Registration from '../models/Registration.js';
+import { v2 as cloudinary } from 'cloudinary';
 
 const getEvents = async (req, res) => {
     try {
@@ -99,7 +99,7 @@ const eventRegister = async (req, res) => {
     try {
         const newRegistration = new Registration({
             eventId,
-            eventName, // Save event name
+            eventName,
             name,
             email,
             phone,
@@ -113,8 +113,7 @@ const eventRegister = async (req, res) => {
     }
 };
 
-// Export the functions using module.exports
-module.exports = {
+export {
     getEvents,
     addEvents,
     deleteEvent,

@@ -1,8 +1,7 @@
 import express from 'express';
 import { login, register } from '../controllers/authController.js';
 import { donationByUsername, totalDonations, userDonation } from '../controllers/donationController.js';
-import { getEvents, deleteEvent, updateEvent, eventRegister } from '../controllers/eventController.js';
-import { addEvents } from '../controllers/eventController.js';
+import { getEvents, addEvents, deleteEvent, updateEvent, eventRegister } from '../controllers/eventController.js';
 import { addInquiry, getInquiries } from '../controllers/inquiryController.js';
 import { cancelMembership, quizPoints } from '../controllers/membershipController.js';
 import { addNews, getNews, updateNews, deleteNews } from '../controllers/newsController.js';

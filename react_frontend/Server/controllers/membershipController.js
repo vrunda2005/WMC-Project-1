@@ -1,6 +1,5 @@
-const User = require('../models/User');
-
-exports.cancelMembership = async (req, res) => {
+import User from '../models/User.js';
+export const cancelMembership = async (req, res) => {
     const { userId } = req.body;
   
     try {
@@ -13,7 +12,7 @@ exports.cancelMembership = async (req, res) => {
 };
   
   
-exports.quizPoints = async (req, res) => {
+export const quizPoints = async (req, res) => {
     const { userId } = req.body;
     const {addPoints}=req.body;
     try {

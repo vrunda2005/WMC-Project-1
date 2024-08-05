@@ -1,13 +1,13 @@
-const User = require('../models/User');
-const jwt = require('jsonwebtoken');
-const { v2: cloudinary } = require('cloudinary');
-const dotenv = require('dotenv');
+import User from '../models/User.js';
+import jwt from 'jsonwebtoken';
+import { v2 as cloudinary } from 'cloudinary';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
@@ -38,7 +38,7 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.register = async (req, res) => {
+export const register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const file = req.files && req.files.file;

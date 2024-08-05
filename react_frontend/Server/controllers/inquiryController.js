@@ -1,6 +1,5 @@
-const Inquiry = require('../models/Inquiry');
-
-exports.addInquiry = async (req, res) => {
+import Inquiry from '../models/Inquiry.js';
+export const addInquiry = async (req, res) => {
     const { name, email, message } = req.body;
   
     if (!name || !email || !message) {
@@ -23,7 +22,7 @@ exports.addInquiry = async (req, res) => {
     }
 };
   
-exports.getInquiries = async (req, res) => {
+export const getInquiries = async (req, res) => {
     try {
       const inquiries = await Inquiry.find().sort({ date: -1 }); // Fetch all inquiries, newest first
       res.json(inquiries);

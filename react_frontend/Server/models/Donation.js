@@ -1,9 +1,10 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const donationSchema = new mongoose.Schema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    amount: { type: Number, required: true },
-    date: { type: Date, default: Date.now },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  amount: { type: Number, required: true },
+  date: { type: Date, default: Date.now },
 });
-  
-module.exports = mongoose.model('Donation', donationSchema);
+
+const Donation = mongoose.model('Donation', donationSchema);
+export default { Donation }; // Use named export here

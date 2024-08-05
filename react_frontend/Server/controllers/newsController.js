@@ -1,6 +1,6 @@
-const News = require('../models/News');
+import News from '../models/News.js';
 
-exports.addNews = async (req, res) => {
+export const addNews = async (req, res) => {
     try {
       const news = new News(req.body);
       await news.save();
@@ -11,7 +11,7 @@ exports.addNews = async (req, res) => {
 };
   
   // Get all news items
-exports.getNews = async (req, res) => {
+export const getNews = async (req, res) => {
     try {
       const news = await News.find().sort({ createdAt: -1 });
       res.json(news);
@@ -21,7 +21,7 @@ exports.getNews = async (req, res) => {
 };
   
   // Update a news item
-exports.updateNews =  async (req, res) => {
+export const updateNews =  async (req, res) => {
     try {
       const news = await News.findByIdAndUpdate(req.params.id, req.body, { new: true });
       res.json(news);
@@ -31,7 +31,7 @@ exports.updateNews =  async (req, res) => {
 };
   
   // Delete a news item
-exports.deleteNews = async (req, res) => {
+export const deleteNews = async (req, res) => {
     try {
       await News.findByIdAndDelete(req.params.id);
       res.status(204).end();

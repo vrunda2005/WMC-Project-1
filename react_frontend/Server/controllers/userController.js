@@ -1,6 +1,7 @@
-const User = require('../models/User');
+import User from '../models/User.js';
 
-exports.getAllUsers =  async (req, res) => {
+
+export const getAllUsers =  async (req, res) => {
     try {
       const users = await User.find()
       res.status(200).json(users);
@@ -11,7 +12,7 @@ exports.getAllUsers =  async (req, res) => {
 };
   
   //find one particular user 
-exports.getUserByEmail =  async (req, res) => {
+export const getUserByEmail =  async (req, res) => {
     const email = req.params.email;
     const user = await User.findOne({ email: email });
     if (!user) {
@@ -20,7 +21,7 @@ exports.getUserByEmail =  async (req, res) => {
     res.json(user);
 };
   
-exports.updateUserByEmail =  async (req, res) => {
+export const updateUserByEmail =  async (req, res) => {
     const email = req.params.email;
     const userPoints = req.body.points;
     const addPoints = Number(req.body.addPoints); // Ensure it's a number

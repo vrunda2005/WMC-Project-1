@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const storySchema = new mongoose.Schema({
     username: String,
@@ -6,4 +6,6 @@ const storySchema = new mongoose.Schema({
     date: { type: Date, default: Date.now }
 });
   
-module.exports = mongoose.model('Story', storySchema);
+const Story = mongoose.model('Story', storySchema);
+
+export default Story;

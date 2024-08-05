@@ -1,6 +1,6 @@
-const Story = require('../models/Story');
+import Story from '../models/Story.js';
 
-exports.getStories = async (req, res) => {
+export const getStories = async (req, res) => {
     try {
       const stories = await Story.find().sort({ date: -1 }); // Sorting by date descending
       res.json(stories);
@@ -11,7 +11,7 @@ exports.getStories = async (req, res) => {
 };
   
   // Endpoint to add a new story
-exports.addStory = async (req, res) => {
+export const addStory = async (req, res) => {
     const { username, story } = req.body;
     try {
       const newStory = new Story({ username, story });
