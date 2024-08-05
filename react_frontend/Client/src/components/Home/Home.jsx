@@ -85,10 +85,10 @@ function Home() {
 
   
   return (
-    <div className='realtive'>
+    <div className=''>
 
-      <div className="page-1 h-screen flex items-center justify-center relative">
-        <div className="react_text bg-gradient-to-r from-blue-500 via-blue-300 to-blue-500 bg-opacity-30 backdrop-filter backdrop-blur-2xl p-4 rounded-lg shadow-lg w-auto">
+      <div className="textContainer h-screen flex items-center justify-center relative">
+        <div className="reactText bg-gradient-to-r from-blue-500 via-blue-300 to-blue-500 bg-opacity-30 backdrop-filter backdrop-blur-2xl p-4 rounded-lg shadow-lg w-auto">
           <ReactTyped
             className="md:text-3xl font-bold md:py-6 text-white text-center"
             strings={[
@@ -105,7 +105,7 @@ function Home() {
         </div>
 
         {/* vertical */}
-        <div className='absolute top-0 w-screen h-screen opacity-5 flex'>
+        <div className='grids absolute top-0 w-screen h-screen opacity-5 flex'>
           <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
           <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
           <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
@@ -183,7 +183,7 @@ function Home() {
         </div>
 
         {/* horizontal */}
-        <div className='absolute top-0 w-screen h-screen opacity-5 flex flex-col'>
+        <div className='grids absolute top-0 w-screen h-screen opacity-5 flex flex-col'>
           <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
           <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
           <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
