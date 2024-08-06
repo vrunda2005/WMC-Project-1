@@ -120,11 +120,11 @@ const MembershipLayout = () => {
       title: 'Epsilon Evangelist',
       description: `Take your Epsilon experience to the next level with the Premium membership! The Epsilon Evangelist tier builds on the Basic membership, offering additional perks and personalized support. Perfect for those seeking a deeper connection with the program and more tailored guidance.`,
       benefits: [
-        '🔑 **All Basic Benefits**: Continue enjoying all the perks of the Epsilon Enthusiast membership.',
-        '🎓 **Personalized Coaching**: Get one-on-one guidance from experts tailored to your goals.',
-        '📖 **Premium Content**: Access an exclusive library of advanced resources and materials.',
-        '🌟 **Enhanced Support**: Receive priority support with personalized attention.',
-        '🎟️ **Special Events**: Invitations to exclusive events and webinars with industry leaders.'
+        '🔑 All Basic Benefits: Continue enjoying all the perks of the Epsilon Enthusiast membership.',
+        '🎓 Personalized Coaching: Get one-on-one guidance from experts tailored to your goals.',
+        '📖 Premium Content: Access an exclusive library of advanced resources and materials.',
+        '🌟 Enhanced Support: Receive priority support with personalized attention.',
+        '🎟️ Special Events: Invitations to exclusive events and webinars with industry leaders.'
       ],
       up: 20,
     };
@@ -133,11 +133,11 @@ const MembershipLayout = () => {
       title: 'Epsilon Visionary',
       description: `Join the elite ranks of the Epsilon community with our top-tier membership! The Epsilon Visionary tier provides unparalleled access and exclusivity, including VIP events and personalized consulting. Ideal for those fully committed to maximizing their Epsilon experience.`,
       benefits: [
-        '🏆 **All Premium Benefits**: Enjoy all the perks of the Epsilon Evangelist membership.',
-        '🎉 **VIP Events**: Receive exclusive invitations to high-profile events and networking opportunities.',
-        '🤝 **Personalized Consulting**: Benefit from tailored consulting services to achieve your goals.',
-        '📊 **Dedicated Account Manager**: Get personalized support from a dedicated account manager.',
-        '🌟 **Recognition**: Be acknowledged as a top supporter within the Epsilon community.'
+        '🏆 All Premium Benefits**: Enjoy all the perks of the Epsilon Evangelist membership.',
+        '🎉 VIP Events: Receive exclusive invitations to high-profile events and networking opportunities.',
+        '🤝 Personalized Consulting: Benefit from tailored consulting services to achieve your goals.',
+        '📊 Dedicated Account Manager: Get personalized support from a dedicated account manager.',
+        '🌟 Recognition: Be acknowledged as a top supporter within the Epsilon community.'
       ],
       up: 30,
     };
@@ -149,9 +149,7 @@ const MembershipLayout = () => {
   const Hightlight = theme === 'blue' ? 'text-blue-text-dark' : 'text-dark-text-dark';
   return (
     <div id="card_container" className="relative mx-auto max-w-3xl p-4 mt-20">
-    {/* <div className="pg">
-      <img src="https://th.bing.com/th/id/OIP.y6ZKND2A3XLBHfF8QmkuRgHaHn?rs=1&pid=ImgDetMain" alt="GTA 5 Cris Formage" className="w-full rounded-lg" />
-    </div> */}
+ 
     <div id="card" className="relative bg-cover bg-center text-white p-6 rounded-lg shadow-lg">
       <div className="shine absolute inset-0"></div>
       <div className="text-block relative z-10">
