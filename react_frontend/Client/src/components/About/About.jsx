@@ -139,6 +139,7 @@ const AboutUs = () => {
 
           <div className="bg-gray-900 text-white p-8">
             <h1 className="text-4xl font-bold text-center mb-12 animate-fadeIn">Epsilon Program Truth Stages</h1>
+            <img src="https://th.bing.com/th/id/OIP.1x4BrvT1YrcYtFAWGQHhyQHaEK?rs=1&pid=ImgDetMain" alt="img" className="object-cover w-full h-48 object-cover rounded-t-lg mb-4" />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {truthStages.map((stage) => (
                 <div key={stage.id} className="bg-gray-800 p-6 rounded-lg shadow-lg transform transition-transform hover:scale-105 animate-slideUp">

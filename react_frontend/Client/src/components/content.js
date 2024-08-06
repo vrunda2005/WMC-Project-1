@@ -13,7 +13,7 @@ export const truthStages = [
         "Access to Basic Resources"
       ],
       difficulty: "Beginner",
-      image: "/images/seeking-truth.jpg" // Update with actual image path
+      image: "https://static.wikia.nocookie.net/gtawiki/images/3/3a/Michael-GTAV-SeekingTruth.jpg" // Update with actual image path
     },
     {
       id: "truth-002",
@@ -29,7 +29,7 @@ export const truthStages = [
         "Exclusive Access to Intermediate Teachings"
       ],
       difficulty: "Intermediate",
-      image: "/images/accepting-truth.jpg" // Update with actual image path
+      image: "https://i.ytimg.com/vi/w7br0cYsShE/maxresdefault.jpg" // Update with actual image path
     },
     {
       id: "truth-003",
@@ -45,7 +45,7 @@ export const truthStages = [
         "Advanced Resource Access"
       ],
       difficulty: "Advanced",
-      image: "/images/assuming-truth.jpg" // Update with actual image path
+      image: "https://th.bing.com/th/id/OIP.prQXs8CmcNEPXd4k7rbZ3wEsCo?w=1280&h=720&rs=1&pid=ImgDetMain" // Update with actual image path
     },
     {
       id: "truth-004",
@@ -61,7 +61,7 @@ export const truthStages = [
         "Special Investigative Tools"
       ],
       difficulty: "Expert",
-      image: "/images/chasing-truth.jpg" // Update with actual image path
+      image: "https://static.wikia.nocookie.net/gtawiki/images/d/d7/AssumingTheTruth-GTAV.png" // Update with actual image path
     },
     {
       id: "truth-005",
@@ -77,7 +77,7 @@ export const truthStages = [
         "Leadership Opportunities"
       ],
       difficulty: "Master",
-      image: "/images/bearing-truth.jpg" // Update with actual image path
+      image: "https://i.ytimg.com/vi/YcC8heRZ68w/maxresdefault.jpg" // Update with actual image path
     },
     {
       id: "truth-006",
@@ -93,7 +93,7 @@ export const truthStages = [
         "Public Recognition"
       ],
       difficulty: "Grandmaster",
-      image: "/images/delivering-truth.jpg" // Update with actual image path
+      image: "https://th.bing.com/th/id/OIP.cMvLnRKDNXQLk_2tjS80yQHaEK?rs=1&pid=ImgDetMain" // Update with actual image path
     },
     {
       id: "truth-007",
@@ -109,7 +109,7 @@ export const truthStages = [
         "Community Leadership Role"
       ],
       difficulty: "Legend",
-      image: "/images/exercising-truth.jpg" // Update with actual image path
+      image: "https://i.pinimg.com/736x/8a/35/ca/8a35cabb252ee1be42a9f6f75ff43093.jpg" // Update with actual image path
     },
     {
       id: "truth-008",
@@ -125,7 +125,7 @@ export const truthStages = [
         "Advanced Philosophical Insights"
       ],
       difficulty: "Sage",
-      image: "/images/unknowing-truth.jpg" // Update with actual image path
+      image: "https://static.wikia.nocookie.net/gtawiki/images/3/33/UnknowingTheTruth-GTAV.png" // Update with actual image path
     },
   ];
   
@@ -141,7 +141,7 @@ export const truthStages = [
             "Ask yourself reflective questions such as 'What did I learn today?' or 'How did I handle challenges?'",
             "Review your journal weekly to identify patterns and areas for improvement."
           ],
-          "image": "https://example.com/self-reflection.jpg"
+          "image": "https://th.bing.com/th/id/OIP.C1xppf8FoxYOtxqGCX-xmAHaGN?rs=1&pid=ImgDetMain"
         },
         {
           "title": "Seek Feedback",
@@ -151,7 +151,7 @@ export const truthStages = [
             "Be open to both positive and negative feedback and ask for specific examples.",
             "Create a plan to address the feedback and monitor your progress."
           ],
-          "image": "https://example.com/seeking-feedback.jpg"
+          "image": "https://th.bing.com/th/id/OIP.d7IlOW1y2G49JCza7w2KYQHaEo?rs=1&pid=ImgDetMain"
         },
         {
           "title": "Practice Mindfulness",
@@ -161,7 +161,7 @@ export const truthStages = [
             "Use mindfulness apps or guided meditations to assist in your practice.",
             "Incorporate mindful breathing exercises throughout your day to manage stress."
           ],
-          "image": "https://example.com/mindfulness.jpg"
+          "image": "https://th.bing.com/th/id/OIP.TNbtTxtWRfH64-nxM_02yQHaEo?rs=1&pid=ImgDetMain"
         },
         {
           "title": "Set Achievable Goals",
@@ -171,7 +171,7 @@ export const truthStages = [
             "Use SMART criteria (Specific, Measurable, Achievable, Relevant, Time-bound) to set your goals.",
             "Regularly review and adjust your goals as needed based on your progress."
           ],
-          "image": "https://example.com/goals.jpg"
+          "image": "https://images.template.net/wp-content/uploads/2020/02/Set-Achievable-Goals.jpg"
         }
       ]
     },
@@ -186,7 +186,7 @@ export const truthStages = [
             "Work on articulating your thoughts clearly and concisely.",
             "Seek opportunities to engage in public speaking or communication workshops."
           ],
-          "image": "https://example.com/communication.jpg"
+          "image": "https://th.bing.com/th/id/OIP.C31u12DMDC2xnNNUuzHJOgAAAA?rs=1&pid=ImgDetMain"
         },
         {
           "title": "Build Empathy",
@@ -196,7 +196,7 @@ export const truthStages = [
             "Engage in conversations with diverse groups of people to broaden your understanding.",
             "Practice empathetic listening by acknowledging and validating others' feelings."
           ],
-          "image": "https://example.com/empathy.jpg"
+          "image": "https://i.pinimg.com/736x/d5/0e/1f/d50e1f2e50a657d69332dc810bab218a.jpg"
         },
         {
           "title": "Foster Positive Relationships",
@@ -206,7 +206,7 @@ export const truthStages = [
             "Regularly check in with friends and family to strengthen your connections.",
             "Express appreciation and gratitude towards those who support you."
           ],
-          "image": "https://example.com/relationships.jpg"
+          "image": "https://cdn.lifehack.org/wp-content/uploads/2018/11/positive-relationship.jpeg"
         }
       ]
     },
@@ -221,7 +221,7 @@ export const truthStages = [
             "Read books and articles to stay informed about new developments in your field.",
             "Attend seminars, conferences, or webinars to expand your knowledge base."
           ],
-          "image": "https://example.com/learning.jpg"
+          "image": "https://thumbs.dreamstime.com/b/exploring-benefits-lifelong-learning-lifelong-learning-benefits-165287966.jpg"
         },
         {
           "title": "Develop Resilience",
@@ -231,7 +231,7 @@ export const truthStages = [
             "Build a support network of friends, family, or mentors to help you through tough times.",
             "Reflect on past challenges and how you overcame them to reinforce your coping strategies."
           ],
-          "image": "https://example.com/resilience.jpg"
+          "image": "https://i.pinimg.com/736x/a3/f5/b9/a3f5b92b9007e3ed7a8d5f12d4a843a2.jpg"
         },
         {
           "title": "Cultivate a Growth Mindset",
@@ -241,7 +241,7 @@ export const truthStages = [
             "Replace negative self-talk with positive affirmations and constructive feedback.",
             "Learn from failures and use them as stepping stones for future success."
           ],
-          "image": "https://example.com/growth-mindset.jpg"
+          "image": "https://th.bing.com/th/id/OIP.KCn0RzntVX4te5uBU8fcGAHaE8?rs=1&pid=ImgDetMain"
         }
       ]
     }
