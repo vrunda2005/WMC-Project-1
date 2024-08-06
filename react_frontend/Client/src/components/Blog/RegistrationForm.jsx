@@ -36,6 +36,7 @@ const EventRegistrationForm = ({ isOpen, onClose, event }) => {
         body: JSON.stringify(registrationData),
       });
   
+      
       const result = await response.json();
       
       if (response.ok) {
