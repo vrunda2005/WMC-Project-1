@@ -39,7 +39,12 @@ function Volunteering() {
 
   const handleShowInterest = (event) => {
     setSelectedEvent(event);
+    setVolunteerStatus(prevStatus => ({
+      ...prevStatus,
+      [event._id]: 'Pending'
+    }));
   };
+  
 
   const renderEvents = (eventsList) => (
     <div className='flex justify-end gap-8'>

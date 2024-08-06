@@ -52,8 +52,29 @@ const deleteVolunteer = async (req, res) => {
     }
 };
 
+const approveVolunteer = async (req, res) => {
+    try {
+        await Volunteer.findByIdAndUpdate(req.params.id, { status: 'Approved' });
+        res.status(200).send('Request approved.');
+    } catch (error) {
+        res.status(500).send('Error approving request.');
+    }
+};
+
+const rejectVolunteer = async (req, res) => {
+    try {
+        await Volunteer.findByIdAndUpdate(req.params.id, { status: 'Rejected' });
+        res.status(200).send('Request rejected.');
+    } catch (error) {
+        res.status(500).send('Error rejecting request.');
+    }
+};
+
+
 export {
     getVolunteers,
     addVolunteer,
-    deleteVolunteer
+    deleteVolunteer,
+    approveVolunteer,
+    rejectVolunteer
 };

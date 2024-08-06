@@ -1,4 +1,3 @@
-// src/components/VolunteerRequests.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -10,8 +9,8 @@ const VolunteerRequests = () => {
         const fetchRequests = async () => {
             try {
                 const response = await axios.get('/api/volunteers');
-                console.log('Response data:', response.data); // Check the structure here
-                // Ensure that the response data is an array
+                console.log(response);
+                
                 if (Array.isArray(response.data)) {
                     setRequests(response.data);
                 } else {
@@ -23,9 +22,36 @@ const VolunteerRequests = () => {
                 setError('Error fetching volunteer requests.');
             }
         };
-
+    
         fetchRequests();
     }, []);
+    
+
+    const handleApprove = async (id) => {
+        try {
+            await axios.post(`/api/volunteers/${id}/approve`);
+            setRequests(prevRequests =>
+                prevRequests.map(request =>
+                    request._id === id ? { ...request, status: 'Approved' } : request
+                )
+            );
+        } catch (error) {
+            console.error('Error approving request:', error);
+        }
+    };
+
+    const handleReject = async (id) => {
+        try {
+            await axios.post(`/api/volunteers/${id}/reject`);
+            setRequests(prevRequests =>
+                prevRequests.map(request =>
+                    request._id === id ? { ...request, status: 'Rejected' } : request
+                )
+            );
+        } catch (error) {
+            console.error('Error rejecting request:', error);
+        }
+    };
 
     if (error) {
         return <div className="p-4 text-red-500">{error}</div>;
@@ -42,6 +68,22 @@ const VolunteerRequests = () => {
                             <p><strong>Email:</strong> {request.email}</p>
                             <p><strong>Message:</strong> {request.message}</p>
                             <p><strong>Status:</strong> {request.status}</p>
+                            {request.status === 'Pending' && (
+                                <div className="mt-2">
+                                    <button
+                                        onClick={() => handleApprove(request._id)}
+                                        className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded mr-2"
+                                    >
+                                        Approve
+                                    </button>
+                                    <button
+                                        onClick={() => handleReject(request._id)}
+                                        className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
+                                    >
+                                        Reject
+                                    </button>
+                                </div>
+                            )}
                         </li>
                     ))}
                 </ul>

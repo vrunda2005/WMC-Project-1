@@ -18,7 +18,7 @@ const StoryPage = () => {
   const [colors, setColors] = useState([]);
   axios.defaults.withCredentials = true;
 
-  useEffect(() => {
+  useEffect(() => { 
     const fetchStories = async () => {
       try {
         setLoading(true); // Start loading
