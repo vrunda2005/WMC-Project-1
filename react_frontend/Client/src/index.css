@@ -41,6 +41,7 @@ body {
   color: var(--text-color);
   font-family: 'Pricedown', sans-serif; /* Apply GTA V font to body */
   background-color: var(--bg-color); /* Fallback color */
+  cursor: url("./assets/images/character_ep.jpg"),auto;
 }
 
 /* //Scrollbar */

@@ -27,6 +27,7 @@ const StoryPage = () => {
         }
         const data = await response.json();
         setStories(data);
+         console.log('Fetched stories:', data); // Log the data for debugging
         // Generate random colors for each story
         const newColors = data.map(() => getRandomColor());
         setColors(newColors);

@@ -1,9 +1,11 @@
 import Story from '../models/Story.js';
-import User from '../models/User.js';
+import User from '../models/User.js'; // Import if needed
 
 export const getStories = async (req, res) => {
     try {
-      const stories = await Story.find().sort({ date: -1 }); // Sorting by date descending
+      const stories = await Story.find()
+      .populate('username', 'image name') // Populate userId with user's image and name
+      .sort({ date: -1 });   
       res.json(stories);
     } catch (error) {
       console.error('Error fetching stories:', error);
@@ -14,6 +16,9 @@ export const getStories = async (req, res) => {
   // Endpoint to add a new story
 export const addStory = async (req, res) => {
     const { username, story } = req.body;
+    if (!username || !story) {
+      return res.status(400).json({ error: 'Username and story are required' });
+    }
     try {
       const userData = await User.findOne({name: username});
       // console.log(userData);
