@@ -20,6 +20,7 @@ import profile from '../../assets/images/profile.png'
 import { FcHome } from "react-icons/fc";
 import { MdQuiz } from "react-icons/md";
 import { FaCircleInfo } from "react-icons/fa6";
+import { HiCurrencyDollar } from "react-icons/hi2";
 
 
 
@@ -80,9 +81,9 @@ const Navbar = () => {
   return (
     <header className={headerClass}>
       {/* Logo */}
-
+      
       {/* <a href="/" className="text-lg font-bold truncate relative left-4 bottom-5">Logo</a> */}
-      <Link to="/">
+      <Link onClick={handleDropdownClose} to="/">
         <img
           src="https://prod.cloud.rockstargames.com/crews/sc/9275/12545759/publish/emblem/emblem_512.png"
           alt="Profile"
@@ -175,7 +176,7 @@ const Navbar = () => {
       </nav>
 
       {/* Desktop Menu */}
-      <nav className="hidden relative bottom-8 text-[17px] md:flex items-center space-x-10 flex-wrap  flex-center justify-between">
+      <nav className="hidden relative bottom-8 text-[17px] md:flex items-center space-x-5 flex-wrap  flex-center justify-between">
         {/* {auth.isLoggedIn && ( */}
           {/* <div className="flex  space-x-2 hover:no-underline">
             <FaRegUser size="1.5em" />
@@ -183,13 +184,13 @@ const Navbar = () => {
           </div> */}
         {/* )} */}
         {auth.isLoggedIn && (
-          <div className="flex items-center space-x-2 hover:no-underline">
-            <MdCurrencyBitcoin size="1.5em" />
+          <div onClick={handleDropdownClose} className="flex items-center space-x-2 hover:no-underline">
+            <HiCurrencyDollar size="1.5em" />
             <span className="ml-2 truncate">{auth.userPoints}</span>
           </div>
         )}
-        <ul className="flex flex-center items-center justify-between space-x-5 ">
-          <li className="flex items-center space-x-1 ">
+        <ul className="flex flex-center items-center justify-between space-x-7">
+          <li onClick={handleDropdownClose} className="flex items-center space-x-1">
             <FcHome className='text-[20px]'/>
             <Link to="/" className={`hover:no-underline ${window.location.pathname === '/' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Home</Link>
           </li>
@@ -223,15 +224,10 @@ const Navbar = () => {
               <img src={profile} alt="img" className="w-6 h-6" />
                <Link to="/Profile" className={`hover:no-underline ${window.location.pathname === '/Profile' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Profile</Link>
               </li> */}
-
+              <div onClick={handleDropdownClose} className='flex gap-6'>
               <li className="flex items-center space-x-2 ">
               <img src={mem} alt="membership" className="w-5 h-5" />
               <Link to={auth.membership_id ? `/epsilon_program_membership/${auth.membership_id}` : '/membership'} className={`hover:no-underline ${window.location.pathname.includes('/epsilon_program_membership') || window.location.pathname === '/membership' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Membership</Link>
-              </li>
-
-              <li className="flex items-center space-x-2 ">
-              <img src={story} alt="img" className="w-5 h-5" />
-              <Link to="/storyPage" className={`hover:no-underline ${window.location.pathname === '/storyPage' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Stories</Link>
               </li>
 
               <li className="flex items-center space-x-2 ">
@@ -240,16 +236,23 @@ const Navbar = () => {
               </li>
 
               <li className="flex items-center space-x-2 ">
+              <img src={story} alt="img" className="w-5 h-5" />
+              <Link to="/storyPage" className={`hover:no-underline ${window.location.pathname === '/storyPage' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Stories</Link>
+              </li>
+
+
+              <li className="flex items-center space-x-2 ">
                 <FcDonate className='text-[20px]'/>
               <Link to="/Donate" className={`hover:no-underline ${window.location.pathname === '/Donate' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Donate</Link>
               </li>
+              </div>
 
               
-    
+          {/* Dropdown menu */}
           <div className="relative">
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className={`relative inline-block px-4 py-2 hover:no-underline ${isDropdownOpen ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}
+              className={`relative inline-block p-0 ${isDropdownOpen ? ' dark:text-blue-300' : ''}`}
             >
               More <FaCaretDown className="inline ml-2" />
             </button>
@@ -310,22 +313,26 @@ const Navbar = () => {
             )}
           </div>
 
-          <li className="flex items-center space-x-2 ">
+          {auth.isAdmin ? (<></>):(<>
+          <li onClick={handleDropdownClose} className="flex items-center space-x-2 ">
             <Link to="/Profile">
               <img
                 src={auth.image} 
                 alt="Profile"
-                className="w-10 h-10 rounded-full border-2 border-white"
+                className="w-10 h-10 rounded-full border-2 p-[2px] border-white"
               />
             </Link>
           </li>
+          </>)}
             </>
           )}
         </ul>
         {auth.isLoggedIn ? (
-          <button onClick={handleLogout} className={buttonClass}>
-            Logout
-          </button>
+          <div onClick={handleDropdownClose}>
+            <button onClick={handleLogout} className={buttonClass}>
+              Logout
+            </button>
+          </div>
         ) : (
           <div className="flex space-x-2">
             <Link to="/login" className={buttonClass}>

@@ -145,3 +145,20 @@ backdrop-filter: blur(4.1px);
     backdrop-filter: blur(4.1px);
     -webkit-backdrop-filter: blur(4.1px);
 }
+
+/* donate */
+.donateContainer {
+    z-index: 1;
+    background: rgb(2,60,74);
+background: linear-gradient(0deg, rgba(2,60,74,1) 4%, rgba(32,89,98,1) 57%, rgba(50,106,122,1) 93%);
+}
+
+.donatePart {
+    z-index: 5;
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.1px);
+    -webkit-backdrop-filter: blur(4.1px);
+}

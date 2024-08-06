@@ -85,9 +85,9 @@ function Home() {
 
   
   return (
-    <div className=''>
+    <div className='overflow-hidden'>
 
-      <div className="textContainer h-screen flex items-center justify-center relative">
+      <div className="textContainer h-[710px] flex items-center justify-center relative">
         <div className="reactText bg-gradient-to-r from-blue-500 via-blue-300 to-blue-500 bg-opacity-30 backdrop-filter backdrop-blur-2xl p-4 rounded-lg shadow-lg w-auto">
           <ReactTyped
             className="md:text-3xl font-bold md:py-6 text-white text-center"
