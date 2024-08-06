@@ -8,7 +8,6 @@ const eventSchema = new mongoose.Schema({
     image: { type: String },
     venue: { type: String, required: true },
     duration: { type: String, required: true },
-    mode: { type: String, required: true, enum: ['online', 'offline'] },
 });
   
 const Event = mongoose.model('Event', eventSchema);

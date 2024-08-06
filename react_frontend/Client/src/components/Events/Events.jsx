@@ -25,7 +25,7 @@ const Events = () => {
     e.preventDefault();
 
     // Basic validation
-    if (!title || !description || !date || !time || !venue || !duration || !mode || !image) {
+    if (!title || !description || !date || !time || !venue || !duration || !image) {
       alert('All fields are required.');
       return;
     }
@@ -146,21 +146,6 @@ const Events = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Enter event duration"
             />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="mode">
-              Mode
-            </label>
-            <select
-              id="mode"
-              value={mode}
-              onChange={(e) => setMode(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            >
-              <option value="">Select mode</option>
-              <option value="online">Online</option>
-              <option value="offline">Offline</option>
-            </select>
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="image">

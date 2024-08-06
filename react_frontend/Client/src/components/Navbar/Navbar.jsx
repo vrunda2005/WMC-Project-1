@@ -11,14 +11,18 @@ import { MdOutlineQuiz } from "react-icons/md";
 import { GiNewspaper } from "react-icons/gi";
 import { FaPersonCircleQuestion } from "react-icons/fa6";
 import { FaMapMarkedAlt } from "react-icons/fa";
-import { FcAbout } from "react-icons/fc";
 import { FcDonate } from "react-icons/fc";
 import mem from '../../assets/images/member-card.png'
 import event from '../../assets/images/event.png'
 import story from '../../assets/images/stories.png'
 import profile from '../../assets/images/profile.png'
-import quiz from '../../assets/images/quiz.png'
+// import quiz from '../../assets/images/quiz.png'
 import { FcHome } from "react-icons/fc";
+import { MdQuiz } from "react-icons/md";
+import { FaCircleInfo } from "react-icons/fa6";
+import { HiCurrencyDollar } from "react-icons/hi2";
+
+
 
 
 
@@ -64,7 +68,7 @@ const Navbar = () => {
     });
   };
   
-  const headerClass = `sticky h-18 top-0 z-50 p-4 md:p-6 flex justify-between  ${
+  const headerClass = `sticky h-18 top-0 z-50 p-4 pb-0 pt-16 flex justify-between items-center ${
     theme === 'blue' ? 'bg-blue-primary-bg text-blue-text-light' : 'bg-dark-primary-bg text-dark-text-light'
   }`;
 
@@ -76,14 +80,20 @@ const Navbar = () => {
 
   return (
     <header className={headerClass}>
-    {/* Logo */}
-    <a href="/" className="text-lg font-bold  relative left-4 bottom-5">
-      <img
-        src="https://prod.cloud.rockstargames.com/crews/sc/9275/12545759/publish/emblem/emblem_512.png"
-        alt="Logo"
-        className="w-18 h-18 border-2 border-white rounded-full"
-      />
-    </a>
+      {/* Logo */}
+      
+      {/* <a href="/" className="text-lg font-bold truncate relative left-4 bottom-5">Logo</a> */}
+      <Link onClick={handleDropdownClose} to="/">
+        <img
+          src="https://prod.cloud.rockstargames.com/crews/sc/9275/12545759/publish/emblem/emblem_512.png"
+          alt="Profile"
+          className="w-12 h-12 border-white text-lg font-bold truncate relative left-4 bottom-8"
+        />
+      </Link>
+      {/* Theme Toggle Button */}
+      {/* <button onClick={toggleTheme} className={buttonClass} aria-label="Toggle Theme">
+        {theme === 'dark' ? <FaSun className="text-yellow-500" /> : <FaMoon className="text-gray-500" />}
+      </button> */}
 
     {/* Theme Toggle Button */}
     <button
@@ -178,44 +188,163 @@ const Navbar = () => {
 
 
       {/* Desktop Menu */}
-      <nav className="hidden relative bottom-8 text-[17px] md:flex items-center space-x-10 flex-wrap justify-between">
-      {auth.isLoggedIn && (
-        <div className="flex space-x-2 items-center hover:underline">
-          <FaRegUser size="1.5em" />
-          <span className="ml-2 truncate">{auth.username}</span>
-        </div>
-      )}
-      {auth.isLoggedIn && (
-        <div className="flex items-center space-x-2 hover:underline">
-          <MdCurrencyBitcoin size="1.5em" />
-          <span className="ml-2 truncate">{auth.userPoints}</span>
-        </div>
-      )}
-      <ul className="flex items-center space-x-5">
-        <li className="flex items-center space-x-1">
-          <FcHome />
-          <Link to="/" className={`hover:underline ${location.pathname === '/' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Home</Link>
-        </li>
-        {auth.isAdmin ? (
-          <>
-            <li className="flex items-center space-x-1">
-              <img src={event} alt="Event" className="w-6 h-6" />
-              <Link to="/events" className={`hover:underline ${location.pathname === '/events' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Events</Link>
-            </li>
-            <li className="flex items-center space-x-1">
-              <Link to="/admin" className={`hover:underline ${location.pathname === '/admin' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Donation Users</Link>
-            </li>
-            <li className="flex items-center space-x-1">
-              <Link to="/allusers" className={`hover:underline ${location.pathname === '/allusers' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Show Users</Link>
-            </li>
-            <li className="flex items-center space-x-1">
-              <Link to="/allinquires" className={`hover:underline ${location.pathname === '/allinquires' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>All Inquires</Link>
-            </li>
-            <li className="flex items-center space-x-1">
-              <GiNewspaper />
-              <Link to="/AddNews" className={`hover:underline ${location.pathname === '/AddNews' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Add News</Link>
-            </li>
-          </>
+      <nav className="hidden relative bottom-8 text-[17px] md:flex items-center space-x-5 flex-wrap  flex-center justify-between">
+        {/* {auth.isLoggedIn && ( */}
+          {/* <div className="flex  space-x-2 hover:no-underline">
+            <FaRegUser size="1.5em" />
+            <span className="ml-2 truncate">{auth.username}</span>
+          </div> */}
+        {/* )} */}
+        {auth.isLoggedIn && (
+          <div onClick={handleDropdownClose} className="flex items-center space-x-2 hover:no-underline">
+            <HiCurrencyDollar size="1.5em" />
+            <span className="ml-2 truncate">{auth.userPoints}</span>
+          </div>
+        )}
+        <ul className="flex flex-center items-center justify-between space-x-7">
+          <li onClick={handleDropdownClose} className="flex items-center space-x-1">
+            <FcHome className='text-[20px]'/>
+            <Link to="/" className={`hover:no-underline ${window.location.pathname === '/' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Home</Link>
+          </li>
+          {auth.isAdmin ? (
+            <>
+              <li className="flex items-center space-x-1 ">
+              <img src={event} alt="img" className="w-6 h-6" />
+
+             <Link to='/events' className={`hover:no-underline ${window.location.pathname === '/events' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Events</Link>
+              </li>
+              <li className="flex items-center space-x-1 ">
+                <Link to='/admin' className={`hover:no-underline ${window.location.pathname === '/admin' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Donation Users</Link>
+              </li>
+              <li className="flex items-center space-x-1 ">
+
+                <Link to='/allusers' className={`hover:no-underline ${window.location.pathname === '/allusers' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Show Users</Link>
+              </li>
+              <li className="flex items-center space-x-1 ">
+
+                <Link to='/allinquires' className={`hover:no-underline ${window.location.pathname === '/allinquires' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>All Inquires</Link>
+              </li>
+              
+              <li className="flex items-center space-x-1 ">
+              <GiNewspaper/>
+                <Link to='/AddNews' className={`hover:no-underline ${window.location.pathname === '/allinquires' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Add News</Link>
+              </li>
+            </>
+          ) : (
+            <>
+              {/* <li className="flex items-center space-x-2 ">
+              <img src={profile} alt="img" className="w-6 h-6" />
+               <Link to="/Profile" className={`hover:no-underline ${window.location.pathname === '/Profile' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Profile</Link>
+              </li> */}
+              <div onClick={handleDropdownClose} className='flex gap-6'>
+              <li className="flex items-center space-x-2 ">
+              <img src={mem} alt="membership" className="w-5 h-5" />
+              <Link to={auth.membership_id ? `/epsilon_program_membership/${auth.membership_id}` : '/membership'} className={`hover:no-underline ${window.location.pathname.includes('/epsilon_program_membership') || window.location.pathname === '/membership' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Membership</Link>
+              </li>
+
+              <li className="flex items-center space-x-2 ">
+              <img src={event} alt="img" className="w-5 h-5" />
+              <Link to="/Blog" className={`hover:no-underline ${window.location.pathname === '/Blog' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Blog</Link>
+              </li>
+
+              <li className="flex items-center space-x-2 ">
+              <img src={story} alt="img" className="w-5 h-5" />
+              <Link to="/storyPage" className={`hover:no-underline ${window.location.pathname === '/storyPage' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Stories</Link>
+              </li>
+
+
+              <li className="flex items-center space-x-2 ">
+                <FcDonate className='text-[20px]'/>
+              <Link to="/Donate" className={`hover:no-underline ${window.location.pathname === '/Donate' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Donate</Link>
+              </li>
+              </div>
+
+              
+          {/* Dropdown menu */}
+          <div className="relative">
+            <button
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className={`relative inline-block p-0 ${isDropdownOpen ? ' dark:text-blue-300' : ''}`}
+            >
+              More <FaCaretDown className="inline ml-2" />
+            </button>
+            {isDropdownOpen && (
+              <ul className="absolute mt-2 right-0 pl-2 bg-white dark:bg-gray-800 shadow-lg rounded-lg w-48 z-10 " >
+                <li className="flex items-center space-x-2 p-2 ">
+                <FaCircleInfo />
+                <Link
+                    to="/About"
+                    className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${location.pathname === '/About' ? 'font-bold text-blue-500 dark:text-blue-300' : ''} transition-all duration-200 hover:rounded-lg`}
+                    onClick={handleDropdownClose}
+                  >
+                    About
+                  </Link>
+                </li>
+                <li className="flex items-center space-x-2 p-2">
+                <FaMapMarkedAlt className=''/>
+
+                  <Link
+                    to="/epsilonMap"
+                    className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${location.pathname === '/epsilonMap' ? 'font-bold text-blue-500 dark:text-blue-300' : ''} transition-all duration-200 hover:rounded-lg`}
+                    onClick={handleDropdownClose}
+                  >
+                    EpsilonMap
+                  </Link>
+                </li>
+                <li className="flex items-center space-x-2 p-3">
+                <FaPersonCircleQuestion />
+
+                  <Link
+                    to="/inquiryForm"
+                    className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${location.pathname === '/inquiryForm' ? 'font-bold text-blue-500 dark:text-blue-300' : ''} transition-all duration-200 hover:rounded-lg`}
+                    onClick={handleDropdownClose}
+                  >
+                    Inquiry Form
+                  </Link>
+                </li>
+                <li className="flex items-center space-x-2 p-2">
+                  <GiNewspaper/>
+                  <Link
+                    to="/News"
+                    className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${location.pathname === '/News' ? 'font-bold text-blue-500 dark:text-blue-300' : ''} transition-all duration-200 hover:rounded-lg`}
+                    onClick={handleDropdownClose}
+                  >
+                    News
+                  </Link>
+                </li>
+                <li className="flex items-center space-x-2 p-2">
+                {/* <img src={quiz} alt="img" className="w-5 h-5" /> */}
+                <MdQuiz />
+
+                <Link to='/Quiz' className={`hover:no-underline px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${window.location.pathname === '/Quiz' ? 'font-bold text-blue-500 dark:text-blue-300' : ''} transition-all duration-200 hover:rounded-lg`}
+                onClick={handleDropdownClose}
+                >Quiz</Link>
+                
+              </li>
+              </ul>
+            )}
+          </div>
+
+          {auth.isAdmin ? (<></>):(<>
+          <li onClick={handleDropdownClose} className="flex items-center space-x-2 ">
+            <Link to="/Profile">
+              <img
+                src={auth.image} 
+                alt="Profile"
+                className="w-10 h-10 rounded-full border-2 p-[2px] border-white"
+              />
+            </Link>
+          </li>
+          </>)}
+            </>
+          )}
+        </ul>
+        {auth.isLoggedIn ? (
+          <div onClick={handleDropdownClose}>
+            <button onClick={handleLogout} className={buttonClass}>
+              Logout
+            </button>
+          </div>
         ) : (
           <>
             <li className="flex items-center space-x-2">

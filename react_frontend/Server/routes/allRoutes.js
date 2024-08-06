@@ -5,7 +5,7 @@ import { getEvents, addEvents, deleteEvent, updateEvent, eventRegister } from '.
 import { addInquiry, getInquiries } from '../controllers/inquiryController.js';
 import { cancelMembership, quizPoints } from '../controllers/membershipController.js';
 import { addNews, getNews, updateNews, deleteNews } from '../controllers/newsController.js';
-import { getStories, addStory } from '../controllers/storyController.js';
+import { getStories, addStory, removeStory } from '../controllers/storyController.js';
 import { getAllUsers, getUserByEmail, updateUserByEmail } from '../controllers/userController.js';
 import { checkToken } from '../middlewares/Auth.js';
 
@@ -35,6 +35,7 @@ router.post("/api/eventRegister", eventRegister);
 
 router.get("/stories", getStories);
 router.post("/stories", addStory);
+router.delete('/stories/:id', removeStory);
 
 router.post("/api/inquiries", addInquiry);
 router.get("/admin/inquiries", getInquiries);
