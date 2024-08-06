@@ -8,6 +8,7 @@ function Volunteering() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [volunteerStatus, setVolunteerStatus] = useState({});
   const [auth] = useAuth();
 
   useEffect(() => {
@@ -21,10 +22,22 @@ function Volunteering() {
         alert('Error loading events: ' + error.message);
         setLoading(false);
       });
+
+    axios.get('http://localhost:5000/api/volunteers')
+      .then(response => {
+        const statusMap = {};
+        response.data.forEach(volunteer => {
+          statusMap[volunteer.eventId] = volunteer.status;
+        });
+        setVolunteerStatus(statusMap);
+      })
+      .catch(error => {
+        console.error(error);
+        alert('Error loading volunteer status: ' + error.message);
+      });
   }, []);
 
   const handleShowInterest = (event) => {
-    console.log('Event selected:', event); // Debugging line
     setSelectedEvent(event);
   };
 
@@ -51,12 +64,15 @@ function Volunteering() {
                 <h4 className=''>Venue: {event.venue}</h4>
                 <h4 className=''>Duration: {event.duration}</h4>
               </p>
-
+              <p className='text-left text-sm leading-6 text-gray-300 mb-2'>
+                Status: <span className='font-bold'>{event.status || 'Not Registered'}</span>
+              </p>
               <button
                 onClick={() => handleShowInterest(event)}
-                className="w-fit mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                className={`w-fit mt-2 px-4 py-2 text-white rounded-lg ${volunteerStatus[event._id] === 'Pending' ? 'bg-gray-600 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}`}
+                disabled={volunteerStatus[event._id] === 'Pending'}
               >
-                Show Interest in this Event
+                {volunteerStatus[event._id] === 'Pending' ? 'Pending' : 'Show Interest in this Event'}
               </button>
             </div>
           </div>
@@ -83,7 +99,6 @@ function Volunteering() {
             {renderEvents(events)}
           </div>
         )}
-        <div className='border-2'>
         {selectedEvent && (
           <VolunteeringForm
             isOpen={Boolean(selectedEvent)}
@@ -91,7 +106,6 @@ function Volunteering() {
             event={selectedEvent}
           />
         )}
-        </div>
       </div>
     </div>
   );

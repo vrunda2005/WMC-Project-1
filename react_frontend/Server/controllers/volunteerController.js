@@ -12,7 +12,7 @@ const getVolunteers = async (req, res) => {
 };
 
 const addVolunteer = async (req, res) => {
-    const { eventId,  name, email, message } = req.body;
+    const { eventId,  name, email, message, status } = req.body;
 
     if (!eventId || !name || !email) {
         return res.status(400).json({ error: 'All fields are required' });
@@ -29,7 +29,8 @@ const addVolunteer = async (req, res) => {
             // eventName,
             name,
             email,
-            message
+            message,
+            status: 'pending',
         });
 
         const savedVolunteer = await newVolunteer.save();

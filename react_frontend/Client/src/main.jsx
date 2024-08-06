@@ -11,6 +11,7 @@ import Signup from './components/Signup/SignUp'
 import Events from './components/Events/Events.jsx'
 import Blog from './components/Blog/Blog.jsx'
 import Volunteering from './components/Volunteering/Volunteering.jsx'
+import VolunteeringRequests from './components/Volunteering/VolunteeringRequests.jsx'
 import Quiz from './components/Quiz/Quiz.jsx'
 import Admin from './components/Admin/Admin.jsx'
 import MembershipPage from './components/Membership/membership_temp.jsx'
@@ -75,6 +76,10 @@ const router=createBrowserRouter([
       {
         path:"Volunteering",
         element:<Volunteering/>
+      },
+      {
+        path:"VolunteeringRequests",
+        element:<VolunteeringRequests/>
       },
       {
         path:"MembershipLayout/:membership_id",

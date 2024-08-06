@@ -208,6 +208,10 @@ const Navbar = () => {
               </li>
               <li className="flex items-center space-x-1 ">
 
+                <Link to='/VolunteerRequests' className={`hover:no-underline ${window.location.pathname === '/VolunteerRequests' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Volunteer Requests</Link>
+              </li>
+              <li className="flex items-center space-x-1 ">
+
                 <Link to='/allinquires' className={`hover:no-underline ${window.location.pathname === '/allinquires' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>All Inquires</Link>
               </li>
               
@@ -244,7 +248,7 @@ const Navbar = () => {
               <Link to="/Donate" className={`hover:no-underline ${window.location.pathname === '/Donate' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Donate</Link>
               </li>
 
-              <li className="flex items-center space-x-2 border-2 p-2">
+              <li className="flex items-center space-x-2 p-2">
               <Link to="/Volunteering" className={`hover:no-underline ${window.location.pathname === '/Volunteering' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Volunteering</Link>
               </li>
             </div>
