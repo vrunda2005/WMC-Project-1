@@ -243,7 +243,11 @@ const Navbar = () => {
                 <FcDonate className='text-[20px]'/>
               <Link to="/Donate" className={`hover:no-underline ${window.location.pathname === '/Donate' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Donate</Link>
               </li>
-              </div>
+
+              <li className="flex items-center space-x-2 border-2 p-2">
+              <Link to="/Volunteering" className={`hover:no-underline ${window.location.pathname === '/Volunteering' ? 'font-bold text-blue-500 dark:text-blue-300' : ''}`}>Volunteering</Link>
+              </li>
+            </div>
 
               
           {/* Dropdown menu */}
@@ -256,6 +260,25 @@ const Navbar = () => {
             </button>
             {isDropdownOpen && (
               <ul className="absolute mt-2 right-0 pl-2 bg-white dark:bg-gray-800 shadow-lg rounded-lg w-48 z-10 " >
+
+                <li className="flex items-center space-x-2 p-2">
+                  <MdQuiz />
+                  <Link to='/Quiz' className={`hover:no-underline px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${window.location.pathname === '/Quiz' ? 'font-bold text-blue-500 dark:text-blue-300' : ''} transition-all duration-200 hover:rounded-lg`}
+                  onClick={handleDropdownClose}
+                  >Quiz</Link>
+                </li>
+
+                <li className="flex items-center space-x-2 p-2">
+                <FaMapMarkedAlt className=''/>
+                  <Link
+                    to="/epsilonMap"
+                    className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${location.pathname === '/epsilonMap' ? 'font-bold text-blue-500 dark:text-blue-300' : ''} transition-all duration-200 hover:rounded-lg`}
+                    onClick={handleDropdownClose}
+                  >
+                    EpsilonMap
+                  </Link>
+                </li>
+
                 <li className="flex items-center space-x-2 p-2 ">
                 <FaCircleInfo />
                 <Link
@@ -266,20 +289,9 @@ const Navbar = () => {
                     About
                   </Link>
                 </li>
-                <li className="flex items-center space-x-2 p-2">
-                <FaMapMarkedAlt className=''/>
 
-                  <Link
-                    to="/epsilonMap"
-                    className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${location.pathname === '/epsilonMap' ? 'font-bold text-blue-500 dark:text-blue-300' : ''} transition-all duration-200 hover:rounded-lg`}
-                    onClick={handleDropdownClose}
-                  >
-                    EpsilonMap
-                  </Link>
-                </li>
                 <li className="flex items-center space-x-2 p-3">
                 <FaPersonCircleQuestion />
-
                   <Link
                     to="/inquiryForm"
                     className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${location.pathname === '/inquiryForm' ? 'font-bold text-blue-500 dark:text-blue-300' : ''} transition-all duration-200 hover:rounded-lg`}
@@ -288,6 +300,7 @@ const Navbar = () => {
                     Inquiry Form
                   </Link>
                 </li>
+
                 <li className="flex items-center space-x-2 p-2">
                   <GiNewspaper/>
                   <Link
@@ -298,19 +311,13 @@ const Navbar = () => {
                     News
                   </Link>
                 </li>
-                <li className="flex items-center space-x-2 p-2">
-                {/* <img src={quiz} alt="img" className="w-5 h-5" /> */}
-                <MdQuiz />
 
-                <Link to='/Quiz' className={`hover:no-underline px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${window.location.pathname === '/Quiz' ? 'font-bold text-blue-500 dark:text-blue-300' : ''} transition-all duration-200 hover:rounded-lg`}
-                onClick={handleDropdownClose}
-                >Quiz</Link>
                 
-              </li>
               </ul>
             )}
           </div>
-
+          
+          {auth.isLoggedIn ? (<>
           {auth.isAdmin ? (<></>):(<>
           <li onClick={handleDropdownClose} className="flex items-center space-x-2 ">
             <Link to="/Profile">
@@ -318,7 +325,7 @@ const Navbar = () => {
                   <img
                     src={auth.image}
                     alt="Profile"
-                    className="w-10 h-10 rounded-full border-2 p-[2px] border-white"
+                    className="w-10 h-10 rounded-full border-2 p-[2px] border-white hover:scale-105 hover:border-2 transition-all duration-300"
                   />
                 ) : (
                   <div className="w-10 h-10 flex items-center justify-center rounded-full border-2 p-[2px] border-white">
@@ -327,9 +334,8 @@ const Navbar = () => {
             )}
             </Link>
           </li>
-
-
           </>)}
+          </>):(<></>)}
             </>
           )}
         </ul>
