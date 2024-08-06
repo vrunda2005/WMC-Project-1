@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../../usetheamContext';
 import pic1 from '../../assets/images/epsilon_house.jpg'
+import { truthStages, improvementTips } from '../content.js';
 
 const AboutUs = () => {
   const { theme } = useTheme();
@@ -19,7 +20,7 @@ const AboutUs = () => {
       <div className='fixed left-0 top-30 flex flex-col p-16'>
         <h1 className='text-5xl text-left text-white m-0 p-0'>ABOUT</h1>
       </div>
-      <div className={`relative overflow-hidden min-h-screen page-background opacity-65`}>
+      <div className={`relative overflow-hidden min-h-screen page-background opacity-95`}>
         {/* Background Image */}
     
           <div className={`absolute inset-0 ${overlayColor}`}></div> {/* Overlay for better text visibility */}
@@ -135,6 +136,55 @@ const AboutUs = () => {
               Interested in learning more? <a href="/contact" className={`text-orange-400 hover:underline`}>Contact us</a> for more information or to schedule a personal consultation.
             </p>
           </section>
+
+          <div className="bg-gray-900 text-white p-8">
+            <h1 className="text-4xl font-bold text-center mb-12 animate-fadeIn">Epsilon Program Truth Stages</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {truthStages.map((stage) => (
+                <div key={stage.id} className="bg-gray-800 p-6 rounded-lg shadow-lg transform transition-transform hover:scale-105 animate-slideUp">
+                  <img src={stage.image} alt={stage.name} className="w-full h-48 object-cover rounded-t-lg mb-4" />
+                  <h2 className="text-2xl font-semibold mb-2">{stage.name}</h2>
+                  <p className="text-lg mb-4">{stage.description}</p>
+                  <ul className="list-disc pl-5 mb-4">
+                    {stage.objectives.map((objective, index) => (
+                      <li key={index}>{objective}</li>
+                    ))}
+                  </ul>
+                  <div className="text-right">
+                    <span className="bg-blue-500 text-white px-3 py-1 rounded-full">{stage.difficulty}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+    </div>
+
+    <div className="p-6 bg-gray-900 min-h-screen">
+      <h1 className="text-3xl font-bold text-center mb-8 animate-fadeIn">Improvement Tips</h1>
+      <div className="space-y-8">
+        {improvementTips.map((category, index) => (
+          <div key={index} className="bg-gray-900 shadow-lg rounded-lg overflow-hidden animate-fadeIn">
+            <h2 className="text-2xl font-semibold p-4 bg-blue-500 text-white">{category.category}</h2>
+            <div className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {category.tips.map((tip, i) => (
+                <div key={i} className="bg-gray-900 border border-gray-200 rounded-lg p-4 flex flex-col items-start">
+                  <img src={tip.image} alt={tip.title} className="w-full h-48 object-cover rounded-t-lg mb-4" />
+                  <h3 className="text-xl font-semibold mb-2">{tip.title}</h3>
+                  <p className="text-white mb-4">{tip.description}</p>
+                  <ul className="list-disc pl-5 space-y-2">
+                    {tip.actions.map((action, j) => (
+                      <li key={j} className="text-white">{action}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+              
+
         </div>
       </div>
     </div>

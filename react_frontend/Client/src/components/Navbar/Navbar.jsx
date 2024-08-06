@@ -21,9 +21,7 @@ import { FcHome } from "react-icons/fc";
 import { MdQuiz } from "react-icons/md";
 import { FaCircleInfo } from "react-icons/fa6";
 import { HiCurrencyDollar } from "react-icons/hi2";
-
-
-
+import { FaUserCircle } from 'react-icons/fa'; 
 
 
 
@@ -316,13 +314,21 @@ const Navbar = () => {
           {auth.isAdmin ? (<></>):(<>
           <li onClick={handleDropdownClose} className="flex items-center space-x-2 ">
             <Link to="/Profile">
-              <img
-                src={auth.image} 
-                alt="Profile"
-                className="w-10 h-10 rounded-full border-2 p-[2px] border-white"
-              />
+            {auth.image ? (
+                  <img
+                    src={auth.image}
+                    alt="Profile"
+                    className="w-10 h-10 rounded-full border-2 p-[2px] border-white"
+                  />
+                ) : (
+                  <div className="w-10 h-10 flex items-center justify-center rounded-full border-2 p-[2px] border-white">
+          <FaUserCircle className="text-gray-600 text-3xl" /> {/* Default icon */}
+                  </div>
+            )}
             </Link>
           </li>
+
+
           </>)}
             </>
           )}
