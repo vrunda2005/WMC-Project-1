@@ -8,6 +8,7 @@ import { addNews, getNews, updateNews, deleteNews } from '../controllers/newsCon
 import { getStories, addStory, removeStory } from '../controllers/storyController.js';
 import { getAllUsers, getUserByEmail, updateUserByEmail } from '../controllers/userController.js';
 import { checkToken } from '../middlewares/Auth.js';
+import { getVolunteers, addVolunteer, deleteVolunteer } from '../controllers/volunteerController.js';
 
 const router = express.Router();
 
@@ -44,5 +45,9 @@ router.post("/news", addNews);
 router.get("/news", getNews);
 router.put("/news/:id", updateNews);
 router.delete("/news/:id", deleteNews);
+
+router.get('/api/volunteers', getVolunteers);
+router.post('/api/volunteers', addVolunteer);
+router.delete('/api/volunteers/:id', deleteVolunteer);
 
 export default router;

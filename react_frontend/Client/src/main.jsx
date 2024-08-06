@@ -1,4 +1,5 @@
 import React, { Children } from 'react'
+import { RouterProvider,createBrowserRouter } from 'react-router-dom'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import  './index.css'
@@ -9,7 +10,7 @@ import Donate from './components/Donate/Donate'
 import Signup from './components/Signup/SignUp'
 import Events from './components/Events/Events.jsx'
 import Blog from './components/Blog/Blog.jsx'
-import { RouterProvider,createBrowserRouter } from 'react-router-dom'
+import Volunteering from './components/Volunteering/Volunteering.jsx'
 import Quiz from './components/Quiz/Quiz.jsx'
 import Admin from './components/Admin/Admin.jsx'
 import MembershipPage from './components/Membership/membership_temp.jsx'
@@ -70,6 +71,10 @@ const router=createBrowserRouter([
       {
         path:"Blog",
         element:<Blog/>
+      },
+      {
+        path:"Volunteering",
+        element:<Volunteering/>
       },
       {
         path:"MembershipLayout/:membership_id",
