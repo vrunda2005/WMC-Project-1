@@ -424,9 +424,9 @@ function Home() {
             {lastFiveStories.map((story, index) => (
 
               <div key={story._id} className={`stories rounded-none text-white relative w-96 p-4 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300`}>
-
-                <p className="text-white mb-2 w-50">{story.story}</p>
-                <p className="text-lg mb-2 text-white text-right">- {story.username}</p>
+                    <img src={story.image} alt={story.username} className='h-14 w-14 rounded-full' />
+                    <p className="text-white mb-2 w-50">{story.story}</p>
+                <p className="text-lg mb-2 text-white text-right">-{story.username}</p>
                 <p className="text-white text-sm italic text-right">{moment(story.date).fromNow()}</p>
              
               </div>
