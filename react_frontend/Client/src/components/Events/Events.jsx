@@ -13,7 +13,7 @@ const Events = () => {
   const [image, setImage] = useState(null);
   const [venue, setVenue] = useState('');
   const [duration, setDuration] = useState('');
-  const [mode, setMode] = useState('');
+  const [points, setPoints] = useState('');
   const navigate = useNavigate();
   const [auth] = useAuth();
 
@@ -38,7 +38,7 @@ const Events = () => {
     formData.append('file', image); // Append the file with the key 'file'
     formData.append('venue', venue);
     formData.append('duration', duration);
-    formData.append('mode', mode);
+    formData.append('points', points);
 
     try {
       const response = await axios.post('http://localhost:5000/api/events', formData, {
@@ -67,9 +67,10 @@ const Events = () => {
   }, [auth.isAdmin, navigate]);
 
   return (
-    <div>
+    <div className='eventContainer p-6'>
       {auth.isAdmin ? (<>
-      <div className="max-w-xl mx-auto p-4 pt-6 pb-8 mb-4 mt-4 bg-white rounded shadow-md">
+      <div>
+      <div className="eventPart relative max-w-xl mx-auto p-4 pt-6 pb-8 mb-4 mt-4 bg-white rounded shadow-md">
         <h2 className="text-2xl font-bold mb-4">Add New Event</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -135,6 +136,19 @@ const Events = () => {
             />
           </div>
           <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="points">
+              Points
+            </label>
+            <input
+              type="number"
+              id="points"
+              value={points}
+              onChange={(e) => setPoints(e.target.value)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              placeholder="Enter required points"
+            />
+          </div>
+          <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="duration">
               Duration
             </label>
@@ -165,6 +179,127 @@ const Events = () => {
             Add Event
           </button>
         </form>
+
+      </div>
+        {/* vertical */}
+        <div className='absolute top-0 left-0 w-screen h-screen opacity-5 flex'>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+            <div className='w-[0.5px]  ml-5 bg-white h-screen'></div>
+        </div>
+
+        {/* horizontal */}
+        <div className='absolute top-0 left-0 w-screen h-screen opacity-5 flex flex-col'>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        <div className='w-screen  mt-5 bg-white h-[0.5px]'></div>
+        </div>
       </div>
 
       <div>

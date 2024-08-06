@@ -8,6 +8,7 @@ const eventSchema = new mongoose.Schema({
     image: { type: String },
     venue: { type: String, required: true },
     duration: { type: String, required: true },
+    points: { type: Number, required: true },
 });
   
 const Event = mongoose.model('Event', eventSchema);

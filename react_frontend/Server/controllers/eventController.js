@@ -13,7 +13,7 @@ const getEvents = async (req, res) => {
 };
 
 const addEvents = async (req, res) => {
-    const { title, description, date, time, venue, duration } = req.body;
+    const { title, description, date, time, venue, duration, points } = req.body;
     const file = req.files && req.files.file;
 
     if (!title || !description || !date || !time || !venue || !duration ) {
@@ -46,6 +46,7 @@ const addEvents = async (req, res) => {
             image: response.secure_url,
             venue,
             duration,
+            points,
         });
 
         const savedEvent = await newEvent.save();
@@ -73,7 +74,7 @@ const updateEvent = async (req, res) => {
     try {
         const updatedEvent = await Event.findByIdAndUpdate(
             req.params.id,
-            { title, description, date, time, image, venue, duration },
+            { title, description, date, time, image, venue, duration, points },
             { new: true }
         );
 
