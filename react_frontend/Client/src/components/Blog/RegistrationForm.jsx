@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useAuth } from '../../creatContext';
+
 
 const EventRegistrationForm = ({ isOpen, onClose, event }) => {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [auth]=useAuth();
 
   if (!isOpen) return null;
 
@@ -21,36 +24,40 @@ const EventRegistrationForm = ({ isOpen, onClose, event }) => {
   
     // Prepare the data to be sent
     const registrationData = {
-      eventId: event._id, // Assuming event has an _id property
-      eventName: event.title, // Add event name
-      ...formData,
+        eventId: event._id, // Assuming event has an _id property
+        eventName: event.title,
+        eventPoint:event.points,
+        membership_id: auth.membership_id,
+        ...formData,
     };
-  
+    console.log(auth);
+    
     try {
-      // Send the data to the server
-      const response = await fetch('http://localhost:5000/api/eventRegister', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(registrationData),
-      });
+        // Send the data to the server
+        const response = await fetch('http://localhost:5000/api/eventRegister', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(registrationData),
+        });
   
-      const result = await response.json();
-      
-      if (response.ok) {
-        setSuccessMessage('Registration successful!');
-        setFormData({ name: '', email: '', phone: '' });
-      } else {
-        setErrorMessage(result.error || 'Error registering');
-      }
+        const result = await response.json();
+        
+        if (response.ok) {
+            setSuccessMessage('Registration successful!');
+            setFormData({ name: '', email: '', phone: '' });
+        } else {
+            setErrorMessage(result.error || 'Error registering');
+        }
     } catch (error) {
-      setErrorMessage('Error submitting form');
-      console.error('Error submitting form:', error);
+        setErrorMessage('Error submitting form');
+        console.error('Error submitting form:', error);
     } finally {
-      setIsSubmitting(false);
+        setIsSubmitting(false);
     }
-  };
+};
+
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">

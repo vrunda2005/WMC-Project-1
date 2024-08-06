@@ -3,7 +3,7 @@ import Donation from '../models/Donation.js';
 
 
 export const donationByUsername =  async (req, res) => {
-    const username = req.params.username;
+    const username = req.params.email;
     const updatedPoints = req.body.points;
     const {addPoints} =req.body;
   

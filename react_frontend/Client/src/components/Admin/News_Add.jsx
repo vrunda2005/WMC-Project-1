@@ -23,21 +23,25 @@ const AdminNewsForm = () => {
 
       if (response.ok) {
         Swal.fire({
-            title: 'Success!',
-            text: 'News item created successfully!',
-            icon: 'success',
-            confirmButtonText: 'OK',
-          });
+          title: 'Success!',
+          text: 'News item created successfully!',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        });
         setTitle('');
         setDescription('');
         setImage('');
+        // Refresh news list
+        const updatedResponse = await fetch('http://localhost:5000/news');
+        const updatedData = await updatedResponse.json();
+        setNewsItems(updatedData);
       } else {
         Swal.fire({
-            title: 'Error!',
-            text: 'Failed to create news item',
-            icon: 'error',
-            confirmButtonText: 'OK',
-          });
+          title: 'Error!',
+          text: 'Failed to create news item',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
       }
     } catch (error) {
       console.error('Error creating news:', error);
@@ -50,11 +54,7 @@ const AdminNewsForm = () => {
     }
   };
 
-
-
-
   useEffect(() => {
-    // Fetch news items from the server
     const fetchNews = async () => {
       try {
         const response = await fetch('http://localhost:5000/news');
@@ -153,30 +153,29 @@ const AdminNewsForm = () => {
     }
   };
 
-
   useEffect(() => {
     if (!auth.isAdmin) {
       Swal.fire({
         title: 'Error!',
         text: 'You are not authorised!',
         icon: 'error',
-        confirmButtonText: 'OK'
-      })
+        confirmButtonText: 'OK',
+      });
       navigate('/');
     }
   }, [auth.isAdmin, navigate]);
 
   return (
-    <div className={`p-8 bg-gray-100 rounded-lg max-w mx-auto mt-10 flex flex-col`}>
-      <h1 className={`text-4xl font-extrabold text-gray-900 mb-6`}>Create News Item</h1>
+    <div className={`p-8 bg-gray-400 rounded-lg shadow-lg max-w-4xl mx-auto mt-10`}>
+      <h1 className={`text-4xl font-extrabold text-gray-900 mb-6 text-center`}>Create News Item</h1>
       <form onSubmit={handleSubmit} className={`space-y-6`}>
-        <div className={`mb-4 text-black`}>
+        <div className={`mb-4`}>
           <label className={`block text-lg font-medium text-gray-700 mb-2`}>Title</label>
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className={`w-full p-3 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+            className={`w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500`}
             required
           />
         </div>
@@ -185,7 +184,7 @@ const AdminNewsForm = () => {
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className={`w-full p-3 border border-gray-300 text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+            className={`w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500`}
             rows="4"
             required
           />
@@ -196,50 +195,53 @@ const AdminNewsForm = () => {
             type="text"
             value={image}
             onChange={(e) => setImage(e.target.value)}
-            className={`w-full p-3 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+            className={`w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500`}
           />
         </div>
         <button
           type="submit"
-          className={`w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+          className={`w-full bg-blue-600 text-white py-3 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500`}
         >
           Submit
         </button>
       </form>
-      <div className={`p-8 bg-gray-100 rounded-lg shadow-md max-w mx-auto mt-10 `}>
-      <h1 className={`text-4xl font-extrabold text-gray-900 mb-6`}>News Items</h1>
-      <ul className={`grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3`}>
-        {newsItems.map((news) => (
-          <li key={news._id} className={`p-4 bg-white rounded-lg shadow-md`}>
-            <h2 className={`text-2xl font-bold text-gray-800`}>{news.title}</h2>
-            <p className={`text-gray-700 mb-2`}>{news.description}</p>
-            {news.image && <img src={news.image} alt={news.title} className={`w-full h-auto mb-2`} />}
-            <button
-              onClick={() => handleEdit(news)}
-              className={`bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 mr-2`}
-            >
-              Edit
-            </button>
-            <button
-              onClick={() => handleDelete(news._id)}
-              className={`bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700`}
-            >
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
+      <div className={`p-8  rounded-lg shadow-lg mt-10`}>
+        <h1 className={`text-4xl font-extrabold text-gray-900 mb-6 text-center`}>News Items</h1>
+        <ul className={`grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3`}>
+          {newsItems.map((news) => (
+            <li key={news._id} className={`p-4 rounded-lg shadow-md`}>
+              <h2 className={`text-2xl font-bold text-gray-800`}>{news.title}</h2>
+              <p className={`text-gray-700 mb-2`}>{news.description}</p>
+              {news.image && <img src={news.image} alt={news.title} className={`w-full h-auto mb-2 rounded-lg`} />}
+              <div className={`flex justify-between`}>
+                <button
+                  onClick={() => handleEdit(news)}
+                  className={`bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none`}
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleDelete(news._id)}
+                  className={`bg-red-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-red-700 focus:outline-none`}
+                >
+                  Delete
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       {editingNews && (
-        <form onSubmit={handleUpdate} className={`space-y-6 mt-8`}>
-          <h1 className={`text-4xl font-extrabold text-gray-900 mb-6`}>Edit News Item</h1>
-          <div className={`mb-4 text-black`}>
+        <form onSubmit={handleUpdate} className={`space-y-6 mt-8  p-6 rounded-lg shadow-lg`}>
+          <h1 className={`text-4xl font-extrabold text-gray-900 mb-6 text-center`}>Edit News Item</h1>
+          <div className={`mb-4`}>
             <label className={`block text-lg font-medium text-gray-700 mb-2`}>Title</label>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className={`w-full p-3 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              className={`w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500`}
               required
             />
           </div>
@@ -248,7 +250,7 @@ const AdminNewsForm = () => {
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className={`w-full p-3 border border-gray-300 text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              className={`w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500`}
               rows="4"
               required
             />
@@ -259,18 +261,24 @@ const AdminNewsForm = () => {
               type="text"
               value={image}
               onChange={(e) => setImage(e.target.value)}
-              className={`w-full p-3 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              className={`w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500`}
             />
           </div>
           <button
             type="submit"
-            className={`w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+            className={`w-full bg-blue-600 text-white py-3 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500`}
           >
             Update
           </button>
+          <button
+            type="button"
+            onClick={() => setEditingNews(null)}
+            className={`w-full mt-4 bg-gray-600 text-white py-3 px-4 rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500`}
+          >
+            Cancel
+          </button>
         </form>
       )}
-    </div>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import axios from 'axios';
 import '../Home/Home.jsx'; // Correct the import path if needed
 import { MdDeleteSweep } from "react-icons/md";
 import { ImQuotesLeft } from "react-icons/im";
+import Swal from 'sweetalert2'
 
 const StoryPage = () => {
   const [stories, setStories] = useState([]);
@@ -68,22 +69,53 @@ const StoryPage = () => {
 
   const handleRemoveStory = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/stories/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username: auth.username }), // Sending the username for authorization
+      // Show confirmation dialog
+      const result = await Swal.fire({
+        title: 'Are you sure?',
+        text: "This action cannot be undone!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'Cancel'
       });
   
-      if (!response.ok) {
-        const errorResponse = await response.json();
-        throw new Error(errorResponse.error);
-      }
+      if (result.isConfirmed) {
+        // Proceed with deletion
+        const response = await fetch(`http://localhost:5000/stories/${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username: auth.username }), // Sending the username for authorization
+        });
   
-      // Remove the story from state after successful deletion
-      setStories(stories.filter(story => story._id !== id));
+        if (!response.ok) {
+          const errorResponse = await response.json();
+          throw new Error(errorResponse.error);
+        }
+  
+        // Show success notification
+        await Swal.fire({
+          title: 'Deleted!',
+          text: 'The story has been removed.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+  
+        // Remove the story from state after successful deletion
+        setStories(stories.filter(story => story._id !== id));
+      }
     } catch (error) {
+      // Show error notification
+      await Swal.fire({
+        title: 'Error!',
+        text: `Error removing story: ${error.message}`,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+  
       console.error('Error removing story:', error);
     }
   };

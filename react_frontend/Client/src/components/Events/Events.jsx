@@ -24,7 +24,6 @@ const Events = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic validation
     if (!title || !description || !date || !time || !venue || !duration || !image) {
       alert('All fields are required.');
       return;
