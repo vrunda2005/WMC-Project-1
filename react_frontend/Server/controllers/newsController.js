@@ -1,14 +1,16 @@
 import News from '../models/News.js';
 
 export const addNews = async (req, res) => {
-    try {
-      const news = new News(req.body);
-      await news.save();
-      res.status(201).json(news);
-    } catch (error) {
-      res.status(400).json({ error: 'Error creating news' });
-    }
+  try {
+    const news = new News(req.body);
+    await news.save();
+    res.status(201).json(news);
+  } catch (error) {
+    console.error('Error creating news:', error);  // Log the error
+    res.status(400).json({ error: 'Error creating news', details: error.message });
+  }
 };
+
   
   // Get all news items
 export const getNews = async (req, res) => {

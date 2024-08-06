@@ -33,6 +33,7 @@ const StoryPage = () => {
         }
         const data = await response.json();
         setStories(data);
+         console.log('Fetched stories:', data); // Log the data for debugging
         // Generate random colors for each story
         const newColors = data.map(() => getRandomColor());
         setColors(newColors);
@@ -126,11 +127,20 @@ const StoryPage = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {stories.map((story, index) => (
+        {stories.map((story) => (
           <div
             key={story._id}
             className="stories border-gray-300 bg-white p-6 rounded-lg shadow-lg transform transition-transform hover:shadow-2xl w-72"
           >
+                      {story.username?.image ? (
+                  <img
+                    src={story.username.image}
+                    alt={`${story.username}'s profile`}
+                    className="w-12 h-12 rounded-full mb-4"
+                  />
+                ) : (
+                  <div className="w-12 h-12 rounded-full mb-4 bg-gray-300">NO image</div> // Placeholder if no image
+                )}
             <p className="text-white mb-4">"{story.story}"</p>
             <h2 className="text-xl font-bold mb-2 text-white text-right">-{story.username}</h2>
             <p className="text-white text-sm text-right">{new Date(story.date).toLocaleString()}</p>
